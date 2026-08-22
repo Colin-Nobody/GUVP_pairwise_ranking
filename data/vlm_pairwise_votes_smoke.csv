@@ -1,0 +1,2 @@
+comparison_id,image_a,image_b,winner,model,prompt_version,max_pixels,timestamp_utc,raw_response,status
+vlm-00001,0953e291-d4f9-4f49-a050-f30003a6c8a5.jpg,4ac38bc4-c236-468c-883f-2237b64cfa7d.jpg,0953e291-d4f9-4f49-a050-f30003a6c8a5.jpg,Qwen/Qwen2.5-VL-3B-Instruct,vp-cleaner-forced-choice-v1,401408,2026-08-22T15:58:28.082570+00:00,A,ok

@@ -1,0 +1,9 @@
+image_a,image_b,winner
+img001,img002,img001
+img001,img003,img001
+img001,img004,img001
+img002,img003,img002
+img002,img004,img002
+img003,img004,img003
+img003,img001,img001
+img004,img002,img002

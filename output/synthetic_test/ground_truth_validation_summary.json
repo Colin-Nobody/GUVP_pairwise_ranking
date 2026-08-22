@@ -1,0 +1,20 @@
+{
+  "ground_truth_file": "data/synthetic_ground_truth_100_images.csv",
+  "overlapping_images": 100,
+  "missing_from_ground_truth": 0,
+  "missing_from_scores": 0,
+  "score_correlations": {
+    "pearson_r": 0.9739256018506074,
+    "pearson_p_value": 6.055731122966733e-65,
+    "spearman_rho": 0.9749894989498948,
+    "spearman_p_value": 8.066140822025769e-66,
+    "kendall_tau": 0.8666666666666668,
+    "kendall_p_value": 2.2291265309962746e-37
+  },
+  "rank_error": {
+    "mean_absolute_error": 5.24,
+    "root_mean_squared_error": 6.456004956627589,
+    "maximum_absolute_error": 17.0,
+    "exact_rank_match_count": 5
+  }
+}

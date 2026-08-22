@@ -1,0 +1,2 @@
+uuid,source,orig_id,city,filename,status,bytes,detail
+f373c3df-13cb-440d-b8d8-45f2a5c12eac,Mapillary,292393519193241,Amsterdam,f373c3df-13cb-440d-b8d8-45f2a5c12eac.jpg,failed,0,"400 Client Error: Bad Request for url: https://graph.mapillary.com/292393519193241?fields=id,thumb_2048_url"
