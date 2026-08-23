@@ -1,0 +1,144 @@
+{
+  "comparison": "3b_vs_7b",
+  "votes": {
+    "3b": {
+      "label": "3b",
+      "source": "data/vlm_pairwise_formal_v2.csv",
+      "rows": 15562,
+      "valid_winners": 15562,
+      "invalid_winners": 0,
+      "unique_images": 250,
+      "side_selection": {
+        "a_count": 15402,
+        "b_count": 160,
+        "a_rate": 0.9897185451741422,
+        "two_sided_binomial_p_value_vs_0_5": 0.0
+      },
+      "model_values": [
+        "Qwen/Qwen2.5-VL-3B-Instruct"
+      ],
+      "prompt_versions": [
+        "vp-overall-minimal-v2"
+      ],
+      "max_pixels_values": [
+        401408
+      ],
+      "timing": {
+        "first_timestamp_utc": "2026-08-22T16:38:09.745539+00:00",
+        "last_timestamp_utc": "2026-08-22T19:05:07.475887+00:00",
+        "elapsed_seconds": 8817.730348,
+        "seconds_per_pair": 0.5666557642825011
+      }
+    },
+    "7b": {
+      "label": "7b",
+      "source": "data/vlm_pairwise_7b_formal_v2.csv",
+      "rows": 15562,
+      "valid_winners": 15562,
+      "invalid_winners": 0,
+      "unique_images": 250,
+      "side_selection": {
+        "a_count": 9317,
+        "b_count": 6245,
+        "a_rate": 0.5987019663282355,
+        "two_sided_binomial_p_value_vs_0_5": 1.1078741508366833e-134
+      },
+      "model_values": [
+        "Qwen/Qwen2.5-VL-7B-Instruct"
+      ],
+      "prompt_versions": [
+        "vp-overall-minimal-v2"
+      ],
+      "max_pixels_values": [
+        401408
+      ],
+      "timing": {
+        "first_timestamp_utc": "2026-08-23T08:38:44.885204+00:00",
+        "last_timestamp_utc": "2026-08-23T12:27:55.688410+00:00",
+        "elapsed_seconds": 13750.803206,
+        "seconds_per_pair": 0.8836709212775529
+      }
+    },
+    "matched_unordered_pairs": 15562,
+    "unmatched_pairs_a": 0,
+    "unmatched_pairs_b": 0,
+    "same_physical_winner_count": 9445,
+    "different_physical_winner_count": 6117,
+    "winner_agreement_rate": 0.6069271301889217
+  },
+  "scores": {
+    "source_a": "output/vlm_formal_v2/perception_scores.csv",
+    "source_b": "output/vlm_7b_formal_v2/perception_scores.csv",
+    "matched_images": 250,
+    "visual_pollution_score_0_10_correlations": {
+      "pearson_r": 0.24206844194390015,
+      "pearson_p_value": 0.00011067648060091915,
+      "spearman_rho": 0.24977718043488692,
+      "spearman_p_value": 6.524108330470209e-05,
+      "kendall_tau": 0.17153413654618474,
+      "kendall_p_value": 5.3452385806066635e-05
+    },
+    "mean_absolute_vp_score_difference": 2.2385324719999997,
+    "mean_absolute_rank_difference": 69.704,
+    "top_bottom_overlap": {
+      "10": {
+        "most_polluted": 1,
+        "least_polluted": 0
+      },
+      "25": {
+        "most_polluted": 5,
+        "least_polluted": 3
+      },
+      "50": {
+        "most_polluted": 20,
+        "least_polluted": 12
+      }
+    }
+  },
+  "city_mean_vp": [
+    {
+      "city": "Amsterdam",
+      "image_count": 50,
+      "mean_vp_3b": 4.524023,
+      "mean_vp_7b": 5.06388,
+      "mean_vp_delta_b_minus_a": 0.539857
+    },
+    {
+      "city": "Barcelona",
+      "image_count": 50,
+      "mean_vp_3b": 4.66357,
+      "mean_vp_7b": 4.327635,
+      "mean_vp_delta_b_minus_a": -0.335935
+    },
+    {
+      "city": "Berlin",
+      "image_count": 50,
+      "mean_vp_3b": 4.946722,
+      "mean_vp_7b": 5.274967,
+      "mean_vp_delta_b_minus_a": 0.328245
+    },
+    {
+      "city": "Paris",
+      "image_count": 50,
+      "mean_vp_3b": 5.174305,
+      "mean_vp_7b": 5.669246,
+      "mean_vp_delta_b_minus_a": 0.494941
+    },
+    {
+      "city": "Rome",
+      "image_count": 50,
+      "mean_vp_3b": 5.419336,
+      "mean_vp_7b": 5.350905,
+      "mean_vp_delta_b_minus_a": -0.068431
+    }
+  ],
+  "quality_flags": {
+    "3b": [
+      "A selection rate differs from 50% by at least 5 percentage points"
+    ],
+    "7b": [
+      "A selection rate differs from 50% by at least 5 percentage points"
+    ],
+    "interpretation": "Q-score/TrueSkill agreement within a run does not validate the VLM judgments. A/B swap auditing is required before treating either run as ground truth."
+  }
+}

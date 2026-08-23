@@ -88,7 +88,44 @@ Deterministic decoding is used, but exact VLM answers can still change across
 GPU architectures, CUDA/PyTorch/Transformers versions, or model revisions.
 The archived CSV is therefore the authoritative record of the original run.
 
-## 5. Re-download source images if needed
+## 5. Qwen2.5-VL-7B formal run and cross-model audit
+
+On 2026-08-23, the same 15,562 unordered pairs, prompt, visual-token budget,
+and deterministic decoding settings were evaluated with
+`Qwen/Qwen2.5-VL-7B-Instruct`. The resumed run added 15,477 decisions to 85
+existing decisions and completed with all 15,562 responses valid. The full run
+spanned 3 h 49 min (0.884 seconds per pair based on the first and last saved
+timestamps).
+
+The 7B artifacts are:
+
+- `data/vlm_pairwise_7b_formal_v2.csv`: all 15,562 pairwise decisions
+- `output/vlm_7b_formal_v2/`: scores, summaries, plots, and run logs
+- `scripts/run_7b_formal_and_score.sh`: resumable inference and scoring helper
+
+Run the reproducible cross-model audit with:
+
+```bash
+python scripts/compare_vlm_runs.py \
+  --votes-a data/vlm_pairwise_formal_v2.csv \
+  --scores-a output/vlm_formal_v2/perception_scores.csv \
+  --label-a 3b \
+  --votes-b data/vlm_pairwise_7b_formal_v2.csv \
+  --scores-b output/vlm_7b_formal_v2/perception_scores.csv \
+  --label-b 7b \
+  --manifest data/images_manifest.csv \
+  --output-dir output/vlm_3b_vs_7b
+```
+
+The audit records a substantial presentation-order warning. The 3B model
+selected position A in 15,402/15,562 comparisons (98.97%); the 7B model selected
+position A in 9,317/15,562 comparisons (59.87%). Their physical-winner agreement
+was 60.69%, and their aggregated VP scores had Spearman rho 0.2498. The high
+Q-score/TrueSkill correlations within each run do not remove this VLM position
+bias. Treat these runs as model-behavior evidence rather than VP ground truth
+until an A/B-swapped audit is completed.
+
+## 6. Re-download source images if needed
 
 The JPEGs are already committed. For a fresh download, Mapillary rows require
 a local token; never commit it:
@@ -108,6 +145,9 @@ python download_global_streetscapes_images.py \
 - `data/images_manifest.csv`: coordinates, city, source, sampling metadata
 - `data/vlm_pairwise_formal_v2.csv`: authoritative formal VLM decisions
 - `output/vlm_formal_v2/`: scores, summary, and charts
+- `data/vlm_pairwise_7b_formal_v2.csv`: 7B formal VLM decisions
+- `output/vlm_7b_formal_v2/`: 7B scores, summary, charts, and logs
+- `output/vlm_3b_vs_7b/`: reproducible cross-model audit
 - `output/sample_location_maps/`: five city sample-location maps
 - `vlm_pairwise.py`: Qwen VLM inference
 - `main.py`: Q-score and TrueSkill aggregation

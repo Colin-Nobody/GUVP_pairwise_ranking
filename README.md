@@ -80,3 +80,10 @@ python main.py --input data/vlm_pairwise_votes.csv --output-dir output/vlm --dim
 ```
 
 图片文件名会作为 `image_a` / `image_b` ID。若需要固定配对，请提供包含 `image_a,image_b` 文件名列的 CSV，并加上 `--pairs path/to/pairs.csv`。
+
+## 3B/7B正式运行对比
+
+2026-08-23完成的Qwen2.5-VL-7B正式运行及其与3B归档运行的跨模型审计见
+[`DGX_SPARK_MIGRATION.md`](DGX_SPARK_MIGRATION.md#5-qwen25-vl-7b-formal-run-and-cross-model-audit)。
+可复现摘要、逐图/逐对比较和图表保存在`output/vlm_3b_vs_7b/`。该审计发现明显的
+A/B位置偏差，因此在完成交换位置复核前，两次运行都不应直接视为VP ground truth。
