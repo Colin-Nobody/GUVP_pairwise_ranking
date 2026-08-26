@@ -1,0 +1,2 @@
+comparison_id,image_a,image_b,winner,model,prompt_version,max_pixels,timestamp_utc,raw_response,status
+vlm-00001,11c74f10-a744-4944-9411-89bb3c1afad0.jpg,5ebee0f7-f962-406b-bc6b-ba8d55e0f935.jpg,11c74f10-a744-4944-9411-89bb3c1afad0.jpg,Qwen/Qwen3-VL-8B-Instruct,vp-overall-minimal-v2,401408,2026-08-26T09:30:32.936750+00:00,A,ok

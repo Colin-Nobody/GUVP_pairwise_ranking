@@ -87,3 +87,37 @@ python main.py --input data/vlm_pairwise_votes.csv --output-dir output/vlm --dim
 [`DGX_SPARK_MIGRATION.md`](DGX_SPARK_MIGRATION.md#5-qwen25-vl-7b-formal-run-and-cross-model-audit)。
 可复现摘要、逐图/逐对比较和图表保存在`output/vlm_3b_vs_7b/`。该审计发现明显的
 A/B位置偏差，因此在完成交换位置复核前，两次运行都不应直接视为VP ground truth。
+
+### 本地 Qwen3-VL 8B 4-bit 比较
+
+RTX 5060 8GB 使用官方 `Qwen/Qwen3-VL-8B-Instruct` 的 bitsandbytes 4-bit NF4
+二次量化版本，并把输入嵌入层和输出头卸载到 CPU。首次运行会从 Hugging Face
+下载模型；单对冒烟测试：
+
+```bash
+./scripts/run_qwen3_vl_8b_smoke.sh
+```
+
+确认冒烟测试成功后，可用与 3B/7B 相同的正式配对表运行并自动计算分数：
+
+```bash
+./scripts/run_qwen3_vl_8b_formal_and_score.sh
+```
+
+正式脚本支持断点续跑；已有输出时会自动添加 `--resume`。
+
+运行中可在另一个终端每 10 秒刷新进度、速度、ETA 和显存状态：
+
+```bash
+./scripts/monitor_qwen3_vl_8b.sh
+```
+
+Qwen3-VL 8B 正式运行已完成全部 15,562 个配对。结果保存在
+`data/vlm_pairwise_qwen3_vl_8b_formal_v2.csv` 和
+`output/vlm_qwen3_vl_8b_formal_v2/`；与 Qwen2.5-VL 3B/7B 的对比位于
+`output/vlm_qwen2_5_3b_vs_qwen3_8b/` 和
+`output/vlm_qwen2_5_7b_vs_qwen3_8b/`。
+
+完整审计见 [`QWEN3_RESULTS_AUDIT.md`](QWEN3_RESULTS_AUDIT.md)。审计确认运行文件
+完整，但发现三种模型均存在显著 A/B 位置偏差；在完成交换位置复核前，这些排名
+不应直接视为视觉污染 ground truth。

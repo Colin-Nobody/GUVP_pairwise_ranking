@@ -1,0 +1,144 @@
+{
+  "comparison": "qwen2_5_7b_vs_qwen3_8b",
+  "votes": {
+    "qwen2_5_7b": {
+      "label": "qwen2_5_7b",
+      "source": "data/vlm_pairwise_7b_formal_v2.csv",
+      "rows": 15562,
+      "valid_winners": 15562,
+      "invalid_winners": 0,
+      "unique_images": 250,
+      "side_selection": {
+        "a_count": 9317,
+        "b_count": 6245,
+        "a_rate": 0.5987019663282355,
+        "two_sided_binomial_p_value_vs_0_5": 1.1078741508366833e-134
+      },
+      "model_values": [
+        "Qwen/Qwen2.5-VL-7B-Instruct"
+      ],
+      "prompt_versions": [
+        "vp-overall-minimal-v2"
+      ],
+      "max_pixels_values": [
+        401408
+      ],
+      "timing": {
+        "first_timestamp_utc": "2026-08-23T08:38:44.885204+00:00",
+        "last_timestamp_utc": "2026-08-23T12:27:55.688410+00:00",
+        "elapsed_seconds": 13750.803206,
+        "seconds_per_pair": 0.8836709212775529
+      }
+    },
+    "qwen3_8b": {
+      "label": "qwen3_8b",
+      "source": "data/vlm_pairwise_qwen3_vl_8b_formal_v2.csv",
+      "rows": 15562,
+      "valid_winners": 15562,
+      "invalid_winners": 0,
+      "unique_images": 250,
+      "side_selection": {
+        "a_count": 3710,
+        "b_count": 11852,
+        "a_rate": 0.2384012337745791,
+        "two_sided_binomial_p_value_vs_0_5": 0.0
+      },
+      "model_values": [
+        "Qwen/Qwen3-VL-8B-Instruct"
+      ],
+      "prompt_versions": [
+        "vp-overall-minimal-v2"
+      ],
+      "max_pixels_values": [
+        401408
+      ],
+      "timing": {
+        "first_timestamp_utc": "2026-08-26T09:34:05.002276+00:00",
+        "last_timestamp_utc": "2026-08-26T14:57:11.136691+00:00",
+        "elapsed_seconds": 19386.134415,
+        "seconds_per_pair": 1.2458154626951996
+      }
+    },
+    "matched_unordered_pairs": 15562,
+    "unmatched_pairs_a": 0,
+    "unmatched_pairs_b": 0,
+    "same_physical_winner_count": 9465,
+    "different_physical_winner_count": 6097,
+    "winner_agreement_rate": 0.608212312042154
+  },
+  "scores": {
+    "source_a": "output/vlm_7b_formal_v2/perception_scores.csv",
+    "source_b": "output/vlm_qwen3_vl_8b_formal_v2/perception_scores.csv",
+    "matched_images": 250,
+    "visual_pollution_score_0_10_correlations": {
+      "pearson_r": 0.4515424178487052,
+      "pearson_p_value": 5.803146495049933e-14,
+      "spearman_rho": 0.42411289780636485,
+      "spearman_p_value": 2.457782818976324e-12,
+      "kendall_tau": 0.29381526104417677,
+      "kendall_p_value": 4.517198024034669e-12
+    },
+    "mean_absolute_vp_score_difference": 1.808026876,
+    "mean_absolute_rank_difference": 60.832,
+    "top_bottom_overlap": {
+      "10": {
+        "most_polluted": 0,
+        "least_polluted": 3
+      },
+      "25": {
+        "most_polluted": 5,
+        "least_polluted": 11
+      },
+      "50": {
+        "most_polluted": 17,
+        "least_polluted": 28
+      }
+    }
+  },
+  "city_mean_vp": [
+    {
+      "city": "Amsterdam",
+      "image_count": 50,
+      "mean_vp_qwen2_5_7b": 5.06388,
+      "mean_vp_qwen3_8b": 5.599427,
+      "mean_vp_delta_b_minus_a": 0.535547
+    },
+    {
+      "city": "Barcelona",
+      "image_count": 50,
+      "mean_vp_qwen2_5_7b": 4.327635,
+      "mean_vp_qwen3_8b": 5.402737,
+      "mean_vp_delta_b_minus_a": 1.075102
+    },
+    {
+      "city": "Berlin",
+      "image_count": 50,
+      "mean_vp_qwen2_5_7b": 5.274967,
+      "mean_vp_qwen3_8b": 5.185067,
+      "mean_vp_delta_b_minus_a": -0.0899
+    },
+    {
+      "city": "Paris",
+      "image_count": 50,
+      "mean_vp_qwen2_5_7b": 5.669246,
+      "mean_vp_qwen3_8b": 5.043086,
+      "mean_vp_delta_b_minus_a": -0.62616
+    },
+    {
+      "city": "Rome",
+      "image_count": 50,
+      "mean_vp_qwen2_5_7b": 5.350905,
+      "mean_vp_qwen3_8b": 5.343937,
+      "mean_vp_delta_b_minus_a": -0.006969
+    }
+  ],
+  "quality_flags": {
+    "qwen2_5_7b": [
+      "A selection rate differs from 50% by at least 5 percentage points"
+    ],
+    "qwen3_8b": [
+      "A selection rate differs from 50% by at least 5 percentage points"
+    ],
+    "interpretation": "Q-score/TrueSkill agreement within a run does not validate the VLM judgments. A/B swap auditing is required before treating either run as ground truth."
+  }
+}

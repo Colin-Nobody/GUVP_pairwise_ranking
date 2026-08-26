@@ -12,7 +12,7 @@ from pathlib import Path
 
 import torch
 from qwen_vl_utils import process_vision_info
-from transformers import AutoProcessor, BitsAndBytesConfig, Qwen2_5_VLForConditionalGeneration
+from transformers import AutoModelForImageTextToText, AutoProcessor, BitsAndBytesConfig
 
 IMAGE_SUFFIXES = {".jpg", ".jpeg", ".png", ".webp"}
 PROMPT_VERSION = "vp-overall-minimal-v2"
@@ -31,9 +31,15 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--max-pairs", type=int, default=20)
     parser.add_argument("--all-pairs", action="store_true", help="Compare every unique unordered image pair")
     parser.add_argument("--resume", action="store_true", help="Append only pairs not already present in --output")
+    parser.add_argument("--overwrite", action="store_true", help="Replace --output if it already exists")
     parser.add_argument("--progress-every", type=int, default=100, help="Print progress every N completed pairs (0 disables)")
     parser.add_argument("--progress-file", type=Path, help="Optional local file updated whenever progress is printed")
     parser.add_argument("--max-pixels", type=int, default=512 * 28 * 28)
+    parser.add_argument(
+        "--cpu-offload",
+        action="store_true",
+        help="Keep the input embedding and output head on CPU (useful for Qwen3-VL 8B on an 8GB GPU)",
+    )
     parser.add_argument("--seed", type=int, default=42)
     return parser.parse_args()
 
@@ -89,6 +95,8 @@ def main() -> None:
     args = parse_args()
     files = get_images(args.images_dir)
     pairs = get_pairs(args, files)
+    if args.resume and args.overwrite:
+        raise ValueError("--resume and --overwrite cannot be used together")
     if args.resume and not args.output.exists():
         raise ValueError(f"Cannot resume: output does not exist: {args.output}")
     existing_pairs: set[frozenset[str]] = set()
@@ -102,13 +110,37 @@ def main() -> None:
                 existing_pairs.add(frozenset((row["image_a"], row["image_b"])))
                 existing_count += 1
         pairs = [pair for pair in pairs if frozenset(pair) not in existing_pairs]
-    elif args.output.exists():
-        raise FileExistsError(f"Output exists: {args.output}. Use a new path or add --resume.")
+    elif args.output.exists() and not args.overwrite:
+        raise FileExistsError(f"Output exists: {args.output}. Use a new path, --overwrite, or --resume.")
     if args.progress_file:
         args.progress_file.parent.mkdir(parents=True, exist_ok=True)
         args.progress_file.write_text(f"Starting {existing_count + len(pairs)} comparisons\n", encoding="utf-8")
-    config = BitsAndBytesConfig(load_in_4bit=True, bnb_4bit_quant_type="nf4", bnb_4bit_compute_dtype=torch.bfloat16)
-    model = Qwen2_5_VLForConditionalGeneration.from_pretrained(args.model, quantization_config=config, torch_dtype=torch.bfloat16, device_map="auto")
+    config = BitsAndBytesConfig(
+        load_in_4bit=True,
+        bnb_4bit_quant_type="nf4",
+        bnb_4bit_compute_dtype=torch.bfloat16,
+        bnb_4bit_use_double_quant=True,
+        llm_int8_enable_fp32_cpu_offload=args.cpu_offload,
+    )
+    device_map = "auto"
+    if args.cpu_offload:
+        device_map = {
+            "model.visual": 0,
+            "model.language_model.embed_tokens": "cpu",
+            "model.language_model.layers": 0,
+            "model.language_model.norm": 0,
+            "model.language_model.rotary_emb": 0,
+            "lm_head": "cpu",
+        }
+    # AutoModel keeps the same evaluation path usable with both Qwen2.5-VL and
+    # Qwen3-VL instead of hard-coding a generation-specific model class.
+    model = AutoModelForImageTextToText.from_pretrained(
+        args.model,
+        quantization_config=config,
+        dtype=torch.bfloat16,
+        device_map=device_map,
+        attn_implementation="sdpa",
+    )
     processor = AutoProcessor.from_pretrained(args.model, max_pixels=args.max_pixels)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     fields = ["comparison_id", "image_a", "image_b", "winner", "model", "prompt_version", "max_pixels", "timestamp_utc", "raw_response", "status"]
@@ -135,6 +167,9 @@ def main() -> None:
                     with args.progress_file.open("a", encoding="utf-8") as progress_handle:
                         progress_handle.write(progress + "\n")
     print(f"Wrote {len(pairs)} comparisons to {args.output}")
+    if torch.cuda.is_available():
+        peak_gib = torch.cuda.max_memory_allocated() / 1024**3
+        print(f"Peak CUDA memory allocated: {peak_gib:.2f} GiB")
 
 
 if __name__ == "__main__":
