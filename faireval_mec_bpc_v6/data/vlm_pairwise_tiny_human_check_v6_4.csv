@@ -1,0 +1,5 @@
+comparison_id,image_a,image_b,expected_winner,expected_reason
+tiny-0001,549e0847-761b-47a6-b1a7-a3b143ed2214.jpg,d3a04fc7-b72d-4fc7-8a04-1b6b8bdccc26.jpg,549e0847-761b-47a6-b1a7-a3b143ed2214.jpg,"clear street versus extensive shutter graffiti"
+tiny-0002,3a1f3784-0d59-4f60-87d2-f6a94dacf9ba.jpg,549e0847-761b-47a6-b1a7-a3b143ed2214.jpg,549e0847-761b-47a6-b1a7-a3b143ed2214.jpg,"dense parked traffic and signage versus clear street"
+tiny-0003,2b65390b-ec7d-4089-b994-802d6fbdfd10.jpg,60777023-7f8e-40ff-957f-c5eafefbf235.jpg,2b65390b-ec7d-4089-b994-802d6fbdfd10.jpg,"open uncluttered park versus dense market stalls and displays"
+tiny-0004,69c70cee-0c73-482c-8bb8-e836d5004d12.jpg,bf969f56-5d22-423b-8175-47b23b704b35.jpg,bf969f56-5d22-423b-8175-47b23b704b35.jpg,"dense traffic and commercial signs versus uncluttered path"
