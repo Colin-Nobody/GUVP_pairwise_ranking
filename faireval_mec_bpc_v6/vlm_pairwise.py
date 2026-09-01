@@ -10,15 +10,25 @@ import json
 import math
 import os
 import re
+import time
 from datetime import datetime, timezone
 from pathlib import Path
 
 import torch
 from qwen_vl_utils import process_vision_info
 from transformers import AutoModelForImageTextToText, AutoProcessor, BitsAndBytesConfig
+from transformers.generation.logits_process import (
+    LogitsProcessor,
+    LogitsProcessorList,
+    RepetitionPenaltyLogitsProcessor,
+)
 
 IMAGE_SUFFIXES = {".jpg", ".jpeg", ".png", ".webp"}
-SUPPORTED_MODELS = {"Qwen/Qwen2.5-VL-7B-Instruct", "Qwen/Qwen3-VL-8B-Instruct"}
+SUPPORTED_MODELS = {
+    "Qwen/Qwen2.5-VL-3B-Instruct",
+    "Qwen/Qwen2.5-VL-7B-Instruct",
+    "Qwen/Qwen3-VL-8B-Instruct",
+}
 PROMPT_VERSION = "vp-faireval-mec-bpc-score-v6"
 LABEL_LAYOUT = "label_before"
 PROMPT_PATH = Path(__file__).resolve().parent / "prompts" / "vp_pairwise_faireval_mec_bpc_v6.txt"
@@ -63,11 +73,26 @@ def parse_args() -> argparse.Namespace:
                         help="Offload selected language modules for an 8GB GPU")
     parser.add_argument("--mec-samples", type=int, default=3,
                         help="Evidence-first samples per position (paper default: 3)")
+    parser.add_argument("--mec-batch-size", type=int, default=1,
+                        help="MEC samples decoded together; 1 preserves the serial baseline")
+    parser.add_argument("--reuse-prefix-cache", action="store_true",
+                        help="Reuse one visual/prompt KV prefix across serial MEC samples")
     parser.add_argument("--temperature", type=float, default=1.0,
                         help="MEC sampling temperature (paper default: 1.0)")
     parser.add_argument("--max-new-tokens", type=int, default=192)
     parser.add_argument("--seed", type=int, default=42)
+    parser.add_argument("--timing-output", type=Path,
+                        help="Optional JSON timing report for controlled benchmarks")
     return parser.parse_args()
+
+
+def inference_decode_mode(args: argparse.Namespace) -> str:
+    batch_size = getattr(args, "mec_batch_size", 1)
+    if getattr(args, "reuse_prefix_cache", False):
+        return f"{DECODE_MODE}_serial_reused_prefix_multinomial"
+    if batch_size == 1:
+        return DECODE_MODE
+    return f"{DECODE_MODE}_mec_batch{batch_size}_independent_multinomial"
 
 
 def default_audit_path(output: Path) -> Path:
@@ -219,10 +244,41 @@ def calibrate_scores(
     return result
 
 
-def infer_once(
-    model, processor, image_a: Path, image_b: Path, max_pixels: int,
-    temperature: float, max_new_tokens: int, sample_seed: int,
-) -> tuple[tuple[float, float] | None, str]:
+class IndependentMultinomialSampler(LogitsProcessor):
+    """Select one token per batch row with the baseline multinomial sampler."""
+
+    def __init__(self, seeds: list[int], temperature: float) -> None:
+        if temperature <= 0:
+            raise ValueError("IndependentMultinomialSampler requires a positive temperature")
+        self.seeds = seeds
+        self.temperature = temperature
+        self.generators: list[torch.Generator] | None = None
+        self.generator_device: torch.device | None = None
+
+    def __call__(self, input_ids: torch.LongTensor, scores: torch.FloatTensor) -> torch.FloatTensor:
+        if scores.shape[0] != len(self.seeds):
+            raise ValueError(
+                f"Expected {len(self.seeds)} batch rows, received {scores.shape[0]}"
+            )
+        if self.generators is None or self.generator_device != scores.device:
+            self.generators = [
+                torch.Generator(device=scores.device).manual_seed(seed) for seed in self.seeds
+            ]
+            self.generator_device = scores.device
+        probabilities = torch.softmax(scores / self.temperature, dim=-1)
+        selected = [
+            torch.multinomial(row, num_samples=1, generator=generator)
+            for row, generator in zip(probabilities, self.generators, strict=True)
+        ]
+        selected_tokens = torch.cat(selected).unsqueeze(1)
+        forced_scores = torch.full_like(scores, -torch.inf)
+        forced_scores.scatter_(1, selected_tokens, 0.0)
+        return forced_scores
+
+
+def prepare_pair_inputs(
+    processor, image_a: Path, image_b: Path, max_pixels: int,
+):
     messages = [{"role": "user", "content": [
         {"type": "text", "text": "Image A:"},
         {"type": "image", "image": str(image_a), "max_pixels": max_pixels},
@@ -232,37 +288,201 @@ def infer_once(
     ]}]
     text = processor.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
     image_inputs, video_inputs = process_vision_info(messages)
-    inputs = processor(
+    return processor(
         text=[text], images=image_inputs, videos=video_inputs, padding=True, return_tensors="pt"
-    ).to(model.device)
-    torch.manual_seed(sample_seed)
-    if torch.cuda.is_available():
-        torch.cuda.manual_seed_all(sample_seed)
+    )
+
+
+def repeat_inputs(inputs, batch_size: int, device: torch.device) -> dict[str, object]:
+    """Repeat one complete multimodal prompt, preserving each [A, B] visual block."""
+    repeated: dict[str, object] = {}
+    for key, value in inputs.items():
+        if torch.is_tensor(value):
+            repeats = (batch_size,) + (1,) * (value.ndim - 1)
+            repeated[key] = value.repeat(repeats).to(device)
+        elif isinstance(value, list):
+            repeated[key] = value * batch_size
+        else:
+            repeated[key] = value
+    return repeated
+
+
+def generate_prepared(
+    model, processor, inputs, temperature: float, max_new_tokens: int, seeds: list[int],
+    independent_sampling: bool,
+) -> list[str]:
+    batched = repeat_inputs(inputs, len(seeds), model.device)
     sampling = temperature > 0
     generation_args: dict[str, object] = {"max_new_tokens": max_new_tokens, "do_sample": sampling}
     if sampling:
-        generation_args["temperature"] = temperature
+        if independent_sampling:
+            generation_args["do_sample"] = False
+            generation_args["logits_processor"] = LogitsProcessorList([
+                IndependentMultinomialSampler(seeds, temperature)
+            ])
+        else:
+            generation_args["temperature"] = temperature
+            torch.manual_seed(seeds[0])
+            if torch.cuda.is_available():
+                torch.cuda.manual_seed_all(seeds[0])
     with torch.inference_mode():
-        generated = model.generate(**inputs, **generation_args)
-    response = processor.batch_decode(
-        generated[:, inputs.input_ids.shape[1]:], skip_special_tokens=True
-    )[0].strip()
+        generated = model.generate(**batched, **generation_args)
+    responses = processor.batch_decode(
+        generated[:, batched["input_ids"].shape[1]:], skip_special_tokens=True
+    )
+    return [response.strip() for response in responses]
+
+
+def generate_with_reused_prefix(
+    model, processor, inputs, temperature: float, max_new_tokens: int, seeds: list[int],
+) -> list[str]:
+    """Encode the multimodal prefix once, then decode each MEC sample serially.
+
+    The first token is sampled explicitly so the remaining generation can start
+    from the already-computed KV cache. The cache is cropped back to the prompt
+    length between samples, preserving baseline batch-size-one arithmetic.
+    """
+    prepared = repeat_inputs(inputs, 1, model.device)
+    prompt_ids = prepared["input_ids"]
+    prompt_length = prompt_ids.shape[1]
+    with torch.inference_mode():
+        prefix_output = model(**prepared, use_cache=True, logits_to_keep=1)
+    prefix_cache = prefix_output.past_key_values
+    prefix_logits = prefix_output.logits[:, -1].to(dtype=torch.float32)
+    if not hasattr(prefix_cache, "crop"):
+        raise TypeError("The model cache does not support prefix reuse via crop()")
+
+    repetition_penalty = float(model.generation_config.repetition_penalty or 1.0)
+    repetition_processor = (
+        RepetitionPenaltyLogitsProcessor(repetition_penalty)
+        if repetition_penalty != 1.0 else None
+    )
+    eos_ids = model.generation_config.eos_token_id
+    eos_ids = [eos_ids] if isinstance(eos_ids, int) else list(eos_ids or [])
+    responses: list[str] = []
+    for seed in seeds:
+        cached_length = prefix_cache.get_seq_length()
+        if cached_length < prompt_length:
+            raise ValueError(
+                f"Prefix cache shrank below the prompt length: {cached_length} < {prompt_length}"
+            )
+        if cached_length > prompt_length:
+            prefix_cache.crop(-(cached_length - prompt_length))
+        torch.manual_seed(seed)
+        if torch.cuda.is_available():
+            torch.cuda.manual_seed_all(seed)
+
+        first_scores = prefix_logits.clone()
+        if repetition_processor is not None:
+            first_scores = repetition_processor(prompt_ids, first_scores)
+        if temperature > 0:
+            first_probabilities = torch.softmax(first_scores / temperature, dim=-1)
+            first_token = torch.multinomial(first_probabilities, num_samples=1)
+        else:
+            first_token = torch.argmax(first_scores, dim=-1, keepdim=True)
+        generated_prefix = torch.cat([prompt_ids, first_token], dim=1)
+
+        if first_token.item() in eos_ids or max_new_tokens == 1:
+            generated = generated_prefix
+        else:
+            attention_mask = torch.cat(
+                [prepared["attention_mask"], torch.ones_like(first_token)], dim=1
+            )
+            generation_args: dict[str, object] = {
+                "max_new_tokens": max_new_tokens - 1,
+                "do_sample": temperature > 0,
+            }
+            if temperature > 0:
+                generation_args["temperature"] = temperature
+            with torch.inference_mode():
+                generated = model.generate(
+                    input_ids=generated_prefix,
+                    attention_mask=attention_mask,
+                    past_key_values=prefix_cache,
+                    **generation_args,
+                )
+        response = processor.batch_decode(
+            generated[:, prompt_length:], skip_special_tokens=True
+        )[0].strip()
+        responses.append(response)
+    return responses
+
+
+def infer_once(
+    model, processor, image_a: Path, image_b: Path, max_pixels: int,
+    temperature: float, max_new_tokens: int, sample_seed: int,
+    timings: dict[str, float] | None = None,
+) -> tuple[tuple[float, float] | None, str]:
+    started = time.perf_counter()
+    inputs = prepare_pair_inputs(processor, image_a, image_b, max_pixels)
+    if timings is not None:
+        timings["preprocess_seconds"] += time.perf_counter() - started
+    started = time.perf_counter()
+    response = generate_prepared(
+        model, processor, inputs, temperature, max_new_tokens, [sample_seed],
+        independent_sampling=False,
+    )[0]
+    if timings is not None:
+        timings["generate_seconds"] += time.perf_counter() - started
     return parse_evaluation(response), response
 
 
 def infer_mec(
     model, processor, image_a: Path, image_b: Path, args: argparse.Namespace, seed_offset: int,
+    timings: dict[str, float] | None = None,
 ) -> tuple[list[tuple[float, float]], list[str]]:
     evaluations: list[tuple[float, float]] = []
     responses: list[str] = []
-    for sample_index in range(args.mec_samples):
-        evaluation, response = infer_once(
-            model, processor, image_a, image_b, args.max_pixels, args.temperature,
-            args.max_new_tokens, args.seed + seed_offset + sample_index,
+    if getattr(args, "reuse_prefix_cache", False):
+        started = time.perf_counter()
+        inputs = prepare_pair_inputs(processor, image_a, image_b, args.max_pixels)
+        if timings is not None:
+            timings["preprocess_seconds"] += time.perf_counter() - started
+        seeds = [args.seed + seed_offset + index for index in range(args.mec_samples)]
+        started = time.perf_counter()
+        responses = generate_with_reused_prefix(
+            model, processor, inputs, args.temperature, args.max_new_tokens, seeds,
         )
-        responses.append(response)
-        if evaluation is not None:
-            evaluations.append(evaluation)
+        if timings is not None:
+            timings["generate_seconds"] += time.perf_counter() - started
+            timings["generation_batches"] += 1
+        evaluations = [
+            evaluation for response in responses
+            if (evaluation := parse_evaluation(response)) is not None
+        ]
+        return evaluations, responses
+
+    if args.mec_batch_size == 1:
+        for sample_index in range(args.mec_samples):
+            evaluation, response = infer_once(
+                model, processor, image_a, image_b, args.max_pixels, args.temperature,
+                args.max_new_tokens, args.seed + seed_offset + sample_index, timings,
+            )
+            responses.append(response)
+            if evaluation is not None:
+                evaluations.append(evaluation)
+        return evaluations, responses
+
+    started = time.perf_counter()
+    inputs = prepare_pair_inputs(processor, image_a, image_b, args.max_pixels)
+    if timings is not None:
+        timings["preprocess_seconds"] += time.perf_counter() - started
+    for first_index in range(0, args.mec_samples, args.mec_batch_size):
+        stop_index = min(first_index + args.mec_batch_size, args.mec_samples)
+        seeds = [args.seed + seed_offset + index for index in range(first_index, stop_index)]
+        started = time.perf_counter()
+        batch_responses = generate_prepared(
+            model, processor, inputs, args.temperature, args.max_new_tokens, seeds,
+            independent_sampling=True,
+        )
+        if timings is not None:
+            timings["generate_seconds"] += time.perf_counter() - started
+            timings["generation_batches"] += 1
+        for response in batch_responses:
+            responses.append(response)
+            evaluation = parse_evaluation(response)
+            if evaluation is not None:
+                evaluations.append(evaluation)
     return evaluations, responses
 
 
@@ -280,7 +500,7 @@ def validate_resume_rows(rows: list[dict[str, str]], args: argparse.Namespace) -
     expected = {
         "model": args.model, "prompt_version": PROMPT_VERSION, "prompt_sha256": PROMPT_SHA256,
         "label_layout": LABEL_LAYOUT, "max_pixels": str(args.max_pixels), "quantization": QUANTIZATION,
-        "cpu_offload": str(args.cpu_offload).lower(), "decode_mode": DECODE_MODE,
+        "cpu_offload": str(args.cpu_offload).lower(), "decode_mode": inference_decode_mode(args),
         "mec_samples": str(args.mec_samples), "temperature": str(args.temperature),
         "max_new_tokens": str(args.max_new_tokens), "seed": str(args.seed),
     }
@@ -337,6 +557,13 @@ def validate_args(args: argparse.Namespace) -> None:
         raise ValueError("--resume and --overwrite cannot be used together")
     if args.mec_samples < 1:
         raise ValueError("--mec-samples must be positive")
+    mec_batch_size = getattr(args, "mec_batch_size", 1)
+    if mec_batch_size < 1:
+        raise ValueError("--mec-batch-size must be positive")
+    if mec_batch_size > args.mec_samples:
+        raise ValueError("--mec-batch-size cannot exceed --mec-samples")
+    if getattr(args, "reuse_prefix_cache", False) and mec_batch_size != 1:
+        raise ValueError("--reuse-prefix-cache requires --mec-batch-size 1")
     if args.temperature < 0:
         raise ValueError("--temperature cannot be negative")
     if args.max_new_tokens < 16:
@@ -344,6 +571,7 @@ def validate_args(args: argparse.Namespace) -> None:
 
 
 def main() -> None:
+    run_started = time.perf_counter()
     args = parse_args()
     validate_args(args)
     args.audit_output = args.audit_output or default_audit_path(args.output)
@@ -385,10 +613,17 @@ def main() -> None:
             handle.write(
                 f"Starting/resuming {len(indexed_pairs)} pairs; {len(completed)} complete; "
                 f"prompt={PROMPT_VERSION}; model={args.model}; MEC k={args.mec_samples}; "
-                f"temperature={args.temperature}; BPC=true\n"
+                f"MEC batch={args.mec_batch_size}; temperature={args.temperature}; BPC=true\n"
             )
 
+    load_started = time.perf_counter()
     model, processor = load_model(args)
+    timings = {
+        "model_load_seconds": time.perf_counter() - load_started,
+        "preprocess_seconds": 0.0,
+        "generate_seconds": 0.0,
+        "generation_batches": 0.0,
+    }
     audit_mode = "a" if args.resume else "w"
     with args.audit_output.open(audit_mode, newline="", encoding="utf-8") as audit_handle, \
             args.output.open("a", newline="", encoding="utf-8") as vote_handle:
@@ -401,10 +636,10 @@ def main() -> None:
             pair_index = int(comparison_id.split("-")[-1])
             seed_offset = pair_index * 10_000
             evaluations_ab, responses_ab = infer_mec(
-                model, processor, files[image_a], files[image_b], args, seed_offset,
+                model, processor, files[image_a], files[image_b], args, seed_offset, timings,
             )
             evaluations_ba, responses_ba = infer_mec(
-                model, processor, files[image_b], files[image_a], args, seed_offset + 5_000,
+                model, processor, files[image_b], files[image_a], args, seed_offset + 5_000, timings,
             )
             calibrated = calibrate_scores(
                 image_a, image_b, evaluations_ab, evaluations_ba, args.mec_samples,
@@ -414,7 +649,8 @@ def main() -> None:
                 **calibrated,
                 "model": args.model, "prompt_version": PROMPT_VERSION, "prompt_sha256": PROMPT_SHA256,
                 "label_layout": LABEL_LAYOUT, "max_pixels": args.max_pixels, "quantization": QUANTIZATION,
-                "cpu_offload": str(args.cpu_offload).lower(), "decode_mode": DECODE_MODE,
+                "cpu_offload": str(args.cpu_offload).lower(),
+                "decode_mode": inference_decode_mode(args),
                 "mec_samples": args.mec_samples, "temperature": args.temperature,
                 "max_new_tokens": args.max_new_tokens, "seed": args.seed,
                 "timestamp_utc": datetime.now(timezone.utc).isoformat(),
@@ -451,8 +687,29 @@ def main() -> None:
     print(f"Calibrated votes: {accepted}; excluded/invalid/tied pairs: {len(final_rows) - accepted}")
     print(f"Audit: {args.audit_output}")
     print(f"Votes: {args.output}")
+    peak_cuda_gib = 0.0
     if torch.cuda.is_available():
-        print(f"Peak CUDA memory allocated: {torch.cuda.max_memory_allocated() / 1024**3:.2f} GiB")
+        peak_cuda_gib = torch.cuda.max_memory_allocated() / 1024**3
+        print(f"Peak CUDA memory allocated: {peak_cuda_gib:.2f} GiB")
+    if args.timing_output:
+        args.timing_output.parent.mkdir(parents=True, exist_ok=True)
+        timing_report = {
+            "model": args.model,
+            "decode_mode": inference_decode_mode(args),
+            "mec_samples": args.mec_samples,
+            "mec_batch_size": args.mec_batch_size,
+            "completed_pairs": len(final_rows),
+            "model_load_seconds": timings["model_load_seconds"],
+            "preprocess_seconds": timings["preprocess_seconds"],
+            "generate_seconds": timings["generate_seconds"],
+            "generation_batches": int(timings["generation_batches"]),
+            "wall_seconds": time.perf_counter() - run_started,
+            "peak_cuda_allocated_gib": peak_cuda_gib,
+        }
+        args.timing_output.write_text(
+            json.dumps(timing_report, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
+        )
+        print(f"Timing: {args.timing_output}")
 
 
 if __name__ == "__main__":

@@ -9,6 +9,8 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
+import torch
+
 import vlm_pairwise
 
 
@@ -68,6 +70,70 @@ class CalibrationTests(unittest.TestCase):
         )
         self.assertEqual(result["status"], "invalid_ab")
         self.assertEqual(result["winner"], "")
+
+
+class InferenceOptimizationTests(unittest.TestCase):
+    @staticmethod
+    def response(score_a: int, score_b: int) -> str:
+        return (
+            "Evaluation evidence: visible evidence.\n"
+            f"Score of Image A: {score_a}\nScore of Image B: {score_b}"
+        )
+
+    def test_repeat_inputs_preserves_complete_multimodal_blocks(self) -> None:
+        inputs = {
+            "input_ids": torch.tensor([[1, 2]]),
+            "pixel_values": torch.tensor([[10], [20], [30]]),
+            "image_grid_thw": torch.tensor([[1, 2, 3], [4, 5, 6]]),
+        }
+        repeated = vlm_pairwise.repeat_inputs(inputs, 2, torch.device("cpu"))
+        self.assertEqual(repeated["input_ids"].tolist(), [[1, 2], [1, 2]])
+        self.assertEqual(
+            repeated["pixel_values"].flatten().tolist(), [10, 20, 30, 10, 20, 30]
+        )
+        self.assertEqual(repeated["image_grid_thw"].shape, (4, 3))
+
+    def test_independent_multinomial_sampling_is_reproducible_per_row(self) -> None:
+        input_ids = torch.ones((2, 1), dtype=torch.long)
+        scores = torch.zeros((2, 256), dtype=torch.float32)
+        first = vlm_pairwise.IndependentMultinomialSampler([101, 202], 1.0)(input_ids, scores)
+        second = vlm_pairwise.IndependentMultinomialSampler([101, 202], 1.0)(input_ids, scores)
+        self.assertTrue(torch.equal(first, second))
+        self.assertNotEqual(first[0].argmax().item(), first[1].argmax().item())
+
+    def test_mec_batch_two_plus_one_prepares_once_and_preserves_order(self) -> None:
+        args = argparse.Namespace(
+            mec_samples=3, mec_batch_size=2, max_pixels=401408, temperature=1.0,
+            max_new_tokens=192, seed=42,
+        )
+        batch_one = [self.response(8, 3), self.response(7, 4)]
+        batch_two = [self.response(9, 2)]
+        with patch.object(vlm_pairwise, "prepare_pair_inputs", return_value={}) as prepare, \
+                patch.object(
+                    vlm_pairwise, "generate_prepared", side_effect=[batch_one, batch_two]
+                ) as generate:
+            evaluations, responses = vlm_pairwise.infer_mec(
+                object(), object(), Path("a.jpg"), Path("b.jpg"), args, seed_offset=100,
+            )
+        prepare.assert_called_once()
+        self.assertEqual(responses, batch_one + batch_two)
+        self.assertEqual(evaluations, [(8.0, 3.0), (7.0, 4.0), (9.0, 2.0)])
+        self.assertEqual(generate.call_args_list[0].args[5], [142, 143])
+        self.assertEqual(generate.call_args_list[1].args[5], [144])
+
+    def test_decode_mode_records_batched_sampling_implementation(self) -> None:
+        self.assertEqual(
+            vlm_pairwise.inference_decode_mode(argparse.Namespace(mec_batch_size=1)),
+            vlm_pairwise.DECODE_MODE,
+        )
+        self.assertIn(
+            "batch2", vlm_pairwise.inference_decode_mode(argparse.Namespace(mec_batch_size=2))
+        )
+        self.assertIn(
+            "reused_prefix", vlm_pairwise.inference_decode_mode(
+                argparse.Namespace(mec_batch_size=1, reuse_prefix_cache=True)
+            )
+        )
 
 
 class OutputAndResumeTests(unittest.TestCase):
@@ -138,6 +204,16 @@ class OutputAndResumeTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "mec-samples"):
             vlm_pairwise.validate_args(argparse.Namespace(
                 resume=False, overwrite=False, mec_samples=0, temperature=1.0, max_new_tokens=192,
+            ))
+        with self.assertRaisesRegex(ValueError, "mec-batch-size"):
+            vlm_pairwise.validate_args(argparse.Namespace(
+                resume=False, overwrite=False, mec_samples=3, mec_batch_size=4,
+                temperature=1.0, max_new_tokens=192,
+            ))
+        with self.assertRaisesRegex(ValueError, "reuse-prefix-cache"):
+            vlm_pairwise.validate_args(argparse.Namespace(
+                resume=False, overwrite=False, mec_samples=3, mec_batch_size=2,
+                reuse_prefix_cache=True, temperature=1.0, max_new_tokens=192,
             ))
 
 

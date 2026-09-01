@@ -2,6 +2,8 @@
 
 这是 `GUVP_pairwise_ranking` 的独立 FairEval 校准版本，用 Qwen VLM 对街景图像的视觉污染进行两两比较。该目录与仓库根目录的早期单向、AB/BA 和提示词实验相互隔离。
 
+> **未来无会话记忆的 CLI/维护者：请从 [`START_HERE_CLI.md`](START_HERE_CLI.md) 开始。** 其中记录了固定控制变量、已验证优化、运行保护、文件地图和下一阶段入口。欧洲 50 城市 × RTX 5090 的采样、配对与工时方案见 [`EUROPE_50_CITIES_5090_PLAN.md`](EUROPE_50_CITIES_5090_PLAN.md)。
+
 ## 方法
 
 本实现适配 Wang et al. 的 *Large Language Models are not Fair Evaluators*：
@@ -61,6 +63,20 @@ python -m unittest discover -s tests -v
 
 ## 运行 7B 正式实验
 
+推荐使用已经过逐字输出对照验证的前缀缓存版本：
+
+```bash
+./scripts/run_7b_formal_optimized_and_score.sh
+```
+
+另一个终端监控：
+
+```bash
+./scripts/monitor_7b_formal_optimized.sh 10
+```
+
+该路径保持 MEC=3 串行独立采样，并复用视觉/提示词 KV 前缀。历史基线脚本仍保留用于复现：
+
 ```bash
 ./scripts/run_7b_formal_and_score.sh
 ```
@@ -72,6 +88,8 @@ python -m unittest discover -s tests -v
 ```bash
 ./scripts/monitor_7b_formal_abba.sh
 ```
+
+优化原理、验证结果和实验性 batch 路径见 [`OPTIMIZATION_PLAN.md`](OPTIMIZATION_PLAN.md)。不要把不同解码实现写入同一个审计文件。
 
 ## 运行 Qwen3-VL 8B
 

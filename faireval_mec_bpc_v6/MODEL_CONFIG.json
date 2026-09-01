@@ -2,6 +2,7 @@
   "experiment": "guvp-faireval-mec-bpc-v6",
   "primary_model": "Qwen/Qwen2.5-VL-7B-Instruct",
   "supported_models": [
+    "Qwen/Qwen2.5-VL-3B-Instruct",
     "Qwen/Qwen2.5-VL-7B-Instruct",
     "Qwen/Qwen3-VL-8B-Instruct"
   ],
@@ -9,9 +10,11 @@
   "prompt_sha256": "b34d3f8b72f684ae228edc6ef817b27d07927d8a73b3a5bd172cfc8b2f33fa8e",
   "label_layout": "label_before",
   "quantization": "bitsandbytes-nf4-double-bfloat16",
-  "decode_mode": "sampled_evidence_first_scores",
+  "decode_mode": "sampled_evidence_first_scores_serial_reused_prefix_multinomial",
   "max_pixels": 401408,
   "mec_samples_per_position": 3,
+  "mec_batch_size": 1,
+  "reuse_prefix_cache": true,
   "temperature": 1.0,
   "max_new_tokens": 192,
   "seed": 42,
@@ -19,5 +22,29 @@
   "formal_image_count": 250,
   "formal_unordered_pair_count": 3000,
   "formal_participation_per_image": 24,
-  "formal_directional_samples": 18000
+  "formal_directional_samples": 18000,
+  "validated_optimization": {
+    "date": "2026-09-01",
+    "hardware": "NVIDIA GeForce RTX 5060 8GB",
+    "comparison_pairs": 20,
+    "directional_samples": 120,
+    "byte_identical_to_serial_baseline": 120,
+    "peak_cuda_allocated_gib": 5.88,
+    "measured_pairs_per_hour": 242,
+    "baseline_pairs_per_hour": 202,
+    "experimental_batch_3_formal_status": "rejected_pending_statistical_validation"
+  },
+  "europe_50_city_default_plan": {
+    "status": "proposal_requires_city_list_and_data_license_approval",
+    "images_per_city": 1000,
+    "city_count": 50,
+    "participation_per_image": 25,
+    "within_city_degree": 20,
+    "cross_city_degree": 5,
+    "unordered_pair_count": 625000,
+    "directional_generation_count": 3750000,
+    "rtx_5090_planning_pairs_per_hour": 1800,
+    "pure_inference_hours": 347.2,
+    "rental_budget_hours_with_buffer": "380-400"
+  }
 }
