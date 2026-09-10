@@ -1,0 +1,24 @@
+{
+  "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+  "prompt_version": "vp-definition-score-v7",
+  "prompt_sha256": "cd3722b5e318415a1b2fbb266c8e898d22c2a0c45939b72dcb07d86fae8a23bc",
+  "score_direction": "lower_is_cleaner",
+  "mec_samples_per_position": 3,
+  "temperature": 1.0,
+  "completed_unordered_pairs": 1500,
+  "mec_directional_samples": 9000,
+  "calibrated_votes": 1305,
+  "calibrated_vote_rate": 0.87,
+  "calibrated_ties": 48,
+  "invalid_pairs": 147,
+  "status_counts": {
+    "calibrated": 1305,
+    "calibrated_tie": 48,
+    "invalid_ab": 68,
+    "invalid_ba": 74,
+    "invalid_both": 5
+  },
+  "mean_absolute_calibrated_margin": 1.7531411677753141,
+  "mean_bpde": 0.41677142908429027,
+  "mean_first_position_score_advantage": 0.5299106638018776
+}

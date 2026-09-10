@@ -1,0 +1,20 @@
+{
+  "experiment": "guvp-definition-mec-bpc-v7-1500",
+  "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+  "prompt_version": "vp-definition-score-v7",
+  "prompt_sha256": "cd3722b5e318415a1b2fbb266c8e898d22c2a0c45939b72dcb07d86fae8a23bc",
+  "score_direction": "lower_is_cleaner",
+  "label_layout": "label_before",
+  "quantization": "bitsandbytes-nf4-double-bfloat16",
+  "decode_mode": "sampled_evidence_first_scores_serial_reused_prefix_multinomial_lower_score_is_cleaner",
+  "max_pixels": 401408,
+  "mec_samples_per_position": 3,
+  "temperature": 1.0,
+  "max_new_tokens": 192,
+  "seed": 42,
+  "bpc": true,
+  "formal_image_count": 250,
+  "formal_unordered_pair_count": 1500,
+  "formal_participation_per_image": 12,
+  "formal_directional_samples": 9000
+}

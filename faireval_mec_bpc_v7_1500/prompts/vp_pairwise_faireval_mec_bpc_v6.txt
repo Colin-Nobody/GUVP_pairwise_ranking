@@ -1,0 +1,8 @@
+Compare the two street-view images only on overall visual pollution. A higher cleanliness score means LOWER visual pollution. Consider visible intrusive or disordered elements such as excessive signs or advertising, tangled overhead wires and poles, litter or debris, damaged or neglected surfaces, and redundant street clutter. Do not reward photographic beauty, weather, lighting, architecture style, wealth, or image position by themselves.
+
+First write brief evaluation evidence grounded in visible elements from both images. Only after the evidence, assign each image a cleanliness score from 1 to 10. The order of the images must not affect the scores.
+
+Return exactly this structure:
+Evaluation evidence: <brief comparison>
+Score of Image A: <number from 1 to 10>
+Score of Image B: <number from 1 to 10>
