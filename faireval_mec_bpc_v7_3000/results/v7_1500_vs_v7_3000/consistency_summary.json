@@ -1,0 +1,207 @@
+{
+  "comparison": "v7_1500_vs_v7_3000",
+  "configuration_identical": true,
+  "configuration_a": {
+    "model": [
+      "Qwen/Qwen2.5-VL-7B-Instruct"
+    ],
+    "prompt_sha256": [
+      "cd3722b5e318415a1b2fbb266c8e898d22c2a0c45939b72dcb07d86fae8a23bc"
+    ],
+    "mec_samples": [
+      "3"
+    ],
+    "temperature": [
+      "1.0"
+    ],
+    "max_pixels": [
+      "401408"
+    ],
+    "decode_mode": [
+      "sampled_evidence_first_scores_serial_reused_prefix_multinomial_lower_score_is_cleaner"
+    ]
+  },
+  "configuration_b": {
+    "model": [
+      "Qwen/Qwen2.5-VL-7B-Instruct"
+    ],
+    "prompt_sha256": [
+      "cd3722b5e318415a1b2fbb266c8e898d22c2a0c45939b72dcb07d86fae8a23bc"
+    ],
+    "mec_samples": [
+      "3"
+    ],
+    "temperature": [
+      "1.0"
+    ],
+    "max_pixels": [
+      "401408"
+    ],
+    "decode_mode": [
+      "sampled_evidence_first_scores_serial_reused_prefix_multinomial_lower_score_is_cleaner"
+    ]
+  },
+  "score_and_rank_agreement": {
+    "matched_images": 250,
+    "direct_q_score_agreement": {
+      "correlations": {
+        "pearson_r": 0.9023470182267342,
+        "pearson_p": 1.2631021652685974e-92,
+        "spearman_rho": 0.9002805164882636,
+        "spearman_p": 1.4846108371881907e-91,
+        "kendall_tau": 0.7211887550200804,
+        "kendall_p": 1.0509367432195674e-64
+      },
+      "mean_bias_b_minus_a": -0.01351145200000002,
+      "mean_absolute_difference": 0.60146622,
+      "root_mean_square_difference": 0.7740444098928718
+    },
+    "correlations": {
+      "pearson_r": 0.9110519923645822,
+      "pearson_p": 2.0656674614766967e-97,
+      "spearman_rho": 0.9085650650410405,
+      "spearman_p": 5.384260777347819e-96,
+      "kendall_tau": 0.733140562248996,
+      "kendall_p": 8.33301355432096e-67,
+      "pearson_r_95_ci": [
+        0.8899642614112268,
+        0.929666998140883
+      ],
+      "spearman_rho_95_ci": [
+        0.8815917658907868,
+        0.9282414449532475
+      ]
+    },
+    "lins_concordance_correlation": 0.9063501511803529,
+    "mean_bias_b_minus_a": -0.22241837199999998,
+    "mean_absolute_difference": 0.81414706,
+    "root_mean_square_difference": 1.0438533042792535,
+    "median_absolute_difference": 0.628808,
+    "bland_altman_95_limits": [
+      -2.2253975397071946,
+      1.7805607957071947
+    ],
+    "score_within_0_5": 0.4,
+    "score_within_1_0": 0.66,
+    "mean_absolute_rank_difference": 23.648,
+    "median_absolute_rank_difference": 19.0,
+    "rank_difference_95th_percentile": 65.09999999999997,
+    "rank_within_10": 0.332,
+    "rank_within_25": 0.644,
+    "exact_quartile_agreement": 0.636,
+    "within_one_quartile": 0.996,
+    "quadratic_weighted_quartile_kappa": 0.8495980748553582,
+    "top_bottom_overlap": {
+      "10": {
+        "most_polluted": {
+          "count": 5,
+          "rate_of_k": 0.5,
+          "jaccard": 0.3333333333333333
+        },
+        "least_polluted": {
+          "count": 6,
+          "rate_of_k": 0.6,
+          "jaccard": 0.42857142857142855
+        }
+      },
+      "25": {
+        "most_polluted": {
+          "count": 19,
+          "rate_of_k": 0.76,
+          "jaccard": 0.6129032258064516
+        },
+        "least_polluted": {
+          "count": 19,
+          "rate_of_k": 0.76,
+          "jaccard": 0.6129032258064516
+        }
+      },
+      "50": {
+        "most_polluted": {
+          "count": 35,
+          "rate_of_k": 0.7,
+          "jaccard": 0.5384615384615384
+        },
+        "least_polluted": {
+          "count": 39,
+          "rate_of_k": 0.78,
+          "jaccard": 0.639344262295082
+        }
+      }
+    },
+    "trueskill_uncertainty": {
+      "mean_sigma_v7_1500": 3.603920752,
+      "mean_sigma_v7_3000": 2.620240732,
+      "mean_sigma_reduction_rate": 0.27294718382864147,
+      "images_with_lower_sigma_in_b": 249
+    }
+  },
+  "repeated_pair_agreement": {
+    "pairs_a": 1500,
+    "pairs_b": 3000,
+    "matched_pairs": 1500,
+    "matched_pair_coverage_of_a": 1.0,
+    "both_success_including_ties": 1224,
+    "both_decisive": 1150,
+    "same_decisive_winner": 977,
+    "decisive_winner_agreement_rate": 0.8495652173913043,
+    "decisive_winner_agreement_95_ci_wilson": [
+      0.827741069498358,
+      0.8690617658077537
+    ],
+    "decisive_winner_cohens_kappa": 0.6990066235184833,
+    "three_way_outcome_agreement_rate": 0.7998366013071896,
+    "three_way_outcome_cohens_kappa": 0.6219245437639865,
+    "canonical_margin_correlations_on_both_successful": {
+      "pearson_r": 0.8646078197538929,
+      "pearson_p": 0.0,
+      "spearman_rho": 0.8600357010871049,
+      "spearman_p": 0.0,
+      "kendall_tau": 0.6778502878826824,
+      "kendall_p": 6.348721914437158e-271
+    }
+  },
+  "city_summary": [
+    {
+      "city": "Amsterdam",
+      "image_count": 50,
+      "mean_score_a": 5.68033,
+      "mean_score_b": 5.45811,
+      "mean_absolute_score_difference": 0.927749,
+      "mean_delta_b_minus_a": -0.22222
+    },
+    {
+      "city": "Barcelona",
+      "image_count": 50,
+      "mean_score_a": 4.268848,
+      "mean_score_b": 4.035974,
+      "mean_absolute_score_difference": 0.836229,
+      "mean_delta_b_minus_a": -0.232874
+    },
+    {
+      "city": "Berlin",
+      "image_count": 50,
+      "mean_score_a": 4.666416,
+      "mean_score_b": 4.363509,
+      "mean_absolute_score_difference": 0.731329,
+      "mean_delta_b_minus_a": -0.302907
+    },
+    {
+      "city": "Paris",
+      "image_count": 50,
+      "mean_score_a": 5.369501,
+      "mean_score_b": 5.334249,
+      "mean_absolute_score_difference": 0.820974,
+      "mean_delta_b_minus_a": -0.035252
+    },
+    {
+      "city": "Rome",
+      "image_count": 50,
+      "mean_score_a": 5.075508,
+      "mean_score_b": 4.756669,
+      "mean_absolute_score_difference": 0.754454,
+      "mean_delta_b_minus_a": -0.318839
+    }
+  ],
+  "interpretation_note": "The larger run contains all pairs from the smaller run plus additional pairs. It is not an independent sample; paired agreement is descriptive, not external validation."
+}

@@ -1,0 +1,8 @@
+__pycache__/
+*.py[cod]
+.venv/
+data/street_images/
+data/*votes*.csv
+output/
+*.log
+.env

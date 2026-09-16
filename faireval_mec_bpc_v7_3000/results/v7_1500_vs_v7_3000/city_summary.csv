@@ -1,0 +1,6 @@
+city,image_count,mean_score_a,mean_score_b,mean_absolute_score_difference,mean_delta_b_minus_a
+Amsterdam,50,5.68033,5.45811,0.927749,-0.22222
+Barcelona,50,4.268848,4.035974,0.836229,-0.232874
+Berlin,50,4.666416,4.363509,0.731329,-0.302907
+Paris,50,5.369501,5.334249,0.820974,-0.035252
+Rome,50,5.075508,4.756669,0.754454,-0.318839
