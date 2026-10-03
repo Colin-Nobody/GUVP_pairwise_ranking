@@ -69,17 +69,45 @@ Q-score 对图片 i 定义为：
 
 无需改动算法。只要将 VLM 的每个强制二选一结果写成同一 CSV 模式即可。例如让 VLM 回答「A 和 B 哪一张更干净？」并将被选择的图片 ID 填入 `winner`。建议另存 VLM 名称、prompt 版本、温度、时间戳和置信度等元数据列，便于审计。
 
-### 本地 Qwen2.5-VL 4-bit 比较
+### 本地 Qwen VLM：MEC + BPC 校准
 
-`vlm_pairwise.py` 会以「哪张更干净／视觉污染更低」作为强制二选一题目，输出可直接传给 `main.py` 的 CSV。它默认使用适合 8GB 显存试跑的 `Qwen/Qwen2.5-VL-3B-Instruct`、4-bit NF4 量化和每图最多 512 个视觉 token。
+`vlm_pairwise.py` 默认使用 Qwen2.5-VL-7B、4-bit NF4 量化和前置 A/B 标签，并按 Wang et al. 的 FairEval 方法适配街景 VP：
+
+- **MEC**：模型先写可见物证据，再给两图各自的 1–10 清洁度分数；每个位置用 temperature=1.0 独立采样 k=3 次。
+- **BPC**：同一图片对同时运行 AB 与 BA。程序把交换后的分数重新映射到实际图片，对每张图的 2k 个分数取平均；平均分更高者才成为该对的 `winner`。
+- 若任一位置没有得到完整 k 个可解析结果，或两个校准均分相同，该图片对只保留在 audit CSV，不进入 `main.py` 的 votes CSV。审计同时保存全部原始响应、位置分数、校准分差和 BPDE。
+
+因此默认每个无序图片对需要 2×3=6 次推理。允许的正式模型仅为 Qwen2.5-VL-7B 和 Qwen3-VL-8B，不再使用 3B。
 
 ```bash
 conda activate guvp-vlm
-python vlm_pairwise.py --images-dir /path/to/street_images --max-pairs 20 --output data/vlm_pairwise_votes.csv
+python vlm_pairwise.py --images-dir /path/to/street_images --max-pairs 20 \
+  --mec-samples 3 --temperature 1.0 \
+  --audit-output output/vlm_smoke/pair_audit.csv \
+  --output data/vlm_pairwise_votes.csv
 python main.py --input data/vlm_pairwise_votes.csv --output-dir output/vlm --dimension visual_pollution
 ```
 
-图片文件名会作为 `image_a` / `image_b` ID。若需要固定配对，请提供包含 `image_a,image_b` 文件名列的 CSV，并加上 `--pairs path/to/pairs.csv`。
+图片文件名会作为 `image_a` / `image_b` ID。若需要固定配对，请提供包含 `image_a,image_b` 文件名列的 CSV，并加上 `--pairs path/to/pairs.csv`。断点续跑以 audit 文件为准，并检查模型、提示词版本及 SHA-256、标签布局、图片分辨率、量化和 offload 设置，防止不同实验误接到同一输出。
+
+### MEC+BPC V6 正式运行
+
+7B 与 Qwen3 8B 必须分别启动、分别保存、分别计算排名：
+
+```bash
+./scripts/run_7b_formal_and_score.sh
+./scripts/run_qwen3_vl_8b_formal_and_score.sh
+```
+
+当前优先运行 7B，Qwen3 8B 暂缓。7B 脚本会先校验图片数、配对数、重复配对、每图参与次数和提示词哈希，并用文件锁及 GPU 进程检查阻止重复启动。运行时可在另一终端查看进度：
+
+```bash
+./scripts/monitor_7b_formal_abba.sh
+```
+
+固定配对表 `data/vlm_pairwise_formal_balanced24_v6_3000.csv` 包含 3,000 个无序图片对；250 张图每张恰好参与 24 对，满足每图 23–25 次的要求。MEC k=3 与 BPC 组合后，每个模型独立执行 18,000 次证据优先方向采样。
+
+7B 输出位于 `data/vlm_pairwise_7b_formal_mec3_bpc_v6_3000.csv` 和 `output/vlm_7b_formal_mec3_bpc_v6_3000/`；Qwen3 8B 输出位于 `data/vlm_pairwise_qwen3_vl_8b_formal_mec3_bpc_v6_3000.csv` 和 `output/vlm_qwen3_vl_8b_formal_mec3_bpc_v6_3000/`。每个目录中的 `pair_audit.csv` 保留所有校准、平局及无效响应，`pair_audit_summary.json` 与 `PAIR_AUDIT_REPORT.md` 汇总 BPDE、校准分差与残余位置分数优势；两个模型的票不会在正式评分阶段合并。
 
 ## 3B/7B正式运行对比
 
@@ -98,7 +126,7 @@ RTX 5060 8GB 使用官方 `Qwen/Qwen3-VL-8B-Instruct` 的 bitsandbytes 4-bit NF4
 ./scripts/run_qwen3_vl_8b_smoke.sh
 ```
 
-确认冒烟测试成功后，可用与 3B/7B 相同的正式配对表运行并自动计算分数：
+确认冒烟测试成功后，可用相同的正式配对表独立运行并自动计算 Qwen3 8B 分数：
 
 ```bash
 ./scripts/run_qwen3_vl_8b_formal_and_score.sh
@@ -121,3 +149,14 @@ Qwen3-VL 8B 正式运行已完成全部 15,562 个配对。结果保存在
 完整审计见 [`QWEN3_RESULTS_AUDIT.md`](QWEN3_RESULTS_AUDIT.md)。审计确认运行文件
 完整，但发现三种模型均存在显著 A/B 位置偏差；在完成交换位置复核前，这些排名
 不应直接视为视觉污染 ground truth。
+
+三模型的双向交换、同图零信息和视觉访问对照实验见
+[`AB_POSITION_EXPERIMENT.md`](AB_POSITION_EXPERIMENT.md)。实验进一步确认三个模型
+都能感知图片，但原来的标签后置布局会使 3B 和 Qwen3 无法稳定对应 A/B；改为
+标签前置后，7B 和 Qwen3 的自然图交换一致率分别达到 86.9% 和 80.6%，3B 仍受
+强位置先验支配。
+
+在极短提示词中加入少量可见 VP object 例子的后续实验见
+[`OBJECT_CUE_PROMPT_EXPERIMENT.md`](OBJECT_CUE_PROMPT_EXPERIMENT.md)。该提示在 7B 上保持
+A/B 平衡并将换位一致率提高到 88.1%；Qwen3 8B 的换位一致率为 76.2%。后续实验仅使用
+7B 和 Qwen3 8B，并要求每个图片对通过 AB/BA 双向复核后才计票，3B 不再参与。

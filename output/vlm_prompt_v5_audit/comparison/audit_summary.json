@@ -1,0 +1,478 @@
+{
+  "runs": {
+    "original_7b": {
+      "label": "original_7b",
+      "model_values": [
+        "Qwen/Qwen2.5-VL-7B-Instruct"
+      ],
+      "rows": 400,
+      "valid_rows": 400,
+      "invalid_rows": 0,
+      "natural_a_selection": {
+        "count": 161,
+        "total": 320,
+        "rate": 0.503125,
+        "clopper_pearson_95pct": [
+          0.44697248652870675,
+          0.5592191453616179
+        ]
+      },
+      "natural_tie_selection": {
+        "count": 0,
+        "total": 320,
+        "rate": 0.0,
+        "clopper_pearson_95pct": [
+          0.0,
+          0.011461558388074885
+        ]
+      },
+      "natural_swap_consistency": {
+        "count": 139,
+        "total": 160,
+        "rate": 0.86875,
+        "clopper_pearson_95pct": [
+          0.8063918442358302,
+          0.9168835344641212
+        ]
+      },
+      "natural_decisive_pair_coverage": {
+        "count": 160,
+        "total": 160,
+        "rate": 1.0,
+        "clopper_pearson_95pct": [
+          0.9772082505445334,
+          1.0
+        ]
+      },
+      "natural_swap_consistency_given_decisive": {
+        "count": 139,
+        "total": 160,
+        "rate": 0.86875,
+        "clopper_pearson_95pct": [
+          0.8063918442358302,
+          0.9168835344641212
+        ]
+      },
+      "natural_pair_abstention": {
+        "count": 0,
+        "total": 160,
+        "rate": 0.0,
+        "clopper_pearson_95pct": [
+          0.0,
+          0.022791749455466522
+        ]
+      },
+      "identical_image_a_selection": {
+        "count": 37,
+        "total": 40,
+        "rate": 0.925,
+        "clopper_pearson_95pct": [
+          0.796135251267101,
+          0.9842578201489585
+        ]
+      },
+      "identical_image_tie_selection": {
+        "count": 0,
+        "total": 40,
+        "rate": 0.0,
+        "clopper_pearson_95pct": [
+          0.0,
+          0.08809730287880237
+        ]
+      },
+      "visual_access_accuracy": {
+        "count": 40,
+        "total": 40,
+        "rate": 1.0,
+        "clopper_pearson_95pct": [
+          0.9119026971211976,
+          1.0
+        ]
+      },
+      "visual_access_swap_consistency": {
+        "count": 20,
+        "total": 20,
+        "rate": 1.0,
+        "clopper_pearson_95pct": [
+          0.8315665290169146,
+          1.0
+        ]
+      },
+      "diagnostic_classification": "natural_vp_judgment_substantially_swap_consistent"
+    },
+    "object_v5_7b": {
+      "label": "object_v5_7b",
+      "model_values": [
+        "Qwen/Qwen2.5-VL-7B-Instruct"
+      ],
+      "rows": 400,
+      "valid_rows": 400,
+      "invalid_rows": 0,
+      "natural_a_selection": {
+        "count": 163,
+        "total": 320,
+        "rate": 0.509375,
+        "clopper_pearson_95pct": [
+          0.4531726117972665,
+          0.5654022829132366
+        ]
+      },
+      "natural_tie_selection": {
+        "count": 0,
+        "total": 320,
+        "rate": 0.0,
+        "clopper_pearson_95pct": [
+          0.0,
+          0.011461558388074885
+        ]
+      },
+      "natural_swap_consistency": {
+        "count": 141,
+        "total": 160,
+        "rate": 0.88125,
+        "clopper_pearson_95pct": [
+          0.8207811796690598,
+          0.9269690866558834
+        ]
+      },
+      "natural_decisive_pair_coverage": {
+        "count": 160,
+        "total": 160,
+        "rate": 1.0,
+        "clopper_pearson_95pct": [
+          0.9772082505445334,
+          1.0
+        ]
+      },
+      "natural_swap_consistency_given_decisive": {
+        "count": 141,
+        "total": 160,
+        "rate": 0.88125,
+        "clopper_pearson_95pct": [
+          0.8207811796690598,
+          0.9269690866558834
+        ]
+      },
+      "natural_pair_abstention": {
+        "count": 0,
+        "total": 160,
+        "rate": 0.0,
+        "clopper_pearson_95pct": [
+          0.0,
+          0.022791749455466522
+        ]
+      },
+      "identical_image_a_selection": {
+        "count": 32,
+        "total": 40,
+        "rate": 0.8,
+        "clopper_pearson_95pct": [
+          0.6435219813207653,
+          0.9094775906000093
+        ]
+      },
+      "identical_image_tie_selection": {
+        "count": 0,
+        "total": 40,
+        "rate": 0.0,
+        "clopper_pearson_95pct": [
+          0.0,
+          0.08809730287880237
+        ]
+      },
+      "visual_access_accuracy": {
+        "count": 40,
+        "total": 40,
+        "rate": 1.0,
+        "clopper_pearson_95pct": [
+          0.9119026971211976,
+          1.0
+        ]
+      },
+      "visual_access_swap_consistency": {
+        "count": 20,
+        "total": 20,
+        "rate": 1.0,
+        "clopper_pearson_95pct": [
+          0.8315665290169146,
+          1.0
+        ]
+      },
+      "diagnostic_classification": "natural_vp_judgment_substantially_swap_consistent"
+    },
+    "original_qwen3_8b": {
+      "label": "original_qwen3_8b",
+      "model_values": [
+        "Qwen/Qwen3-VL-8B-Instruct"
+      ],
+      "rows": 400,
+      "valid_rows": 400,
+      "invalid_rows": 0,
+      "natural_a_selection": {
+        "count": 179,
+        "total": 320,
+        "rate": 0.559375,
+        "clopper_pearson_95pct": [
+          0.5030805768926006,
+          0.6145601524751192
+        ]
+      },
+      "natural_tie_selection": {
+        "count": 0,
+        "total": 320,
+        "rate": 0.0,
+        "clopper_pearson_95pct": [
+          0.0,
+          0.011461558388074885
+        ]
+      },
+      "natural_swap_consistency": {
+        "count": 129,
+        "total": 160,
+        "rate": 0.80625,
+        "clopper_pearson_95pct": [
+          0.736405196957526,
+          0.8643970661154116
+        ]
+      },
+      "natural_decisive_pair_coverage": {
+        "count": 160,
+        "total": 160,
+        "rate": 1.0,
+        "clopper_pearson_95pct": [
+          0.9772082505445334,
+          1.0
+        ]
+      },
+      "natural_swap_consistency_given_decisive": {
+        "count": 129,
+        "total": 160,
+        "rate": 0.80625,
+        "clopper_pearson_95pct": [
+          0.736405196957526,
+          0.8643970661154116
+        ]
+      },
+      "natural_pair_abstention": {
+        "count": 0,
+        "total": 160,
+        "rate": 0.0,
+        "clopper_pearson_95pct": [
+          0.0,
+          0.022791749455466522
+        ]
+      },
+      "identical_image_a_selection": {
+        "count": 39,
+        "total": 40,
+        "rate": 0.975,
+        "clopper_pearson_95pct": [
+          0.8684141415172343,
+          0.9993672550679505
+        ]
+      },
+      "identical_image_tie_selection": {
+        "count": 0,
+        "total": 40,
+        "rate": 0.0,
+        "clopper_pearson_95pct": [
+          0.0,
+          0.08809730287880237
+        ]
+      },
+      "visual_access_accuracy": {
+        "count": 40,
+        "total": 40,
+        "rate": 1.0,
+        "clopper_pearson_95pct": [
+          0.9119026971211976,
+          1.0
+        ]
+      },
+      "visual_access_swap_consistency": {
+        "count": 20,
+        "total": 20,
+        "rate": 1.0,
+        "clopper_pearson_95pct": [
+          0.8315665290169146,
+          1.0
+        ]
+      },
+      "diagnostic_classification": "natural_vp_judgment_substantially_swap_consistent"
+    },
+    "object_v5_qwen3_8b": {
+      "label": "object_v5_qwen3_8b",
+      "model_values": [
+        "Qwen/Qwen3-VL-8B-Instruct"
+      ],
+      "rows": 400,
+      "valid_rows": 400,
+      "invalid_rows": 0,
+      "natural_a_selection": {
+        "count": 194,
+        "total": 320,
+        "rate": 0.60625,
+        "clopper_pearson_95pct": [
+          0.550373899280655,
+          0.6601399593800277
+        ]
+      },
+      "natural_tie_selection": {
+        "count": 0,
+        "total": 320,
+        "rate": 0.0,
+        "clopper_pearson_95pct": [
+          0.0,
+          0.011461558388074885
+        ]
+      },
+      "natural_swap_consistency": {
+        "count": 122,
+        "total": 160,
+        "rate": 0.7625,
+        "clopper_pearson_95pct": [
+          0.6888962795900853,
+          0.8261191332511755
+        ]
+      },
+      "natural_decisive_pair_coverage": {
+        "count": 160,
+        "total": 160,
+        "rate": 1.0,
+        "clopper_pearson_95pct": [
+          0.9772082505445334,
+          1.0
+        ]
+      },
+      "natural_swap_consistency_given_decisive": {
+        "count": 122,
+        "total": 160,
+        "rate": 0.7625,
+        "clopper_pearson_95pct": [
+          0.6888962795900853,
+          0.8261191332511755
+        ]
+      },
+      "natural_pair_abstention": {
+        "count": 0,
+        "total": 160,
+        "rate": 0.0,
+        "clopper_pearson_95pct": [
+          0.0,
+          0.022791749455466522
+        ]
+      },
+      "identical_image_a_selection": {
+        "count": 40,
+        "total": 40,
+        "rate": 1.0,
+        "clopper_pearson_95pct": [
+          0.9119026971211976,
+          1.0
+        ]
+      },
+      "identical_image_tie_selection": {
+        "count": 0,
+        "total": 40,
+        "rate": 0.0,
+        "clopper_pearson_95pct": [
+          0.0,
+          0.08809730287880237
+        ]
+      },
+      "visual_access_accuracy": {
+        "count": 40,
+        "total": 40,
+        "rate": 1.0,
+        "clopper_pearson_95pct": [
+          0.9119026971211976,
+          1.0
+        ]
+      },
+      "visual_access_swap_consistency": {
+        "count": 20,
+        "total": 20,
+        "rate": 1.0,
+        "clopper_pearson_95pct": [
+          0.8315665290169146,
+          1.0
+        ]
+      },
+      "diagnostic_classification": "natural_vp_judgment_substantially_swap_consistent"
+    }
+  },
+  "cross_model_on_jointly_swap_consistent_natural_cases": {
+    "original_7b_vs_object_v5_7b": {
+      "jointly_swap_consistent_cases": 128,
+      "same_physical_winner": {
+        "count": 124,
+        "total": 128,
+        "rate": 0.96875,
+        "clopper_pearson_95pct": [
+          0.9219204745615296,
+          0.9914210644627388
+        ]
+      }
+    },
+    "original_7b_vs_original_qwen3_8b": {
+      "jointly_swap_consistent_cases": 114,
+      "same_physical_winner": {
+        "count": 98,
+        "total": 114,
+        "rate": 0.8596491228070176,
+        "clopper_pearson_95pct": [
+          0.7821059074518903,
+          0.917597722731882
+        ]
+      }
+    },
+    "original_7b_vs_object_v5_qwen3_8b": {
+      "jointly_swap_consistent_cases": 108,
+      "same_physical_winner": {
+        "count": 96,
+        "total": 108,
+        "rate": 0.8888888888888888,
+        "clopper_pearson_95pct": [
+          0.8139535420107816,
+          0.9412521944045327
+        ]
+      }
+    },
+    "object_v5_7b_vs_original_qwen3_8b": {
+      "jointly_swap_consistent_cases": 117,
+      "same_physical_winner": {
+        "count": 99,
+        "total": 117,
+        "rate": 0.8461538461538461,
+        "clopper_pearson_95pct": [
+          0.7677968608702697,
+          0.9061973678586023
+        ]
+      }
+    },
+    "object_v5_7b_vs_object_v5_qwen3_8b": {
+      "jointly_swap_consistent_cases": 111,
+      "same_physical_winner": {
+        "count": 98,
+        "total": 111,
+        "rate": 0.8828828828828829,
+        "clopper_pearson_95pct": [
+          0.8080550260310417,
+          0.9361439491034345
+        ]
+      }
+    },
+    "original_qwen3_8b_vs_object_v5_qwen3_8b": {
+      "jointly_swap_consistent_cases": 111,
+      "same_physical_winner": {
+        "count": 108,
+        "total": 111,
+        "rate": 0.972972972972973,
+        "clopper_pearson_95pct": [
+          0.9230444249324207,
+          0.994391316783324
+        ]
+      }
+    }
+  }
+}

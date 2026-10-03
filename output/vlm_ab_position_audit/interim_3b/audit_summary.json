@@ -1,0 +1,60 @@
+{
+  "runs": {
+    "qwen2_5_3b": {
+      "label": "qwen2_5_3b",
+      "model_values": [
+        "Qwen/Qwen2.5-VL-3B-Instruct"
+      ],
+      "rows": 400,
+      "valid_rows": 400,
+      "invalid_rows": 0,
+      "natural_a_selection": {
+        "count": 314,
+        "total": 320,
+        "rate": 0.98125,
+        "clopper_pearson_95pct": [
+          0.9596379150123164,
+          0.9930887613198303
+        ]
+      },
+      "natural_swap_consistency": {
+        "count": 6,
+        "total": 160,
+        "rate": 0.0375,
+        "clopper_pearson_95pct": [
+          0.013884076240393957,
+          0.07983210971114044
+        ]
+      },
+      "identical_image_a_selection": {
+        "count": 40,
+        "total": 40,
+        "rate": 1.0,
+        "clopper_pearson_95pct": [
+          0.9119026971211976,
+          1.0
+        ]
+      },
+      "visual_access_accuracy": {
+        "count": 21,
+        "total": 40,
+        "rate": 0.525,
+        "clopper_pearson_95pct": [
+          0.3612801352640621,
+          0.6848802933650138
+        ]
+      },
+      "visual_access_swap_consistency": {
+        "count": 1,
+        "total": 20,
+        "rate": 0.05,
+        "clopper_pearson_95pct": [
+          0.0012650894979498038,
+          0.24873276277202777
+        ]
+      },
+      "diagnostic_classification": "visual_access_or_label_mapping_failure"
+    }
+  },
+  "cross_model_on_jointly_swap_consistent_natural_cases": {}
+}

@@ -13,3 +13,8 @@ output/sample_location_maps/.tile_cache/
 output/sample_location_maps/.carto_tile_cache/
 data/osm_sample_area_features/
 output/vlm_formal_v2_reproduced/
+segmentation/checkpoints/*.pth
+segmentation/vendor/
+segmentation/**/__pycache__/
+output/**/iter_*.pth
+output/**/best_*.pth

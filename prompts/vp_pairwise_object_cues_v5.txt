@@ -1,0 +1,1 @@
+Compare the two street-view images fairly. Visual pollution means visible intrusive or disordered elements such as excessive signs or advertising, tangled overhead wires and poles, litter or debris, damaged or neglected surfaces, and redundant street clutter. Which image has LOWER overall visual pollution and looks cleaner? Return exactly: A or B.

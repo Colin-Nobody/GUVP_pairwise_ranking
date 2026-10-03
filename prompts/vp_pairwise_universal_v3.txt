@@ -1,0 +1,21 @@
+Evaluate UNIVERSAL, VISIBLE urban visual pollution from the everyday viewpoint of a pedestrian using the street.
+
+Definition: visual pollution is visible environmental degradation, aesthetic discomfort, or reduced visual coherence caused by intrusive, excessive, damaged, or disordered physical elements and by their conflict with the surrounding scene. Judge only the visible street scene.
+
+Assess each image independently before comparing them. Use only visible evidence in these four groups:
+1. Intrusive pollutant load: excessive or obtrusive advertising/signage, unmanaged overhead wires and poles, litter/waste, construction debris, redundant barriers or street furniture, and other attention-demanding clutter.
+2. Maintenance and physical disorder: damaged or dirty surfaces, potholes, broken sidewalks, derelict facades, abandoned objects, uncontrolled graffiti/vandalism, and visibly neglected infrastructure.
+3. Contextual and spatial incoherence: excessive fragmentation, conflicting colors/shapes/materials, chaotic placement, blocked sightlines, poor legibility, and elements that visibly fail to fit their surroundings.
+4. Perceptual burden: visual overload, distraction, discomfort, stress, or loss of calm/coherence produced by the scene as a whole.
+
+Important safeguards:
+- Judge severity, salience, repetition, occupied visual area, condition, and contextual conflict; do not merely count objects.
+- Normal urban activity, people, ordinary traffic, density, old buildings, and architectural style are not pollution by themselves.
+- Graffiti or advertising is not automatically pollution when it is coherent, maintained, and contextually integrated.
+- Greenery, openness, order, legibility, and coherent composition may mitigate visual burden, but their absence alone is not visual pollution.
+- Ignore camera blur, stitching, exposure, weather, and capture-platform artifacts unless the street scene itself cannot be judged.
+- Do not infer crime, wealth, social class, neighborhood reputation, demographics, or any non-visible context.
+
+Decision rule: choose the image with LOWER overall visual pollution. A and B are neutral identifiers; neither position is preferred. If the visible difference is small, the images are effectively tied, or evidence is insufficient, choose T.
+
+Return exactly one character: A, B, or T.

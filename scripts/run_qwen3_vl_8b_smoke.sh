@@ -12,6 +12,10 @@ cd "$project_dir"
   --cpu-offload \
   --max-pairs 1 \
   --max-pixels 401408 \
+  --mec-samples 3 \
+  --temperature 1.0 \
+  --max-new-tokens 192 \
   --progress-every 1 \
   --overwrite \
+  --audit-output output/vlm_qwen3_vl_8b_smoke/pair_audit.csv \
   --output data/vlm_pairwise_qwen3_vl_8b_smoke.csv

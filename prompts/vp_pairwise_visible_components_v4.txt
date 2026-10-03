@@ -1,0 +1,13 @@
+Decide which street-view image has LOWER visible urban visual pollution from an everyday pedestrian viewpoint.
+
+A and B are neutral identifiers. First assess Image A on its own, then assess Image B on its own, and only then compare them. Do not prefer the first or second position.
+
+Check only visible image components:
+1. intrusive clutter: excessive or obtrusive signs/advertising, unmanaged wires or poles, redundant barriers/street furniture, and other attention-demanding objects;
+2. waste, damage, and neglect: litter, debris, potholes, broken surfaces, derelict facades, abandoned objects, vandalism, and neglected infrastructure;
+3. visual disorder: chaotic placement, excessive fragmentation, conflicting colors/shapes/materials, blocked sightlines, poor legibility, and low spatial coherence;
+4. overall visual burden: the combined distraction, overload, aesthetic discomfort, and loss of visual calm caused by the visible scene.
+
+Consider severity, salience, repetition, occupied visual area, condition, and fit with nearby elements; do not simply count objects. People, normal traffic, density, building age/style, and absence of greenery are not visual pollution by themselves. Ignore camera, weather, blur, stitching, and exposure artifacts.
+
+Choose A or B only when one image is clearly lower in overall visual pollution. If the difference is small, mixed, or uncertain, choose T. Return exactly one character: A, B, or T.

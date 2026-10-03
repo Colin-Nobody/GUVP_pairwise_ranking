@@ -1,0 +1,157 @@
+Mapillary Vistas DeepLabV3+ 实验操作日志
+========================================
+
+任务开始时间：2026-09-21 22:23 CST
+仓库：/home/colin/GUVP_pairwise_ranking
+执行环境：/home/colin/miniconda3/envs/guvp-seg
+GPU：NVIDIA GeForce RTX 5060（约 8 GB）
+
+记录原则
+--------
+从用户于 2026-09-21 离开后开始，按执行轮次持续追加：目标、实际操作、
+验证结果、异常及处理方式。长时间命令（解压、训练、推理）按关键阶段记录，
+不将每条重复轮询单独展开。
+
+[第 1 轮] 数据定位、容量评估与安全迁移
+时间：2026-09-21 21:46--22:09 CST
+操作：
+1. 定位 Mapillary Vistas 完整压缩包：
+   /home/colin/下载/An-ZjB1Zm61yAZG0ozTymz8I8NqI4x0MrYrh26dq7kPgfu8vf9ImrdaOAVOFYbJ2pNAgUnVGBmbue9lTgdBOb5BbKXIpFs0fpYWqACbrQDChAA2fdX0zS9PcHu7fY8c-FOvyBVxPNYNFQuM.zip
+2. 检查压缩包：165033 个条目，未压缩约 32.26 GB；语义训练所需部分为
+   18000 张训练图、2000 张验证图及对应 v2.0 标签。
+3. 发现内置盘仅余约 16 GiB，不足以安全解压；识别移动盘
+   /media/colin/白（NTFS，迁移前可用约 122 GiB）。
+4. 将 28 GiB 压缩包复制到：
+   /media/colin/白/datasets/mapillary_vistas/
+5. 对源与目标分别计算 SHA-256；两者均为：
+   984907306e030c9822523d843130a97dc21f7acafb737c77128f3ac86ff6e3b4
+6. 校验成功后删除内置盘原件。本机根分区可用空间增加到约 43 GiB；
+   移动盘上的完整副本保留，可恢复。
+结果：迁移成功，无数据损坏。
+
+[第 2 轮] Mapillary v2.0 精简解压
+开始时间：2026-09-21 22:09 CST
+目标目录：/media/colin/白/datasets/mapillary_vistas/dataset
+仅解压：
+- config_v2.0.json
+- training/images
+- training/v2.0/labels
+- validation/images
+- validation/v2.0/labels
+明确跳过：testing、v1.2、instances、panoptic、polygons。
+当前状态：进行中；完成后核对 18000/18000 与 2000/2000 配对。
+
+[第 2 轮补充] 解压位置优化
+时间：2026-09-21 22:31 CST
+发现：直接在 NTFS 移动盘创建约 40,000 个小文件速度过低，且会拖慢后续训练
+随机读取。处理：停止外盘解压；将外盘上约 6 GiB 的可重建半成品移动到系统
+回收站（可恢复，完整 ZIP 未受影响）；改为从外盘 ZIP 将精简数据直接解压到
+/home/colin/datasets/mapillary_vistas。训练期间不再依赖移动盘。
+
+[第 3 轮] 后续自动执行计划
+时间：2026-09-21 22:23 CST
+计划：
+1. 以现有固定版本 MMSegmentation v1.2.2 和 DeepLabV3+ R50-D8 为基线，
+   最大程度复用 ADE20K 的 512x512、80k、数据增强、优化器和评估流程。
+2. 为本机 8 GB GPU 增加 AMP 和安全的单卡 batch 配置，先做数据/前向/反向
+   冒烟测试，再启动可恢复的正式训练。
+3. 训练完成后固定最佳 checkpoint，复用 ADE20K 审计的 30 图抽样清单与输出
+   结构，对 250 张目标街景中的审计样本运行 Mapillary 分割。
+4. 输出 mask、overlay、类别像素统计、比较报告和同款浏览器人工审核页面。
+5. 持续追加本日志，并在最终交付前验证所有命令和关键产物。
+
+[第 4 轮] 训练工程与迁移初始化
+时间：2026-09-21 22:24--22:38 CST
+操作：
+1. 创建 segmentation/mapillary_vistas/ 独立项目，复用现有官方
+   MMSegmentation v1.2.2（commit c685fe6），未重复下载或修改 vendor 源码。
+2. 新建 DeepLabV3+ R50-D8 / Mapillary v2.0 / 512x512 / 80k 配置。
+   与 ADE20K 基线保持相同的模型、增强、SGD、PolyLR 和验证间隔；针对本机
+   8 GB GPU 使用 batch_size=2、AMP，并按基准全局 batch 16 自动缩放学习率。
+3. 从上一轮 ADE20K checkpoint 删除 decode/auxiliary 的四个 150 类分类器
+   张量，生成 124 类训练的迁移初始化文件；backbone、ASPP、decoder 其余权重
+   均保留。模型构建和权重加载验证通过，预期仅缺四个新分类层参数。
+4. 新建数据完整性验证、训练、恢复训练、测试脚本及 README。
+结果：配置解析为 124 类、batch 2、80k iterations；Shell/Python 语法检查通过。
+
+[第 5 轮] 训练后审计自动化
+时间：2026-09-21 22:35--22:40 CST
+操作：
+1. 将既有 segmentation/run_audit.py 泛化为动态类别数及可指定 config/checkpoint，
+   同时保留原 ADE20K 默认行为。
+2. 增加 Mapillary 重点类别评分模板（广告/店招、杆件、路灯、垃圾桶、坑洞、
+   临时护栏、车辆、道路和植被等）。
+3. 将人工审核页面改为从每次审计的 run_config.json 读取类别、调色板和模型，
+   避免错误复用 ADE20K 的 150 类元数据。
+4. 新建 run_post_training_audit.sh 和 summarize_audit.py：复用同一确定性 30 图
+   抽样规则，自动完成两种推理、统计、完整性校验、报告与浏览器审核页。
+结果：相关 Python 和 Shell 脚本语法检查通过；待正式 checkpoint 生成后执行。
+
+[第 6 轮] 数据校验与 GPU 冒烟训练
+时间：2026-09-21 22:49--22:56 CST
+操作与结果：
+1. Ubuntu 内置盘精简数据解压完成，占用约 19 GiB；训练图/标签均为 18000，
+   验证图/标签均为 2000，文件名一一配对，抽样标签为单通道且类别 ID <124。
+2. 首次 10-iteration AMP 冒烟训练前向/反向成功，训练显存峰值约 3.5 GiB；
+   默认验证把 124 通道 logits 上采样至 Mapillary 原始大图，申请 7.36 GiB 后 OOM。
+3. 新增 UseResizedShapeForEvaluation：验证图像和标签以最近邻/图像插值分别保持
+   宽高比缩放至 (2048,512) 约束内，在缩放分辨率直接计算指标。目标域审计仍然
+   先 argmax，再在 CPU 上恢复原图大小，因此不损失最终 mask 几何尺寸。
+4. 第二次 10-iteration 训练及 10 图验证成功；训练峰值约 3.5 GiB，验证最坏样本
+   峰值约 6.9 GiB，处于 8 GB GPU 安全范围。
+5. 断点恢复首次被两个兼容性细节阻止：load_from 指向 ADE 初始化文件，以及
+   PyTorch 2.6+ 默认 weights_only=True。训练脚本现已在 --resume 时清空 load_from，
+   并仅对本项目可信本地 checkpoint 设置 TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD=1。
+6. 从 iter_10 完整恢复优化器、scheduler 和 message hub，继续至 iter_11 并完成
+   验证，断点恢复测试通过。
+结果：数据、训练、验证、保存最佳权重和恢复训练链路全部通过。
+
+[第 7 轮] 正式无人值守实验启动
+时间：2026-09-21 22:58 CST
+服务：guvp-mapillary-experiment.service
+启动方式：systemd 用户瞬态服务，工作目录为仓库根目录；服务依次执行 80k 训练、
+最佳 checkpoint 选择、30 图审计、报告和人工审核页面生成。即使当前 Codex 命令
+会话结束，systemd 服务仍持续运行。
+首轮状态：
+- 进程 PID 237343，服务 active。
+- iter 50：loss 2.6358，decode accuracy 71.03%，训练显存 3541 MiB。
+- iter 100：loss 2.8121，训练速度约 0.18 秒/iter，GPU 利用率约 95%，
+  整卡显存占用约 3.8 GiB，温度 65°C。
+- 初始化日志仅报告四个分类层缺失，符合 ADE20K(150类) 到 Mapillary(124类)
+  的设计预期。
+当前状态：正式训练进行中；每 8000 iterations 验证并保存 checkpoint。
+
+[第 8 轮] 正式训练与最终验证完成
+时间：2026-09-22 03:17 CST
+操作与结果：
+1. systemd 无人值守服务完成 DeepLabV3+ R50-D8 在 Mapillary Vistas v2.0
+   训练集上的 80,000 iterations 训练；期间周期性验证、保存断点并保持
+   8 GB GPU 显存安全。
+2. 最终验证集 2,000 张图完成，aAcc=87.33%，mIoU=20.60%，mAcc=27.46%，
+   mDice=27.40%。最佳模型为 best_mIoU_iter_80000.pth，旧的 72000 最佳权重
+   已按 checkpoint 策略移除。
+3. 训练日志、断点和最终 checkpoint 均写入
+   output/deeplabv3plus_r50_mapillary_v2_80k/。
+
+[第 9 轮] 250 图抽样审计与人工审核界面完成
+时间：2026-09-22 03:17--03:20 CST
+操作与结果：
+1. 按上一轮相同的确定性规则，从 250 张目标图生成每城市高/中/低 VP 各 2 张，
+   共 30 张审计清单；manifest 共 30 行数据。
+2. 对每张图执行 baseline 与 sliding_512_o25 两种推理，分别生成 30 个原尺寸
+   mask、30 个 overlay 和各 3720 行（30×124）类别统计；比例完整性校验通过。
+3. 两种方法平均像素一致率 0.7258，中位数 0.7651，平均类别 IoU 0.2103；
+   baseline 总推理 2.33 秒，sliding 总推理 191.96 秒。
+4. 生成 REPORT.md、baseline_vs_sliding.csv、audit_ratings.csv、
+   visual_review/index.html。人工评分尚未填写，页面打开后可继续逐图审核。
+结果目录：output/segmentation_mapillary_v2_audit/。
+
+[第 10 轮] 生成仅分割 mask 的人工审核界面克隆
+时间：2026-09-22
+操作与结果：
+1. 在原有 build_audit_gallery.py 基础上增加 --masks-only 模式，保留城市/VP
+   筛选、类别图例、逐图评分、备注和 CSV 导出功能。
+2. 新界面只显示缩放基线和 512 滑窗两种彩色分割 mask，不再显示原始底图或
+   overlay；点击图片可打开对应原始 PNG mask。
+3. 新页面独立保存浏览器评分状态，不影响原审核页面。
+结果：[output/segmentation_mapillary_v2_audit/visual_review_masks/index.html]
