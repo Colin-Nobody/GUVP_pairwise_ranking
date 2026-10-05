@@ -21,6 +21,13 @@ The runnable configuration and launchers are under `segmentation/mapillary_vista
 
 These regression exports are exploratory inputs for the downstream statistical analysis; they do not constitute pixel-level fine-tuning labels.
 
+## Local storage archive
+
+- On 2026-10-05, 29 inactive segmentation checkpoints and 21 generated masks/overlays/review-preview directories (2,515 files; 11,638,058,000 bytes) were copied to `/media/colin/白/GUVP_storage/archives/GUVP_pairwise_ranking_2026-10-05/`.
+- Every copied file was SHA-256 verified before the local data was replaced with a symlink. `SHA256SUMS` and `SHA256SUMS.tsv` in the archive record the checksums and original repository-relative paths.
+- The original project paths continue to work while the 白 drive is mounted at `/media/colin/白`. The 136k fine-tune best checkpoint is included; copy just that checkpoint back to local storage if faster model startup is needed.
+- The active VLM expansion run and its data/output directories were excluded from this archive and remain local until the run completes.
+
 ## Deliberately excluded from Git
 
-Training checkpoints and the source/mask image bulk are retained locally.  Current checkpoints are approximately 400 MB each (above GitHub's standard 100 MB per-file limit) and are actively updated by the 900k run.  They must be archived separately with Git LFS or object storage after training completes.
+Training checkpoints are kept on the 白 drive instead of Git because individual files exceed GitHub's standard 100 MB per-file limit. Source images and compact analysis tables remain in the project.
