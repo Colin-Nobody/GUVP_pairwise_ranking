@@ -200,6 +200,7 @@ def save_prediction(
     tile_count: int | None,
 ) -> tuple[list[dict[str, object]], dict[str, object]]:
     image_id = row["image_id"]
+    score_column = "vp_score_0_10" if "vp_score_0_10" in row else "vp_score_v8"
     (mode_dir / "masks").mkdir(parents=True, exist_ok=True)
     (mode_dir / "overlays").mkdir(parents=True, exist_ok=True)
     cv2.imwrite(str(mode_dir / "masks" / f"{image_id}.png"), mask)
@@ -225,7 +226,8 @@ def save_prediction(
         "image_id": image_id,
         "city": row["city"],
         "vp_stratum": row["vp_stratum"],
-        "vp_score_v8": float(row["vp_score_v8"]),
+        "vp_score": float(row[score_column]),
+        "vp_score_source_column": score_column,
         "width": int(row["width"]),
         "height": int(row["height"]),
         "classes_present": int(np.count_nonzero(counts)),

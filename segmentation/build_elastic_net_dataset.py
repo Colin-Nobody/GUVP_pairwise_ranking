@@ -31,11 +31,13 @@ def main() -> None:
 
     manifest = pd.read_csv(args.manifest)
     features = pd.read_csv(args.semantic_features)
-    if len(manifest) != 250 or len(features) != 250:
-        raise ValueError("Manifest and semantic feature table must each contain 250 rows")
+    if manifest.empty or features.empty or len(manifest) != len(features):
+        raise ValueError("Manifest and semantic feature table must have the same non-zero row count")
+    if manifest["image_id"].duplicated().any() or features["image_id"].duplicated().any():
+        raise ValueError("Manifest and semantic feature table must have unique image IDs")
     merged = manifest.merge(features, on="image_id", validate="one_to_one", suffixes=("", "_seg"))
-    if len(merged) != 250:
-        raise RuntimeError("Feature/manifest merge did not retain 250 rows")
+    if len(merged) != len(manifest):
+        raise RuntimeError("Feature/manifest merge did not retain every image")
 
     config = json.loads(args.run_config.read_text(encoding="utf-8"))
     classes = config["classes"]

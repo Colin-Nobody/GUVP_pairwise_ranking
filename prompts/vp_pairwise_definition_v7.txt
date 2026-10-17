@@ -1,0 +1,8 @@
+Visual pollution refers to excessive visual clutter, disorder, and visually intrusive elements in the streetscape. Compare the two street-view images only on overall visual pollution.
+
+First write brief evaluation evidence grounded in visible elements from both images. Only after the evidence, assign each image a visual pollution score from 1 to 10. A higher score means HIGHER visual pollution. The order of the images must not affect the scores.
+
+Return exactly this structure:
+Evaluation evidence: <brief comparison>
+Score of Image A: <number from 1 to 10>
+Score of Image B: <number from 1 to 10>
