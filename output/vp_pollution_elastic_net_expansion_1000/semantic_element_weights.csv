@@ -1,0 +1,125 @@
+feature_column,class_id,class_name,source_column,standardised_beta,beta_per_full_share,beta_per_10_percentage_points,outer_selection_frequency,outer_sign_consistency,bootstrap_selection_frequency,bootstrap_sign_consistency,bootstrap_beta_low_2_5,bootstrap_beta_high_97_5,stable
+feature_ratio_064_vegetation,64,Vegetation,ratio__Vegetation,-0.3085249603799948,-2.090868454646672,-0.2090868454646672,1.0,1.0,1.0,1.0,-2.6569418333764117,-1.4097898836496878,True
+feature_ratio_108_car,108,Car,ratio__Car,0.2923609799503363,4.3297161103703985,0.43297161103703985,1.0,1.0,1.0,1.0,2.820460073746976,6.643885331385291,True
+feature_ratio_030_person,30,Person,ratio__Person,0.24029244034372135,6.946096615740251,0.6946096615740252,1.0,1.0,1.0,1.0,4.76185264427347,9.115281273844131,True
+feature_ratio_063_terrain,63,Terrain,ratio__Terrain,-0.19030435015965594,-5.1880633564581,-0.51880633564581,1.0,1.0,1.0,1.0,-8.558281194852045,-3.176984190387416,True
+feature_ratio_119_dynamic,119,Dynamic,ratio__Dynamic,0.18924263574955552,13.407231715206262,1.3407231715206263,1.0,1.0,1.0,1.0,9.031075393978579,23.189081564854558,True
+feature_ratio_065_water,65,Water,ratio__Water,-0.17065008365250808,-4.305100080120349,-0.43051000801203493,0.92,1.0,0.712,1.0,-5.9531257642593225,0.0,True
+feature_ratio_083_signage_store,83,Signage - Store,ratio__Signage - Store,0.1583762129372514,32.807650546490514,3.2807650546490517,1.0,1.0,1.0,1.0,17.909118558582062,51.08114340367983,True
+feature_ratio_100_traffic_sign_front,100,Traffic Sign (Front),ratio__Traffic Sign (Front),0.1464462915808442,34.65853994374975,3.4658539943749753,1.0,1.0,1.0,1.0,15.313579886174752,54.142873166374166,True
+feature_ratio_078_signage_advertisement,78,Signage - Advertisement,ratio__Signage - Advertisement,0.1293253011933092,6.939848332634608,0.6939848332634608,1.0,1.0,1.0,1.0,3.512508473602514,13.069874893269,True
+feature_ratio_107_bus,107,Bus,ratio__Bus,0.1149934940278924,3.121703399742289,0.31217033997422894,1.0,1.0,0.976,1.0,0.41818940956093675,5.1844393043577846,True
+feature_ratio_122_static,122,Static,ratio__Static,0.10748433939047973,1.9329413484355265,0.19329413484355265,1.0,1.0,0.992,1.0,0.3604572608682022,3.751094599861294,True
+feature_ratio_019_pedestrian_area,19,Pedestrian Area,ratio__Pedestrian Area,-0.09462611127193303,-1.0169579044812154,-0.10169579044812155,1.0,1.0,0.972,1.0,-1.7004903622586114,-0.004772835937769414,True
+feature_ratio_114_truck,114,Truck,ratio__Truck,0.0927738696280044,10.367139240196948,1.036713924019695,1.0,1.0,0.984,1.0,0.917455035408782,18.409829662985743,True
+feature_ratio_088_utility_pole,88,Utility Pole,ratio__Utility Pole,0.08715337887624335,61.19693214331965,6.119693214331965,1.0,1.0,0.964,1.0,0.0,144.56248965739258,True
+feature_ratio_120_ego_vehicle,120,Ego Vehicle,ratio__Ego Vehicle,0.08333649293598698,1.7093838106317907,0.17093838106317907,1.0,1.0,0.988,1.0,0.19104250104242157,3.3478002576155736,True
+feature_ratio_005_fence,5,Fence,ratio__Fence,0.08314153376273815,1.483471538402288,0.1483471538402288,1.0,1.0,0.916,0.9912663755458515,0.0,3.651823237283034,True
+feature_ratio_069_catch_basin,69,Catch Basin,ratio__Catch Basin,-0.082398067937275,-112.23160086288387,-11.223160086288388,0.64,1.0,0.62,1.0,-180.87872548904156,0.0,False
+feature_ratio_085_pole,85,Pole,ratio__Pole,0.07863482800729923,7.128093394278786,0.7128093394278787,1.0,1.0,0.984,1.0,0.37872658245545465,12.784463252241244,True
+feature_ratio_104_trash_can,104,Trash Can,ratio__Trash Can,0.07120233601478629,9.549612072103939,0.9549612072103939,0.98,1.0,0.964,1.0,0.0,20.710725585556435,True
+feature_ratio_115_vehicle_group,115,Vehicle Group,ratio__Vehicle Group,0.06443317495064484,21.20704509389052,2.120704509389052,1.0,1.0,0.984,1.0,3.0782572165615316,40.860513570037256,True
+feature_ratio_062_snow,62,Snow,ratio__Snow,0.06272727070836474,1.6182303606579356,0.16182303606579357,0.96,1.0,0.972,1.0,0.004433844371319802,3.3787670655952318,True
+feature_ratio_054_lane_marking_text,54,Lane Marking - Text,ratio__Lane Marking - Text,0.059940346975783175,8.497192640370649,0.849719264037065,1.0,1.0,0.936,1.0,0.0,31.41736439360633,True
+feature_ratio_110_motorcycle,110,Motorcycle,ratio__Motorcycle,0.05461943469058792,5.008371926326113,0.5008371926326113,1.0,1.0,0.948,1.0,0.0,10.19881385011892,True
+feature_ratio_099_traffic_sign_direction_front,99,Traffic Sign - Direction (Front),ratio__Traffic Sign - Direction (Front),0.04841607182987141,1.5282509317478536,0.15282509317478538,0.86,1.0,0.856,0.9906542056074766,0.0,5.234100504671807,True
+feature_ratio_014_crosswalk_plain,14,Crosswalk - Plain,ratio__Crosswalk - Plain,-0.04799535268556648,-2.3564188259899312,-0.23564188259899313,0.82,1.0,0.616,1.0,-4.784086259566586,0.0,False
+feature_ratio_020_rail_track,20,Rail Track,ratio__Rail Track,0.041354355432038546,4.167451020110228,0.4167451020110228,0.96,1.0,0.852,1.0,0.0,14.210359902433673,True
+feature_ratio_035_lane_marking_dashed_line,35,Lane Marking - Dashed Line,ratio__Lane Marking - Dashed Line,0.039462295060139325,10.497135529229643,1.0497135529229644,0.86,1.0,0.812,1.0,0.0,28.512221365254913,True
+feature_ratio_050_lane_marking_other,50,Lane Marking - Other,ratio__Lane Marking - Other,0.03790631694612333,2.9836067040824648,0.2983606704082465,0.92,1.0,0.832,0.9903846153846154,0.0,5.358328306115013,True
+feature_ratio_092_traffic_light_general_upright,92,Traffic Light - General (Upright),ratio__Traffic Light - General (Upright),0.03323286922627768,14.787590170158806,1.4787590170158806,0.86,1.0,0.76,1.0,0.0,51.189179707393905,True
+feature_ratio_097_traffic_sign_back,97,Traffic Sign (Back),ratio__Traffic Sign (Back),0.02787973414389182,22.978087748738307,2.2978087748738307,0.9,1.0,0.724,0.9447513812154696,0.0,78.15486911036257,True
+feature_ratio_036_lane_marking_straight_line,36,Lane Marking - Straight Line,ratio__Lane Marking - Straight Line,0.022103057010683186,5.374220266542807,0.5374220266542807,0.7,1.0,0.62,0.9612903225806452,0.0,28.744541438376793,False
+feature_ratio_105_bicycle,105,Bicycle,ratio__Bicycle,-0.01835583750471266,-1.1272112006706272,-0.11272112006706272,0.72,1.0,0.632,0.8860759493670886,-4.058103127996346,0.8363763423579101,False
+feature_ratio_044_lane_marking_arrow_straight,44,Lane Marking - Arrow (Straight),ratio__Lane Marking - Arrow (Straight),0.016117709406342787,15.442846210066783,1.5442846210066783,0.58,1.0,0.444,1.0,0.0,57.067610104842046,False
+feature_ratio_017_parking,17,Parking,ratio__Parking,0.014974955374954184,0.789937365565914,0.0789937365565914,0.72,1.0,0.692,0.9884393063583815,0.0,3.6127272588749206,False
+feature_ratio_061_sky,61,Sky,ratio__Sky,-0.010463442293820357,-0.08115920005876434,-0.008115920005876435,0.52,1.0,0.7,0.9771428571428571,-0.7490522115726,0.0,False
+feature_ratio_026_bridge,26,Bridge,ratio__Bridge,-0.010032956981910156,-0.15726101496537348,-0.01572610149653735,0.46,1.0,0.66,0.6242424242424243,-1.4395212196478966,0.6142892323399941,False
+feature_ratio_091_traffic_light_pedestrians,91,Traffic Light - Pedestrians,ratio__Traffic Light - Pedestrians,0.008242185497402603,17.275831458360578,1.727583145836058,0.44,1.0,0.572,0.9300699300699301,0.0,140.65147271559658,False
+feature_ratio_084_street_light,84,Street Light,ratio__Street Light,0.005251220518806966,4.833005475227251,0.48330054752272517,0.44,1.0,0.58,0.903448275862069,-8.043780519110731,88.52466466793724,False
+feature_ratio_021_road,21,Road,ratio__Road,0.0033940525771597074,0.02829986859798287,0.0028299868597982873,0.3,1.0,0.46,0.8434782608695652,-0.11014943051742777,0.6615206148519853,False
+feature_ratio_013_bike_lane,13,Bike Lane,ratio__Bike Lane,-0.0007412462136121806,-0.01913303521747767,-0.0019133035217477673,0.36,1.0,0.604,0.8278145695364238,-3.106339789606441,0.3707238419563772,False
+feature_ratio_022_road_shoulder,22,Road Shoulder,ratio__Road Shoulder,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_012_wall,12,Wall,ratio__Wall,-0.0,-0.0,-0.0,0.2,1.0,0.568,0.4507042253521127,-2.674947147768136,0.8485518062349052,False
+feature_ratio_024_sidewalk,24,Sidewalk,ratio__Sidewalk,-0.0,-0.0,-0.0,0.1,1.0,0.388,0.5051546391752577,-0.5855491229501087,0.28737868526348087,False
+feature_ratio_023_service_lane,23,Service Lane,ratio__Service Lane,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_027_building,27,Building,ratio__Building,0.0,0.0,0.0,0.02,1.0,0.312,0.28205128205128205,-0.16735309016137995,0.22811770454244965,False
+feature_ratio_025_traffic_island,25,Traffic Island,ratio__Traffic Island,0.0,0.0,0.0,0.18,1.0,0.392,0.4897959183673469,-1.9731168558877756,16.958829018075182,False
+feature_ratio_011_temporary_barrier,11,Temporary Barrier,ratio__Temporary Barrier,0.0,0.0,0.0,0.0,0.0,0.004,1.0,0.0,0.0,False
+feature_ratio_010_lane_separator,10,Lane Separator,ratio__Lane Separator,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_007_barrier,7,Barrier,ratio__Barrier,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_006_guard_rail,6,Guard Rail,ratio__Guard Rail,0.0,0.0,0.0,0.02,1.0,0.148,0.4594594594594595,-11.015791994174835,0.6054523433983927,False
+feature_ratio_004_curb,4,Curb,ratio__Curb,0.0,0.0,0.0,0.06,1.0,0.396,0.1717171717171717,-5.83166017107927,6.444359296185899,False
+feature_ratio_015_curb_cut,15,Curb Cut,ratio__Curb Cut,-0.0,-0.0,-0.0,0.02,1.0,0.408,0.47058823529411764,-41.007892616370064,18.248218953256014,False
+feature_ratio_018_parking_aisle,18,Parking Aisle,ratio__Parking Aisle,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_016_driveway,16,Driveway,ratio__Driveway,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_009_road_side,9,Road Side,ratio__Road Side,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_008_road_median,8,Road Median,ratio__Road Median,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_003_concrete_block,3,Concrete Block,ratio__Concrete Block,0.0,0.0,0.0,0.0,0.0,0.032,1.0,0.0,2.3553117192601465,False
+feature_ratio_000_bird,0,Bird,ratio__Bird,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_002_ambiguous_barrier,2,Ambiguous Barrier,ratio__Ambiguous Barrier,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_001_ground_animal,1,Ground Animal,ratio__Ground Animal,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_059_mountain,59,Mountain,ratio__Mountain,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_058_lane_marking_only_test,58,Lane Marking (only) - Test,ratio__Lane Marking (only) - Test,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_057_lane_marking_only_other,57,Lane Marking (only) - Other,ratio__Lane Marking (only) - Other,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_056_lane_marking_only_crosswalk,56,Lane Marking (only) - Crosswalk,ratio__Lane Marking (only) - Crosswalk,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_055_lane_marking_only_dashed_line,55,Lane Marking (only) - Dashed Line,ratio__Lane Marking (only) - Dashed Line,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_053_lane_marking_symbol_other,53,Lane Marking - Symbol (Other),ratio__Lane Marking - Symbol (Other),0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_052_lane_marking_symbol_bicycle,52,Lane Marking - Symbol (Bicycle),ratio__Lane Marking - Symbol (Bicycle),0.0,0.0,0.0,0.0,0.0,0.144,0.4444444444444444,-43.06797639340438,34.24281459217554,False
+feature_ratio_051_lane_marking_stop_line,51,Lane Marking - Stop Line,ratio__Lane Marking - Stop Line,0.0,0.0,0.0,0.22,1.0,0.54,0.7333333333333333,-16.68948623869916,136.0673709248154,False
+feature_ratio_045_lane_marking_crosswalk,45,Lane Marking - Crosswalk,ratio__Lane Marking - Crosswalk,0.0,0.0,0.0,0.26,1.0,0.52,1.0,0.0,2.1960453325659324,False
+feature_ratio_049_lane_marking_hatched_diagonal,49,Lane Marking - Hatched (Diagonal),ratio__Lane Marking - Hatched (Diagonal),0.0,0.0,0.0,0.0,0.0,0.008,1.0,0.0,0.0,False
+feature_ratio_048_lane_marking_hatched_chevron,48,Lane Marking - Hatched (Chevron),ratio__Lane Marking - Hatched (Chevron),0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_047_lane_marking_give_way_single,47,Lane Marking - Give Way (Single),ratio__Lane Marking - Give Way (Single),0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_046_lane_marking_give_way_row,46,Lane Marking - Give Way (Row),ratio__Lane Marking - Give Way (Row),0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_041_lane_marking_arrow_right,41,Lane Marking - Arrow (Right),ratio__Lane Marking - Arrow (Right),0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_042_lane_marking_arrow_split_left_or_straight,42,Lane Marking - Arrow (Split Left or Straight),ratio__Lane Marking - Arrow (Split Left or Straight),0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_043_lane_marking_arrow_split_right_or_straight,43,Lane Marking - Arrow (Split Right or Straight),ratio__Lane Marking - Arrow (Split Right or Straight),0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_028_garage,28,Garage,ratio__Garage,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_033_motorcyclist,33,Motorcyclist,ratio__Motorcyclist,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_032_bicyclist,32,Bicyclist,ratio__Bicyclist,0.0,0.0,0.0,0.34,1.0,0.568,0.9577464788732394,0.0,20.394339582201884,False
+feature_ratio_040_lane_marking_arrow_other,40,Lane Marking - Arrow (Other),ratio__Lane Marking - Arrow (Other),0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_039_lane_marking_arrow_left,39,Lane Marking - Arrow (Left),ratio__Lane Marking - Arrow (Left),0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_038_lane_marking_ambiguous,38,Lane Marking - Ambiguous,ratio__Lane Marking - Ambiguous,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_037_lane_marking_zigzag_line,37,Lane Marking - Zigzag Line,ratio__Lane Marking - Zigzag Line,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_034_other_rider,34,Other Rider,ratio__Other Rider,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_029_tunnel,29,Tunnel,ratio__Tunnel,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_031_person_group,31,Person Group,ratio__Person Group,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_075_parking_meter,75,Parking Meter,ratio__Parking Meter,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_074_manhole,74,Manhole,ratio__Manhole,-0.0,-0.0,-0.0,0.14,1.0,0.372,0.8494623655913979,-18.824660245833563,0.6318567599574915,False
+feature_ratio_067_bench,67,Bench,ratio__Bench,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_068_bike_rack,68,Bike Rack,ratio__Bike Rack,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_066_banner,66,Banner,ratio__Banner,0.0,0.0,0.0,0.14,1.0,0.388,0.8556701030927835,-2.1934043710590156,104.35918712012173,False
+feature_ratio_060_sand,60,Sand,ratio__Sand,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_090_traffic_light_general_single,90,Traffic Light - General (Single),ratio__Traffic Light - General (Single),0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_089_traffic_cone,89,Traffic Cone,ratio__Traffic Cone,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_086_pole_group,86,Pole Group,ratio__Pole Group,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_087_traffic_sign_frame,87,Traffic Sign Frame,ratio__Traffic Sign Frame,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_079_signage_ambiguous,79,Signage - Ambiguous,ratio__Signage - Ambiguous,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_080_signage_back,80,Signage - Back,ratio__Signage - Back,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_081_signage_information,81,Signage - Information,ratio__Signage - Information,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_082_signage_other,82,Signage - Other,ratio__Signage - Other,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_076_phone_booth,76,Phone Booth,ratio__Phone Booth,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_077_pothole,77,Pothole,ratio__Pothole,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_070_cctv_camera,70,CCTV Camera,ratio__CCTV Camera,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_071_fire_hydrant,71,Fire Hydrant,ratio__Fire Hydrant,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_072_junction_box,72,Junction Box,ratio__Junction Box,-0.0,-0.0,-0.0,0.18,0.5555555555555556,0.456,0.14035087719298245,-20.508478052376464,21.23149681161449,False
+feature_ratio_073_mailbox,73,Mailbox,ratio__Mailbox,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_098_traffic_sign_direction_back,98,Traffic Sign - Direction (Back),ratio__Traffic Sign - Direction (Back),0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_093_traffic_light_general_horizontal,93,Traffic Light - General (Horizontal),ratio__Traffic Light - General (Horizontal),0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_106_boat,106,Boat,ratio__Boat,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_101_traffic_sign_parking,101,Traffic Sign - Parking,ratio__Traffic Sign - Parking,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_102_traffic_sign_temporary_back,102,Traffic Sign - Temporary (Back),ratio__Traffic Sign - Temporary (Back),0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_103_traffic_sign_temporary_front,103,Traffic Sign - Temporary (Front),ratio__Traffic Sign - Temporary (Front),0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_095_traffic_light_other,95,Traffic Light - Other,ratio__Traffic Light - Other,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_094_traffic_light_cyclists,94,Traffic Light - Cyclists,ratio__Traffic Light - Cyclists,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_096_traffic_sign_ambiguous,96,Traffic Sign - Ambiguous,ratio__Traffic Sign - Ambiguous,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_111_on_rails,111,On Rails,ratio__On Rails,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_112_other_vehicle,112,Other Vehicle,ratio__Other Vehicle,0.0,0.0,0.0,0.0,0.0,0.06,1.0,0.0,16.356703139972474,False
+feature_ratio_113_trailer,113,Trailer,ratio__Trailer,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_109_caravan,109,Caravan,ratio__Caravan,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_116_wheeled_slow,116,Wheeled Slow,ratio__Wheeled Slow,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_118_car_mount,118,Car Mount,ratio__Car Mount,0.0,0.0,0.0,0.0,0.0,0.08,0.9,0.0,5.563431722720046,False
+feature_ratio_117_water_valve,117,Water Valve,ratio__Water Valve,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_121_ground,121,Ground,ratio__Ground,-0.0,-0.0,-0.0,0.42,0.9047619047619048,0.636,0.4716981132075472,-1.4505552570954332,0.7717917439883251,False
+feature_ratio_123_unlabeled,123,Unlabeled,ratio__Unlabeled,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False

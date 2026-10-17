@@ -1,0 +1,11 @@
+{
+  "analysis_scope": "pooled single population; city labels unused",
+  "estimator": "Ridge regression (continuous shrinkage)",
+  "target": "visual_pollution_score_0_10",
+  "n_images": 250,
+  "n_kept_elements": 42,
+  "excluded_if_present_in_fewer_than_images": 25,
+  "outer_repeats": 10,
+  "bootstrap_resamples": 500,
+  "final_alpha": 10000.0
+}

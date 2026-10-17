@@ -1,0 +1,2 @@
+comparison_id,image_a,image_b,winner,model,prompt_version,label_layout,max_pixels,timestamp_utc,choice_ab,choice_ba,raw_response_ab,raw_response_ba,status
+vlm-00001,11c74f10-a744-4944-9411-89bb3c1afad0.jpg,5ebee0f7-f962-406b-bc6b-ba8d55e0f935.jpg,5ebee0f7-f962-406b-bc6b-ba8d55e0f935.jpg,Qwen/Qwen2.5-VL-7B-Instruct,vp-object-cues-label-before-abba-v5,label_before,401408,2026-08-26T17:12:20.407601+00:00,B,A,B,A,stable

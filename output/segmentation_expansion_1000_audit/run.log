@@ -1,0 +1,38 @@
+/home/colin/GUVP_pairwise_ranking/segmentation/vendor/mmsegmentation/mmseg/models/builder.py:36: UserWarning: ``build_loss`` would be deprecated soon, please use ``mmseg.registry.MODELS.build()`` 
+  warnings.warn('``build_loss`` would be deprecated soon, please use '
+/home/colin/GUVP_pairwise_ranking/segmentation/vendor/mmsegmentation/mmseg/models/losses/cross_entropy_loss.py:250: UserWarning: Default ``avg_non_ignore`` is False, if you would like to ignore the certain label and average loss over non-ignore labels, which is the same with PyTorch official cross_entropy, set ``avg_non_ignore=True``.
+  warnings.warn(
+/home/colin/miniconda3/envs/guvp-seg/lib/python3.11/site-packages/mmengine/runner/checkpoint.py:347: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  checkpoint = torch.load(filename, map_location=map_location)
+Loads checkpoint by local backend from path: /home/colin/GUVP_pairwise_ranking/output/deeplabv3plus_r50_mapillary_v2_finetune_3e-5_140k/best_mIoU_iter_136000.pth
+[baseline 01/30] Amsterdam 3b04d261-4a31-4a1a-a44a-55a0ccbf9586 2048x1536 0.34s
+[baseline 02/30] Barcelona 2aa2626c-2c8e-49bf-bd01-4f936a9fc3dc 2048x1536 0.06s
+[baseline 03/30] Belgrade 02a864f4-05ac-4e19-9ec7-47fec75a520e 4000x2000 0.10s
+[baseline 04/30] Berlin 5490ca80-d439-4eef-94a5-73d554fbf22f 2048x1536 0.06s
+[baseline 05/30] Brussels ecb185c0-9880-4690-b0bb-77744fe06fd0 2048x1536 0.06s
+[baseline 06/30] Budapest 303f0b7d-907a-4b01-a396-0220dc35ad9e 2048x1536 0.06s
+[baseline 07/30] Copenhagen e08ff8ed-385a-443e-af91-39cc1b2ab457 2048x1536 0.06s
+[baseline 08/30] Edinburgh 3e7362f6-d37f-472e-a2db-ba5cc74e44fb 1152x1536 0.06s
+[baseline 09/30] Helsinki b96e34e5-ed62-4dc2-82ff-b3caf43e7ffe 2048x1536 0.07s
+[baseline 10/30] Krakow 23a66233-a984-444a-885d-b9033a3b6992 2048x1536 0.06s
+[baseline 11/30] Madrid 91476974-bb66-4f44-9c61-983d1525a205 2048x1154 0.08s
+[baseline 12/30] Munich a342f1f5-f560-44c7-baa2-4e9ba99df0ea 2048x1152 0.08s
+[baseline 13/30] Oslo 24c4da63-cd2a-46c2-a831-876c887f665b 1149x1536 0.06s
+[baseline 14/30] Paris 080b42cc-9f1d-430f-ac9a-95b8a71b6f44 2048x1536 0.06s
+[baseline 15/30] Prague 003c9fe0-3e80-4ca3-b0b0-533c6d246411 2048x1536 0.06s
+[baseline 16/30] Rome fc277ba7-9ee9-41c9-a08e-124d39b46b8a 2047x1529 0.07s
+[baseline 17/30] Stockholm 1db4a020-6eff-43b4-8dcc-05d3b402baf8 2048x1536 0.06s
+[baseline 18/30] Tallinn 1605a280-00ab-4a9c-a468-f1c90d4d680d 2048x1152 0.07s
+[baseline 19/30] Warsaw 436f2cb7-2cba-4102-a42e-f5cb0e260985 1000x481 0.08s
+[baseline 20/30] Zurich 178a3705-18ed-43e0-b35a-6e536cb25c8d 3264x2448 0.06s
+[baseline 21/30] Amsterdam f843d54d-8967-4ac0-925a-b3e7829f3408 2048x1312 0.07s
+[baseline 22/30] Barcelona 78739aac-ea1c-496a-915e-eb9f625f8859 2048x1152 0.08s
+[baseline 23/30] Belgrade 52255d05-a22c-48cb-8c48-69157af13293 2048x1536 0.07s
+[baseline 24/30] Berlin c98e2ba1-355b-491f-be4f-fb42a1bf419e 2048x1536 0.07s
+[baseline 25/30] Brussels f96dab9e-d6a3-4104-9122-bb342f2eb45f 2048x1536 0.07s
+[baseline 26/30] Budapest 80f7bf00-70ca-48ad-8961-d9f1fb7d5202 2048x2734 0.08s
+[baseline 27/30] Copenhagen 1d831d5d-b516-4264-9de7-09b979d0e282 2048x1536 0.07s
+[baseline 28/30] Edinburgh e3aa088f-402e-494f-85f3-f2f634a030a9 2048x1536 0.06s
+[baseline 29/30] Helsinki 87c96607-1b01-4839-839a-967bc829a934 2048x1536 0.07s
+[baseline 30/30] Krakow b9289dff-8887-4e3e-8415-d3c89303d4db 2048x1536 0.07s
+Audit inference complete: /home/colin/GUVP_pairwise_ranking/output/segmentation_expansion_1000_audit

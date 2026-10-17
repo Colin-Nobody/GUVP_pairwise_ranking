@@ -1,0 +1,52 @@
+feature_column,class_id,class_name,source_column,feature_type,standardised_beta,beta_per_full_share,beta_per_10_percentage_points,outer_selection_frequency,outer_sign_consistency,bootstrap_selection_frequency,bootstrap_sign_consistency,bootstrap_beta_low_2_5,bootstrap_beta_high_97_5,stable
+feature_core_004,4,Curb,feature_ratio_004_curb,core_10pct,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_core_005,5,Fence,feature_ratio_005_fence,core_10pct,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_core_012,12,Wall,feature_ratio_012_wall,core_10pct,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_core_013,13,Bike Lane,feature_ratio_013_bike_lane,core_10pct,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_core_017,17,Parking,feature_ratio_017_parking,core_10pct,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_core_019,19,Pedestrian Area,feature_ratio_019_pedestrian_area,core_10pct,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_core_021,21,Road,feature_ratio_021_road,core_10pct,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_core_024,24,Sidewalk,feature_ratio_024_sidewalk,core_10pct,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_core_025,25,Traffic Island,feature_ratio_025_traffic_island,core_10pct,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_core_026,26,Bridge,feature_ratio_026_bridge,core_10pct,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_core_027,27,Building,feature_ratio_027_building,core_10pct,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_core_030,30,Person,feature_ratio_030_person,core_10pct,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_core_032,32,Bicyclist,feature_ratio_032_bicyclist,core_10pct,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_core_035,35,Lane Marking - Dashed Line,feature_ratio_035_lane_marking_dashed_line,core_10pct,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_core_036,36,Lane Marking - Straight Line,feature_ratio_036_lane_marking_straight_line,core_10pct,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_core_045,45,Lane Marking - Crosswalk,feature_ratio_045_lane_marking_crosswalk,core_10pct,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_core_050,50,Lane Marking - Other,feature_ratio_050_lane_marking_other,core_10pct,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_core_054,54,Lane Marking - Text,feature_ratio_054_lane_marking_text,core_10pct,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_core_061,61,Sky,feature_ratio_061_sky,core_10pct,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_core_062,62,Snow,feature_ratio_062_snow,core_10pct,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_core_063,63,Terrain,feature_ratio_063_terrain,core_10pct,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_core_064,64,Vegetation,feature_ratio_064_vegetation,core_10pct,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_core_074,74,Manhole,feature_ratio_074_manhole,core_10pct,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_core_078,78,Signage - Advertisement,feature_ratio_078_signage_advertisement,core_10pct,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_core_083,83,Signage - Store,feature_ratio_083_signage_store,core_10pct,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_core_084,84,Street Light,feature_ratio_084_street_light,core_10pct,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_core_085,85,Pole,feature_ratio_085_pole,core_10pct,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_core_088,88,Utility Pole,feature_ratio_088_utility_pole,core_10pct,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_core_092,92,Traffic Light - General (Upright),feature_ratio_092_traffic_light_general_upright,core_10pct,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_core_097,97,Traffic Sign (Back),feature_ratio_097_traffic_sign_back,core_10pct,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_core_099,99,Traffic Sign - Direction (Front),feature_ratio_099_traffic_sign_direction_front,core_10pct,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_core_100,100,Traffic Sign (Front),feature_ratio_100_traffic_sign_front,core_10pct,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_core_104,104,Trash Can,feature_ratio_104_trash_can,core_10pct,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_core_105,105,Bicycle,feature_ratio_105_bicycle,core_10pct,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_core_108,108,Car,feature_ratio_108_car,core_10pct,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_core_110,110,Motorcycle,feature_ratio_110_motorcycle,core_10pct,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_core_114,114,Truck,feature_ratio_114_truck,core_10pct,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_core_115,115,Vehicle Group,feature_ratio_115_vehicle_group,core_10pct,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_core_119,119,Dynamic,feature_ratio_119_dynamic,core_10pct,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_core_120,120,Ego Vehicle,feature_ratio_120_ego_vehicle,core_10pct,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_core_121,121,Ground,feature_ratio_121_ground,core_10pct,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_core_122,122,Static,feature_ratio_122_static,core_10pct,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_group_rare_animals,-1,Rare Animals,feature_ratio_000_bird;feature_ratio_001_ground_animal,grouped_rare,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_group_rare_built_and_road_infrastructure,-1,Rare Built And Road Infrastructure,feature_ratio_002_ambiguous_barrier;feature_ratio_003_concrete_block;feature_ratio_006_guard_rail;feature_ratio_007_barrier;feature_ratio_008_road_median;feature_ratio_009_road_side;feature_ratio_010_lane_separator;feature_ratio_011_temporary_barrier;feature_ratio_015_curb_cut;feature_ratio_016_driveway;feature_ratio_018_parking_aisle;feature_ratio_020_rail_track;feature_ratio_022_road_shoulder;feature_ratio_023_service_lane;feature_ratio_028_garage;feature_ratio_029_tunnel,grouped_rare,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_group_rare_lane_markings,-1,Rare Lane Markings,feature_ratio_037_lane_marking_zigzag_line;feature_ratio_038_lane_marking_ambiguous;feature_ratio_039_lane_marking_arrow_left;feature_ratio_040_lane_marking_arrow_other;feature_ratio_041_lane_marking_arrow_right;feature_ratio_042_lane_marking_arrow_split_left_or_straight;feature_ratio_043_lane_marking_arrow_split_right_or_straight;feature_ratio_044_lane_marking_arrow_straight;feature_ratio_046_lane_marking_give_way_row;feature_ratio_047_lane_marking_give_way_single;feature_ratio_048_lane_marking_hatched_chevron;feature_ratio_049_lane_marking_hatched_diagonal;feature_ratio_051_lane_marking_stop_line;feature_ratio_052_lane_marking_symbol_bicycle;feature_ratio_053_lane_marking_symbol_other;feature_ratio_055_lane_marking_only_dashed_line;feature_ratio_056_lane_marking_only_crosswalk;feature_ratio_057_lane_marking_only_other;feature_ratio_058_lane_marking_only_test,grouped_rare,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_group_rare_natural_elements,-1,Rare Natural Elements,feature_ratio_059_mountain;feature_ratio_060_sand;feature_ratio_065_water,grouped_rare,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_group_rare_other_context,-1,Rare Other Context,feature_ratio_014_crosswalk_plain;feature_ratio_086_pole_group;feature_ratio_118_car_mount;feature_ratio_123_unlabeled,grouped_rare,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_group_rare_road_users,-1,Rare Road Users,feature_ratio_031_person_group;feature_ratio_033_motorcyclist;feature_ratio_034_other_rider,grouped_rare,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_group_rare_signage_and_traffic_control,-1,Rare Signage And Traffic Control,feature_ratio_079_signage_ambiguous;feature_ratio_080_signage_back;feature_ratio_081_signage_information;feature_ratio_082_signage_other;feature_ratio_087_traffic_sign_frame;feature_ratio_089_traffic_cone;feature_ratio_090_traffic_light_general_single;feature_ratio_091_traffic_light_pedestrians;feature_ratio_093_traffic_light_general_horizontal;feature_ratio_094_traffic_light_cyclists;feature_ratio_095_traffic_light_other;feature_ratio_096_traffic_sign_ambiguous;feature_ratio_098_traffic_sign_direction_back;feature_ratio_101_traffic_sign_parking;feature_ratio_102_traffic_sign_temporary_back;feature_ratio_103_traffic_sign_temporary_front,grouped_rare,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_group_rare_street_furniture_and_utilities,-1,Rare Street Furniture And Utilities,feature_ratio_066_banner;feature_ratio_067_bench;feature_ratio_068_bike_rack;feature_ratio_069_catch_basin;feature_ratio_070_cctv_camera;feature_ratio_071_fire_hydrant;feature_ratio_072_junction_box;feature_ratio_073_mailbox;feature_ratio_075_parking_meter;feature_ratio_076_phone_booth;feature_ratio_077_pothole;feature_ratio_117_water_valve,grouped_rare,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_group_rare_vehicles,-1,Rare Vehicles,feature_ratio_106_boat;feature_ratio_107_bus;feature_ratio_109_caravan;feature_ratio_111_on_rails;feature_ratio_112_other_vehicle;feature_ratio_113_trailer;feature_ratio_116_wheeled_slow,grouped_rare,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False

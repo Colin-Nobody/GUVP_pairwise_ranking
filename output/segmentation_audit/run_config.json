@@ -1,0 +1,17 @@
+{
+  "config": "segmentation/vendor/mmsegmentation/configs/deeplabv3plus/deeplabv3plus_r50-d8_4xb4-80k_ade20k-512x512.py",
+  "checkpoint": "segmentation/checkpoints/deeplabv3plus_r50-d8_512x512_80k_ade20k_20200614_185028-bf1400d8.pth",
+  "device": "cuda:0",
+  "torch": "2.11.0+cu128",
+  "mmcv": "2.1.0",
+  "mmengine": "0.10.7",
+  "mmsegmentation": "1.2.2",
+  "baseline_postprocess": "argmax at official test resolution; CPU nearest-neighbor categorical restore",
+  "sliding": {
+    "tile_size": 512,
+    "overlap": 0.25,
+    "stride": 384,
+    "merge": "equal-weight average of overlapping logits; argmax after accumulation",
+    "accumulator_dtype": "float16"
+  }
+}

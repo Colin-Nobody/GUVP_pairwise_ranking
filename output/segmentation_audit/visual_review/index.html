@@ -1,0 +1,525 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GUVP 分割人工审计</title>
+<style>
+:root{--bg:#f4f5f7;--card:#fff;--ink:#20242a;--muted:#657080;--line:#d9dee6;--blue:#1769aa}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,sans-serif}header{position:sticky;top:0;z-index:5;background:#fffffff2;border-bottom:1px solid var(--line);padding:14px 20px;backdrop-filter:blur(8px)}h1{font-size:21px;margin:0 0 8px}.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center}select,button,input{font:inherit;padding:6px 8px;border:1px solid #b8c0cc;border-radius:6px;background:white}button{background:var(--blue);color:white;border:0;cursor:pointer}main{max-width:1700px;margin:auto;padding:18px}.help,.legend{background:white;border:1px solid var(--line);border-radius:9px;padding:12px;margin-bottom:15px}.legend{display:flex;gap:11px;flex-wrap:wrap}.legend span{white-space:nowrap}.legend i{display:inline-block;width:13px;height:13px;margin-right:4px;vertical-align:-2px;border:1px solid #999}.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px;margin:0 0 18px;box-shadow:0 2px 7px #0000000b}h2{font-size:18px;margin:0 0 3px}.meta,.metric{margin:3px 0;color:var(--muted)}.images{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-top:10px}figure{margin:0;background:#eef0f3;border-radius:7px;overflow:hidden;text-align:center}figure img{width:100%;height:420px;object-fit:contain;display:block;background:#202124}figcaption{padding:5px;font-weight:650}details{margin-top:8px}.review{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:10px;padding:9px;background:#f1f6fb;border-radius:7px}.notes-label{flex:1;min-width:300px}.notes{width:calc(100% - 45px)}.hidden{display:none}@media(max-width:900px){.images{grid-template-columns:1fr}figure img{height:auto;max-height:650px}}
+</style></head><body>
+<header><h1>GUVP DeepLabv3+ 目标域人工审计（30图）</h1><div class="toolbar"><label>城市 <select id="city"><option value="all">全部</option><option value="Amsterdam">Amsterdam</option><option value="Barcelona">Barcelona</option><option value="Berlin">Berlin</option><option value="Paris">Paris</option><option value="Rome">Rome</option></select></label><label>VP层 <select id="stratum"><option value="all">全部</option><option value="high">高</option><option value="mid">中</option><option value="low">低</option></select></label><button id="export">导出图像级评分 CSV</button><a href="../audit_ratings.csv">下载类别级评分模板</a></div></header>
+<main><section class="help">评分：0=不可用/严重错误，1=部分可用，2=总体可靠，NA=无法判断。点击图片可打开原始分辨率。页面输入自动保存在当前浏览器；“导出”生成图像级评分文件。方法差异不代表滑窗一定更好，必须结合原图判断。</section><section class="legend"><span><i style="background:rgb(180,120,120)"></i>building</span><span><i style="background:rgb(120,120,120)"></i>wall</span><span><i style="background:rgb(140,140,140)"></i>road</span><span><i style="background:rgb(235,255,7)"></i>sidewalk</span><span><i style="background:rgb(4,200,3)"></i>tree</span><span><i style="background:rgb(4,250,7)"></i>grass</span><span><i style="background:rgb(204,255,4)"></i>plant</span><span><i style="background:rgb(6,230,230)"></i>sky</span><span><i style="background:rgb(0,102,200)"></i>car</span><span><i style="background:rgb(255,0,245)"></i>bus</span><span><i style="background:rgb(255,0,20)"></i>truck</span><span><i style="background:rgb(150,5,61)"></i>person</span><span><i style="background:rgb(255,184,6)"></i>fence</span><span><i style="background:rgb(255,5,153)"></i>signboard</span><span><i style="background:rgb(143,255,0)"></i>poster</span><span><i style="background:rgb(51,0,255)"></i>pole</span><span><i style="background:rgb(0,71,255)"></i>streetlight</span><span><i style="background:rgb(0,255,61)"></i>awning</span><span><i style="background:rgb(194,255,0)"></i>bench</span><span><i style="background:rgb(173,0,255)"></i>ashcan</span></section>
+<article class="card" data-city="Amsterdam" data-stratum="high">
+  <h2>#01 · Amsterdam · HIGH</h2>
+  <p class="meta"><code>a87adabb-7a2f-4eac-a79c-571a7581a94d</code> · VP v8 7.97 · 2048×1536 · Mapillary / driving surface · pano=False</p>
+  <p class="metric">基线/滑窗像素一致率 <strong>17.7%</strong>；方法间 mIoU <strong>0.020</strong>；类别数 4 → 24</p>
+  <div class="images">
+    <figure><a href="../../../data/street_images/a87adabb-7a2f-4eac-a79c-571a7581a94d.jpg"><img loading="lazy" src="previews/original/a87adabb-7a2f-4eac-a79c-571a7581a94d.jpg"></a><figcaption>原图</figcaption></figure>
+    <figure><a href="../baseline/overlays/a87adabb-7a2f-4eac-a79c-571a7581a94d.jpg"><img loading="lazy" src="previews/baseline/a87adabb-7a2f-4eac-a79c-571a7581a94d.jpg"></a><figcaption>缩放基线</figcaption></figure>
+    <figure><a href="../sliding_512_o25/overlays/a87adabb-7a2f-4eac-a79c-571a7581a94d.jpg"><img loading="lazy" src="previews/sliding/a87adabb-7a2f-4eac-a79c-571a7581a94d.jpg"></a><figcaption>512滑窗（25%重叠）</figcaption></figure>
+  </div>
+  <details><summary>面积最大的类别</summary><p><b>基线：</b>building 84.0%, sky 13.0%, sidewalk 2.8%, road 0.1%</p><p><b>滑窗：</b>wall 47.4%, floor 17.8%, building 13.5%, ceiling 9.4%, sky 4.5%, conveyer belt 2.2%, cabinet 2.0%, desk 2.0%</p></details>
+  <div class="review" data-id="a87adabb-7a2f-4eac-a79c-571a7581a94d">
+    <label>基线质量 <select class="baseline"><option></option><option>0</option><option>1</option><option>2</option><option>NA</option></select></label>
+    <label>滑窗质量 <select class="sliding"><option></option><option>0</option><option>1</option><option>2</option><option>NA</option></select></label>
+    <label>偏好 <select class="preferred"><option></option><option>baseline</option><option>sliding</option><option>tie</option><option>neither</option></select></label>
+    <label class="notes-label">备注 <input class="notes" placeholder="小目标遗漏、类别混淆、接缝等"></label>
+  </div>
+</article>
+<article class="card" data-city="Amsterdam" data-stratum="high">
+  <h2>#02 · Amsterdam · HIGH</h2>
+  <p class="meta"><code>688dc5ea-a046-4460-ad8d-80a9c02d53a1</code> · VP v8 9.02 · 2048×1024 · Mapillary / driving surface · pano=True</p>
+  <p class="metric">基线/滑窗像素一致率 <strong>73.5%</strong>；方法间 mIoU <strong>0.111</strong>；类别数 11 → 23</p>
+  <div class="images">
+    <figure><a href="../../../data/street_images/688dc5ea-a046-4460-ad8d-80a9c02d53a1.jpg"><img loading="lazy" src="previews/original/688dc5ea-a046-4460-ad8d-80a9c02d53a1.jpg"></a><figcaption>原图</figcaption></figure>
+    <figure><a href="../baseline/overlays/688dc5ea-a046-4460-ad8d-80a9c02d53a1.jpg"><img loading="lazy" src="previews/baseline/688dc5ea-a046-4460-ad8d-80a9c02d53a1.jpg"></a><figcaption>缩放基线</figcaption></figure>
+    <figure><a href="../sliding_512_o25/overlays/688dc5ea-a046-4460-ad8d-80a9c02d53a1.jpg"><img loading="lazy" src="previews/sliding/688dc5ea-a046-4460-ad8d-80a9c02d53a1.jpg"></a><figcaption>512滑窗（25%重叠）</figcaption></figure>
+  </div>
+  <details><summary>面积最大的类别</summary><p><b>基线：</b>building 42.2%, sky 26.1%, road 22.6%, car 4.5%, boat 2.1%, wall 1.0%, signboard 0.8%, fountain 0.4%</p><p><b>滑窗：</b>building 33.1%, sky 26.0%, road 15.2%, counter 9.1%, wall 6.8%, car 3.9%, conveyer belt 2.1%, base 1.9%</p></details>
+  <div class="review" data-id="688dc5ea-a046-4460-ad8d-80a9c02d53a1">
+    <label>基线质量 <select class="baseline"><option></option><option>0</option><option>1</option><option>2</option><option>NA</option></select></label>
+    <label>滑窗质量 <select class="sliding"><option></option><option>0</option><option>1</option><option>2</option><option>NA</option></select></label>
+    <label>偏好 <select class="preferred"><option></option><option>baseline</option><option>sliding</option><option>tie</option><option>neither</option></select></label>
+    <label class="notes-label">备注 <input class="notes" placeholder="小目标遗漏、类别混淆、接缝等"></label>
+  </div>
+</article>
+<article class="card" data-city="Amsterdam" data-stratum="low">
+  <h2>#03 · Amsterdam · LOW</h2>
+  <p class="meta"><code>b65c1999-4423-4d17-9b29-57c69f8f1696</code> · VP v8 4.14 · 2592×1936 · KartaView / walking surface · pano=False</p>
+  <p class="metric">基线/滑窗像素一致率 <strong>43.1%</strong>；方法间 mIoU <strong>0.129</strong>；类别数 12 → 31</p>
+  <div class="images">
+    <figure><a href="../../../data/street_images/b65c1999-4423-4d17-9b29-57c69f8f1696.jpg"><img loading="lazy" src="previews/original/b65c1999-4423-4d17-9b29-57c69f8f1696.jpg"></a><figcaption>原图</figcaption></figure>
+    <figure><a href="../baseline/overlays/b65c1999-4423-4d17-9b29-57c69f8f1696.jpg"><img loading="lazy" src="previews/baseline/b65c1999-4423-4d17-9b29-57c69f8f1696.jpg"></a><figcaption>缩放基线</figcaption></figure>
+    <figure><a href="../sliding_512_o25/overlays/b65c1999-4423-4d17-9b29-57c69f8f1696.jpg"><img loading="lazy" src="previews/sliding/b65c1999-4423-4d17-9b29-57c69f8f1696.jpg"></a><figcaption>512滑窗（25%重叠）</figcaption></figure>
+  </div>
+  <details><summary>面积最大的类别</summary><p><b>基线：</b>building 69.4%, road 16.7%, sidewalk 6.4%, sky 3.8%, bicycle 1.3%, ashcan 1.1%, person 1.0%, tree 0.2%</p><p><b>滑窗：</b>building 35.2%, wall 28.7%, sidewalk 10.3%, floor 7.7%, box 5.9%, sky 3.9%, seat 1.7%, bicycle 1.6%</p></details>
+  <div class="review" data-id="b65c1999-4423-4d17-9b29-57c69f8f1696">
+    <label>基线质量 <select class="baseline"><option></option><option>0</option><option>1</option><option>2</option><option>NA</option></select></label>
+    <label>滑窗质量 <select class="sliding"><option></option><option>0</option><option>1</option><option>2</option><option>NA</option></select></label>
+    <label>偏好 <select class="preferred"><option></option><option>baseline</option><option>sliding</option><option>tie</option><option>neither</option></select></label>
+    <label class="notes-label">备注 <input class="notes" placeholder="小目标遗漏、类别混淆、接缝等"></label>
+  </div>
+</article>
+<article class="card" data-city="Amsterdam" data-stratum="low">
+  <h2>#04 · Amsterdam · LOW</h2>
+  <p class="meta"><code>6c7398c4-09fe-4e8b-b57c-b8f43461dd13</code> · VP v8 0.86 · 1071×1600 · Mapillary / walking surface · pano=False</p>
+  <p class="metric">基线/滑窗像素一致率 <strong>87.4%</strong>；方法间 mIoU <strong>0.235</strong>；类别数 16 → 26</p>
+  <div class="images">
+    <figure><a href="../../../data/street_images/6c7398c4-09fe-4e8b-b57c-b8f43461dd13.jpg"><img loading="lazy" src="previews/original/6c7398c4-09fe-4e8b-b57c-b8f43461dd13.jpg"></a><figcaption>原图</figcaption></figure>
+    <figure><a href="../baseline/overlays/6c7398c4-09fe-4e8b-b57c-b8f43461dd13.jpg"><img loading="lazy" src="previews/baseline/6c7398c4-09fe-4e8b-b57c-b8f43461dd13.jpg"></a><figcaption>缩放基线</figcaption></figure>
+    <figure><a href="../sliding_512_o25/overlays/6c7398c4-09fe-4e8b-b57c-b8f43461dd13.jpg"><img loading="lazy" src="previews/sliding/6c7398c4-09fe-4e8b-b57c-b8f43461dd13.jpg"></a><figcaption>512滑窗（25%重叠）</figcaption></figure>
+  </div>
+  <details><summary>面积最大的类别</summary><p><b>基线：</b>building 35.6%, tree 26.1%, sidewalk 20.4%, wall 9.6%, sky 4.5%, fence 1.5%, car 1.5%, bicycle 0.4%</p><p><b>滑窗：</b>building 29.8%, tree 26.3%, sidewalk 20.3%, wall 14.6%, sky 4.4%, fence 1.0%, water 0.7%, palm 0.5%</p></details>
+  <div class="review" data-id="6c7398c4-09fe-4e8b-b57c-b8f43461dd13">
+    <label>基线质量 <select class="baseline"><option></option><option>0</option><option>1</option><option>2</option><option>NA</option></select></label>
+    <label>滑窗质量 <select class="sliding"><option></option><option>0</option><option>1</option><option>2</option><option>NA</option></select></label>
+    <label>偏好 <select class="preferred"><option></option><option>baseline</option><option>sliding</option><option>tie</option><option>neither</option></select></label>
+    <label class="notes-label">备注 <input class="notes" placeholder="小目标遗漏、类别混淆、接缝等"></label>
+  </div>
+</article>
+<article class="card" data-city="Amsterdam" data-stratum="mid">
+  <h2>#05 · Amsterdam · MID</h2>
+  <p class="meta"><code>ad49e449-b2f1-4831-9df9-cddef6a2d616</code> · VP v8 6.30 · 1239×1773 · Mapillary / walking surface · pano=False</p>
+  <p class="metric">基线/滑窗像素一致率 <strong>97.6%</strong>；方法间 mIoU <strong>0.443</strong>；类别数 10 → 13</p>
+  <div class="images">
+    <figure><a href="../../../data/street_images/ad49e449-b2f1-4831-9df9-cddef6a2d616.jpg"><img loading="lazy" src="previews/original/ad49e449-b2f1-4831-9df9-cddef6a2d616.jpg"></a><figcaption>原图</figcaption></figure>
+    <figure><a href="../baseline/overlays/ad49e449-b2f1-4831-9df9-cddef6a2d616.jpg"><img loading="lazy" src="previews/baseline/ad49e449-b2f1-4831-9df9-cddef6a2d616.jpg"></a><figcaption>缩放基线</figcaption></figure>
+    <figure><a href="../sliding_512_o25/overlays/ad49e449-b2f1-4831-9df9-cddef6a2d616.jpg"><img loading="lazy" src="previews/sliding/ad49e449-b2f1-4831-9df9-cddef6a2d616.jpg"></a><figcaption>512滑窗（25%重叠）</figcaption></figure>
+  </div>
+  <details><summary>面积最大的类别</summary><p><b>基线：</b>building 73.8%, sky 16.1%, road 5.0%, car 2.4%, bicycle 1.0%, awning 0.7%, sidewalk 0.3%, minibike 0.3%</p><p><b>滑窗：</b>building 74.1%, sky 16.2%, road 4.5%, car 2.3%, bicycle 1.6%, awning 0.7%, sidewalk 0.5%, signboard 0.1%</p></details>
+  <div class="review" data-id="ad49e449-b2f1-4831-9df9-cddef6a2d616">
+    <label>基线质量 <select class="baseline"><option></option><option>0</option><option>1</option><option>2</option><option>NA</option></select></label>
+    <label>滑窗质量 <select class="sliding"><option></option><option>0</option><option>1</option><option>2</option><option>NA</option></select></label>
+    <label>偏好 <select class="preferred"><option></option><option>baseline</option><option>sliding</option><option>tie</option><option>neither</option></select></label>
+    <label class="notes-label">备注 <input class="notes" placeholder="小目标遗漏、类别混淆、接缝等"></label>
+  </div>
+</article>
+<article class="card" data-city="Amsterdam" data-stratum="mid">
+  <h2>#06 · Amsterdam · MID</h2>
+  <p class="meta"><code>34a75d1f-e767-4b4d-86cd-002952a0496b</code> · VP v8 5.56 · 2048×1024 · Mapillary / cycling surface · pano=True</p>
+  <p class="metric">基线/滑窗像素一致率 <strong>65.1%</strong>；方法间 mIoU <strong>0.134</strong>；类别数 21 → 30</p>
+  <div class="images">
+    <figure><a href="../../../data/street_images/34a75d1f-e767-4b4d-86cd-002952a0496b.jpg"><img loading="lazy" src="previews/original/34a75d1f-e767-4b4d-86cd-002952a0496b.jpg"></a><figcaption>原图</figcaption></figure>
+    <figure><a href="../baseline/overlays/34a75d1f-e767-4b4d-86cd-002952a0496b.jpg"><img loading="lazy" src="previews/baseline/34a75d1f-e767-4b4d-86cd-002952a0496b.jpg"></a><figcaption>缩放基线</figcaption></figure>
+    <figure><a href="../sliding_512_o25/overlays/34a75d1f-e767-4b4d-86cd-002952a0496b.jpg"><img loading="lazy" src="previews/sliding/34a75d1f-e767-4b4d-86cd-002952a0496b.jpg"></a><figcaption>512滑窗（25%重叠）</figcaption></figure>
+  </div>
+  <details><summary>面积最大的类别</summary><p><b>基线：</b>sky 24.4%, car 17.1%, road 16.7%, building 16.3%, tree 11.5%, floor 4.9%, earth 2.8%, boat 1.5%</p><p><b>滑窗：</b>sky 25.1%, building 17.5%, floor 16.0%, road 14.6%, tree 10.4%, car 6.1%, sidewalk 4.1%, wall 1.9%</p></details>
+  <div class="review" data-id="34a75d1f-e767-4b4d-86cd-002952a0496b">
+    <label>基线质量 <select class="baseline"><option></option><option>0</option><option>1</option><option>2</option><option>NA</option></select></label>
+    <label>滑窗质量 <select class="sliding"><option></option><option>0</option><option>1</option><option>2</option><option>NA</option></select></label>
+    <label>偏好 <select class="preferred"><option></option><option>baseline</option><option>sliding</option><option>tie</option><option>neither</option></select></label>
+    <label class="notes-label">备注 <input class="notes" placeholder="小目标遗漏、类别混淆、接缝等"></label>
+  </div>
+</article>
+<article class="card" data-city="Barcelona" data-stratum="high">
+  <h2>#07 · Barcelona · HIGH</h2>
+  <p class="meta"><code>a71d2ec1-cd0a-49d9-b8e5-57ae5871ce9f</code> · VP v8 7.64 · 2048×1024 · Mapillary / cycling surface · pano=True</p>
+  <p class="metric">基线/滑窗像素一致率 <strong>90.9%</strong>；方法间 mIoU <strong>0.386</strong>；类别数 12 → 17</p>
+  <div class="images">
+    <figure><a href="../../../data/street_images/a71d2ec1-cd0a-49d9-b8e5-57ae5871ce9f.jpg"><img loading="lazy" src="previews/original/a71d2ec1-cd0a-49d9-b8e5-57ae5871ce9f.jpg"></a><figcaption>原图</figcaption></figure>
+    <figure><a href="../baseline/overlays/a71d2ec1-cd0a-49d9-b8e5-57ae5871ce9f.jpg"><img loading="lazy" src="previews/baseline/a71d2ec1-cd0a-49d9-b8e5-57ae5871ce9f.jpg"></a><figcaption>缩放基线</figcaption></figure>
+    <figure><a href="../sliding_512_o25/overlays/a71d2ec1-cd0a-49d9-b8e5-57ae5871ce9f.jpg"><img loading="lazy" src="previews/sliding/a71d2ec1-cd0a-49d9-b8e5-57ae5871ce9f.jpg"></a><figcaption>512滑窗（25%重叠）</figcaption></figure>
+  </div>
+  <details><summary>面积最大的类别</summary><p><b>基线：</b>sky 33.2%, sidewalk 28.2%, road 16.7%, building 12.1%, tree 5.5%, person 1.1%, car 1.1%, signboard 1.0%</p><p><b>滑窗：</b>sky 32.5%, sidewalk 25.6%, road 19.0%, building 10.8%, tree 6.6%, signboard 1.4%, person 1.1%, minibike 1.0%</p></details>
+  <div class="review" data-id="a71d2ec1-cd0a-49d9-b8e5-57ae5871ce9f">
+    <label>基线质量 <select class="baseline"><option></option><option>0</option><option>1</option><option>2</option><option>NA</option></select></label>
+    <label>滑窗质量 <select class="sliding"><option></option><option>0</option><option>1</option><option>2</option><option>NA</option></select></label>
+    <label>偏好 <select class="preferred"><option></option><option>baseline</option><option>sliding</option><option>tie</option><option>neither</option></select></label>
+    <label class="notes-label">备注 <input class="notes" placeholder="小目标遗漏、类别混淆、接缝等"></label>
+  </div>
+</article>
+<article class="card" data-city="Barcelona" data-stratum="high">
+  <h2>#08 · Barcelona · HIGH</h2>
+  <p class="meta"><code>60777023-7f8e-40ff-957f-c5eafefbf235</code> · VP v8 9.36 · 1600×1067 · Mapillary / walking surface · pano=False</p>
+  <p class="metric">基线/滑窗像素一致率 <strong>86.2%</strong>；方法间 mIoU <strong>0.190</strong>；类别数 12 → 25</p>
+  <div class="images">
+    <figure><a href="../../../data/street_images/60777023-7f8e-40ff-957f-c5eafefbf235.jpg"><img loading="lazy" src="previews/original/60777023-7f8e-40ff-957f-c5eafefbf235.jpg"></a><figcaption>原图</figcaption></figure>
+    <figure><a href="../baseline/overlays/60777023-7f8e-40ff-957f-c5eafefbf235.jpg"><img loading="lazy" src="previews/baseline/60777023-7f8e-40ff-957f-c5eafefbf235.jpg"></a><figcaption>缩放基线</figcaption></figure>
+    <figure><a href="../sliding_512_o25/overlays/60777023-7f8e-40ff-957f-c5eafefbf235.jpg"><img loading="lazy" src="previews/sliding/60777023-7f8e-40ff-957f-c5eafefbf235.jpg"></a><figcaption>512滑窗（25%重叠）</figcaption></figure>
+  </div>
+  <details><summary>面积最大的类别</summary><p><b>基线：</b>building 29.7%, tree 28.1%, person 28.0%, base 8.7%, sky 2.3%, sidewalk 1.1%, awning 1.0%, streetlight 0.9%</p><p><b>滑窗：</b>building 32.4%, tree 28.2%, person 27.2%, base 3.1%, sky 2.4%, awning 1.8%, streetlight 1.4%, wall 0.8%</p></details>
+  <div class="review" data-id="60777023-7f8e-40ff-957f-c5eafefbf235">
+    <label>基线质量 <select class="baseline"><option></option><option>0</option><option>1</option><option>2</option><option>NA</option></select></label>
+    <label>滑窗质量 <select class="sliding"><option></option><option>0</option><option>1</option><option>2</option><option>NA</option></select></label>
+    <label>偏好 <select class="preferred"><option></option><option>baseline</option><option>sliding</option><option>tie</option><option>neither</option></select></label>
+    <label class="notes-label">备注 <input class="notes" placeholder="小目标遗漏、类别混淆、接缝等"></label>
+  </div>
+</article>
+<article class="card" data-city="Barcelona" data-stratum="low">
+  <h2>#09 · Barcelona · LOW</h2>
+  <p class="meta"><code>c29e0d7f-c50d-48a8-9b0e-d974ae325426</code> · VP v8 2.69 · 1067×1600 · Mapillary / walking surface · pano=False</p>
+  <p class="metric">基线/滑窗像素一致率 <strong>82.4%</strong>；方法间 mIoU <strong>0.136</strong>；类别数 14 → 26</p>
+  <div class="images">
+    <figure><a href="../../../data/street_images/c29e0d7f-c50d-48a8-9b0e-d974ae325426.jpg"><img loading="lazy" src="previews/original/c29e0d7f-c50d-48a8-9b0e-d974ae325426.jpg"></a><figcaption>原图</figcaption></figure>
+    <figure><a href="../baseline/overlays/c29e0d7f-c50d-48a8-9b0e-d974ae325426.jpg"><img loading="lazy" src="previews/baseline/c29e0d7f-c50d-48a8-9b0e-d974ae325426.jpg"></a><figcaption>缩放基线</figcaption></figure>
+    <figure><a href="../sliding_512_o25/overlays/c29e0d7f-c50d-48a8-9b0e-d974ae325426.jpg"><img loading="lazy" src="previews/sliding/c29e0d7f-c50d-48a8-9b0e-d974ae325426.jpg"></a><figcaption>512滑窗（25%重叠）</figcaption></figure>
+  </div>
+  <details><summary>面积最大的类别</summary><p><b>基线：</b>sky 58.2%, building 20.9%, palm 10.4%, stairs 3.1%, bench 2.4%, sculpture 1.4%, stairway 1.4%, flag 0.8%</p><p><b>滑窗：</b>sky 51.5%, building 20.3%, palm 12.1%, wall 6.6%, stairway 4.9%, flag 1.1%, bannister 0.9%, sculpture 0.6%</p></details>
+  <div class="review" data-id="c29e0d7f-c50d-48a8-9b0e-d974ae325426">
+    <label>基线质量 <select class="baseline"><option></option><option>0</option><option>1</option><option>2</option><option>NA</option></select></label>
+    <label>滑窗质量 <select class="sliding"><option></option><option>0</option><option>1</option><option>2</option><option>NA</option></select></label>
+    <label>偏好 <select class="preferred"><option></option><option>baseline</option><option>sliding</option><option>tie</option><option>neither</option></select></label>
+    <label class="notes-label">备注 <input class="notes" placeholder="小目标遗漏、类别混淆、接缝等"></label>
+  </div>
+</article>
+<article class="card" data-city="Barcelona" data-stratum="low">
+  <h2>#10 · Barcelona · LOW</h2>
+  <p class="meta"><code>cc057101-61ac-42bb-a7ec-9a88466b2d1e</code> · VP v8 0.14 · 2048×1152 · Mapillary / walking surface · pano=False</p>
+  <p class="metric">基线/滑窗像素一致率 <strong>53.3%</strong>；方法间 mIoU <strong>0.146</strong>；类别数 18 → 22</p>
+  <div class="images">
+    <figure><a href="../../../data/street_images/cc057101-61ac-42bb-a7ec-9a88466b2d1e.jpg"><img loading="lazy" src="previews/original/cc057101-61ac-42bb-a7ec-9a88466b2d1e.jpg"></a><figcaption>原图</figcaption></figure>
+    <figure><a href="../baseline/overlays/cc057101-61ac-42bb-a7ec-9a88466b2d1e.jpg"><img loading="lazy" src="previews/baseline/cc057101-61ac-42bb-a7ec-9a88466b2d1e.jpg"></a><figcaption>缩放基线</figcaption></figure>
+    <figure><a href="../sliding_512_o25/overlays/cc057101-61ac-42bb-a7ec-9a88466b2d1e.jpg"><img loading="lazy" src="previews/sliding/cc057101-61ac-42bb-a7ec-9a88466b2d1e.jpg"></a><figcaption>512滑窗（25%重叠）</figcaption></figure>
+  </div>
+  <details><summary>面积最大的类别</summary><p><b>基线：</b>sidewalk 31.2%, palm 24.0%, tree 19.8%, sky 13.3%, bench 5.8%, building 4.3%, wall 0.5%, person 0.3%</p><p><b>滑窗：</b>tree 26.7%, palm 16.7%, path 16.0%, sky 13.0%, earth 7.1%, sidewalk 5.3%, building 5.0%, fence 4.8%</p></details>
+  <div class="review" data-id="cc057101-61ac-42bb-a7ec-9a88466b2d1e">
+    <label>基线质量 <select class="baseline"><option></option><option>0</option><option>1</option><option>2</option><option>NA</option></select></label>
+    <label>滑窗质量 <select class="sliding"><option></option><option>0</option><option>1</option><option>2</option><option>NA</option></select></label>
+    <label>偏好 <select class="preferred"><option></option><option>baseline</option><option>sliding</option><option>tie</option><option>neither</option></select></label>
+    <label class="notes-label">备注 <input class="notes" placeholder="小目标遗漏、类别混淆、接缝等"></label>
+  </div>
+</article>
+<article class="card" data-city="Barcelona" data-stratum="mid">
+  <h2>#11 · Barcelona · MID</h2>
+  <p class="meta"><code>3af78a40-8458-45d0-885e-cf6e6cac7f32</code> · VP v8 3.31 · 3264×2448 · KartaView / driving surface · pano=False</p>
+  <p class="metric">基线/滑窗像素一致率 <strong>79.3%</strong>；方法间 mIoU <strong>0.123</strong>；类别数 17 → 42</p>
+  <div class="images">
+    <figure><a href="../../../data/street_images/3af78a40-8458-45d0-885e-cf6e6cac7f32.jpg"><img loading="lazy" src="previews/original/3af78a40-8458-45d0-885e-cf6e6cac7f32.jpg"></a><figcaption>原图</figcaption></figure>
+    <figure><a href="../baseline/overlays/3af78a40-8458-45d0-885e-cf6e6cac7f32.jpg"><img loading="lazy" src="previews/baseline/3af78a40-8458-45d0-885e-cf6e6cac7f32.jpg"></a><figcaption>缩放基线</figcaption></figure>
+    <figure><a href="../sliding_512_o25/overlays/3af78a40-8458-45d0-885e-cf6e6cac7f32.jpg"><img loading="lazy" src="previews/sliding/3af78a40-8458-45d0-885e-cf6e6cac7f32.jpg"></a><figcaption>512滑窗（25%重叠）</figcaption></figure>
+  </div>
+  <details><summary>面积最大的类别</summary><p><b>基线：</b>sky 37.4%, road 20.8%, tree 18.4%, palm 8.0%, building 3.8%, car 3.3%, bus 2.8%, sidewalk 1.7%</p><p><b>滑窗：</b>sky 38.5%, tree 16.2%, road 15.1%, palm 9.4%, wall 4.4%, building 3.6%, car 3.5%, sea 2.4%</p></details>
+  <div class="review" data-id="3af78a40-8458-45d0-885e-cf6e6cac7f32">
+    <label>基线质量 <select class="baseline"><option></option><option>0</option><option>1</option><option>2</option><option>NA</option></select></label>
+    <label>滑窗质量 <select class="sliding"><option></option><option>0</option><option>1</option><option>2</option><option>NA</option></select></label>
+    <label>偏好 <select class="preferred"><option></option><option>baseline</option><option>sliding</option><option>tie</option><option>neither</option></select></label>
+    <label class="notes-label">备注 <input class="notes" placeholder="小目标遗漏、类别混淆、接缝等"></label>
+  </div>
+</article>
+<article class="card" data-city="Barcelona" data-stratum="mid">
+  <h2>#12 · Barcelona · MID</h2>
+  <p class="meta"><code>77bb0abf-d07d-4835-a38d-69966d640c1d</code> · VP v8 3.59 · 2048×1536 · Mapillary / walking surface · pano=False</p>
+  <p class="metric">基线/滑窗像素一致率 <strong>93.3%</strong>；方法间 mIoU <strong>0.395</strong>；类别数 7 → 9</p>
+  <div class="images">
+    <figure><a href="../../../data/street_images/77bb0abf-d07d-4835-a38d-69966d640c1d.jpg"><img loading="lazy" src="previews/original/77bb0abf-d07d-4835-a38d-69966d640c1d.jpg"></a><figcaption>原图</figcaption></figure>
+    <figure><a href="../baseline/overlays/77bb0abf-d07d-4835-a38d-69966d640c1d.jpg"><img loading="lazy" src="previews/baseline/77bb0abf-d07d-4835-a38d-69966d640c1d.jpg"></a><figcaption>缩放基线</figcaption></figure>
+    <figure><a href="../sliding_512_o25/overlays/77bb0abf-d07d-4835-a38d-69966d640c1d.jpg"><img loading="lazy" src="previews/sliding/77bb0abf-d07d-4835-a38d-69966d640c1d.jpg"></a><figcaption>512滑窗（25%重叠）</figcaption></figure>
+  </div>
+  <details><summary>面积最大的类别</summary><p><b>基线：</b>building 40.6%, sky 37.2%, tree 16.0%, mountain 5.1%, road 1.0%, earth 0.0%, bridge 0.0%</p><p><b>滑窗：</b>building 40.4%, sky 37.2%, tree 15.1%, mountain 4.0%, road 3.1%, earth 0.1%, bridge 0.1%, sidewalk 0.0%</p></details>
+  <div class="review" data-id="77bb0abf-d07d-4835-a38d-69966d640c1d">
+    <label>基线质量 <select class="baseline"><option></option><option>0</option><option>1</option><option>2</option><option>NA</option></select></label>
+    <label>滑窗质量 <select class="sliding"><option></option><option>0</option><option>1</option><option>2</option><option>NA</option></select></label>
+    <label>偏好 <select class="preferred"><option></option><option>baseline</option><option>sliding</option><option>tie</option><option>neither</option></select></label>
+    <label class="notes-label">备注 <input class="notes" placeholder="小目标遗漏、类别混淆、接缝等"></label>
+  </div>
+</article>
+<article class="card" data-city="Berlin" data-stratum="high">
+  <h2>#13 · Berlin · HIGH</h2>
+  <p class="meta"><code>8e2ac8a5-3b3b-4b7c-a5b6-3979b9779af7</code> · VP v8 7.34 · 2048×1024 · Mapillary / cycling surface · pano=True</p>
+  <p class="metric">基线/滑窗像素一致率 <strong>85.0%</strong>；方法间 mIoU <strong>0.325</strong>；类别数 14 → 16</p>
+  <div class="images">
+    <figure><a href="../../../data/street_images/8e2ac8a5-3b3b-4b7c-a5b6-3979b9779af7.jpg"><img loading="lazy" src="previews/original/8e2ac8a5-3b3b-4b7c-a5b6-3979b9779af7.jpg"></a><figcaption>原图</figcaption></figure>
+    <figure><a href="../baseline/overlays/8e2ac8a5-3b3b-4b7c-a5b6-3979b9779af7.jpg"><img loading="lazy" src="previews/baseline/8e2ac8a5-3b3b-4b7c-a5b6-3979b9779af7.jpg"></a><figcaption>缩放基线</figcaption></figure>
+    <figure><a href="../sliding_512_o25/overlays/8e2ac8a5-3b3b-4b7c-a5b6-3979b9779af7.jpg"><img loading="lazy" src="previews/sliding/8e2ac8a5-3b3b-4b7c-a5b6-3979b9779af7.jpg"></a><figcaption>512滑窗（25%重叠）</figcaption></figure>
+  </div>
+  <details><summary>面积最大的类别</summary><p><b>基线：</b>road 30.5%, sky 27.8%, building 24.5%, car 11.5%, earth 3.0%, sidewalk 0.7%, plant 0.7%, tree 0.6%</p><p><b>滑窗：</b>road 33.1%, sky 28.0%, building 23.4%, car 10.6%, sidewalk 1.9%, floor 1.1%, plant 0.6%, tree 0.5%</p></details>
+  <div class="review" data-id="8e2ac8a5-3b3b-4b7c-a5b6-3979b9779af7">
+    <label>基线质量 <select class="baseline"><option></option><option>0</option><option>1</option><option>2</option><option>NA</option></select></label>
+    <label>滑窗质量 <select class="sliding"><option></option><option>0</option><option>1</option><option>2</option><option>NA</option></select></label>
+    <label>偏好 <select class="preferred"><option></option><option>baseline</option><option>sliding</option><option>tie</option><option>neither</option></select></label>
+    <label class="notes-label">备注 <input class="notes" placeholder="小目标遗漏、类别混淆、接缝等"></label>
+  </div>
+</article>
+<article class="card" data-city="Berlin" data-stratum="high">
+  <h2>#14 · Berlin · HIGH</h2>
+  <p class="meta"><code>f81624da-eb18-40b0-a846-83a1f1c77294</code> · VP v8 9.53 · 3264×1836 · KartaView / driving surface · pano=False</p>
+  <p class="metric">基线/滑窗像素一致率 <strong>79.3%</strong>；方法间 mIoU <strong>0.135</strong>；类别数 14 → 34</p>
+  <div class="images">
+    <figure><a href="../../../data/street_images/f81624da-eb18-40b0-a846-83a1f1c77294.jpg"><img loading="lazy" src="previews/original/f81624da-eb18-40b0-a846-83a1f1c77294.jpg"></a><figcaption>原图</figcaption></figure>
+    <figure><a href="../baseline/overlays/f81624da-eb18-40b0-a846-83a1f1c77294.jpg"><img loading="lazy" src="previews/baseline/f81624da-eb18-40b0-a846-83a1f1c77294.jpg"></a><figcaption>缩放基线</figcaption></figure>
+    <figure><a href="../sliding_512_o25/overlays/f81624da-eb18-40b0-a846-83a1f1c77294.jpg"><img loading="lazy" src="previews/sliding/f81624da-eb18-40b0-a846-83a1f1c77294.jpg"></a><figcaption>512滑窗（25%重叠）</figcaption></figure>
+  </div>
+  <details><summary>面积最大的类别</summary><p><b>基线：</b>sky 44.7%, building 17.3%, road 14.8%, fence 4.9%, wall 4.6%, signboard 3.9%, car 3.4%, tree 2.8%</p><p><b>滑窗：</b>sky 44.7%, building 17.5%, road 11.9%, wall 8.2%, floor 3.5%, car 3.1%, tree 2.5%, signboard 2.2%</p></details>
+  <div class="review" data-id="f81624da-eb18-40b0-a846-83a1f1c77294">
+    <label>基线质量 <select class="baseline"><option></option><option>0</option><option>1</option><option>2</option><option>NA</option></select></label>
+    <label>滑窗质量 <select class="sliding"><option></option><option>0</option><option>1</option><option>2</option><option>NA</option></select></label>
+    <label>偏好 <select class="preferred"><option></option><option>baseline</option><option>sliding</option><option>tie</option><option>neither</option></select></label>
+    <label class="notes-label">备注 <input class="notes" placeholder="小目标遗漏、类别混淆、接缝等"></label>
+  </div>
+</article>
+<article class="card" data-city="Berlin" data-stratum="low">
+  <h2>#15 · Berlin · LOW</h2>
+  <p class="meta"><code>54ac8cd3-067d-439a-bb3e-bdba1b593d05</code> · VP v8 3.19 · 4032×3024 · KartaView / cycling surface · pano=False</p>
+  <p class="metric">基线/滑窗像素一致率 <strong>64.8%</strong>；方法间 mIoU <strong>0.083</strong>；类别数 11 → 36</p>
+  <div class="images">
+    <figure><a href="../../../data/street_images/54ac8cd3-067d-439a-bb3e-bdba1b593d05.jpg"><img loading="lazy" src="previews/original/54ac8cd3-067d-439a-bb3e-bdba1b593d05.jpg"></a><figcaption>原图</figcaption></figure>
+    <figure><a href="../baseline/overlays/54ac8cd3-067d-439a-bb3e-bdba1b593d05.jpg"><img loading="lazy" src="previews/baseline/54ac8cd3-067d-439a-bb3e-bdba1b593d05.jpg"></a><figcaption>缩放基线</figcaption></figure>
+    <figure><a href="../sliding_512_o25/overlays/54ac8cd3-067d-439a-bb3e-bdba1b593d05.jpg"><img loading="lazy" src="previews/sliding/54ac8cd3-067d-439a-bb3e-bdba1b593d05.jpg"></a><figcaption>512滑窗（25%重叠）</figcaption></figure>
+  </div>
+  <details><summary>面积最大的类别</summary><p><b>基线：</b>building 43.0%, road 39.0%, sky 11.2%, sidewalk 3.0%, fence 1.8%, tree 1.4%, car 0.3%, streetlight 0.2%</p><p><b>滑窗：</b>building 31.4%, road 23.8%, sky 20.6%, wall 10.5%, water 4.9%, tree 2.5%, grass 1.2%, sidewalk 1.0%</p></details>
+  <div class="review" data-id="54ac8cd3-067d-439a-bb3e-bdba1b593d05">
+    <label>基线质量 <select class="baseline"><option></option><option>0</option><option>1</option><option>2</option><option>NA</option></select></label>
+    <label>滑窗质量 <select class="sliding"><option></option><option>0</option><option>1</option><option>2</option><option>NA</option></select></label>
+    <label>偏好 <select class="preferred"><option></option><option>baseline</option><option>sliding</option><option>tie</option><option>neither</option></select></label>
+    <label class="notes-label">备注 <input class="notes" placeholder="小目标遗漏、类别混淆、接缝等"></label>
+  </div>
+</article>
+<article class="card" data-city="Berlin" data-stratum="low">
+  <h2>#16 · Berlin · LOW</h2>
+  <p class="meta"><code>a61fe0e0-a408-4d4b-9827-d086b099ce5f</code> · VP v8 0.24 · 2048×1536 · Mapillary / cycling surface · pano=False</p>
+  <p class="metric">基线/滑窗像素一致率 <strong>59.5%</strong>；方法间 mIoU <strong>0.207</strong>；类别数 16 → 26</p>
+  <div class="images">
+    <figure><a href="../../../data/street_images/a61fe0e0-a408-4d4b-9827-d086b099ce5f.jpg"><img loading="lazy" src="previews/original/a61fe0e0-a408-4d4b-9827-d086b099ce5f.jpg"></a><figcaption>原图</figcaption></figure>
+    <figure><a href="../baseline/overlays/a61fe0e0-a408-4d4b-9827-d086b099ce5f.jpg"><img loading="lazy" src="previews/baseline/a61fe0e0-a408-4d4b-9827-d086b099ce5f.jpg"></a><figcaption>缩放基线</figcaption></figure>
+    <figure><a href="../sliding_512_o25/overlays/a61fe0e0-a408-4d4b-9827-d086b099ce5f.jpg"><img loading="lazy" src="previews/sliding/a61fe0e0-a408-4d4b-9827-d086b099ce5f.jpg"></a><figcaption>512滑窗（25%重叠）</figcaption></figure>
+  </div>
+  <details><summary>面积最大的类别</summary><p><b>基线：</b>tree 36.7%, road 17.7%, sidewalk 10.8%, grass 7.4%, earth 7.3%, sky 7.1%, path 7.0%, fence 1.4%</p><p><b>滑窗：</b>tree 34.3%, road 18.5%, water 9.9%, sky 8.0%, sand 5.7%, earth 4.1%, path 4.0%, grass 3.3%</p></details>
+  <div class="review" data-id="a61fe0e0-a408-4d4b-9827-d086b099ce5f">
+    <label>基线质量 <select class="baseline"><option></option><option>0</option><option>1</option><option>2</option><option>NA</option></select></label>
+    <label>滑窗质量 <select class="sliding"><option></option><option>0</option><option>1</option><option>2</option><option>NA</option></select></label>
+    <label>偏好 <select class="preferred"><option></option><option>baseline</option><option>sliding</option><option>tie</option><option>neither</option></select></label>
+    <label class="notes-label">备注 <input class="notes" placeholder="小目标遗漏、类别混淆、接缝等"></label>
+  </div>
+</article>
+<article class="card" data-city="Berlin" data-stratum="mid">
+  <h2>#17 · Berlin · MID</h2>
+  <p class="meta"><code>3dccdf5d-c1fb-4c77-bedf-f9a55aee4075</code> · VP v8 3.70 · 2048×1536 · Mapillary / driving surface · pano=False</p>
+  <p class="metric">基线/滑窗像素一致率 <strong>86.3%</strong>；方法间 mIoU <strong>0.266</strong>；类别数 8 → 19</p>
+  <div class="images">
+    <figure><a href="../../../data/street_images/3dccdf5d-c1fb-4c77-bedf-f9a55aee4075.jpg"><img loading="lazy" src="previews/original/3dccdf5d-c1fb-4c77-bedf-f9a55aee4075.jpg"></a><figcaption>原图</figcaption></figure>
+    <figure><a href="../baseline/overlays/3dccdf5d-c1fb-4c77-bedf-f9a55aee4075.jpg"><img loading="lazy" src="previews/baseline/3dccdf5d-c1fb-4c77-bedf-f9a55aee4075.jpg"></a><figcaption>缩放基线</figcaption></figure>
+    <figure><a href="../sliding_512_o25/overlays/3dccdf5d-c1fb-4c77-bedf-f9a55aee4075.jpg"><img loading="lazy" src="previews/sliding/3dccdf5d-c1fb-4c77-bedf-f9a55aee4075.jpg"></a><figcaption>512滑窗（25%重叠）</figcaption></figure>
+  </div>
+  <details><summary>面积最大的类别</summary><p><b>基线：</b>road 39.4%, building 35.8%, sky 8.8%, car 8.5%, tree 6.5%, sidewalk 0.8%, person 0.2%, signboard 0.0%</p><p><b>滑窗：</b>road 32.5%, building 31.1%, sky 8.8%, car 8.3%, tree 7.3%, wall 3.2%, path 2.7%, sidewalk 2.1%</p></details>
+  <div class="review" data-id="3dccdf5d-c1fb-4c77-bedf-f9a55aee4075">
+    <label>基线质量 <select class="baseline"><option></option><option>0</option><option>1</option><option>2</option><option>NA</option></select></label>
+    <label>滑窗质量 <select class="sliding"><option></option><option>0</option><option>1</option><option>2</option><option>NA</option></select></label>
+    <label>偏好 <select class="preferred"><option></option><option>baseline</option><option>sliding</option><option>tie</option><option>neither</option></select></label>
+    <label class="notes-label">备注 <input class="notes" placeholder="小目标遗漏、类别混淆、接缝等"></label>
+  </div>
+</article>
+<article class="card" data-city="Berlin" data-stratum="mid">
+  <h2>#18 · Berlin · MID</h2>
+  <p class="meta"><code>36df05e5-1d96-4f91-8a34-b133694a46e8</code> · VP v8 4.92 · 2048×1536 · Mapillary / walking surface · pano=False</p>
+  <p class="metric">基线/滑窗像素一致率 <strong>96.6%</strong>；方法间 mIoU <strong>0.322</strong>；类别数 9 → 15</p>
+  <div class="images">
+    <figure><a href="../../../data/street_images/36df05e5-1d96-4f91-8a34-b133694a46e8.jpg"><img loading="lazy" src="previews/original/36df05e5-1d96-4f91-8a34-b133694a46e8.jpg"></a><figcaption>原图</figcaption></figure>
+    <figure><a href="../baseline/overlays/36df05e5-1d96-4f91-8a34-b133694a46e8.jpg"><img loading="lazy" src="previews/baseline/36df05e5-1d96-4f91-8a34-b133694a46e8.jpg"></a><figcaption>缩放基线</figcaption></figure>
+    <figure><a href="../sliding_512_o25/overlays/36df05e5-1d96-4f91-8a34-b133694a46e8.jpg"><img loading="lazy" src="previews/sliding/36df05e5-1d96-4f91-8a34-b133694a46e8.jpg"></a><figcaption>512滑窗（25%重叠）</figcaption></figure>
+  </div>
+  <details><summary>面积最大的类别</summary><p><b>基线：</b>building 56.0%, road 31.2%, car 6.7%, tree 3.2%, sidewalk 1.8%, plant 1.0%, streetlight 0.1%, grass 0.1%</p><p><b>滑窗：</b>building 55.2%, road 32.0%, car 6.9%, tree 3.3%, sidewalk 0.8%, plant 0.5%, wall 0.4%, grass 0.4%</p></details>
+  <div class="review" data-id="36df05e5-1d96-4f91-8a34-b133694a46e8">
+    <label>基线质量 <select class="baseline"><option></option><option>0</option><option>1</option><option>2</option><option>NA</option></select></label>
+    <label>滑窗质量 <select class="sliding"><option></option><option>0</option><option>1</option><option>2</option><option>NA</option></select></label>
+    <label>偏好 <select class="preferred"><option></option><option>baseline</option><option>sliding</option><option>tie</option><option>neither</option></select></label>
+    <label class="notes-label">备注 <input class="notes" placeholder="小目标遗漏、类别混淆、接缝等"></label>
+  </div>
+</article>
+<article class="card" data-city="Paris" data-stratum="high">
+  <h2>#19 · Paris · HIGH</h2>
+  <p class="meta"><code>48ccd2f1-703c-4c03-b4b8-19c5ab71dd79</code> · VP v8 6.56 · 2592×1936 · KartaView / driving surface · pano=False</p>
+  <p class="metric">基线/滑窗像素一致率 <strong>77.1%</strong>；方法间 mIoU <strong>0.089</strong>；类别数 10 → 32</p>
+  <div class="images">
+    <figure><a href="../../../data/street_images/48ccd2f1-703c-4c03-b4b8-19c5ab71dd79.jpg"><img loading="lazy" src="previews/original/48ccd2f1-703c-4c03-b4b8-19c5ab71dd79.jpg"></a><figcaption>原图</figcaption></figure>
+    <figure><a href="../baseline/overlays/48ccd2f1-703c-4c03-b4b8-19c5ab71dd79.jpg"><img loading="lazy" src="previews/baseline/48ccd2f1-703c-4c03-b4b8-19c5ab71dd79.jpg"></a><figcaption>缩放基线</figcaption></figure>
+    <figure><a href="../sliding_512_o25/overlays/48ccd2f1-703c-4c03-b4b8-19c5ab71dd79.jpg"><img loading="lazy" src="previews/sliding/48ccd2f1-703c-4c03-b4b8-19c5ab71dd79.jpg"></a><figcaption>512滑窗（25%重叠）</figcaption></figure>
+  </div>
+  <details><summary>面积最大的类别</summary><p><b>基线：</b>building 59.3%, sky 18.4%, car 9.0%, road 6.1%, bus 5.1%, van 1.0%, sidewalk 0.9%, wall 0.2%</p><p><b>滑窗：</b>building 49.3%, sky 18.4%, wall 8.9%, car 8.2%, floor 7.9%, road 2.3%, signboard 1.8%, door 1.1%</p></details>
+  <div class="review" data-id="48ccd2f1-703c-4c03-b4b8-19c5ab71dd79">
+    <label>基线质量 <select class="baseline"><option></option><option>0</option><option>1</option><option>2</option><option>NA</option></select></label>
+    <label>滑窗质量 <select class="sliding"><option></option><option>0</option><option>1</option><option>2</option><option>NA</option></select></label>
+    <label>偏好 <select class="preferred"><option></option><option>baseline</option><option>sliding</option><option>tie</option><option>neither</option></select></label>
+    <label class="notes-label">备注 <input class="notes" placeholder="小目标遗漏、类别混淆、接缝等"></label>
+  </div>
+</article>
+<article class="card" data-city="Paris" data-stratum="high">
+  <h2>#20 · Paris · HIGH</h2>
+  <p class="meta"><code>a3b16581-4da9-4b10-a6bb-fbcef99b8f09</code> · VP v8 9.87 · 2048×1024 · Mapillary / cycling surface · pano=True</p>
+  <p class="metric">基线/滑窗像素一致率 <strong>88.9%</strong>；方法间 mIoU <strong>0.225</strong>；类别数 16 → 23</p>
+  <div class="images">
+    <figure><a href="../../../data/street_images/a3b16581-4da9-4b10-a6bb-fbcef99b8f09.jpg"><img loading="lazy" src="previews/original/a3b16581-4da9-4b10-a6bb-fbcef99b8f09.jpg"></a><figcaption>原图</figcaption></figure>
+    <figure><a href="../baseline/overlays/a3b16581-4da9-4b10-a6bb-fbcef99b8f09.jpg"><img loading="lazy" src="previews/baseline/a3b16581-4da9-4b10-a6bb-fbcef99b8f09.jpg"></a><figcaption>缩放基线</figcaption></figure>
+    <figure><a href="../sliding_512_o25/overlays/a3b16581-4da9-4b10-a6bb-fbcef99b8f09.jpg"><img loading="lazy" src="previews/sliding/a3b16581-4da9-4b10-a6bb-fbcef99b8f09.jpg"></a><figcaption>512滑窗（25%重叠）</figcaption></figure>
+  </div>
+  <details><summary>面积最大的类别</summary><p><b>基线：</b>building 30.1%, sky 23.6%, road 18.8%, car 18.8%, sidewalk 4.9%, person 1.7%, sea 0.8%, poster 0.4%</p><p><b>滑窗：</b>building 29.1%, sky 24.5%, car 18.1%, road 17.5%, sidewalk 5.8%, person 1.8%, bed  0.7%, bus 0.6%</p></details>
+  <div class="review" data-id="a3b16581-4da9-4b10-a6bb-fbcef99b8f09">
+    <label>基线质量 <select class="baseline"><option></option><option>0</option><option>1</option><option>2</option><option>NA</option></select></label>
+    <label>滑窗质量 <select class="sliding"><option></option><option>0</option><option>1</option><option>2</option><option>NA</option></select></label>
+    <label>偏好 <select class="preferred"><option></option><option>baseline</option><option>sliding</option><option>tie</option><option>neither</option></select></label>
+    <label class="notes-label">备注 <input class="notes" placeholder="小目标遗漏、类别混淆、接缝等"></label>
+  </div>
+</article>
+<article class="card" data-city="Paris" data-stratum="low">
+  <h2>#21 · Paris · LOW</h2>
+  <p class="meta"><code>39d371eb-7fee-4f7a-a9ad-9bca6bc56718</code> · VP v8 3.74 · 1920×1080 · Mapillary / walking surface · pano=False</p>
+  <p class="metric">基线/滑窗像素一致率 <strong>87.5%</strong>；方法间 mIoU <strong>0.352</strong>；类别数 12 → 14</p>
+  <div class="images">
+    <figure><a href="../../../data/street_images/39d371eb-7fee-4f7a-a9ad-9bca6bc56718.jpg"><img loading="lazy" src="previews/original/39d371eb-7fee-4f7a-a9ad-9bca6bc56718.jpg"></a><figcaption>原图</figcaption></figure>
+    <figure><a href="../baseline/overlays/39d371eb-7fee-4f7a-a9ad-9bca6bc56718.jpg"><img loading="lazy" src="previews/baseline/39d371eb-7fee-4f7a-a9ad-9bca6bc56718.jpg"></a><figcaption>缩放基线</figcaption></figure>
+    <figure><a href="../sliding_512_o25/overlays/39d371eb-7fee-4f7a-a9ad-9bca6bc56718.jpg"><img loading="lazy" src="previews/sliding/39d371eb-7fee-4f7a-a9ad-9bca6bc56718.jpg"></a><figcaption>512滑窗（25%重叠）</figcaption></figure>
+  </div>
+  <details><summary>面积最大的类别</summary><p><b>基线：</b>building 53.5%, road 22.0%, car 5.5%, sky 5.5%, sidewalk 5.0%, person 3.9%, minibike 3.5%, pole 0.7%</p><p><b>滑窗：</b>building 49.6%, road 20.0%, sidewalk 8.6%, sky 5.5%, minibike 5.1%, person 4.0%, car 3.8%, wall 1.9%</p></details>
+  <div class="review" data-id="39d371eb-7fee-4f7a-a9ad-9bca6bc56718">
+    <label>基线质量 <select class="baseline"><option></option><option>0</option><option>1</option><option>2</option><option>NA</option></select></label>
+    <label>滑窗质量 <select class="sliding"><option></option><option>0</option><option>1</option><option>2</option><option>NA</option></select></label>
+    <label>偏好 <select class="preferred"><option></option><option>baseline</option><option>sliding</option><option>tie</option><option>neither</option></select></label>
+    <label class="notes-label">备注 <input class="notes" placeholder="小目标遗漏、类别混淆、接缝等"></label>
+  </div>
+</article>
+<article class="card" data-city="Paris" data-stratum="low">
+  <h2>#22 · Paris · LOW</h2>
+  <p class="meta"><code>2ee1c97f-24b0-43ad-b217-798e6a0b113f</code> · VP v8 1.18 · 1024×576 · Mapillary / walking surface · pano=False</p>
+  <p class="metric">基线/滑窗像素一致率 <strong>96.7%</strong>；方法间 mIoU <strong>0.447</strong>；类别数 16 → 15</p>
+  <div class="images">
+    <figure><a href="../../../data/street_images/2ee1c97f-24b0-43ad-b217-798e6a0b113f.jpg"><img loading="lazy" src="previews/original/2ee1c97f-24b0-43ad-b217-798e6a0b113f.jpg"></a><figcaption>原图</figcaption></figure>
+    <figure><a href="../baseline/overlays/2ee1c97f-24b0-43ad-b217-798e6a0b113f.jpg"><img loading="lazy" src="previews/baseline/2ee1c97f-24b0-43ad-b217-798e6a0b113f.jpg"></a><figcaption>缩放基线</figcaption></figure>
+    <figure><a href="../sliding_512_o25/overlays/2ee1c97f-24b0-43ad-b217-798e6a0b113f.jpg"><img loading="lazy" src="previews/sliding/2ee1c97f-24b0-43ad-b217-798e6a0b113f.jpg"></a><figcaption>512滑窗（25%重叠）</figcaption></figure>
+  </div>
+  <details><summary>面积最大的类别</summary><p><b>基线：</b>grass 24.8%, building 24.6%, tree 24.3%, sky 14.3%, path 9.7%, person 0.7%, road 0.6%, car 0.4%</p><p><b>滑窗：</b>grass 24.5%, tree 24.1%, building 23.8%, sky 14.3%, path 10.1%, person 0.8%, fence 0.6%, road 0.6%</p></details>
+  <div class="review" data-id="2ee1c97f-24b0-43ad-b217-798e6a0b113f">
+    <label>基线质量 <select class="baseline"><option></option><option>0</option><option>1</option><option>2</option><option>NA</option></select></label>
+    <label>滑窗质量 <select class="sliding"><option></option><option>0</option><option>1</option><option>2</option><option>NA</option></select></label>
+    <label>偏好 <select class="preferred"><option></option><option>baseline</option><option>sliding</option><option>tie</option><option>neither</option></select></label>
+    <label class="notes-label">备注 <input class="notes" placeholder="小目标遗漏、类别混淆、接缝等"></label>
+  </div>
+</article>
+<article class="card" data-city="Paris" data-stratum="mid">
+  <h2>#23 · Paris · MID</h2>
+  <p class="meta"><code>d9f3867b-cd42-4a9c-92e6-58d427c5f550</code> · VP v8 4.35 · 2048×3640 · Mapillary / walking surface · pano=False</p>
+  <p class="metric">基线/滑窗像素一致率 <strong>31.5%</strong>；方法间 mIoU <strong>0.044</strong>；类别数 13 → 48</p>
+  <div class="images">
+    <figure><a href="../../../data/street_images/d9f3867b-cd42-4a9c-92e6-58d427c5f550.jpg"><img loading="lazy" src="previews/original/d9f3867b-cd42-4a9c-92e6-58d427c5f550.jpg"></a><figcaption>原图</figcaption></figure>
+    <figure><a href="../baseline/overlays/d9f3867b-cd42-4a9c-92e6-58d427c5f550.jpg"><img loading="lazy" src="previews/baseline/d9f3867b-cd42-4a9c-92e6-58d427c5f550.jpg"></a><figcaption>缩放基线</figcaption></figure>
+    <figure><a href="../sliding_512_o25/overlays/d9f3867b-cd42-4a9c-92e6-58d427c5f550.jpg"><img loading="lazy" src="previews/sliding/d9f3867b-cd42-4a9c-92e6-58d427c5f550.jpg"></a><figcaption>512滑窗（25%重叠）</figcaption></figure>
+  </div>
+  <details><summary>面积最大的类别</summary><p><b>基线：</b>building 59.8%, sidewalk 27.9%, signboard 5.4%, sky 2.9%, poster 2.2%, plant 1.0%, road 0.4%, door 0.2%</p><p><b>滑窗：</b>building 26.4%, road 23.3%, wall 22.7%, door 5.1%, signboard 4.3%, sky 3.8%, floor 3.0%, ceiling 1.9%</p></details>
+  <div class="review" data-id="d9f3867b-cd42-4a9c-92e6-58d427c5f550">
+    <label>基线质量 <select class="baseline"><option></option><option>0</option><option>1</option><option>2</option><option>NA</option></select></label>
+    <label>滑窗质量 <select class="sliding"><option></option><option>0</option><option>1</option><option>2</option><option>NA</option></select></label>
+    <label>偏好 <select class="preferred"><option></option><option>baseline</option><option>sliding</option><option>tie</option><option>neither</option></select></label>
+    <label class="notes-label">备注 <input class="notes" placeholder="小目标遗漏、类别混淆、接缝等"></label>
+  </div>
+</article>
+<article class="card" data-city="Paris" data-stratum="mid">
+  <h2>#24 · Paris · MID</h2>
+  <p class="meta"><code>19f8e47c-a406-497a-a27b-fd0b0ace5c93</code> · VP v8 4.88 · 1280×720 · Mapillary / walking surface · pano=False</p>
+  <p class="metric">基线/滑窗像素一致率 <strong>44.2%</strong>；方法间 mIoU <strong>0.166</strong>；类别数 11 → 18</p>
+  <div class="images">
+    <figure><a href="../../../data/street_images/19f8e47c-a406-497a-a27b-fd0b0ace5c93.jpg"><img loading="lazy" src="previews/original/19f8e47c-a406-497a-a27b-fd0b0ace5c93.jpg"></a><figcaption>原图</figcaption></figure>
+    <figure><a href="../baseline/overlays/19f8e47c-a406-497a-a27b-fd0b0ace5c93.jpg"><img loading="lazy" src="previews/baseline/19f8e47c-a406-497a-a27b-fd0b0ace5c93.jpg"></a><figcaption>缩放基线</figcaption></figure>
+    <figure><a href="../sliding_512_o25/overlays/19f8e47c-a406-497a-a27b-fd0b0ace5c93.jpg"><img loading="lazy" src="previews/sliding/19f8e47c-a406-497a-a27b-fd0b0ace5c93.jpg"></a><figcaption>512滑窗（25%重叠）</figcaption></figure>
+  </div>
+  <details><summary>面积最大的类别</summary><p><b>基线：</b>building 49.8%, car 34.5%, sky 5.1%, wall 3.9%, seat 2.1%, signboard 1.5%, poster 1.3%, tree 1.3%</p><p><b>滑窗：</b>wall 33.6%, building 22.4%, seat 15.2%, car 14.3%, sky 4.9%, floor 2.1%, signboard 1.8%, road 1.2%</p></details>
+  <div class="review" data-id="19f8e47c-a406-497a-a27b-fd0b0ace5c93">
+    <label>基线质量 <select class="baseline"><option></option><option>0</option><option>1</option><option>2</option><option>NA</option></select></label>
+    <label>滑窗质量 <select class="sliding"><option></option><option>0</option><option>1</option><option>2</option><option>NA</option></select></label>
+    <label>偏好 <select class="preferred"><option></option><option>baseline</option><option>sliding</option><option>tie</option><option>neither</option></select></label>
+    <label class="notes-label">备注 <input class="notes" placeholder="小目标遗漏、类别混淆、接缝等"></label>
+  </div>
+</article>
+<article class="card" data-city="Rome" data-stratum="high">
+  <h2>#25 · Rome · HIGH</h2>
+  <p class="meta"><code>2c42ffba-8ab9-472b-ac1a-f44799967eb0</code> · VP v8 6.87 · 2048×1024 · Mapillary / walking surface · pano=True</p>
+  <p class="metric">基线/滑窗像素一致率 <strong>75.2%</strong>；方法间 mIoU <strong>0.207</strong>；类别数 17 → 18</p>
+  <div class="images">
+    <figure><a href="../../../data/street_images/2c42ffba-8ab9-472b-ac1a-f44799967eb0.jpg"><img loading="lazy" src="previews/original/2c42ffba-8ab9-472b-ac1a-f44799967eb0.jpg"></a><figcaption>原图</figcaption></figure>
+    <figure><a href="../baseline/overlays/2c42ffba-8ab9-472b-ac1a-f44799967eb0.jpg"><img loading="lazy" src="previews/baseline/2c42ffba-8ab9-472b-ac1a-f44799967eb0.jpg"></a><figcaption>缩放基线</figcaption></figure>
+    <figure><a href="../sliding_512_o25/overlays/2c42ffba-8ab9-472b-ac1a-f44799967eb0.jpg"><img loading="lazy" src="previews/sliding/2c42ffba-8ab9-472b-ac1a-f44799967eb0.jpg"></a><figcaption>512滑窗（25%重叠）</figcaption></figure>
+  </div>
+  <details><summary>面积最大的类别</summary><p><b>基线：</b>sky 37.9%, sidewalk 29.4%, person 12.1%, tree 5.5%, earth 5.3%, building 4.3%, railing 1.3%, road 1.0%</p><p><b>滑窗：</b>sky 36.6%, sidewalk 34.5%, earth 9.2%, tree 6.9%, building 4.4%, person 4.4%, fence 1.6%, road 0.8%</p></details>
+  <div class="review" data-id="2c42ffba-8ab9-472b-ac1a-f44799967eb0">
+    <label>基线质量 <select class="baseline"><option></option><option>0</option><option>1</option><option>2</option><option>NA</option></select></label>
+    <label>滑窗质量 <select class="sliding"><option></option><option>0</option><option>1</option><option>2</option><option>NA</option></select></label>
+    <label>偏好 <select class="preferred"><option></option><option>baseline</option><option>sliding</option><option>tie</option><option>neither</option></select></label>
+    <label class="notes-label">备注 <input class="notes" placeholder="小目标遗漏、类别混淆、接缝等"></label>
+  </div>
+</article>
+<article class="card" data-city="Rome" data-stratum="high">
+  <h2>#26 · Rome · HIGH</h2>
+  <p class="meta"><code>77bcfee4-911d-41dd-b874-face2d41230f</code> · VP v8 10.00 · 2048×1536 · Mapillary / walking surface · pano=False</p>
+  <p class="metric">基线/滑窗像素一致率 <strong>38.4%</strong>；方法间 mIoU <strong>0.092</strong>；类别数 17 → 24</p>
+  <div class="images">
+    <figure><a href="../../../data/street_images/77bcfee4-911d-41dd-b874-face2d41230f.jpg"><img loading="lazy" src="previews/original/77bcfee4-911d-41dd-b874-face2d41230f.jpg"></a><figcaption>原图</figcaption></figure>
+    <figure><a href="../baseline/overlays/77bcfee4-911d-41dd-b874-face2d41230f.jpg"><img loading="lazy" src="previews/baseline/77bcfee4-911d-41dd-b874-face2d41230f.jpg"></a><figcaption>缩放基线</figcaption></figure>
+    <figure><a href="../sliding_512_o25/overlays/77bcfee4-911d-41dd-b874-face2d41230f.jpg"><img loading="lazy" src="previews/sliding/77bcfee4-911d-41dd-b874-face2d41230f.jpg"></a><figcaption>512滑窗（25%重叠）</figcaption></figure>
+  </div>
+  <details><summary>面积最大的类别</summary><p><b>基线：</b>person 19.3%, earth 18.7%, sidewalk 15.3%, tree 14.7%, sky 11.2%, building 5.6%, fence 4.2%, grass 3.2%</p><p><b>滑窗：</b>wall 17.3%, person 16.7%, ceiling 12.3%, sky 11.2%, floor 10.2%, building 9.7%, earth 6.2%, tank 4.8%</p></details>
+  <div class="review" data-id="77bcfee4-911d-41dd-b874-face2d41230f">
+    <label>基线质量 <select class="baseline"><option></option><option>0</option><option>1</option><option>2</option><option>NA</option></select></label>
+    <label>滑窗质量 <select class="sliding"><option></option><option>0</option><option>1</option><option>2</option><option>NA</option></select></label>
+    <label>偏好 <select class="preferred"><option></option><option>baseline</option><option>sliding</option><option>tie</option><option>neither</option></select></label>
+    <label class="notes-label">备注 <input class="notes" placeholder="小目标遗漏、类别混淆、接缝等"></label>
+  </div>
+</article>
+<article class="card" data-city="Rome" data-stratum="low">
+  <h2>#27 · Rome · LOW</h2>
+  <p class="meta"><code>35f00dc3-0bb0-4d3f-9235-c0e57fb8302c</code> · VP v8 3.55 · 2048×1536 · Mapillary / walking surface · pano=False</p>
+  <p class="metric">基线/滑窗像素一致率 <strong>59.3%</strong>；方法间 mIoU <strong>0.141</strong>；类别数 9 → 29</p>
+  <div class="images">
+    <figure><a href="../../../data/street_images/35f00dc3-0bb0-4d3f-9235-c0e57fb8302c.jpg"><img loading="lazy" src="previews/original/35f00dc3-0bb0-4d3f-9235-c0e57fb8302c.jpg"></a><figcaption>原图</figcaption></figure>
+    <figure><a href="../baseline/overlays/35f00dc3-0bb0-4d3f-9235-c0e57fb8302c.jpg"><img loading="lazy" src="previews/baseline/35f00dc3-0bb0-4d3f-9235-c0e57fb8302c.jpg"></a><figcaption>缩放基线</figcaption></figure>
+    <figure><a href="../sliding_512_o25/overlays/35f00dc3-0bb0-4d3f-9235-c0e57fb8302c.jpg"><img loading="lazy" src="previews/sliding/35f00dc3-0bb0-4d3f-9235-c0e57fb8302c.jpg"></a><figcaption>512滑窗（25%重叠）</figcaption></figure>
+  </div>
+  <details><summary>面积最大的类别</summary><p><b>基线：</b>building 65.4%, road 23.2%, sky 5.7%, car 2.4%, minibike 2.0%, sidewalk 1.0%, plant 0.3%, person 0.1%</p><p><b>滑窗：</b>building 38.4%, wall 17.8%, road 12.2%, sidewalk 10.7%, sky 5.7%, ceiling 4.0%, floor 3.8%, car 2.4%</p></details>
+  <div class="review" data-id="35f00dc3-0bb0-4d3f-9235-c0e57fb8302c">
+    <label>基线质量 <select class="baseline"><option></option><option>0</option><option>1</option><option>2</option><option>NA</option></select></label>
+    <label>滑窗质量 <select class="sliding"><option></option><option>0</option><option>1</option><option>2</option><option>NA</option></select></label>
+    <label>偏好 <select class="preferred"><option></option><option>baseline</option><option>sliding</option><option>tie</option><option>neither</option></select></label>
+    <label class="notes-label">备注 <input class="notes" placeholder="小目标遗漏、类别混淆、接缝等"></label>
+  </div>
+</article>
+<article class="card" data-city="Rome" data-stratum="low">
+  <h2>#28 · Rome · LOW</h2>
+  <p class="meta"><code>70ace1e6-5e92-4478-bc6c-c015020b69b5</code> · VP v8 0.00 · 3840×2160 · KartaView / walking surface · pano=False</p>
+  <p class="metric">基线/滑窗像素一致率 <strong>46.9%</strong>；方法间 mIoU <strong>0.107</strong>；类别数 10 → 28</p>
+  <div class="images">
+    <figure><a href="../../../data/street_images/70ace1e6-5e92-4478-bc6c-c015020b69b5.jpg"><img loading="lazy" src="previews/original/70ace1e6-5e92-4478-bc6c-c015020b69b5.jpg"></a><figcaption>原图</figcaption></figure>
+    <figure><a href="../baseline/overlays/70ace1e6-5e92-4478-bc6c-c015020b69b5.jpg"><img loading="lazy" src="previews/baseline/70ace1e6-5e92-4478-bc6c-c015020b69b5.jpg"></a><figcaption>缩放基线</figcaption></figure>
+    <figure><a href="../sliding_512_o25/overlays/70ace1e6-5e92-4478-bc6c-c015020b69b5.jpg"><img loading="lazy" src="previews/sliding/70ace1e6-5e92-4478-bc6c-c015020b69b5.jpg"></a><figcaption>512滑窗（25%重叠）</figcaption></figure>
+  </div>
+  <details><summary>面积最大的类别</summary><p><b>基线：</b>earth 60.9%, building 15.2%, sky 12.6%, road 7.1%, wall 2.6%, person 1.1%, rock 0.3%, fence 0.2%</p><p><b>滑窗：</b>rock 22.2%, earth 22.0%, building 14.5%, sky 12.4%, wall 8.2%, water 8.1%, sidewalk 4.0%, bannister 2.9%</p></details>
+  <div class="review" data-id="70ace1e6-5e92-4478-bc6c-c015020b69b5">
+    <label>基线质量 <select class="baseline"><option></option><option>0</option><option>1</option><option>2</option><option>NA</option></select></label>
+    <label>滑窗质量 <select class="sliding"><option></option><option>0</option><option>1</option><option>2</option><option>NA</option></select></label>
+    <label>偏好 <select class="preferred"><option></option><option>baseline</option><option>sliding</option><option>tie</option><option>neither</option></select></label>
+    <label class="notes-label">备注 <input class="notes" placeholder="小目标遗漏、类别混淆、接缝等"></label>
+  </div>
+</article>
+<article class="card" data-city="Rome" data-stratum="mid">
+  <h2>#29 · Rome · MID</h2>
+  <p class="meta"><code>81b40e66-521c-4873-98e8-62ada1feca14</code> · VP v8 3.81 · 3840×2160 · KartaView / walking surface · pano=False</p>
+  <p class="metric">基线/滑窗像素一致率 <strong>57.3%</strong>；方法间 mIoU <strong>0.226</strong>；类别数 12 → 26</p>
+  <div class="images">
+    <figure><a href="../../../data/street_images/81b40e66-521c-4873-98e8-62ada1feca14.jpg"><img loading="lazy" src="previews/original/81b40e66-521c-4873-98e8-62ada1feca14.jpg"></a><figcaption>原图</figcaption></figure>
+    <figure><a href="../baseline/overlays/81b40e66-521c-4873-98e8-62ada1feca14.jpg"><img loading="lazy" src="previews/baseline/81b40e66-521c-4873-98e8-62ada1feca14.jpg"></a><figcaption>缩放基线</figcaption></figure>
+    <figure><a href="../sliding_512_o25/overlays/81b40e66-521c-4873-98e8-62ada1feca14.jpg"><img loading="lazy" src="previews/sliding/81b40e66-521c-4873-98e8-62ada1feca14.jpg"></a><figcaption>512滑窗（25%重叠）</figcaption></figure>
+  </div>
+  <details><summary>面积最大的类别</summary><p><b>基线：</b>road 43.6%, building 39.0%, sky 6.2%, person 3.8%, tree 2.2%, sidewalk 1.7%, plant 1.4%, earth 1.2%</p><p><b>滑窗：</b>building 34.3%, sidewalk 25.1%, road 8.8%, sky 6.1%, wall 5.6%, floor 4.9%, person 4.2%, earth 3.6%</p></details>
+  <div class="review" data-id="81b40e66-521c-4873-98e8-62ada1feca14">
+    <label>基线质量 <select class="baseline"><option></option><option>0</option><option>1</option><option>2</option><option>NA</option></select></label>
+    <label>滑窗质量 <select class="sliding"><option></option><option>0</option><option>1</option><option>2</option><option>NA</option></select></label>
+    <label>偏好 <select class="preferred"><option></option><option>baseline</option><option>sliding</option><option>tie</option><option>neither</option></select></label>
+    <label class="notes-label">备注 <input class="notes" placeholder="小目标遗漏、类别混淆、接缝等"></label>
+  </div>
+</article>
+<article class="card" data-city="Rome" data-stratum="mid">
+  <h2>#30 · Rome · MID</h2>
+  <p class="meta"><code>9aa7568b-22b4-4d24-a74e-9e8c6dfe0428</code> · VP v8 4.47 · 2046×886 · Mapillary / walking surface · pano=False</p>
+  <p class="metric">基线/滑窗像素一致率 <strong>73.9%</strong>；方法间 mIoU <strong>0.203</strong>；类别数 11 → 18</p>
+  <div class="images">
+    <figure><a href="../../../data/street_images/9aa7568b-22b4-4d24-a74e-9e8c6dfe0428.jpg"><img loading="lazy" src="previews/original/9aa7568b-22b4-4d24-a74e-9e8c6dfe0428.jpg"></a><figcaption>原图</figcaption></figure>
+    <figure><a href="../baseline/overlays/9aa7568b-22b4-4d24-a74e-9e8c6dfe0428.jpg"><img loading="lazy" src="previews/baseline/9aa7568b-22b4-4d24-a74e-9e8c6dfe0428.jpg"></a><figcaption>缩放基线</figcaption></figure>
+    <figure><a href="../sliding_512_o25/overlays/9aa7568b-22b4-4d24-a74e-9e8c6dfe0428.jpg"><img loading="lazy" src="previews/sliding/9aa7568b-22b4-4d24-a74e-9e8c6dfe0428.jpg"></a><figcaption>512滑窗（25%重叠）</figcaption></figure>
+  </div>
+  <details><summary>面积最大的类别</summary><p><b>基线：</b>building 42.1%, wall 31.5%, sky 21.8%, earth 2.0%, person 1.2%, water 0.7%, floor 0.6%, rock 0.1%</p><p><b>滑窗：</b>wall 38.7%, building 23.2%, sky 21.7%, earth 4.7%, mountain 2.8%, water 2.4%, floor 1.7%, grandstand 1.5%</p></details>
+  <div class="review" data-id="9aa7568b-22b4-4d24-a74e-9e8c6dfe0428">
+    <label>基线质量 <select class="baseline"><option></option><option>0</option><option>1</option><option>2</option><option>NA</option></select></label>
+    <label>滑窗质量 <select class="sliding"><option></option><option>0</option><option>1</option><option>2</option><option>NA</option></select></label>
+    <label>偏好 <select class="preferred"><option></option><option>baseline</option><option>sliding</option><option>tie</option><option>neither</option></select></label>
+    <label class="notes-label">备注 <input class="notes" placeholder="小目标遗漏、类别混淆、接缝等"></label>
+  </div>
+</article></main>
+<script>
+const key='guvp-seg-audit-v1'; const saved=JSON.parse(localStorage.getItem(key)||'{}');
+document.querySelectorAll('.review').forEach(r=>{const id=r.dataset.id, v=saved[id]||{}; ['baseline','sliding','preferred','notes'].forEach(k=>{r.querySelector('.'+k).value=v[k]||''}); r.addEventListener('input',()=>{saved[id]={baseline:r.querySelector('.baseline').value,sliding:r.querySelector('.sliding').value,preferred:r.querySelector('.preferred').value,notes:r.querySelector('.notes').value};localStorage.setItem(key,JSON.stringify(saved))})});
+function filter(){const c=document.querySelector('#city').value,s=document.querySelector('#stratum').value;document.querySelectorAll('.card').forEach(x=>x.classList.toggle('hidden',!(c==='all'||x.dataset.city===c)||!(s==='all'||x.dataset.stratum===s)))} document.querySelector('#city').onchange=filter;document.querySelector('#stratum').onchange=filter;
+document.querySelector('#export').onclick=()=>{let rows=[['image_id','baseline_rating','sliding_rating','preferred_method','notes']];document.querySelectorAll('.review').forEach(r=>{let v=saved[r.dataset.id]||{};rows.push([r.dataset.id,v.baseline||'',v.sliding||'',v.preferred||'',v.notes||''])});let esc=x=>'"'+String(x).replaceAll('"','""')+'"';let blob=new Blob([rows.map(r=>r.map(esc).join(',')).join('
+')],{type:'text/csv'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='segmentation_image_review.csv';a.click();URL.revokeObjectURL(a.href)};
+</script></body></html>

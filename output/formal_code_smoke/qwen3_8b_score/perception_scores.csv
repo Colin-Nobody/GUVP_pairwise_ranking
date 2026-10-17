@@ -1,0 +1,3 @@
+image_id,dimension,rank_by_visual_pollution,wins,losses,comparison_count,win_ratio,q_score_0_10,trueskill_mu,trueskill_sigma,trueskill_preference_0_1,visual_pollution_score_0_1,visual_pollution_score_0_10
+5ebee0f7-f962-406b-bc6b-ba8d55e0f935.jpg,visual_pollution,1,0,1,1,0.0,3.333333,20.794527,7.194817,0.0,1.0,10.0
+11c74f10-a744-4944-9411-89bb3c1afad0.jpg,visual_pollution,2,1,0,1,1.0,6.666667,29.205473,7.194817,1.0,0.0,0.0

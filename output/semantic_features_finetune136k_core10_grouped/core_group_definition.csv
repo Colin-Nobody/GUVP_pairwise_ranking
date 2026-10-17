@@ -1,0 +1,125 @@
+feature_column,member_class_id,member_class_name
+feature_core_004,4,Curb
+feature_core_005,5,Fence
+feature_core_012,12,Wall
+feature_core_013,13,Bike Lane
+feature_core_017,17,Parking
+feature_core_019,19,Pedestrian Area
+feature_core_021,21,Road
+feature_core_024,24,Sidewalk
+feature_core_025,25,Traffic Island
+feature_core_026,26,Bridge
+feature_core_027,27,Building
+feature_core_030,30,Person
+feature_core_032,32,Bicyclist
+feature_core_035,35,Lane Marking - Dashed Line
+feature_core_036,36,Lane Marking - Straight Line
+feature_core_045,45,Lane Marking - Crosswalk
+feature_core_050,50,Lane Marking - Other
+feature_core_054,54,Lane Marking - Text
+feature_core_061,61,Sky
+feature_core_062,62,Snow
+feature_core_063,63,Terrain
+feature_core_064,64,Vegetation
+feature_core_074,74,Manhole
+feature_core_078,78,Signage - Advertisement
+feature_core_083,83,Signage - Store
+feature_core_084,84,Street Light
+feature_core_085,85,Pole
+feature_core_088,88,Utility Pole
+feature_core_092,92,Traffic Light - General (Upright)
+feature_core_097,97,Traffic Sign (Back)
+feature_core_099,99,Traffic Sign - Direction (Front)
+feature_core_100,100,Traffic Sign (Front)
+feature_core_104,104,Trash Can
+feature_core_105,105,Bicycle
+feature_core_108,108,Car
+feature_core_110,110,Motorcycle
+feature_core_114,114,Truck
+feature_core_115,115,Vehicle Group
+feature_core_119,119,Dynamic
+feature_core_120,120,Ego Vehicle
+feature_core_121,121,Ground
+feature_core_122,122,Static
+feature_group_rare_animals,0,Bird
+feature_group_rare_animals,1,Ground Animal
+feature_group_rare_built_and_road_infrastructure,2,Ambiguous Barrier
+feature_group_rare_built_and_road_infrastructure,3,Concrete Block
+feature_group_rare_built_and_road_infrastructure,6,Guard Rail
+feature_group_rare_built_and_road_infrastructure,7,Barrier
+feature_group_rare_built_and_road_infrastructure,8,Road Median
+feature_group_rare_built_and_road_infrastructure,9,Road Side
+feature_group_rare_built_and_road_infrastructure,10,Lane Separator
+feature_group_rare_built_and_road_infrastructure,11,Temporary Barrier
+feature_group_rare_built_and_road_infrastructure,15,Curb Cut
+feature_group_rare_built_and_road_infrastructure,16,Driveway
+feature_group_rare_built_and_road_infrastructure,18,Parking Aisle
+feature_group_rare_built_and_road_infrastructure,20,Rail Track
+feature_group_rare_built_and_road_infrastructure,22,Road Shoulder
+feature_group_rare_built_and_road_infrastructure,23,Service Lane
+feature_group_rare_built_and_road_infrastructure,28,Garage
+feature_group_rare_built_and_road_infrastructure,29,Tunnel
+feature_group_rare_lane_markings,37,Lane Marking - Zigzag Line
+feature_group_rare_lane_markings,38,Lane Marking - Ambiguous
+feature_group_rare_lane_markings,39,Lane Marking - Arrow (Left)
+feature_group_rare_lane_markings,40,Lane Marking - Arrow (Other)
+feature_group_rare_lane_markings,41,Lane Marking - Arrow (Right)
+feature_group_rare_lane_markings,42,Lane Marking - Arrow (Split Left or Straight)
+feature_group_rare_lane_markings,43,Lane Marking - Arrow (Split Right or Straight)
+feature_group_rare_lane_markings,44,Lane Marking - Arrow (Straight)
+feature_group_rare_lane_markings,46,Lane Marking - Give Way (Row)
+feature_group_rare_lane_markings,47,Lane Marking - Give Way (Single)
+feature_group_rare_lane_markings,48,Lane Marking - Hatched (Chevron)
+feature_group_rare_lane_markings,49,Lane Marking - Hatched (Diagonal)
+feature_group_rare_lane_markings,51,Lane Marking - Stop Line
+feature_group_rare_lane_markings,52,Lane Marking - Symbol (Bicycle)
+feature_group_rare_lane_markings,53,Lane Marking - Symbol (Other)
+feature_group_rare_lane_markings,55,Lane Marking (only) - Dashed Line
+feature_group_rare_lane_markings,56,Lane Marking (only) - Crosswalk
+feature_group_rare_lane_markings,57,Lane Marking (only) - Other
+feature_group_rare_lane_markings,58,Lane Marking (only) - Test
+feature_group_rare_natural_elements,59,Mountain
+feature_group_rare_natural_elements,60,Sand
+feature_group_rare_natural_elements,65,Water
+feature_group_rare_other_context,14,Crosswalk - Plain
+feature_group_rare_other_context,86,Pole Group
+feature_group_rare_other_context,118,Car Mount
+feature_group_rare_other_context,123,Unlabeled
+feature_group_rare_road_users,31,Person Group
+feature_group_rare_road_users,33,Motorcyclist
+feature_group_rare_road_users,34,Other Rider
+feature_group_rare_signage_and_traffic_control,79,Signage - Ambiguous
+feature_group_rare_signage_and_traffic_control,80,Signage - Back
+feature_group_rare_signage_and_traffic_control,81,Signage - Information
+feature_group_rare_signage_and_traffic_control,82,Signage - Other
+feature_group_rare_signage_and_traffic_control,87,Traffic Sign Frame
+feature_group_rare_signage_and_traffic_control,89,Traffic Cone
+feature_group_rare_signage_and_traffic_control,90,Traffic Light - General (Single)
+feature_group_rare_signage_and_traffic_control,91,Traffic Light - Pedestrians
+feature_group_rare_signage_and_traffic_control,93,Traffic Light - General (Horizontal)
+feature_group_rare_signage_and_traffic_control,94,Traffic Light - Cyclists
+feature_group_rare_signage_and_traffic_control,95,Traffic Light - Other
+feature_group_rare_signage_and_traffic_control,96,Traffic Sign - Ambiguous
+feature_group_rare_signage_and_traffic_control,98,Traffic Sign - Direction (Back)
+feature_group_rare_signage_and_traffic_control,101,Traffic Sign - Parking
+feature_group_rare_signage_and_traffic_control,102,Traffic Sign - Temporary (Back)
+feature_group_rare_signage_and_traffic_control,103,Traffic Sign - Temporary (Front)
+feature_group_rare_street_furniture_and_utilities,66,Banner
+feature_group_rare_street_furniture_and_utilities,67,Bench
+feature_group_rare_street_furniture_and_utilities,68,Bike Rack
+feature_group_rare_street_furniture_and_utilities,69,Catch Basin
+feature_group_rare_street_furniture_and_utilities,70,CCTV Camera
+feature_group_rare_street_furniture_and_utilities,71,Fire Hydrant
+feature_group_rare_street_furniture_and_utilities,72,Junction Box
+feature_group_rare_street_furniture_and_utilities,73,Mailbox
+feature_group_rare_street_furniture_and_utilities,75,Parking Meter
+feature_group_rare_street_furniture_and_utilities,76,Phone Booth
+feature_group_rare_street_furniture_and_utilities,77,Pothole
+feature_group_rare_street_furniture_and_utilities,117,Water Valve
+feature_group_rare_vehicles,106,Boat
+feature_group_rare_vehicles,107,Bus
+feature_group_rare_vehicles,109,Caravan
+feature_group_rare_vehicles,111,On Rails
+feature_group_rare_vehicles,112,Other Vehicle
+feature_group_rare_vehicles,113,Trailer
+feature_group_rare_vehicles,116,Wheeled Slow

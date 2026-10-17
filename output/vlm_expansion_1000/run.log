@@ -1,0 +1,250 @@
+Loading weights:   0%|          | 0/729 [00:00<?, ?it/s]Loading weights:   0%|          | 2/729 [00:00<00:56, 12.97it/s]Loading weights:   3%|▎         | 22/729 [00:00<00:06, 102.72it/s]Loading weights:   7%|▋         | 53/729 [00:00<00:03, 180.21it/s]Loading weights:  12%|█▏        | 85/729 [00:00<00:02, 230.35it/s]Loading weights:  16%|█▌        | 113/729 [00:00<00:02, 241.31it/s]Loading weights:  20%|██        | 146/729 [00:00<00:02, 269.41it/s]Loading weights:  24%|██▍       | 174/729 [00:00<00:02, 258.61it/s]Loading weights:  29%|██▊       | 208/729 [00:00<00:01, 282.16it/s]Loading weights:  33%|███▎      | 237/729 [00:00<00:01, 279.12it/s]Loading weights:  37%|███▋      | 269/729 [00:01<00:01, 281.91it/s]Loading weights:  41%|████▏     | 302/729 [00:01<00:01, 295.63it/s]Loading weights:  46%|████▌     | 332/729 [00:01<00:01, 280.80it/s]Loading weights:  80%|████████  | 585/729 [00:01<00:00, 916.20it/s]Loading weights: 100%|██████████| 729/729 [00:01<00:00, 489.36it/s]
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Completed 30/6500 unordered pairs (180 MEC directional samples); calibrated votes=19
+Completed 60/6500 unordered pairs (360 MEC directional samples); calibrated votes=41
+Completed 90/6500 unordered pairs (540 MEC directional samples); calibrated votes=62
+Completed 120/6500 unordered pairs (720 MEC directional samples); calibrated votes=86
+Completed 150/6500 unordered pairs (900 MEC directional samples); calibrated votes=108
+Completed 180/6500 unordered pairs (1080 MEC directional samples); calibrated votes=133
+Completed 210/6500 unordered pairs (1260 MEC directional samples); calibrated votes=155
+Completed 240/6500 unordered pairs (1440 MEC directional samples); calibrated votes=178
+Completed 270/6500 unordered pairs (1620 MEC directional samples); calibrated votes=201
+Completed 300/6500 unordered pairs (1800 MEC directional samples); calibrated votes=226
+Completed 330/6500 unordered pairs (1980 MEC directional samples); calibrated votes=249
+Completed 360/6500 unordered pairs (2160 MEC directional samples); calibrated votes=269
+Completed 390/6500 unordered pairs (2340 MEC directional samples); calibrated votes=296
+Completed 420/6500 unordered pairs (2520 MEC directional samples); calibrated votes=319
+Completed 450/6500 unordered pairs (2700 MEC directional samples); calibrated votes=346
+Completed 480/6500 unordered pairs (2880 MEC directional samples); calibrated votes=367
+Completed 510/6500 unordered pairs (3060 MEC directional samples); calibrated votes=392
+Completed 540/6500 unordered pairs (3240 MEC directional samples); calibrated votes=417
+Completed 570/6500 unordered pairs (3420 MEC directional samples); calibrated votes=439
+Completed 600/6500 unordered pairs (3600 MEC directional samples); calibrated votes=457
+Completed 630/6500 unordered pairs (3780 MEC directional samples); calibrated votes=484
+Completed 660/6500 unordered pairs (3960 MEC directional samples); calibrated votes=504
+Completed 690/6500 unordered pairs (4140 MEC directional samples); calibrated votes=527
+Completed 720/6500 unordered pairs (4320 MEC directional samples); calibrated votes=550
+Completed 750/6500 unordered pairs (4500 MEC directional samples); calibrated votes=575
+Completed 780/6500 unordered pairs (4680 MEC directional samples); calibrated votes=603
+Completed 810/6500 unordered pairs (4860 MEC directional samples); calibrated votes=630
+Completed 840/6500 unordered pairs (5040 MEC directional samples); calibrated votes=657
+Completed 870/6500 unordered pairs (5220 MEC directional samples); calibrated votes=675
+Completed 900/6500 unordered pairs (5400 MEC directional samples); calibrated votes=697
+Completed 930/6500 unordered pairs (5580 MEC directional samples); calibrated votes=723
+Completed 960/6500 unordered pairs (5760 MEC directional samples); calibrated votes=748
+Completed 990/6500 unordered pairs (5940 MEC directional samples); calibrated votes=768
+Completed 1020/6500 unordered pairs (6120 MEC directional samples); calibrated votes=792
+Completed 1050/6500 unordered pairs (6300 MEC directional samples); calibrated votes=816
+Completed 1080/6500 unordered pairs (6480 MEC directional samples); calibrated votes=839
+Completed 1110/6500 unordered pairs (6660 MEC directional samples); calibrated votes=863
+Completed 1140/6500 unordered pairs (6840 MEC directional samples); calibrated votes=883
+Completed 1170/6500 unordered pairs (7020 MEC directional samples); calibrated votes=908
+Completed 1200/6500 unordered pairs (7200 MEC directional samples); calibrated votes=929
+Completed 1230/6500 unordered pairs (7380 MEC directional samples); calibrated votes=952
+Completed 1260/6500 unordered pairs (7560 MEC directional samples); calibrated votes=977
+Completed 1290/6500 unordered pairs (7740 MEC directional samples); calibrated votes=1001
+Completed 1320/6500 unordered pairs (7920 MEC directional samples); calibrated votes=1024
+Completed 1350/6500 unordered pairs (8100 MEC directional samples); calibrated votes=1051
+Completed 1380/6500 unordered pairs (8280 MEC directional samples); calibrated votes=1076
+Completed 1410/6500 unordered pairs (8460 MEC directional samples); calibrated votes=1103
+Completed 1440/6500 unordered pairs (8640 MEC directional samples); calibrated votes=1125
+Completed 1470/6500 unordered pairs (8820 MEC directional samples); calibrated votes=1150
+Completed 1500/6500 unordered pairs (9000 MEC directional samples); calibrated votes=1177
+Completed 1530/6500 unordered pairs (9180 MEC directional samples); calibrated votes=1203
+Completed 1560/6500 unordered pairs (9360 MEC directional samples); calibrated votes=1229
+Completed 1590/6500 unordered pairs (9540 MEC directional samples); calibrated votes=1251
+Completed 1620/6500 unordered pairs (9720 MEC directional samples); calibrated votes=1274
+Completed 1650/6500 unordered pairs (9900 MEC directional samples); calibrated votes=1299
+Completed 1680/6500 unordered pairs (10080 MEC directional samples); calibrated votes=1324
+Completed 1710/6500 unordered pairs (10260 MEC directional samples); calibrated votes=1349
+Completed 1740/6500 unordered pairs (10440 MEC directional samples); calibrated votes=1372
+Completed 1770/6500 unordered pairs (10620 MEC directional samples); calibrated votes=1398
+Completed 1800/6500 unordered pairs (10800 MEC directional samples); calibrated votes=1425
+Completed 1830/6500 unordered pairs (10980 MEC directional samples); calibrated votes=1446
+Completed 1860/6500 unordered pairs (11160 MEC directional samples); calibrated votes=1464
+Completed 1890/6500 unordered pairs (11340 MEC directional samples); calibrated votes=1488
+Completed 1920/6500 unordered pairs (11520 MEC directional samples); calibrated votes=1512
+Completed 1950/6500 unordered pairs (11700 MEC directional samples); calibrated votes=1534
+Completed 1980/6500 unordered pairs (11880 MEC directional samples); calibrated votes=1562
+Completed 2010/6500 unordered pairs (12060 MEC directional samples); calibrated votes=1588
+Completed 2040/6500 unordered pairs (12240 MEC directional samples); calibrated votes=1611
+Completed 2070/6500 unordered pairs (12420 MEC directional samples); calibrated votes=1638
+Completed 2100/6500 unordered pairs (12600 MEC directional samples); calibrated votes=1661
+Completed 2130/6500 unordered pairs (12780 MEC directional samples); calibrated votes=1679
+Completed 2160/6500 unordered pairs (12960 MEC directional samples); calibrated votes=1705
+Completed 2190/6500 unordered pairs (13140 MEC directional samples); calibrated votes=1729
+Completed 2220/6500 unordered pairs (13320 MEC directional samples); calibrated votes=1755
+Completed 2250/6500 unordered pairs (13500 MEC directional samples); calibrated votes=1778
+Completed 2280/6500 unordered pairs (13680 MEC directional samples); calibrated votes=1806
+Completed 2310/6500 unordered pairs (13860 MEC directional samples); calibrated votes=1830
+Completed 2340/6500 unordered pairs (14040 MEC directional samples); calibrated votes=1851
+Completed 2370/6500 unordered pairs (14220 MEC directional samples); calibrated votes=1873
+Completed 2400/6500 unordered pairs (14400 MEC directional samples); calibrated votes=1896
+Completed 2430/6500 unordered pairs (14580 MEC directional samples); calibrated votes=1922
+Completed 2460/6500 unordered pairs (14760 MEC directional samples); calibrated votes=1944
+Completed 2490/6500 unordered pairs (14940 MEC directional samples); calibrated votes=1964
+Completed 2520/6500 unordered pairs (15120 MEC directional samples); calibrated votes=1990
+Completed 2550/6500 unordered pairs (15300 MEC directional samples); calibrated votes=2012
+Completed 2580/6500 unordered pairs (15480 MEC directional samples); calibrated votes=2037
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/729 [00:00<?, ?it/s]Loading weights:   0%|          | 2/729 [00:00<00:55, 12.98it/s]Loading weights:   3%|▎         | 24/729 [00:00<00:06, 111.44it/s]Loading weights:   7%|▋         | 53/729 [00:00<00:03, 178.74it/s]Loading weights:  12%|█▏        | 86/729 [00:00<00:02, 233.03it/s]Loading weights:  16%|█▌        | 113/729 [00:00<00:02, 240.94it/s]Loading weights:  20%|█▉        | 144/729 [00:00<00:02, 263.13it/s]Loading weights:  24%|██▎       | 173/729 [00:00<00:02, 266.40it/s]Loading weights:  28%|██▊       | 206/729 [00:00<00:01, 285.66it/s]Loading weights:  32%|███▏      | 235/729 [00:00<00:01, 272.28it/s]Loading weights:  37%|███▋      | 268/729 [00:01<00:01, 289.00it/s]Loading weights:  41%|████      | 298/729 [00:01<00:01, 285.08it/s]Loading weights:  45%|████▍     | 328/729 [00:01<00:01, 277.41it/s]Loading weights:  64%|██████▎   | 463/729 [00:01<00:00, 582.12it/s]Loading weights:  95%|█████████▍| 691/729 [00:01<00:00, 1069.72it/s]Loading weights: 100%|██████████| 729/729 [00:01<00:00, 473.08it/s] 
+Completed 2610/6500 unordered pairs (15660 MEC directional samples); calibrated votes=2058
+Completed 2640/6500 unordered pairs (15840 MEC directional samples); calibrated votes=2081
+Completed 2670/6500 unordered pairs (16020 MEC directional samples); calibrated votes=2106
+Completed 2700/6500 unordered pairs (16200 MEC directional samples); calibrated votes=2129
+Completed 2730/6500 unordered pairs (16380 MEC directional samples); calibrated votes=2153
+Completed 2760/6500 unordered pairs (16560 MEC directional samples); calibrated votes=2177
+Completed 2790/6500 unordered pairs (16740 MEC directional samples); calibrated votes=2199
+Completed 2820/6500 unordered pairs (16920 MEC directional samples); calibrated votes=2223
+Completed 2850/6500 unordered pairs (17100 MEC directional samples); calibrated votes=2250
+Completed 2880/6500 unordered pairs (17280 MEC directional samples); calibrated votes=2275
+Completed 2910/6500 unordered pairs (17460 MEC directional samples); calibrated votes=2297
+Traceback (most recent call last):
+  File "/home/colin/GUVP_pairwise_ranking/vlm_pairwise.py", line 753, in <module>
+    main()
+  File "/home/colin/GUVP_pairwise_ranking/vlm_pairwise.py", line 672, in main
+    evaluations_ab, responses_ab = infer_mec(
+                                   ^^^^^^^^^^
+  File "/home/colin/GUVP_pairwise_ranking/vlm_pairwise.py", line 473, in infer_mec
+    responses = generate_with_reused_prefix(
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/colin/GUVP_pairwise_ranking/vlm_pairwise.py", line 426, in generate_with_reused_prefix
+    generated = model.generate(
+                ^^^^^^^^^^^^^^^
+  File "/home/colin/miniconda3/envs/guvp-vlm/lib/python3.11/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/colin/miniconda3/envs/guvp-vlm/lib/python3.11/site-packages/transformers/generation/utils.py", line 2668, in generate
+    result = decoding_method(
+             ^^^^^^^^^^^^^^^^
+  File "/home/colin/miniconda3/envs/guvp-vlm/lib/python3.11/site-packages/transformers/generation/utils.py", line 2876, in _sample
+    while self._has_unfinished_sequences(this_peer_finished, synced_gpus, device=input_ids.device):
+KeyboardInterrupt
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/729 [00:00<?, ?it/s]Loading weights:   0%|          | 1/729 [00:00<05:20,  2.27it/s]Loading weights:   0%|          | 2/729 [00:00<04:46,  2.54it/s]Loading weights:   1%|          | 5/729 [00:00<01:45,  6.86it/s]Loading weights:   2%|▏         | 16/729 [00:01<00:28, 24.92it/s]Loading weights:   3%|▎         | 24/729 [00:01<00:19, 35.93it/s]Loading weights:   4%|▍         | 30/729 [00:01<00:17, 39.20it/s]Loading weights:   6%|▌         | 42/729 [00:01<00:12, 54.01it/s]Loading weights:   7%|▋         | 53/729 [00:01<00:10, 67.20it/s]Loading weights:   9%|▉         | 65/729 [00:01<00:09, 73.72it/s]Loading weights:  11%|█         | 77/729 [00:01<00:08, 77.98it/s]Loading weights:  12%|█▏        | 88/729 [00:01<00:07, 84.59it/s]Loading weights:  13%|█▎        | 97/729 [00:02<00:07, 83.10it/s]Loading weights:  15%|█▍        | 106/729 [00:02<00:08, 76.61it/s]Loading weights:  16%|█▌        | 114/729 [00:02<00:08, 71.31it/s]Loading weights:  17%|█▋        | 125/729 [00:02<00:08, 74.81it/s]Loading weights:  19%|█▊        | 136/729 [00:02<00:07, 79.96it/s]Loading weights:  20%|█▉        | 145/729 [00:02<00:07, 81.30it/s]Loading weights:  21%|██        | 154/729 [00:02<00:07, 77.85it/s]Loading weights:  22%|██▏       | 162/729 [00:02<00:07, 73.33it/s]Loading weights:  24%|██▍       | 174/729 [00:03<00:07, 77.79it/s]Loading weights:  25%|██▌       | 185/729 [00:03<00:06, 84.60it/s]Loading weights:  27%|██▋       | 196/729 [00:03<00:06, 86.57it/s]Loading weights:  29%|██▊       | 208/729 [00:03<00:05, 87.24it/s]Loading weights:  30%|███       | 220/729 [00:03<00:05, 86.63it/s]Loading weights:  32%|███▏      | 232/729 [00:03<00:05, 86.11it/s]Loading weights:  33%|███▎      | 244/729 [00:03<00:05, 85.85it/s]Loading weights:  35%|███▍      | 253/729 [00:03<00:05, 86.14it/s]Loading weights:  36%|███▌      | 262/729 [00:04<00:05, 82.91it/s]Loading weights:  37%|███▋      | 271/729 [00:04<00:05, 79.45it/s]Loading weights:  39%|███▊      | 281/729 [00:04<00:05, 84.30it/s]Loading weights:  40%|████      | 293/729 [00:04<00:05, 85.24it/s]Loading weights:  42%|████▏     | 305/729 [00:04<00:04, 85.97it/s]Loading weights:  43%|████▎     | 316/729 [00:04<00:04, 91.19it/s]Loading weights:  45%|████▍     | 326/729 [00:04<00:04, 92.30it/s]Loading weights:  46%|████▌     | 336/729 [00:04<00:05, 72.54it/s]Loading weights:  57%|█████▋    | 419/729 [00:05<00:01, 245.29it/s]Loading weights:  69%|██████▉   | 503/729 [00:05<00:00, 389.59it/s]Loading weights:  80%|████████  | 585/729 [00:05<00:00, 501.05it/s]Loading weights:  92%|█████████▏| 671/729 [00:05<00:00, 596.07it/s]Loading weights: 100%|██████████| 729/729 [00:05<00:00, 133.34it/s]
+Completed 2940/6500 unordered pairs (17640 MEC directional samples); calibrated votes=2319
+Completed 2970/6500 unordered pairs (17820 MEC directional samples); calibrated votes=2342
+Completed 3000/6500 unordered pairs (18000 MEC directional samples); calibrated votes=2367
+Completed 3030/6500 unordered pairs (18180 MEC directional samples); calibrated votes=2392
+Completed 3060/6500 unordered pairs (18360 MEC directional samples); calibrated votes=2414
+Completed 3090/6500 unordered pairs (18540 MEC directional samples); calibrated votes=2436
+Completed 3120/6500 unordered pairs (18720 MEC directional samples); calibrated votes=2459
+Completed 3150/6500 unordered pairs (18900 MEC directional samples); calibrated votes=2483
+Completed 3180/6500 unordered pairs (19080 MEC directional samples); calibrated votes=2509
+Completed 3210/6500 unordered pairs (19260 MEC directional samples); calibrated votes=2533
+Completed 3240/6500 unordered pairs (19440 MEC directional samples); calibrated votes=2554
+Completed 3270/6500 unordered pairs (19620 MEC directional samples); calibrated votes=2579
+Completed 3300/6500 unordered pairs (19800 MEC directional samples); calibrated votes=2606
+Completed 3330/6500 unordered pairs (19980 MEC directional samples); calibrated votes=2627
+Completed 3360/6500 unordered pairs (20160 MEC directional samples); calibrated votes=2651
+Completed 3390/6500 unordered pairs (20340 MEC directional samples); calibrated votes=2674
+Completed 3420/6500 unordered pairs (20520 MEC directional samples); calibrated votes=2699
+Completed 3450/6500 unordered pairs (20700 MEC directional samples); calibrated votes=2723
+Completed 3480/6500 unordered pairs (20880 MEC directional samples); calibrated votes=2745
+Completed 3510/6500 unordered pairs (21060 MEC directional samples); calibrated votes=2767
+Completed 3540/6500 unordered pairs (21240 MEC directional samples); calibrated votes=2790
+Completed 3570/6500 unordered pairs (21420 MEC directional samples); calibrated votes=2809
+Completed 3600/6500 unordered pairs (21600 MEC directional samples); calibrated votes=2835
+Completed 3630/6500 unordered pairs (21780 MEC directional samples); calibrated votes=2861
+Completed 3660/6500 unordered pairs (21960 MEC directional samples); calibrated votes=2884
+Completed 3690/6500 unordered pairs (22140 MEC directional samples); calibrated votes=2910
+Completed 3720/6500 unordered pairs (22320 MEC directional samples); calibrated votes=2935
+Completed 3750/6500 unordered pairs (22500 MEC directional samples); calibrated votes=2961
+Completed 3780/6500 unordered pairs (22680 MEC directional samples); calibrated votes=2985
+Completed 3810/6500 unordered pairs (22860 MEC directional samples); calibrated votes=3011
+Completed 3840/6500 unordered pairs (23040 MEC directional samples); calibrated votes=3038
+Completed 3870/6500 unordered pairs (23220 MEC directional samples); calibrated votes=3064
+Completed 3900/6500 unordered pairs (23400 MEC directional samples); calibrated votes=3088
+Completed 3930/6500 unordered pairs (23580 MEC directional samples); calibrated votes=3112
+Completed 3960/6500 unordered pairs (23760 MEC directional samples); calibrated votes=3134
+Completed 3990/6500 unordered pairs (23940 MEC directional samples); calibrated votes=3157
+Completed 4020/6500 unordered pairs (24120 MEC directional samples); calibrated votes=3183
+Completed 4050/6500 unordered pairs (24300 MEC directional samples); calibrated votes=3206
+Completed 4080/6500 unordered pairs (24480 MEC directional samples); calibrated votes=3229
+Completed 4110/6500 unordered pairs (24660 MEC directional samples); calibrated votes=3256
+Completed 4140/6500 unordered pairs (24840 MEC directional samples); calibrated votes=3278
+Completed 4170/6500 unordered pairs (25020 MEC directional samples); calibrated votes=3300
+Completed 4200/6500 unordered pairs (25200 MEC directional samples); calibrated votes=3322
+Completed 4230/6500 unordered pairs (25380 MEC directional samples); calibrated votes=3341
+Completed 4260/6500 unordered pairs (25560 MEC directional samples); calibrated votes=3366
+Completed 4290/6500 unordered pairs (25740 MEC directional samples); calibrated votes=3393
+Completed 4320/6500 unordered pairs (25920 MEC directional samples); calibrated votes=3413
+Completed 4350/6500 unordered pairs (26100 MEC directional samples); calibrated votes=3437
+Completed 4380/6500 unordered pairs (26280 MEC directional samples); calibrated votes=3460
+Completed 4410/6500 unordered pairs (26460 MEC directional samples); calibrated votes=3483
+Completed 4440/6500 unordered pairs (26640 MEC directional samples); calibrated votes=3507
+Completed 4470/6500 unordered pairs (26820 MEC directional samples); calibrated votes=3531
+Completed 4500/6500 unordered pairs (27000 MEC directional samples); calibrated votes=3553
+Completed 4530/6500 unordered pairs (27180 MEC directional samples); calibrated votes=3573
+Completed 4560/6500 unordered pairs (27360 MEC directional samples); calibrated votes=3597
+Completed 4590/6500 unordered pairs (27540 MEC directional samples); calibrated votes=3620
+Completed 4620/6500 unordered pairs (27720 MEC directional samples); calibrated votes=3643
+Completed 4650/6500 unordered pairs (27900 MEC directional samples); calibrated votes=3665
+Completed 4680/6500 unordered pairs (28080 MEC directional samples); calibrated votes=3692
+Completed 4710/6500 unordered pairs (28260 MEC directional samples); calibrated votes=3713
+Completed 4740/6500 unordered pairs (28440 MEC directional samples); calibrated votes=3732
+Completed 4770/6500 unordered pairs (28620 MEC directional samples); calibrated votes=3756
+Completed 4800/6500 unordered pairs (28800 MEC directional samples); calibrated votes=3781
+Completed 4830/6500 unordered pairs (28980 MEC directional samples); calibrated votes=3804
+Completed 4860/6500 unordered pairs (29160 MEC directional samples); calibrated votes=3828
+Completed 4890/6500 unordered pairs (29340 MEC directional samples); calibrated votes=3854
+Completed 4920/6500 unordered pairs (29520 MEC directional samples); calibrated votes=3877
+Completed 4950/6500 unordered pairs (29700 MEC directional samples); calibrated votes=3902
+Completed 4980/6500 unordered pairs (29880 MEC directional samples); calibrated votes=3925
+Completed 5010/6500 unordered pairs (30060 MEC directional samples); calibrated votes=3950
+Completed 5040/6500 unordered pairs (30240 MEC directional samples); calibrated votes=3977
+Completed 5070/6500 unordered pairs (30420 MEC directional samples); calibrated votes=4001
+Completed 5100/6500 unordered pairs (30600 MEC directional samples); calibrated votes=4024
+Completed 5130/6500 unordered pairs (30780 MEC directional samples); calibrated votes=4050
+Completed 5160/6500 unordered pairs (30960 MEC directional samples); calibrated votes=4076
+Completed 5190/6500 unordered pairs (31140 MEC directional samples); calibrated votes=4099
+Completed 5220/6500 unordered pairs (31320 MEC directional samples); calibrated votes=4126
+Completed 5250/6500 unordered pairs (31500 MEC directional samples); calibrated votes=4150
+Completed 5280/6500 unordered pairs (31680 MEC directional samples); calibrated votes=4172
+Completed 5310/6500 unordered pairs (31860 MEC directional samples); calibrated votes=4195
+Completed 5340/6500 unordered pairs (32040 MEC directional samples); calibrated votes=4220
+Completed 5370/6500 unordered pairs (32220 MEC directional samples); calibrated votes=4244
+Completed 5400/6500 unordered pairs (32400 MEC directional samples); calibrated votes=4270
+Completed 5430/6500 unordered pairs (32580 MEC directional samples); calibrated votes=4296
+Completed 5460/6500 unordered pairs (32760 MEC directional samples); calibrated votes=4319
+Completed 5490/6500 unordered pairs (32940 MEC directional samples); calibrated votes=4347
+Completed 5520/6500 unordered pairs (33120 MEC directional samples); calibrated votes=4366
+Completed 5550/6500 unordered pairs (33300 MEC directional samples); calibrated votes=4390
+Completed 5580/6500 unordered pairs (33480 MEC directional samples); calibrated votes=4415
+Completed 5610/6500 unordered pairs (33660 MEC directional samples); calibrated votes=4436
+Completed 5640/6500 unordered pairs (33840 MEC directional samples); calibrated votes=4460
+Completed 5670/6500 unordered pairs (34020 MEC directional samples); calibrated votes=4488
+Completed 5700/6500 unordered pairs (34200 MEC directional samples); calibrated votes=4508
+Completed 5730/6500 unordered pairs (34380 MEC directional samples); calibrated votes=4530
+Completed 5760/6500 unordered pairs (34560 MEC directional samples); calibrated votes=4555
+Completed 5790/6500 unordered pairs (34740 MEC directional samples); calibrated votes=4581
+Completed 5820/6500 unordered pairs (34920 MEC directional samples); calibrated votes=4604
+Completed 5850/6500 unordered pairs (35100 MEC directional samples); calibrated votes=4629
+Completed 5880/6500 unordered pairs (35280 MEC directional samples); calibrated votes=4653
+Completed 5910/6500 unordered pairs (35460 MEC directional samples); calibrated votes=4677
+Completed 5940/6500 unordered pairs (35640 MEC directional samples); calibrated votes=4700
+Completed 5970/6500 unordered pairs (35820 MEC directional samples); calibrated votes=4724
+Completed 6000/6500 unordered pairs (36000 MEC directional samples); calibrated votes=4746
+Completed 6030/6500 unordered pairs (36180 MEC directional samples); calibrated votes=4769
+Completed 6060/6500 unordered pairs (36360 MEC directional samples); calibrated votes=4799
+Completed 6090/6500 unordered pairs (36540 MEC directional samples); calibrated votes=4820
+Completed 6120/6500 unordered pairs (36720 MEC directional samples); calibrated votes=4842
+Completed 6150/6500 unordered pairs (36900 MEC directional samples); calibrated votes=4867
+Completed 6180/6500 unordered pairs (37080 MEC directional samples); calibrated votes=4892
+Completed 6210/6500 unordered pairs (37260 MEC directional samples); calibrated votes=4919
+Completed 6240/6500 unordered pairs (37440 MEC directional samples); calibrated votes=4944
+Completed 6270/6500 unordered pairs (37620 MEC directional samples); calibrated votes=4970
+Completed 6300/6500 unordered pairs (37800 MEC directional samples); calibrated votes=4992
+Completed 6330/6500 unordered pairs (37980 MEC directional samples); calibrated votes=5018
+Completed 6360/6500 unordered pairs (38160 MEC directional samples); calibrated votes=5034
+Completed 6390/6500 unordered pairs (38340 MEC directional samples); calibrated votes=5061
+Completed 6420/6500 unordered pairs (38520 MEC directional samples); calibrated votes=5087
+Completed 6450/6500 unordered pairs (38700 MEC directional samples); calibrated votes=5111
+Completed 6480/6500 unordered pairs (38880 MEC directional samples); calibrated votes=5135
+Completed 6500/6500 unordered pairs (39000 MEC directional samples); calibrated votes=5146
+Completed 6500 unordered pairs and 39000 MEC directional samples.
+Calibrated votes: 5146; excluded/invalid/tied pairs: 1354
+Audit: /home/colin/GUVP_pairwise_ranking/output/vlm_expansion_1000/pair_audit.csv
+Votes: /home/colin/GUVP_pairwise_ranking/data/expansion_750/vlm_pairwise_votes.csv
+Peak CUDA memory allocated: 5.88 GiB
+Timing: /home/colin/GUVP_pairwise_ranking/output/vlm_expansion_1000/timing.json

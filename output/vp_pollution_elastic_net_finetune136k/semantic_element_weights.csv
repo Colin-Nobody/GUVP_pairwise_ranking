@@ -1,0 +1,125 @@
+feature_column,class_id,class_name,source_column,standardised_beta,beta_per_full_share,beta_per_10_percentage_points,outer_selection_frequency,outer_sign_consistency,bootstrap_selection_frequency,bootstrap_sign_consistency,bootstrap_beta_low_2_5,bootstrap_beta_high_97_5,stable
+feature_ratio_000_bird,0,Bird,ratio__Bird,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_001_ground_animal,1,Ground Animal,ratio__Ground Animal,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_002_ambiguous_barrier,2,Ambiguous Barrier,ratio__Ambiguous Barrier,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_003_concrete_block,3,Concrete Block,ratio__Concrete Block,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_004_curb,4,Curb,ratio__Curb,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_005_fence,5,Fence,ratio__Fence,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_006_guard_rail,6,Guard Rail,ratio__Guard Rail,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_007_barrier,7,Barrier,ratio__Barrier,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_008_road_median,8,Road Median,ratio__Road Median,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_009_road_side,9,Road Side,ratio__Road Side,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_010_lane_separator,10,Lane Separator,ratio__Lane Separator,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_011_temporary_barrier,11,Temporary Barrier,ratio__Temporary Barrier,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_012_wall,12,Wall,ratio__Wall,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_013_bike_lane,13,Bike Lane,ratio__Bike Lane,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_014_crosswalk_plain,14,Crosswalk - Plain,ratio__Crosswalk - Plain,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_015_curb_cut,15,Curb Cut,ratio__Curb Cut,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_016_driveway,16,Driveway,ratio__Driveway,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_017_parking,17,Parking,ratio__Parking,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_018_parking_aisle,18,Parking Aisle,ratio__Parking Aisle,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_019_pedestrian_area,19,Pedestrian Area,ratio__Pedestrian Area,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_020_rail_track,20,Rail Track,ratio__Rail Track,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_021_road,21,Road,ratio__Road,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_022_road_shoulder,22,Road Shoulder,ratio__Road Shoulder,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_023_service_lane,23,Service Lane,ratio__Service Lane,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_024_sidewalk,24,Sidewalk,ratio__Sidewalk,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_025_traffic_island,25,Traffic Island,ratio__Traffic Island,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_026_bridge,26,Bridge,ratio__Bridge,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_027_building,27,Building,ratio__Building,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_028_garage,28,Garage,ratio__Garage,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_029_tunnel,29,Tunnel,ratio__Tunnel,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_030_person,30,Person,ratio__Person,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_031_person_group,31,Person Group,ratio__Person Group,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_032_bicyclist,32,Bicyclist,ratio__Bicyclist,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_033_motorcyclist,33,Motorcyclist,ratio__Motorcyclist,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_034_other_rider,34,Other Rider,ratio__Other Rider,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_035_lane_marking_dashed_line,35,Lane Marking - Dashed Line,ratio__Lane Marking - Dashed Line,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_036_lane_marking_straight_line,36,Lane Marking - Straight Line,ratio__Lane Marking - Straight Line,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_037_lane_marking_zigzag_line,37,Lane Marking - Zigzag Line,ratio__Lane Marking - Zigzag Line,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_038_lane_marking_ambiguous,38,Lane Marking - Ambiguous,ratio__Lane Marking - Ambiguous,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_039_lane_marking_arrow_left,39,Lane Marking - Arrow (Left),ratio__Lane Marking - Arrow (Left),0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_040_lane_marking_arrow_other,40,Lane Marking - Arrow (Other),ratio__Lane Marking - Arrow (Other),0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_041_lane_marking_arrow_right,41,Lane Marking - Arrow (Right),ratio__Lane Marking - Arrow (Right),0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_042_lane_marking_arrow_split_left_or_straight,42,Lane Marking - Arrow (Split Left or Straight),ratio__Lane Marking - Arrow (Split Left or Straight),0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_043_lane_marking_arrow_split_right_or_straight,43,Lane Marking - Arrow (Split Right or Straight),ratio__Lane Marking - Arrow (Split Right or Straight),0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_044_lane_marking_arrow_straight,44,Lane Marking - Arrow (Straight),ratio__Lane Marking - Arrow (Straight),0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_045_lane_marking_crosswalk,45,Lane Marking - Crosswalk,ratio__Lane Marking - Crosswalk,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_046_lane_marking_give_way_row,46,Lane Marking - Give Way (Row),ratio__Lane Marking - Give Way (Row),0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_047_lane_marking_give_way_single,47,Lane Marking - Give Way (Single),ratio__Lane Marking - Give Way (Single),0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_048_lane_marking_hatched_chevron,48,Lane Marking - Hatched (Chevron),ratio__Lane Marking - Hatched (Chevron),0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_049_lane_marking_hatched_diagonal,49,Lane Marking - Hatched (Diagonal),ratio__Lane Marking - Hatched (Diagonal),0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_050_lane_marking_other,50,Lane Marking - Other,ratio__Lane Marking - Other,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_051_lane_marking_stop_line,51,Lane Marking - Stop Line,ratio__Lane Marking - Stop Line,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_052_lane_marking_symbol_bicycle,52,Lane Marking - Symbol (Bicycle),ratio__Lane Marking - Symbol (Bicycle),0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_053_lane_marking_symbol_other,53,Lane Marking - Symbol (Other),ratio__Lane Marking - Symbol (Other),0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_054_lane_marking_text,54,Lane Marking - Text,ratio__Lane Marking - Text,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_055_lane_marking_only_dashed_line,55,Lane Marking (only) - Dashed Line,ratio__Lane Marking (only) - Dashed Line,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_056_lane_marking_only_crosswalk,56,Lane Marking (only) - Crosswalk,ratio__Lane Marking (only) - Crosswalk,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_057_lane_marking_only_other,57,Lane Marking (only) - Other,ratio__Lane Marking (only) - Other,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_058_lane_marking_only_test,58,Lane Marking (only) - Test,ratio__Lane Marking (only) - Test,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_059_mountain,59,Mountain,ratio__Mountain,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_060_sand,60,Sand,ratio__Sand,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_061_sky,61,Sky,ratio__Sky,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_062_snow,62,Snow,ratio__Snow,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_063_terrain,63,Terrain,ratio__Terrain,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_064_vegetation,64,Vegetation,ratio__Vegetation,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_065_water,65,Water,ratio__Water,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_066_banner,66,Banner,ratio__Banner,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_067_bench,67,Bench,ratio__Bench,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_068_bike_rack,68,Bike Rack,ratio__Bike Rack,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_069_catch_basin,69,Catch Basin,ratio__Catch Basin,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_070_cctv_camera,70,CCTV Camera,ratio__CCTV Camera,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_071_fire_hydrant,71,Fire Hydrant,ratio__Fire Hydrant,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_072_junction_box,72,Junction Box,ratio__Junction Box,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_073_mailbox,73,Mailbox,ratio__Mailbox,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_074_manhole,74,Manhole,ratio__Manhole,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_075_parking_meter,75,Parking Meter,ratio__Parking Meter,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_076_phone_booth,76,Phone Booth,ratio__Phone Booth,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_077_pothole,77,Pothole,ratio__Pothole,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_078_signage_advertisement,78,Signage - Advertisement,ratio__Signage - Advertisement,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_079_signage_ambiguous,79,Signage - Ambiguous,ratio__Signage - Ambiguous,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_080_signage_back,80,Signage - Back,ratio__Signage - Back,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_081_signage_information,81,Signage - Information,ratio__Signage - Information,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_082_signage_other,82,Signage - Other,ratio__Signage - Other,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_083_signage_store,83,Signage - Store,ratio__Signage - Store,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_084_street_light,84,Street Light,ratio__Street Light,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_085_pole,85,Pole,ratio__Pole,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_086_pole_group,86,Pole Group,ratio__Pole Group,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_087_traffic_sign_frame,87,Traffic Sign Frame,ratio__Traffic Sign Frame,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_088_utility_pole,88,Utility Pole,ratio__Utility Pole,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_089_traffic_cone,89,Traffic Cone,ratio__Traffic Cone,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_090_traffic_light_general_single,90,Traffic Light - General (Single),ratio__Traffic Light - General (Single),0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_091_traffic_light_pedestrians,91,Traffic Light - Pedestrians,ratio__Traffic Light - Pedestrians,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_092_traffic_light_general_upright,92,Traffic Light - General (Upright),ratio__Traffic Light - General (Upright),0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_093_traffic_light_general_horizontal,93,Traffic Light - General (Horizontal),ratio__Traffic Light - General (Horizontal),0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_094_traffic_light_cyclists,94,Traffic Light - Cyclists,ratio__Traffic Light - Cyclists,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_095_traffic_light_other,95,Traffic Light - Other,ratio__Traffic Light - Other,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_096_traffic_sign_ambiguous,96,Traffic Sign - Ambiguous,ratio__Traffic Sign - Ambiguous,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_097_traffic_sign_back,97,Traffic Sign (Back),ratio__Traffic Sign (Back),0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_098_traffic_sign_direction_back,98,Traffic Sign - Direction (Back),ratio__Traffic Sign - Direction (Back),0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_099_traffic_sign_direction_front,99,Traffic Sign - Direction (Front),ratio__Traffic Sign - Direction (Front),0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_100_traffic_sign_front,100,Traffic Sign (Front),ratio__Traffic Sign (Front),0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_101_traffic_sign_parking,101,Traffic Sign - Parking,ratio__Traffic Sign - Parking,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_102_traffic_sign_temporary_back,102,Traffic Sign - Temporary (Back),ratio__Traffic Sign - Temporary (Back),0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_103_traffic_sign_temporary_front,103,Traffic Sign - Temporary (Front),ratio__Traffic Sign - Temporary (Front),0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_104_trash_can,104,Trash Can,ratio__Trash Can,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_105_bicycle,105,Bicycle,ratio__Bicycle,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_106_boat,106,Boat,ratio__Boat,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_107_bus,107,Bus,ratio__Bus,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_108_car,108,Car,ratio__Car,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_109_caravan,109,Caravan,ratio__Caravan,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_110_motorcycle,110,Motorcycle,ratio__Motorcycle,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_111_on_rails,111,On Rails,ratio__On Rails,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_112_other_vehicle,112,Other Vehicle,ratio__Other Vehicle,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_113_trailer,113,Trailer,ratio__Trailer,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_114_truck,114,Truck,ratio__Truck,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_115_vehicle_group,115,Vehicle Group,ratio__Vehicle Group,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_116_wheeled_slow,116,Wheeled Slow,ratio__Wheeled Slow,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_117_water_valve,117,Water Valve,ratio__Water Valve,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_118_car_mount,118,Car Mount,ratio__Car Mount,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_119_dynamic,119,Dynamic,ratio__Dynamic,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_120_ego_vehicle,120,Ego Vehicle,ratio__Ego Vehicle,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_121_ground,121,Ground,ratio__Ground,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_122_static,122,Static,ratio__Static,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False
+feature_ratio_123_unlabeled,123,Unlabeled,ratio__Unlabeled,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,False

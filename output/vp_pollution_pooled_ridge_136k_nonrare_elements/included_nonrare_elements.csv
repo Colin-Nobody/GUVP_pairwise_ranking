@@ -1,0 +1,43 @@
+feature_column,class_id,class_name,source_column,n_images_present,image_prevalence
+feature_ratio_004_curb,4,Curb,ratio__Curb,166,0.664
+feature_ratio_005_fence,5,Fence,ratio__Fence,154,0.616
+feature_ratio_012_wall,12,Wall,ratio__Wall,98,0.392
+feature_ratio_013_bike_lane,13,Bike Lane,ratio__Bike Lane,41,0.164
+feature_ratio_017_parking,17,Parking,ratio__Parking,57,0.228
+feature_ratio_019_pedestrian_area,19,Pedestrian Area,ratio__Pedestrian Area,84,0.336
+feature_ratio_021_road,21,Road,ratio__Road,199,0.796
+feature_ratio_024_sidewalk,24,Sidewalk,ratio__Sidewalk,189,0.756
+feature_ratio_025_traffic_island,25,Traffic Island,ratio__Traffic Island,37,0.148
+feature_ratio_026_bridge,26,Bridge,ratio__Bridge,28,0.112
+feature_ratio_027_building,27,Building,ratio__Building,245,0.98
+feature_ratio_030_person,30,Person,ratio__Person,178,0.712
+feature_ratio_032_bicyclist,32,Bicyclist,ratio__Bicyclist,44,0.176
+feature_ratio_035_lane_marking_dashed_line,35,Lane Marking - Dashed Line,ratio__Lane Marking - Dashed Line,83,0.332
+feature_ratio_036_lane_marking_straight_line,36,Lane Marking - Straight Line,ratio__Lane Marking - Straight Line,109,0.436
+feature_ratio_045_lane_marking_crosswalk,45,Lane Marking - Crosswalk,ratio__Lane Marking - Crosswalk,53,0.212
+feature_ratio_050_lane_marking_other,50,Lane Marking - Other,ratio__Lane Marking - Other,37,0.148
+feature_ratio_054_lane_marking_text,54,Lane Marking - Text,ratio__Lane Marking - Text,34,0.136
+feature_ratio_061_sky,61,Sky,ratio__Sky,240,0.96
+feature_ratio_062_snow,62,Snow,ratio__Snow,28,0.112
+feature_ratio_063_terrain,63,Terrain,ratio__Terrain,60,0.24
+feature_ratio_064_vegetation,64,Vegetation,ratio__Vegetation,213,0.852
+feature_ratio_074_manhole,74,Manhole,ratio__Manhole,38,0.152
+feature_ratio_078_signage_advertisement,78,Signage - Advertisement,ratio__Signage - Advertisement,75,0.3
+feature_ratio_083_signage_store,83,Signage - Store,ratio__Signage - Store,91,0.364
+feature_ratio_084_street_light,84,Street Light,ratio__Street Light,150,0.6
+feature_ratio_085_pole,85,Pole,ratio__Pole,229,0.916
+feature_ratio_088_utility_pole,88,Utility Pole,ratio__Utility Pole,38,0.152
+feature_ratio_092_traffic_light_general_upright,92,Traffic Light - General (Upright),ratio__Traffic Light - General (Upright),54,0.216
+feature_ratio_097_traffic_sign_back,97,Traffic Sign (Back),ratio__Traffic Sign (Back),44,0.176
+feature_ratio_099_traffic_sign_direction_front,99,Traffic Sign - Direction (Front),ratio__Traffic Sign - Direction (Front),31,0.124
+feature_ratio_100_traffic_sign_front,100,Traffic Sign (Front),ratio__Traffic Sign (Front),134,0.536
+feature_ratio_104_trash_can,104,Trash Can,ratio__Trash Can,41,0.164
+feature_ratio_105_bicycle,105,Bicycle,ratio__Bicycle,93,0.372
+feature_ratio_108_car,108,Car,ratio__Car,176,0.704
+feature_ratio_110_motorcycle,110,Motorcycle,ratio__Motorcycle,65,0.26
+feature_ratio_114_truck,114,Truck,ratio__Truck,32,0.128
+feature_ratio_115_vehicle_group,115,Vehicle Group,ratio__Vehicle Group,116,0.464
+feature_ratio_119_dynamic,119,Dynamic,ratio__Dynamic,92,0.368
+feature_ratio_120_ego_vehicle,120,Ego Vehicle,ratio__Ego Vehicle,50,0.2
+feature_ratio_121_ground,121,Ground,ratio__Ground,93,0.372
+feature_ratio_122_static,122,Static,ratio__Static,197,0.788

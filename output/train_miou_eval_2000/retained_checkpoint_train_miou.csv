@@ -1,0 +1,4 @@
+run,iteration,checkpoint,train_eval_miou_percent
+main_450k,80000,/home/colin/GUVP_pairwise_ranking/output/deeplabv3plus_r50_mapillary_v2_80k/iter_80000.pth,21.3600
+main_450k,84000,/home/colin/GUVP_pairwise_ranking/output/deeplabv3plus_r50_mapillary_v2_80k/iter_84000.pth,21.2500
+main_450k,88000,/home/colin/GUVP_pairwise_ranking/output/deeplabv3plus_r50_mapillary_v2_80k/iter_88000.pth,21.3200

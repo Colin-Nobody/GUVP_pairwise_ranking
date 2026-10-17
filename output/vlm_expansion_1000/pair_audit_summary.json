@@ -1,0 +1,23 @@
+{
+  "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+  "prompt_version": "vp-faireval-mec-bpc-score-v6",
+  "prompt_sha256": "b34d3f8b72f684ae228edc6ef817b27d07927d8a73b3a5bd172cfc8b2f33fa8e",
+  "mec_samples_per_position": 3,
+  "temperature": 1.0,
+  "completed_unordered_pairs": 6500,
+  "mec_directional_samples": 39000,
+  "calibrated_votes": 5146,
+  "calibrated_vote_rate": 0.7916923076923077,
+  "calibrated_ties": 270,
+  "invalid_pairs": 1084,
+  "status_counts": {
+    "calibrated": 5146,
+    "calibrated_tie": 270,
+    "invalid_ab": 490,
+    "invalid_ba": 528,
+    "invalid_both": 66
+  },
+  "mean_absolute_calibrated_margin": 1.1082440915805023,
+  "mean_bpde": 0.4941663886769662,
+  "mean_first_position_score_advantage": 0.5533504336788662
+}

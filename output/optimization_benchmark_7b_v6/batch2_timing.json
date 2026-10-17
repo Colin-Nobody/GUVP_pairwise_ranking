@@ -1,0 +1,13 @@
+{
+  "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+  "decode_mode": "sampled_evidence_first_scores_mec_batch2_independent_gumbel",
+  "mec_samples": 3,
+  "mec_batch_size": 2,
+  "completed_pairs": 2,
+  "model_load_seconds": 12.921498966003128,
+  "preprocess_seconds": 0.21312750300421612,
+  "generate_seconds": 29.941098458009947,
+  "generation_batches": 8,
+  "wall_seconds": 43.10164632600208,
+  "peak_cuda_allocated_gib": 6.054947853088379
+}

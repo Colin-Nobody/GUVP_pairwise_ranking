@@ -1,0 +1,111 @@
+[raw] repeat 1/10, fold 1/5: lambda=3.162, l1=1.00
+[raw] repeat 1/10, fold 2/5: lambda=3.162, l1=1.00
+[raw] repeat 1/10, fold 3/5: lambda=3.162, l1=1.00
+[raw] repeat 1/10, fold 4/5: lambda=3.162, l1=1.00
+[raw] repeat 1/10, fold 5/5: lambda=3.162, l1=1.00
+[raw] repeat 2/10, fold 1/5: lambda=3.162, l1=1.00
+[raw] repeat 2/10, fold 2/5: lambda=3.162, l1=1.00
+[raw] repeat 2/10, fold 3/5: lambda=3.162, l1=1.00
+[raw] repeat 2/10, fold 4/5: lambda=3.162, l1=1.00
+[raw] repeat 2/10, fold 5/5: lambda=3.162, l1=1.00
+[raw] repeat 3/10, fold 1/5: lambda=3.162, l1=1.00
+[raw] repeat 3/10, fold 2/5: lambda=3.162, l1=1.00
+[raw] repeat 3/10, fold 3/5: lambda=3.162, l1=1.00
+[raw] repeat 3/10, fold 4/5: lambda=3.162, l1=1.00
+[raw] repeat 3/10, fold 5/5: lambda=3.162, l1=1.00
+[raw] repeat 4/10, fold 1/5: lambda=3.162, l1=1.00
+[raw] repeat 4/10, fold 2/5: lambda=3.162, l1=1.00
+[raw] repeat 4/10, fold 3/5: lambda=3.162, l1=1.00
+[raw] repeat 4/10, fold 4/5: lambda=3.162, l1=1.00
+[raw] repeat 4/10, fold 5/5: lambda=3.162, l1=1.00
+[raw] repeat 5/10, fold 1/5: lambda=3.162, l1=1.00
+[raw] repeat 5/10, fold 2/5: lambda=3.162, l1=1.00
+[raw] repeat 5/10, fold 3/5: lambda=3.162, l1=1.00
+[raw] repeat 5/10, fold 4/5: lambda=3.162, l1=1.00
+[raw] repeat 5/10, fold 5/5: lambda=3.162, l1=1.00
+[raw] repeat 6/10, fold 1/5: lambda=3.162, l1=1.00
+[raw] repeat 6/10, fold 2/5: lambda=3.162, l1=1.00
+[raw] repeat 6/10, fold 3/5: lambda=3.162, l1=1.00
+[raw] repeat 6/10, fold 4/5: lambda=3.162, l1=1.00
+[raw] repeat 6/10, fold 5/5: lambda=3.162, l1=1.00
+[raw] repeat 7/10, fold 1/5: lambda=3.162, l1=1.00
+[raw] repeat 7/10, fold 2/5: lambda=3.162, l1=1.00
+[raw] repeat 7/10, fold 3/5: lambda=3.162, l1=1.00
+[raw] repeat 7/10, fold 4/5: lambda=3.162, l1=1.00
+[raw] repeat 7/10, fold 5/5: lambda=3.162, l1=1.00
+[raw] repeat 8/10, fold 1/5: lambda=3.162, l1=1.00
+[raw] repeat 8/10, fold 2/5: lambda=3.162, l1=1.00
+[raw] repeat 8/10, fold 3/5: lambda=3.162, l1=1.00
+[raw] repeat 8/10, fold 4/5: lambda=3.162, l1=1.00
+[raw] repeat 8/10, fold 5/5: lambda=3.162, l1=1.00
+[raw] repeat 9/10, fold 1/5: lambda=3.162, l1=1.00
+[raw] repeat 9/10, fold 2/5: lambda=3.162, l1=1.00
+[raw] repeat 9/10, fold 3/5: lambda=3.162, l1=1.00
+[raw] repeat 9/10, fold 4/5: lambda=3.162, l1=1.00
+[raw] repeat 9/10, fold 5/5: lambda=3.162, l1=1.00
+[raw] repeat 10/10, fold 1/5: lambda=3.162, l1=1.00
+[raw] repeat 10/10, fold 2/5: lambda=3.162, l1=1.00
+[raw] repeat 10/10, fold 3/5: lambda=3.162, l1=1.00
+[raw] repeat 10/10, fold 4/5: lambda=3.162, l1=1.00
+[raw] repeat 10/10, fold 5/5: lambda=3.162, l1=1.00
+[clr] repeat 1/10, fold 1/5: lambda=3.162, l1=1.00
+[clr] repeat 1/10, fold 2/5: lambda=3.162, l1=1.00
+[clr] repeat 1/10, fold 3/5: lambda=3.162, l1=1.00
+[clr] repeat 1/10, fold 4/5: lambda=3.162, l1=1.00
+[clr] repeat 1/10, fold 5/5: lambda=3.162, l1=1.00
+[clr] repeat 2/10, fold 1/5: lambda=3.162, l1=1.00
+[clr] repeat 2/10, fold 2/5: lambda=3.162, l1=1.00
+[clr] repeat 2/10, fold 3/5: lambda=3.162, l1=1.00
+[clr] repeat 2/10, fold 4/5: lambda=3.162, l1=1.00
+[clr] repeat 2/10, fold 5/5: lambda=3.162, l1=0.10
+[clr] repeat 3/10, fold 1/5: lambda=3.162, l1=0.10
+[clr] repeat 3/10, fold 2/5: lambda=3.162, l1=0.10
+[clr] repeat 3/10, fold 3/5: lambda=3.162, l1=1.00
+[clr] repeat 3/10, fold 4/5: lambda=3.162, l1=1.00
+[clr] repeat 3/10, fold 5/5: lambda=3.162, l1=1.00
+[clr] repeat 4/10, fold 1/5: lambda=3.162, l1=1.00
+[clr] repeat 4/10, fold 2/5: lambda=3.162, l1=1.00
+[clr] repeat 4/10, fold 3/5: lambda=3.162, l1=1.00
+[clr] repeat 4/10, fold 4/5: lambda=3.162, l1=0.10
+[clr] repeat 4/10, fold 5/5: lambda=3.162, l1=0.10
+[clr] repeat 5/10, fold 1/5: lambda=3.162, l1=0.10
+[clr] repeat 5/10, fold 2/5: lambda=3.162, l1=1.00
+[clr] repeat 5/10, fold 3/5: lambda=3.162, l1=0.10
+[clr] repeat 5/10, fold 4/5: lambda=3.162, l1=1.00
+[clr] repeat 5/10, fold 5/5: lambda=1.155, l1=0.40
+[clr] repeat 6/10, fold 1/5: lambda=3.162, l1=1.00
+[clr] repeat 6/10, fold 2/5: lambda=3.162, l1=0.10
+[clr] repeat 6/10, fold 3/5: lambda=3.162, l1=1.00
+[clr] repeat 6/10, fold 4/5: lambda=3.162, l1=1.00
+[clr] repeat 6/10, fold 5/5: lambda=3.162, l1=1.00
+[clr] repeat 7/10, fold 1/5: lambda=3.162, l1=1.00
+[clr] repeat 7/10, fold 2/5: lambda=3.162, l1=0.10
+[clr] repeat 7/10, fold 3/5: lambda=3.162, l1=1.00
+[clr] repeat 7/10, fold 4/5: lambda=3.162, l1=1.00
+[clr] repeat 7/10, fold 5/5: lambda=3.162, l1=1.00
+[clr] repeat 8/10, fold 1/5: lambda=3.162, l1=1.00
+[clr] repeat 8/10, fold 2/5: lambda=3.162, l1=0.10
+[clr] repeat 8/10, fold 3/5: lambda=3.162, l1=1.00
+[clr] repeat 8/10, fold 4/5: lambda=3.162, l1=1.00
+[clr] repeat 8/10, fold 5/5: lambda=3.162, l1=1.00
+[clr] repeat 9/10, fold 1/5: lambda=3.162, l1=1.00
+[clr] repeat 9/10, fold 2/5: lambda=3.162, l1=1.00
+[clr] repeat 9/10, fold 3/5: lambda=3.162, l1=0.10
+[clr] repeat 9/10, fold 4/5: lambda=3.162, l1=1.00
+[clr] repeat 9/10, fold 5/5: lambda=3.162, l1=1.00
+[clr] repeat 10/10, fold 1/5: lambda=3.162, l1=1.00
+[clr] repeat 10/10, fold 2/5: lambda=3.162, l1=0.10
+[clr] repeat 10/10, fold 3/5: lambda=3.162, l1=1.00
+[clr] repeat 10/10, fold 4/5: lambda=3.162, l1=1.00
+[clr] repeat 10/10, fold 5/5: lambda=3.162, l1=1.00
+[bootstrap] 25/250
+[bootstrap] 50/250
+[bootstrap] 75/250
+[bootstrap] 100/250
+[bootstrap] 125/250
+[bootstrap] 150/250
+[bootstrap] 175/250
+[bootstrap] 200/250
+[bootstrap] 225/250
+[bootstrap] 250/250
+Completed Elastic Net analysis: /home/colin/GUVP_pairwise_ranking/output/vp_pollution_elastic_net_finetune136k_core10_grouped

@@ -1,0 +1,599 @@
+2026/10/02 14:23:31 - mmengine - INFO - 
+------------------------------------------------------------
+System environment:
+    sys.platform: linux
+    Python: 3.11.16 (main, Aug 27 2026, 14:44:21) [GCC 14.3.0]
+    CUDA available: True
+    MUSA available: False
+    numpy_random_seed: 0
+    GPU 0: NVIDIA GeForce RTX 5060
+    CUDA_HOME: None
+    GCC: gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
+    PyTorch: 2.11.0+cu128
+    PyTorch compiling details: PyTorch built with:
+  - GCC 13.3
+  - C++ Version: 201703
+  - Intel(R) oneAPI Math Kernel Library Version 2024.2-Product Build 20240605 for Intel(R) 64 architecture applications
+  - Intel(R) MKL-DNN v3.10.2 (Git Hash f1d471933dc852f956fd05389f9313c7148783d5)
+  - OpenMP 201511 (a.k.a. OpenMP 4.5)
+  - LAPACK is enabled (usually provided by MKL)
+  - NNPACK is enabled
+  - CPU capability usage: AVX512
+  - CUDA Runtime 12.8
+  - NVCC architecture flags: -gencode;arch=compute_75,code=sm_75;-gencode;arch=compute_80,code=sm_80;-gencode;arch=compute_86,code=sm_86;-gencode;arch=compute_90,code=sm_90;-gencode;arch=compute_100,code=sm_100;-gencode;arch=compute_120,code=sm_120
+  - CuDNN 91.9  (built against CUDA 12.9)
+  - Magma 2.6.1
+  - Build settings: BLAS_INFO=mkl, BUILD_TYPE=Release, COMMIT_SHA=70d99e998b4955e0049d13a98d77ae1b14db1f45, CUDA_VERSION=12.8, CUDNN_VERSION=9.19.0, CXX_COMPILER=/opt/rh/gcc-toolset-13/root/usr/bin/c++, CXX_FLAGS= -fvisibility-inlines-hidden -DUSE_PTHREADPOOL -DNDEBUG -DUSE_KINETO -DLIBKINETO_NOROCTRACER -DLIBKINETO_NOXPUPTI=ON -DUSE_FBGEMM -DUSE_MSLK -DUSE_PYTORCH_QNNPACK -DUSE_XNNPACK -DSYMBOLICATE_MOBILE_DEBUG_HANDLE -O2 -fPIC -DC10_NODEPRECATED -Wall -Wextra -Werror=return-type -Werror=non-virtual-dtor -Werror=range-loop-construct -Werror=bool-operation -Wnarrowing -Wno-missing-field-initializers -Wno-unknown-pragmas -Wno-unused-parameter -Wno-strict-overflow -Wno-strict-aliasing -Wno-stringop-overflow -Wsuggest-override -Wno-psabi -Wno-error=old-style-cast -faligned-new -Wno-maybe-uninitialized -fno-math-errno -fno-trapping-math -Werror=format -Wno-dangling-reference -Wno-error=dangling-reference -Wno-stringop-overflow, LAPACK_INFO=mkl, PERF_WITH_AVX=1, PERF_WITH_AVX2=1, TORCH_VERSION=2.11.0, USE_CUDA=ON, USE_CUDNN=ON, USE_CUSPARSELT=1, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_GLOO=ON, USE_MKL=ON, USE_MKLDNN=ON, USE_MPI=OFF, USE_NCCL=1, USE_NNPACK=ON, USE_OPENMP=ON, USE_ROCM=OFF, USE_ROCM_KERNEL_ASSERT=OFF, USE_XCCL=OFF, USE_XPU=OFF, 
+
+    TorchVision: 0.26.0+cu128
+    OpenCV: 5.0.0
+    MMEngine: 0.10.7
+
+Runtime environment:
+    cudnn_benchmark: True
+    dist_cfg: {'backend': 'nccl'}
+    mp_cfg: {'mp_start_method': 'fork', 'opencv_num_threads': 0}
+    deterministic: False
+    seed: 0
+    Distributed launcher: none
+    Distributed training: False
+    GPU number: 1
+------------------------------------------------------------
+
+2026/10/02 14:23:31 - mmengine - INFO - Config:
+auto_scale_lr = dict(base_batch_size=16, enable=True)
+crop_size = (
+    512,
+    512,
+)
+custom_imports = dict(
+    allow_failed_imports=False, imports=[
+        'mapillary_transforms',
+    ])
+data_preprocessor = dict(
+    bgr_to_rgb=True,
+    mean=[
+        123.675,
+        116.28,
+        103.53,
+    ],
+    pad_val=0,
+    seg_pad_val=255,
+    size=(
+        512,
+        512,
+    ),
+    std=[
+        58.395,
+        57.12,
+        57.375,
+    ],
+    type='SegDataPreProcessor')
+data_root = '/home/colin/datasets/mapillary_vistas'
+dataset_type = 'MapillaryDataset_v2'
+default_hooks = dict(
+    checkpoint=dict(
+        by_epoch=False,
+        interval=4000,
+        max_keep_ckpts=5,
+        rule='greater',
+        save_best='mIoU',
+        type='CheckpointHook'),
+    logger=dict(interval=50, log_metric_by_epoch=False, type='LoggerHook'),
+    param_scheduler=dict(type='ParamSchedulerHook'),
+    sampler_seed=dict(type='DistSamplerSeedHook'),
+    timer=dict(type='IterTimerHook'),
+    visualization=dict(type='SegVisualizationHook'))
+default_scope = 'mmseg'
+env_cfg = dict(
+    cudnn_benchmark=True,
+    dist_cfg=dict(backend='nccl'),
+    mp_cfg=dict(mp_start_method='fork', opencv_num_threads=0))
+launcher = 'none'
+load_from = '/home/colin/GUVP_pairwise_ranking/output/deeplabv3plus_r50_mapillary_v2_80k/iter_80000.pth'
+log_level = 'INFO'
+log_processor = dict(by_epoch=False)
+model = dict(
+    auxiliary_head=dict(
+        align_corners=False,
+        channels=256,
+        concat_input=False,
+        dropout_ratio=0.1,
+        in_channels=1024,
+        in_index=2,
+        loss_decode=dict(
+            loss_weight=0.4, type='CrossEntropyLoss', use_sigmoid=False),
+        norm_cfg=dict(requires_grad=True, type='SyncBN'),
+        num_classes=124,
+        num_convs=1,
+        type='FCNHead'),
+    backbone=dict(
+        contract_dilation=True,
+        depth=50,
+        dilations=(
+            1,
+            1,
+            2,
+            4,
+        ),
+        norm_cfg=dict(requires_grad=True, type='SyncBN'),
+        norm_eval=False,
+        num_stages=4,
+        out_indices=(
+            0,
+            1,
+            2,
+            3,
+        ),
+        strides=(
+            1,
+            2,
+            1,
+            1,
+        ),
+        style='pytorch',
+        type='ResNetV1c'),
+    data_preprocessor=dict(
+        bgr_to_rgb=True,
+        mean=[
+            123.675,
+            116.28,
+            103.53,
+        ],
+        pad_val=0,
+        seg_pad_val=255,
+        size=(
+            512,
+            512,
+        ),
+        std=[
+            58.395,
+            57.12,
+            57.375,
+        ],
+        type='SegDataPreProcessor'),
+    decode_head=dict(
+        align_corners=False,
+        c1_channels=48,
+        c1_in_channels=256,
+        channels=512,
+        dilations=(
+            1,
+            12,
+            24,
+            36,
+        ),
+        dropout_ratio=0.1,
+        in_channels=2048,
+        in_index=3,
+        loss_decode=dict(
+            loss_weight=1.0, type='CrossEntropyLoss', use_sigmoid=False),
+        norm_cfg=dict(requires_grad=True, type='SyncBN'),
+        num_classes=124,
+        type='DepthwiseSeparableASPPHead'),
+    pretrained='open-mmlab://resnet50_v1c',
+    test_cfg=dict(mode='whole'),
+    train_cfg=dict(),
+    type='EncoderDecoder')
+norm_cfg = dict(requires_grad=True, type='SyncBN')
+optim_wrapper = dict(
+    clip_grad=None,
+    loss_scale='dynamic',
+    optimizer=dict(lr=0.01, momentum=0.9, type='SGD', weight_decay=0.0005),
+    type='AmpOptimWrapper')
+optimizer = dict(lr=0.01, momentum=0.9, type='SGD', weight_decay=0.0005)
+param_scheduler = [
+    dict(
+        begin=0,
+        by_epoch=False,
+        end=80000,
+        eta_min=0.0001,
+        power=0.9,
+        type='PolyLR'),
+]
+randomness = dict(deterministic=False, seed=0)
+resume = True
+test_cfg = dict(type='TestLoop')
+test_dataloader = dict(
+    batch_size=1,
+    dataset=dict(
+        ann_file=
+        '/home/colin/GUVP_pairwise_ranking/data/mapillary_vistas_train_eval_2000.txt',
+        data_prefix=dict(
+            img_path='training/images', seg_map_path='training/v2.0/labels'),
+        data_root='/home/colin/datasets/mapillary_vistas',
+        pipeline=[
+            dict(type='LoadImageFromFile'),
+            dict(type='LoadAnnotations'),
+            dict(keep_ratio=True, scale=(
+                2048,
+                512,
+            ), type='Resize'),
+            dict(type='UseResizedShapeForEvaluation'),
+            dict(type='PackSegInputs'),
+        ],
+        type='MapillaryDataset_v2'),
+    num_workers=4,
+    persistent_workers=True,
+    sampler=dict(shuffle=False, type='DefaultSampler'))
+test_evaluator = dict(
+    iou_metrics=[
+        'mIoU',
+        'mDice',
+    ], type='IoUMetric')
+test_pipeline = [
+    dict(type='LoadImageFromFile'),
+    dict(type='LoadAnnotations'),
+    dict(keep_ratio=True, scale=(
+        2048,
+        512,
+    ), type='Resize'),
+    dict(type='UseResizedShapeForEvaluation'),
+    dict(type='PackSegInputs'),
+]
+train_cfg = dict(
+    max_iters=450000, type='IterBasedTrainLoop', val_interval=4000)
+train_dataloader = dict(
+    batch_size=2,
+    dataset=dict(
+        data_prefix=dict(
+            img_path='training/images', seg_map_path='training/v2.0/labels'),
+        data_root='/home/colin/datasets/mapillary_vistas',
+        pipeline=[
+            dict(type='LoadImageFromFile'),
+            dict(type='LoadAnnotations'),
+            dict(
+                keep_ratio=True,
+                ratio_range=(
+                    0.5,
+                    2.0,
+                ),
+                scale=(
+                    2048,
+                    512,
+                ),
+                type='RandomResize'),
+            dict(
+                cat_max_ratio=0.75, crop_size=(
+                    512,
+                    512,
+                ), type='RandomCrop'),
+            dict(prob=0.5, type='RandomFlip'),
+            dict(type='PhotoMetricDistortion'),
+            dict(type='PackSegInputs'),
+        ],
+        type='MapillaryDataset_v2'),
+    num_workers=4,
+    persistent_workers=True,
+    sampler=dict(shuffle=True, type='InfiniteSampler'))
+train_eval_pipeline = [
+    dict(type='LoadImageFromFile'),
+    dict(type='LoadAnnotations'),
+    dict(keep_ratio=True, scale=(
+        2048,
+        512,
+    ), type='Resize'),
+    dict(type='UseResizedShapeForEvaluation'),
+    dict(type='PackSegInputs'),
+]
+train_pipeline = [
+    dict(type='LoadImageFromFile'),
+    dict(type='LoadAnnotations'),
+    dict(
+        keep_ratio=True,
+        ratio_range=(
+            0.5,
+            2.0,
+        ),
+        scale=(
+            2048,
+            512,
+        ),
+        type='RandomResize'),
+    dict(cat_max_ratio=0.75, crop_size=(
+        512,
+        512,
+    ), type='RandomCrop'),
+    dict(prob=0.5, type='RandomFlip'),
+    dict(type='PhotoMetricDistortion'),
+    dict(type='PackSegInputs'),
+]
+tta_model = dict(type='SegTTAModel')
+val_cfg = dict(type='ValLoop')
+val_dataloader = dict(
+    batch_size=1,
+    dataset=dict(
+        data_prefix=dict(
+            img_path='validation/images',
+            seg_map_path='validation/v2.0/labels'),
+        data_root='/home/colin/datasets/mapillary_vistas',
+        pipeline=[
+            dict(type='LoadImageFromFile'),
+            dict(type='LoadAnnotations'),
+            dict(keep_ratio=True, scale=(
+                2048,
+                512,
+            ), type='Resize'),
+            dict(type='UseResizedShapeForEvaluation'),
+            dict(type='PackSegInputs'),
+        ],
+        type='MapillaryDataset_v2'),
+    num_workers=4,
+    persistent_workers=True,
+    sampler=dict(shuffle=False, type='DefaultSampler'))
+val_evaluator = dict(
+    iou_metrics=[
+        'mIoU',
+        'mDice',
+    ], type='IoUMetric')
+vis_backends = [
+    dict(type='LocalVisBackend'),
+]
+visualizer = dict(
+    name='visualizer',
+    type='SegLocalVisualizer',
+    vis_backends=[
+        dict(type='LocalVisBackend'),
+    ])
+work_dir = '/home/colin/GUVP_pairwise_ranking/output/train_miou_eval_2000/train_eval_2000_logs/main_450k_iter_80000'
+
+2026/10/02 14:23:32 - mmengine - INFO - Distributed training is not used, all SyncBatchNorm (SyncBN) layers in the model will be automatically reverted to BatchNormXd layers if they are used.
+2026/10/02 14:23:32 - mmengine - INFO - Hooks will be executed in the following order:
+before_run:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(BELOW_NORMAL) LoggerHook                         
+ -------------------- 
+before_train:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(NORMAL      ) IterTimerHook                      
+(VERY_LOW    ) CheckpointHook                     
+ -------------------- 
+before_train_epoch:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(NORMAL      ) IterTimerHook                      
+(NORMAL      ) DistSamplerSeedHook                
+ -------------------- 
+before_train_iter:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(NORMAL      ) IterTimerHook                      
+ -------------------- 
+after_train_iter:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(NORMAL      ) IterTimerHook                      
+(NORMAL      ) SegVisualizationHook               
+(BELOW_NORMAL) LoggerHook                         
+(LOW         ) ParamSchedulerHook                 
+(VERY_LOW    ) CheckpointHook                     
+ -------------------- 
+after_train_epoch:
+(NORMAL      ) IterTimerHook                      
+(LOW         ) ParamSchedulerHook                 
+(VERY_LOW    ) CheckpointHook                     
+ -------------------- 
+before_val:
+(VERY_HIGH   ) RuntimeInfoHook                    
+ -------------------- 
+before_val_epoch:
+(NORMAL      ) IterTimerHook                      
+ -------------------- 
+before_val_iter:
+(NORMAL      ) IterTimerHook                      
+ -------------------- 
+after_val_iter:
+(NORMAL      ) IterTimerHook                      
+(NORMAL      ) SegVisualizationHook               
+(BELOW_NORMAL) LoggerHook                         
+ -------------------- 
+after_val_epoch:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(NORMAL      ) IterTimerHook                      
+(BELOW_NORMAL) LoggerHook                         
+(LOW         ) ParamSchedulerHook                 
+(VERY_LOW    ) CheckpointHook                     
+ -------------------- 
+after_val:
+(VERY_HIGH   ) RuntimeInfoHook                    
+ -------------------- 
+after_train:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(VERY_LOW    ) CheckpointHook                     
+ -------------------- 
+before_test:
+(VERY_HIGH   ) RuntimeInfoHook                    
+ -------------------- 
+before_test_epoch:
+(NORMAL      ) IterTimerHook                      
+ -------------------- 
+before_test_iter:
+(NORMAL      ) IterTimerHook                      
+ -------------------- 
+after_test_iter:
+(NORMAL      ) IterTimerHook                      
+(NORMAL      ) SegVisualizationHook               
+(BELOW_NORMAL) LoggerHook                         
+ -------------------- 
+after_test_epoch:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(NORMAL      ) IterTimerHook                      
+(BELOW_NORMAL) LoggerHook                         
+ -------------------- 
+after_test:
+(VERY_HIGH   ) RuntimeInfoHook                    
+ -------------------- 
+after_run:
+(BELOW_NORMAL) LoggerHook                         
+ -------------------- 
+2026/10/02 14:23:32 - mmengine - WARNING - The prefix is not set in metric class IoUMetric.
+2026/10/02 14:23:32 - mmengine - INFO - Load checkpoint from /home/colin/GUVP_pairwise_ranking/output/deeplabv3plus_r50_mapillary_v2_80k/iter_80000.pth
+2026/10/02 14:23:33 - mmengine - INFO - resumed epoch: 0, iter: 80000
+2026/10/02 14:24:42 - mmengine - INFO - Iter(test) [  50/2000]    eta: 0:45:01  time: 1.0060  data_time: 0.0009  memory: 6834  
+2026/10/02 14:24:59 - mmengine - INFO - Iter(test) [ 100/2000]    eta: 0:27:20  time: 0.0479  data_time: 0.0009  memory: 5996  
+2026/10/02 14:25:10 - mmengine - INFO - Iter(test) [ 150/2000]    eta: 0:19:58  time: 0.0499  data_time: 0.0009  memory: 2464  
+2026/10/02 14:25:12 - mmengine - INFO - Iter(test) [ 200/2000]    eta: 0:14:56  time: 0.0493  data_time: 0.0008  memory: 842  
+2026/10/02 14:25:33 - mmengine - INFO - Iter(test) [ 250/2000]    eta: 0:14:06  time: 1.0014  data_time: 0.0009  memory: 6043  
+2026/10/02 14:25:36 - mmengine - INFO - Iter(test) [ 300/2000]    eta: 0:11:38  time: 0.0478  data_time: 0.0009  memory: 841  
+2026/10/02 14:25:49 - mmengine - INFO - Iter(test) [ 350/2000]    eta: 0:10:42  time: 0.0462  data_time: 0.0008  memory: 6053  
+2026/10/02 14:25:51 - mmengine - INFO - Iter(test) [ 400/2000]    eta: 0:09:15  time: 0.0462  data_time: 0.0009  memory: 843  
+2026/10/02 14:25:54 - mmengine - INFO - Iter(test) [ 450/2000]    eta: 0:08:06  time: 0.0490  data_time: 0.0009  memory: 843  
+2026/10/02 14:25:57 - mmengine - INFO - Iter(test) [ 500/2000]    eta: 0:07:13  time: 0.1427  data_time: 0.0008  memory: 1929  
+2026/10/02 14:26:00 - mmengine - INFO - Iter(test) [ 550/2000]    eta: 0:06:28  time: 0.0831  data_time: 0.0009  memory: 901  
+2026/10/02 14:26:03 - mmengine - INFO - Iter(test) [ 600/2000]    eta: 0:05:51  time: 0.0478  data_time: 0.0009  memory: 1929  
+2026/10/02 14:26:06 - mmengine - INFO - Iter(test) [ 650/2000]    eta: 0:05:17  time: 0.0485  data_time: 0.0009  memory: 844  
+2026/10/02 14:26:08 - mmengine - INFO - Iter(test) [ 700/2000]    eta: 0:04:48  time: 0.0508  data_time: 0.0009  memory: 844  
+2026/10/02 14:26:20 - mmengine - INFO - Iter(test) [ 750/2000]    eta: 0:04:38  time: 0.0462  data_time: 0.0009  memory: 6832  
+2026/10/02 14:26:22 - mmengine - INFO - Iter(test) [ 800/2000]    eta: 0:04:14  time: 0.0465  data_time: 0.0010  memory: 841  
+2026/10/02 14:26:25 - mmengine - INFO - Iter(test) [ 850/2000]    eta: 0:03:52  time: 0.0509  data_time: 0.0009  memory: 841  
+2026/10/02 14:26:27 - mmengine - INFO - Iter(test) [ 900/2000]    eta: 0:03:33  time: 0.0806  data_time: 0.0009  memory: 841  
+2026/10/02 14:26:30 - mmengine - INFO - Iter(test) [ 950/2000]    eta: 0:03:16  time: 0.0483  data_time: 0.0009  memory: 875  
+2026/10/02 14:26:32 - mmengine - INFO - Iter(test) [1000/2000]    eta: 0:02:59  time: 0.0493  data_time: 0.0009  memory: 875  
+2026/10/02 14:26:35 - mmengine - INFO - Iter(test) [1050/2000]    eta: 0:02:44  time: 0.0463  data_time: 0.0009  memory: 841  
+2026/10/02 14:26:46 - mmengine - INFO - Iter(test) [1100/2000]    eta: 0:02:38  time: 0.0493  data_time: 0.0009  memory: 6815  
+2026/10/02 14:26:58 - mmengine - INFO - Iter(test) [1150/2000]    eta: 0:02:31  time: 0.0494  data_time: 0.0009  memory: 5929  
+2026/10/02 14:27:01 - mmengine - INFO - Iter(test) [1200/2000]    eta: 0:02:18  time: 0.0462  data_time: 0.0009  memory: 841  
+2026/10/02 14:27:03 - mmengine - INFO - Iter(test) [1250/2000]    eta: 0:02:06  time: 0.0492  data_time: 0.0009  memory: 841  
+2026/10/02 14:27:05 - mmengine - INFO - Iter(test) [1300/2000]    eta: 0:01:54  time: 0.0477  data_time: 0.0008  memory: 841  
+2026/10/02 14:27:08 - mmengine - INFO - Iter(test) [1350/2000]    eta: 0:01:43  time: 0.0479  data_time: 0.0009  memory: 841  
+2026/10/02 14:27:10 - mmengine - INFO - Iter(test) [1400/2000]    eta: 0:01:33  time: 0.0462  data_time: 0.0009  memory: 841  
+2026/10/02 14:27:13 - mmengine - INFO - Iter(test) [1450/2000]    eta: 0:01:23  time: 0.0493  data_time: 0.0009  memory: 841  
+2026/10/02 14:27:15 - mmengine - INFO - Iter(test) [1500/2000]    eta: 0:01:14  time: 0.0462  data_time: 0.0008  memory: 875  
+2026/10/02 14:27:27 - mmengine - INFO - Iter(test) [1550/2000]    eta: 0:01:08  time: 0.0480  data_time: 0.0010  memory: 6028  
+2026/10/02 14:27:44 - mmengine - INFO - Iter(test) [1600/2000]    eta: 0:01:02  time: 0.0478  data_time: 0.0009  memory: 6034  
+2026/10/02 14:27:46 - mmengine - INFO - Iter(test) [1650/2000]    eta: 0:00:53  time: 0.0797  data_time: 0.0009  memory: 875  
+2026/10/02 14:27:49 - mmengine - INFO - Iter(test) [1700/2000]    eta: 0:00:45  time: 0.0462  data_time: 0.0009  memory: 843  
+2026/10/02 14:27:51 - mmengine - INFO - Iter(test) [1750/2000]    eta: 0:00:36  time: 0.0494  data_time: 0.0010  memory: 843  
+2026/10/02 14:27:54 - mmengine - INFO - Iter(test) [1800/2000]    eta: 0:00:29  time: 0.0492  data_time: 0.0009  memory: 843  
+2026/10/02 14:27:56 - mmengine - INFO - Iter(test) [1850/2000]    eta: 0:00:21  time: 0.0507  data_time: 0.0009  memory: 843  
+2026/10/02 14:27:59 - mmengine - INFO - Iter(test) [1900/2000]    eta: 0:00:14  time: 0.0477  data_time: 0.0009  memory: 843  
+2026/10/02 14:28:01 - mmengine - INFO - Iter(test) [1950/2000]    eta: 0:00:06  time: 0.0508  data_time: 0.0009  memory: 843  
+2026/10/02 14:28:04 - mmengine - INFO - Iter(test) [2000/2000]    eta: 0:00:00  time: 0.0503  data_time: 0.0006  memory: 875  
+2026/10/02 14:28:04 - mmengine - INFO - per class results:
+2026/10/02 14:28:04 - mmengine - INFO - 
++------------------------------------------------+-------+-------+-------+
+|                     Class                      |  IoU  |  Acc  |  Dice |
++------------------------------------------------+-------+-------+-------+
+|                      Bird                      |  0.0  |  0.0  |  0.0  |
+|                 Ground Animal                  |  0.0  |  0.0  |  0.0  |
+|               Ambiguous Barrier                |  0.0  |  0.0  |  0.0  |
+|                 Concrete Block                 |  56.9 | 83.47 | 72.53 |
+|                      Curb                      | 47.76 | 60.65 | 64.65 |
+|                     Fence                      | 51.06 | 66.57 |  67.6 |
+|                   Guard Rail                   | 50.84 |  80.7 | 67.41 |
+|                    Barrier                     |  0.0  |  0.0  |  0.0  |
+|                  Road Median                   |  2.47 |  2.62 |  4.83 |
+|                   Road Side                    |  7.87 |  9.03 |  14.6 |
+|                 Lane Separator                 |  0.0  |  0.0  |  0.01 |
+|               Temporary Barrier                | 19.79 | 29.65 | 33.04 |
+|                      Wall                      |  50.5 |  68.3 | 67.11 |
+|                   Bike Lane                    | 28.55 | 60.78 | 44.42 |
+|               Crosswalk - Plain                | 23.55 | 28.71 | 38.12 |
+|                    Curb Cut                    |  2.66 |  2.75 |  5.19 |
+|                    Driveway                    |  3.16 |  3.3  |  6.13 |
+|                    Parking                     | 10.74 | 11.93 | 19.39 |
+|                 Parking Aisle                  |  0.0  |  0.0  |  0.0  |
+|                Pedestrian Area                 | 42.65 |  82.9 |  59.8 |
+|                   Rail Track                   | 41.23 | 77.59 | 58.39 |
+|                      Road                      | 84.94 | 92.79 | 91.85 |
+|                 Road Shoulder                  | 15.51 | 18.79 | 26.85 |
+|                  Service Lane                  | 51.97 | 81.93 |  68.4 |
+|                    Sidewalk                    | 62.94 | 82.15 | 77.25 |
+|                 Traffic Island                 | 36.35 | 45.52 | 53.32 |
+|                     Bridge                     | 58.53 | 86.38 | 73.84 |
+|                    Building                    | 83.78 | 92.72 | 91.17 |
+|                     Garage                     |  0.0  |  0.0  |  0.0  |
+|                     Tunnel                     | 49.65 | 93.09 | 66.35 |
+|                     Person                     | 55.67 | 71.88 | 71.52 |
+|                  Person Group                  |  0.0  |  0.0  |  0.0  |
+|                   Bicyclist                    | 21.72 | 28.58 | 35.69 |
+|                  Motorcyclist                  | 20.26 | 26.52 | 33.69 |
+|                  Other Rider                   |  0.0  |  0.0  |  0.0  |
+|           Lane Marking - Dashed Line           | 32.23 | 38.81 | 48.75 |
+|          Lane Marking - Straight Line          |  48.8 | 59.66 | 65.59 |
+|           Lane Marking - Zigzag Line           |  0.0  |  0.0  |  0.0  |
+|            Lane Marking - Ambiguous            |  0.0  |  0.0  |  0.0  |
+|          Lane Marking - Arrow (Left)           |  0.0  |  0.0  |  0.0  |
+|          Lane Marking - Arrow (Other)          |  0.0  |  0.0  |  0.0  |
+|          Lane Marking - Arrow (Right)          |  0.0  |  0.0  |  0.0  |
+| Lane Marking - Arrow (Split Left or Straight)  |  0.0  |  0.0  |  0.0  |
+| Lane Marking - Arrow (Split Right or Straight) |  0.0  |  0.0  |  0.0  |
+|        Lane Marking - Arrow (Straight)         |  0.0  |  0.0  |  0.0  |
+|            Lane Marking - Crosswalk            | 66.57 | 84.36 | 79.93 |
+|         Lane Marking - Give Way (Row)          |  0.0  |  0.0  |  0.0  |
+|        Lane Marking - Give Way (Single)        |  0.0  |  0.0  |  0.0  |
+|        Lane Marking - Hatched (Chevron)        |  0.0  |  0.0  |  0.0  |
+|       Lane Marking - Hatched (Diagonal)        | 26.61 | 47.51 | 42.03 |
+|              Lane Marking - Other              | 22.96 | 31.47 | 37.35 |
+|            Lane Marking - Stop Line            |  31.3 | 38.28 | 47.68 |
+|        Lane Marking - Symbol (Bicycle)         |  0.0  |  0.0  |  0.0  |
+|         Lane Marking - Symbol (Other)          |  0.0  |  0.0  |  0.0  |
+|              Lane Marking - Text               | 34.07 | 63.69 | 50.83 |
+|       Lane Marking (only) - Dashed Line        |  0.0  |  0.0  |  0.0  |
+|        Lane Marking (only) - Crosswalk         |  0.0  |  0.0  |  0.0  |
+|          Lane Marking (only) - Other           |  0.0  |  0.0  |  0.0  |
+|           Lane Marking (only) - Test           |  0.0  |  0.0  |  0.0  |
+|                    Mountain                    | 60.22 | 76.91 | 75.17 |
+|                      Sand                      |  0.0  |  0.0  |  0.0  |
+|                      Sky                       | 96.77 | 98.22 | 98.36 |
+|                      Snow                      | 52.56 | 71.16 |  68.9 |
+|                    Terrain                     | 59.24 | 67.27 |  74.4 |
+|                   Vegetation                   | 87.02 | 94.64 | 93.06 |
+|                     Water                      | 67.75 |  90.9 | 80.78 |
+|                     Banner                     |  0.13 |  0.13 |  0.26 |
+|                     Bench                      |  0.0  |  0.0  |  0.0  |
+|                   Bike Rack                    |  0.0  |  0.0  |  0.0  |
+|                  Catch Basin                   |  0.16 |  0.16 |  0.33 |
+|                  CCTV Camera                   |  0.0  |  0.0  |  0.0  |
+|                  Fire Hydrant                  |  0.0  |  0.0  |  0.0  |
+|                  Junction Box                  |  12.2 | 14.12 | 21.75 |
+|                    Mailbox                     |  0.0  |  0.0  |  0.0  |
+|                    Manhole                     | 26.67 | 35.68 |  42.1 |
+|                 Parking Meter                  |  0.0  |  0.0  |  0.0  |
+|                  Phone Booth                   |  0.0  |  0.0  |  0.0  |
+|                    Pothole                     |  0.0  |  0.0  |  0.0  |
+|            Signage - Advertisement             | 42.26 | 56.01 | 59.41 |
+|              Signage - Ambiguous               |  0.0  |  0.0  |  0.0  |
+|                 Signage - Back                 |  0.0  |  0.0  |  0.0  |
+|             Signage - Information              |  0.0  |  0.0  |  0.0  |
+|                Signage - Other                 |  0.0  |  0.0  |  0.0  |
+|                Signage - Store                 | 32.85 | 42.78 | 49.46 |
+|                  Street Light                  |  29.9 | 36.65 | 46.04 |
+|                      Pole                      | 31.37 | 43.53 | 47.76 |
+|                   Pole Group                   |  0.0  |  0.0  |  0.0  |
+|               Traffic Sign Frame               | 41.97 | 60.79 | 59.12 |
+|                  Utility Pole                  | 37.02 | 47.36 | 54.03 |
+|                  Traffic Cone                  |  0.0  |  0.0  |  0.0  |
+|        Traffic Light - General (Single)        |  0.0  |  0.0  |  0.0  |
+|          Traffic Light - Pedestrians           |  0.0  |  0.0  |  0.0  |
+|       Traffic Light - General (Upright)        | 49.53 | 65.86 | 66.25 |
+|      Traffic Light - General (Horizontal)      |  1.53 |  1.53 |  3.01 |
+|            Traffic Light - Cyclists            |  0.0  |  0.0  |  0.0  |
+|             Traffic Light - Other              |  0.0  |  0.0  |  0.0  |
+|            Traffic Sign - Ambiguous            |  0.0  |  0.0  |  0.0  |
+|              Traffic Sign (Back)               | 21.01 | 29.05 | 34.73 |
+|        Traffic Sign - Direction (Back)         |  2.11 |  2.16 |  4.14 |
+|        Traffic Sign - Direction (Front)        | 58.44 | 73.26 | 73.77 |
+|              Traffic Sign (Front)              | 44.88 | 58.72 | 61.96 |
+|             Traffic Sign - Parking             |  0.0  |  0.0  |  0.0  |
+|        Traffic Sign - Temporary (Back)         |  0.0  |  0.0  |  0.0  |
+|        Traffic Sign - Temporary (Front)        |  0.0  |  0.0  |  0.0  |
+|                   Trash Can                    | 37.64 | 58.65 | 54.69 |
+|                    Bicycle                     | 39.98 | 79.01 | 57.12 |
+|                      Boat                      |  0.0  |  0.0  |  0.0  |
+|                      Bus                       | 61.01 | 87.28 | 75.78 |
+|                      Car                       | 85.52 | 92.14 |  92.2 |
+|                    Caravan                     |  0.0  |  0.0  |  0.0  |
+|                   Motorcycle                   | 32.47 | 73.87 | 49.02 |
+|                    On Rails                    |  0.0  |  0.0  |  0.0  |
+|                 Other Vehicle                  |  1.1  |  1.11 |  2.18 |
+|                    Trailer                     |  0.0  |  0.0  |  0.0  |
+|                     Truck                      | 54.51 | 83.66 | 70.56 |
+|                 Vehicle Group                  |  13.3 | 17.16 | 23.48 |
+|                  Wheeled Slow                  |  0.0  |  0.0  |  0.0  |
+|                  Water Valve                   |  0.0  |  0.0  |  0.0  |
+|                   Car Mount                    | 79.42 | 91.23 | 88.53 |
+|                    Dynamic                     | 16.29 | 21.97 | 28.01 |
+|                  Ego Vehicle                   | 82.15 | 83.64 |  90.2 |
+|                     Ground                     | 31.07 | 41.03 | 47.41 |
+|                     Static                     | 14.73 | 18.75 | 25.68 |
+|                   Unlabeled                    |  0.0  |  0.0  |  0.0  |
++------------------------------------------------+-------+-------+-------+
+2026/10/02 14:28:04 - mmengine - INFO - Iter(test) [2000/2000]    aAcc: 88.2100  mIoU: 21.3600  mAcc: 28.7900  mDice: 28.2700  data_time: 0.0010  time: 0.1356

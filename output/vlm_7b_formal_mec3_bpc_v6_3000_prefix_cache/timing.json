@@ -1,0 +1,13 @@
+{
+  "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+  "decode_mode": "sampled_evidence_first_scores_serial_reused_prefix_multinomial",
+  "mec_samples": 3,
+  "mec_batch_size": 1,
+  "completed_pairs": 3000,
+  "model_load_seconds": 14.400242681003874,
+  "preprocess_seconds": 446.35935895401053,
+  "generate_seconds": 43596.27984794293,
+  "generation_batches": 6000,
+  "wall_seconds": 44071.450400967005,
+  "peak_cuda_allocated_gib": 5.880984783172607
+}

@@ -1,0 +1,1 @@
+comparison_id,image_a,image_b,winner,model,prompt_version,prompt_sha256,label_layout,max_pixels,quantization,cpu_offload,decode_mode,timestamp_utc,choice_ab,choice_ba,raw_response_ab,raw_response_ba,status

@@ -1,0 +1,8 @@
+{
+  "image_count": 1000,
+  "feature_count": 124,
+  "target_column": "visual_pollution_score_0_10",
+  "feature_type": "per-image predicted semantic-class pixel ratio",
+  "component_percentages_long": "pixel_percentage is in the 0-100 range",
+  "inference_mode": "single-scale whole-image aspect-ratio-preserving baseline; CPU nearest-neighbour mask restore"
+}

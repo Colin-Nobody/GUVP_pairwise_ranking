@@ -1,0 +1,8 @@
+/home/colin/GUVP_pairwise_ranking/segmentation/vendor/mmsegmentation/mmseg/models/builder.py:36: UserWarning: ``build_loss`` would be deprecated soon, please use ``mmseg.registry.MODELS.build()`` 
+  warnings.warn('``build_loss`` would be deprecated soon, please use '
+/home/colin/GUVP_pairwise_ranking/segmentation/vendor/mmsegmentation/mmseg/models/losses/cross_entropy_loss.py:250: UserWarning: Default ``avg_non_ignore`` is False, if you would like to ignore the certain label and average loss over non-ignore labels, which is the same with PyTorch official cross_entropy, set ``avg_non_ignore=True``.
+  warnings.warn(
+/home/colin/miniconda3/envs/guvp-seg/lib/python3.11/site-packages/mmengine/runner/checkpoint.py:347: UserWarning: Environment variable TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD detected, since the`weights_only` argument was not explicitly passed to `torch.load`, forcing weights_only=False.
+  checkpoint = torch.load(filename, map_location=map_location)
+Loads checkpoint by local backend from path: /home/colin/GUVP_pairwise_ranking/output/deeplabv3plus_r50_mapillary_v2_baseline_resize_b1_450k/best_mIoU_iter_408000.pth
+[baseline 01/250] Barcelona 002955dc-44b1-42e2-b557-9e90e795ae93 2048x1152 0.27s

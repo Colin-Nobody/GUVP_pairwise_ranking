@@ -1,0 +1,2099 @@
+2026/09/23 21:10:23 - mmengine - INFO - 
+------------------------------------------------------------
+System environment:
+    sys.platform: linux
+    Python: 3.11.16 (main, Aug 27 2026, 14:44:21) [GCC 14.3.0]
+    CUDA available: True
+    MUSA available: False
+    numpy_random_seed: 0
+    GPU 0: NVIDIA GeForce RTX 5060
+    CUDA_HOME: None
+    GCC: gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
+    PyTorch: 2.11.0+cu128
+    PyTorch compiling details: PyTorch built with:
+  - GCC 13.3
+  - C++ Version: 201703
+  - Intel(R) oneAPI Math Kernel Library Version 2024.2-Product Build 20240605 for Intel(R) 64 architecture applications
+  - Intel(R) MKL-DNN v3.10.2 (Git Hash f1d471933dc852f956fd05389f9313c7148783d5)
+  - OpenMP 201511 (a.k.a. OpenMP 4.5)
+  - LAPACK is enabled (usually provided by MKL)
+  - NNPACK is enabled
+  - CPU capability usage: AVX512
+  - CUDA Runtime 12.8
+  - NVCC architecture flags: -gencode;arch=compute_75,code=sm_75;-gencode;arch=compute_80,code=sm_80;-gencode;arch=compute_86,code=sm_86;-gencode;arch=compute_90,code=sm_90;-gencode;arch=compute_100,code=sm_100;-gencode;arch=compute_120,code=sm_120
+  - CuDNN 91.9  (built against CUDA 12.9)
+  - Magma 2.6.1
+  - Build settings: BLAS_INFO=mkl, BUILD_TYPE=Release, COMMIT_SHA=70d99e998b4955e0049d13a98d77ae1b14db1f45, CUDA_VERSION=12.8, CUDNN_VERSION=9.19.0, CXX_COMPILER=/opt/rh/gcc-toolset-13/root/usr/bin/c++, CXX_FLAGS= -fvisibility-inlines-hidden -DUSE_PTHREADPOOL -DNDEBUG -DUSE_KINETO -DLIBKINETO_NOROCTRACER -DLIBKINETO_NOXPUPTI=ON -DUSE_FBGEMM -DUSE_MSLK -DUSE_PYTORCH_QNNPACK -DUSE_XNNPACK -DSYMBOLICATE_MOBILE_DEBUG_HANDLE -O2 -fPIC -DC10_NODEPRECATED -Wall -Wextra -Werror=return-type -Werror=non-virtual-dtor -Werror=range-loop-construct -Werror=bool-operation -Wnarrowing -Wno-missing-field-initializers -Wno-unknown-pragmas -Wno-unused-parameter -Wno-strict-overflow -Wno-strict-aliasing -Wno-stringop-overflow -Wsuggest-override -Wno-psabi -Wno-error=old-style-cast -faligned-new -Wno-maybe-uninitialized -fno-math-errno -fno-trapping-math -Werror=format -Wno-dangling-reference -Wno-error=dangling-reference -Wno-stringop-overflow, LAPACK_INFO=mkl, PERF_WITH_AVX=1, PERF_WITH_AVX2=1, TORCH_VERSION=2.11.0, USE_CUDA=ON, USE_CUDNN=ON, USE_CUSPARSELT=1, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_GLOO=ON, USE_MKL=ON, USE_MKLDNN=ON, USE_MPI=OFF, USE_NCCL=1, USE_NNPACK=ON, USE_OPENMP=ON, USE_ROCM=OFF, USE_ROCM_KERNEL_ASSERT=OFF, USE_XCCL=OFF, USE_XPU=OFF, 
+
+    TorchVision: 0.26.0+cu128
+    OpenCV: 5.0.0
+    MMEngine: 0.10.7
+
+Runtime environment:
+    cudnn_benchmark: True
+    mp_cfg: {'mp_start_method': 'fork', 'opencv_num_threads': 0}
+    dist_cfg: {'backend': 'nccl'}
+    seed: 0
+    deterministic: False
+    Distributed launcher: none
+    Distributed training: False
+    GPU number: 1
+------------------------------------------------------------
+
+2026/09/23 21:10:23 - mmengine - INFO - Config:
+auto_scale_lr = dict(base_batch_size=16, enable=True)
+crop_size = (
+    512,
+    512,
+)
+custom_imports = dict(
+    allow_failed_imports=False, imports=[
+        'mapillary_transforms',
+    ])
+data_preprocessor = dict(
+    bgr_to_rgb=True,
+    mean=[
+        123.675,
+        116.28,
+        103.53,
+    ],
+    pad_val=0,
+    seg_pad_val=255,
+    size=(
+        512,
+        512,
+    ),
+    std=[
+        58.395,
+        57.12,
+        57.375,
+    ],
+    type='SegDataPreProcessor')
+data_root = '/home/colin/datasets/mapillary_vistas'
+dataset_type = 'MapillaryDataset_v2'
+default_hooks = dict(
+    checkpoint=dict(
+        by_epoch=False,
+        interval=4000,
+        max_keep_ckpts=5,
+        rule='greater',
+        save_best='mIoU',
+        type='CheckpointHook'),
+    logger=dict(interval=50, log_metric_by_epoch=False, type='LoggerHook'),
+    param_scheduler=dict(type='ParamSchedulerHook'),
+    sampler_seed=dict(type='DistSamplerSeedHook'),
+    timer=dict(type='IterTimerHook'),
+    visualization=dict(type='SegVisualizationHook'))
+default_scope = 'mmseg'
+env_cfg = dict(
+    cudnn_benchmark=True,
+    dist_cfg=dict(backend='nccl'),
+    mp_cfg=dict(mp_start_method='fork', opencv_num_threads=0))
+launcher = 'none'
+load_from = None
+log_level = 'INFO'
+log_processor = dict(by_epoch=False)
+model = dict(
+    auxiliary_head=dict(
+        align_corners=False,
+        channels=256,
+        concat_input=False,
+        dropout_ratio=0.1,
+        in_channels=1024,
+        in_index=2,
+        loss_decode=dict(
+            loss_weight=0.4, type='CrossEntropyLoss', use_sigmoid=False),
+        norm_cfg=dict(requires_grad=True, type='SyncBN'),
+        num_classes=124,
+        num_convs=1,
+        type='FCNHead'),
+    backbone=dict(
+        contract_dilation=True,
+        depth=50,
+        dilations=(
+            1,
+            1,
+            2,
+            4,
+        ),
+        norm_cfg=dict(requires_grad=True, type='SyncBN'),
+        norm_eval=False,
+        num_stages=4,
+        out_indices=(
+            0,
+            1,
+            2,
+            3,
+        ),
+        strides=(
+            1,
+            2,
+            1,
+            1,
+        ),
+        style='pytorch',
+        type='ResNetV1c'),
+    data_preprocessor=dict(
+        bgr_to_rgb=True,
+        mean=[
+            123.675,
+            116.28,
+            103.53,
+        ],
+        pad_val=0,
+        seg_pad_val=255,
+        size=(
+            512,
+            512,
+        ),
+        std=[
+            58.395,
+            57.12,
+            57.375,
+        ],
+        type='SegDataPreProcessor'),
+    decode_head=dict(
+        align_corners=False,
+        c1_channels=48,
+        c1_in_channels=256,
+        channels=512,
+        dilations=(
+            1,
+            12,
+            24,
+            36,
+        ),
+        dropout_ratio=0.1,
+        in_channels=2048,
+        in_index=3,
+        loss_decode=dict(
+            loss_weight=1.0, type='CrossEntropyLoss', use_sigmoid=False),
+        norm_cfg=dict(requires_grad=True, type='SyncBN'),
+        num_classes=124,
+        type='DepthwiseSeparableASPPHead'),
+    pretrained='open-mmlab://resnet50_v1c',
+    test_cfg=dict(mode='whole'),
+    train_cfg=dict(),
+    type='EncoderDecoder')
+norm_cfg = dict(requires_grad=True, type='SyncBN')
+optim_wrapper = dict(
+    clip_grad=None,
+    loss_scale='dynamic',
+    optimizer=dict(lr=0.01, momentum=0.9, type='SGD', weight_decay=0.0005),
+    type='AmpOptimWrapper')
+optimizer = dict(lr=0.01, momentum=0.9, type='SGD', weight_decay=0.0005)
+param_scheduler = [
+    dict(
+        begin=0,
+        by_epoch=False,
+        end=80000,
+        eta_min=0.0001,
+        power=0.9,
+        type='PolyLR'),
+]
+randomness = dict(deterministic=False, seed=0)
+resume = True
+test_cfg = dict(type='TestLoop')
+test_dataloader = dict(
+    batch_size=1,
+    dataset=dict(
+        data_prefix=dict(
+            img_path='validation/images',
+            seg_map_path='validation/v2.0/labels'),
+        data_root='/home/colin/datasets/mapillary_vistas',
+        pipeline=[
+            dict(type='LoadImageFromFile'),
+            dict(type='LoadAnnotations'),
+            dict(keep_ratio=True, scale=(
+                2048,
+                512,
+            ), type='Resize'),
+            dict(type='UseResizedShapeForEvaluation'),
+            dict(type='PackSegInputs'),
+        ],
+        type='MapillaryDataset_v2'),
+    num_workers=4,
+    persistent_workers=True,
+    sampler=dict(shuffle=False, type='DefaultSampler'))
+test_evaluator = dict(
+    iou_metrics=[
+        'mIoU',
+        'mDice',
+    ], type='IoUMetric')
+test_pipeline = [
+    dict(type='LoadImageFromFile'),
+    dict(type='LoadAnnotations'),
+    dict(keep_ratio=True, scale=(
+        2048,
+        512,
+    ), type='Resize'),
+    dict(type='UseResizedShapeForEvaluation'),
+    dict(type='PackSegInputs'),
+]
+train_cfg = dict(max_iters=96000, type='IterBasedTrainLoop', val_interval=4000)
+train_dataloader = dict(
+    batch_size=2,
+    dataset=dict(
+        data_prefix=dict(
+            img_path='training/images', seg_map_path='training/v2.0/labels'),
+        data_root='/home/colin/datasets/mapillary_vistas',
+        pipeline=[
+            dict(type='LoadImageFromFile'),
+            dict(type='LoadAnnotations'),
+            dict(
+                keep_ratio=True,
+                ratio_range=(
+                    0.5,
+                    2.0,
+                ),
+                scale=(
+                    2048,
+                    512,
+                ),
+                type='RandomResize'),
+            dict(
+                cat_max_ratio=0.75, crop_size=(
+                    512,
+                    512,
+                ), type='RandomCrop'),
+            dict(prob=0.5, type='RandomFlip'),
+            dict(type='PhotoMetricDistortion'),
+            dict(type='PackSegInputs'),
+        ],
+        type='MapillaryDataset_v2'),
+    num_workers=4,
+    persistent_workers=True,
+    sampler=dict(shuffle=True, type='InfiniteSampler'))
+train_pipeline = [
+    dict(type='LoadImageFromFile'),
+    dict(type='LoadAnnotations'),
+    dict(
+        keep_ratio=True,
+        ratio_range=(
+            0.5,
+            2.0,
+        ),
+        scale=(
+            2048,
+            512,
+        ),
+        type='RandomResize'),
+    dict(cat_max_ratio=0.75, crop_size=(
+        512,
+        512,
+    ), type='RandomCrop'),
+    dict(prob=0.5, type='RandomFlip'),
+    dict(type='PhotoMetricDistortion'),
+    dict(type='PackSegInputs'),
+]
+tta_model = dict(type='SegTTAModel')
+val_cfg = dict(type='ValLoop')
+val_dataloader = dict(
+    batch_size=1,
+    dataset=dict(
+        data_prefix=dict(
+            img_path='validation/images',
+            seg_map_path='validation/v2.0/labels'),
+        data_root='/home/colin/datasets/mapillary_vistas',
+        pipeline=[
+            dict(type='LoadImageFromFile'),
+            dict(type='LoadAnnotations'),
+            dict(keep_ratio=True, scale=(
+                2048,
+                512,
+            ), type='Resize'),
+            dict(type='UseResizedShapeForEvaluation'),
+            dict(type='PackSegInputs'),
+        ],
+        type='MapillaryDataset_v2'),
+    num_workers=4,
+    persistent_workers=True,
+    sampler=dict(shuffle=False, type='DefaultSampler'))
+val_evaluator = dict(
+    iou_metrics=[
+        'mIoU',
+        'mDice',
+    ], type='IoUMetric')
+vis_backends = [
+    dict(type='LocalVisBackend'),
+]
+visualizer = dict(
+    name='visualizer',
+    type='SegLocalVisualizer',
+    vis_backends=[
+        dict(type='LocalVisBackend'),
+    ])
+work_dir = '/home/colin/GUVP_pairwise_ranking/output/deeplabv3plus_r50_mapillary_v2_80k'
+
+2026/09/23 21:10:24 - mmengine - INFO - Distributed training is not used, all SyncBatchNorm (SyncBN) layers in the model will be automatically reverted to BatchNormXd layers if they are used.
+2026/09/23 21:10:24 - mmengine - INFO - Hooks will be executed in the following order:
+before_run:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(BELOW_NORMAL) LoggerHook                         
+ -------------------- 
+before_train:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(NORMAL      ) IterTimerHook                      
+(VERY_LOW    ) CheckpointHook                     
+ -------------------- 
+before_train_epoch:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(NORMAL      ) IterTimerHook                      
+(NORMAL      ) DistSamplerSeedHook                
+ -------------------- 
+before_train_iter:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(NORMAL      ) IterTimerHook                      
+ -------------------- 
+after_train_iter:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(NORMAL      ) IterTimerHook                      
+(NORMAL      ) SegVisualizationHook               
+(BELOW_NORMAL) LoggerHook                         
+(LOW         ) ParamSchedulerHook                 
+(VERY_LOW    ) CheckpointHook                     
+ -------------------- 
+after_train_epoch:
+(NORMAL      ) IterTimerHook                      
+(LOW         ) ParamSchedulerHook                 
+(VERY_LOW    ) CheckpointHook                     
+ -------------------- 
+before_val:
+(VERY_HIGH   ) RuntimeInfoHook                    
+ -------------------- 
+before_val_epoch:
+(NORMAL      ) IterTimerHook                      
+ -------------------- 
+before_val_iter:
+(NORMAL      ) IterTimerHook                      
+ -------------------- 
+after_val_iter:
+(NORMAL      ) IterTimerHook                      
+(NORMAL      ) SegVisualizationHook               
+(BELOW_NORMAL) LoggerHook                         
+ -------------------- 
+after_val_epoch:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(NORMAL      ) IterTimerHook                      
+(BELOW_NORMAL) LoggerHook                         
+(LOW         ) ParamSchedulerHook                 
+(VERY_LOW    ) CheckpointHook                     
+ -------------------- 
+after_val:
+(VERY_HIGH   ) RuntimeInfoHook                    
+ -------------------- 
+after_train:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(VERY_LOW    ) CheckpointHook                     
+ -------------------- 
+before_test:
+(VERY_HIGH   ) RuntimeInfoHook                    
+ -------------------- 
+before_test_epoch:
+(NORMAL      ) IterTimerHook                      
+ -------------------- 
+before_test_iter:
+(NORMAL      ) IterTimerHook                      
+ -------------------- 
+after_test_iter:
+(NORMAL      ) IterTimerHook                      
+(NORMAL      ) SegVisualizationHook               
+(BELOW_NORMAL) LoggerHook                         
+ -------------------- 
+after_test_epoch:
+(VERY_HIGH   ) RuntimeInfoHook                    
+(NORMAL      ) IterTimerHook                      
+(BELOW_NORMAL) LoggerHook                         
+ -------------------- 
+after_test:
+(VERY_HIGH   ) RuntimeInfoHook                    
+ -------------------- 
+after_run:
+(BELOW_NORMAL) LoggerHook                         
+ -------------------- 
+2026/09/23 21:10:25 - mmengine - INFO - LR is set based on batch size of 16 and the current batch size is 2. Scaling the original LR by 0.125.
+2026/09/23 21:10:25 - mmengine - WARNING - The prefix is not set in metric class IoUMetric.
+2026/09/23 21:10:25 - mmengine - INFO - load model from: open-mmlab://resnet50_v1c
+2026/09/23 21:10:25 - mmengine - INFO - Loads checkpoint by openmmlab backend from path: open-mmlab://resnet50_v1c
+2026/09/23 21:10:25 - mmengine - WARNING - The model and loaded state dict do not match exactly
+
+unexpected key in source state_dict: fc.weight, fc.bias
+
+Name of parameter - Initialization information
+
+backbone.stem.0.weight - torch.Size([32, 3, 3, 3]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.stem.1.weight - torch.Size([32]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.stem.1.bias - torch.Size([32]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.stem.3.weight - torch.Size([32, 32, 3, 3]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.stem.4.weight - torch.Size([32]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.stem.4.bias - torch.Size([32]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.stem.6.weight - torch.Size([64, 32, 3, 3]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.stem.7.weight - torch.Size([64]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.stem.7.bias - torch.Size([64]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer1.0.conv1.weight - torch.Size([64, 64, 1, 1]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer1.0.bn1.weight - torch.Size([64]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer1.0.bn1.bias - torch.Size([64]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer1.0.conv2.weight - torch.Size([64, 64, 3, 3]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer1.0.bn2.weight - torch.Size([64]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer1.0.bn2.bias - torch.Size([64]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer1.0.conv3.weight - torch.Size([256, 64, 1, 1]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer1.0.bn3.weight - torch.Size([256]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer1.0.bn3.bias - torch.Size([256]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer1.0.downsample.0.weight - torch.Size([256, 64, 1, 1]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer1.0.downsample.1.weight - torch.Size([256]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer1.0.downsample.1.bias - torch.Size([256]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer1.1.conv1.weight - torch.Size([64, 256, 1, 1]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer1.1.bn1.weight - torch.Size([64]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer1.1.bn1.bias - torch.Size([64]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer1.1.conv2.weight - torch.Size([64, 64, 3, 3]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer1.1.bn2.weight - torch.Size([64]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer1.1.bn2.bias - torch.Size([64]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer1.1.conv3.weight - torch.Size([256, 64, 1, 1]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer1.1.bn3.weight - torch.Size([256]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer1.1.bn3.bias - torch.Size([256]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer1.2.conv1.weight - torch.Size([64, 256, 1, 1]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer1.2.bn1.weight - torch.Size([64]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer1.2.bn1.bias - torch.Size([64]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer1.2.conv2.weight - torch.Size([64, 64, 3, 3]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer1.2.bn2.weight - torch.Size([64]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer1.2.bn2.bias - torch.Size([64]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer1.2.conv3.weight - torch.Size([256, 64, 1, 1]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer1.2.bn3.weight - torch.Size([256]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer1.2.bn3.bias - torch.Size([256]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer2.0.conv1.weight - torch.Size([128, 256, 1, 1]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer2.0.bn1.weight - torch.Size([128]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer2.0.bn1.bias - torch.Size([128]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer2.0.conv2.weight - torch.Size([128, 128, 3, 3]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer2.0.bn2.weight - torch.Size([128]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer2.0.bn2.bias - torch.Size([128]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer2.0.conv3.weight - torch.Size([512, 128, 1, 1]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer2.0.bn3.weight - torch.Size([512]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer2.0.bn3.bias - torch.Size([512]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer2.0.downsample.0.weight - torch.Size([512, 256, 1, 1]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer2.0.downsample.1.weight - torch.Size([512]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer2.0.downsample.1.bias - torch.Size([512]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer2.1.conv1.weight - torch.Size([128, 512, 1, 1]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer2.1.bn1.weight - torch.Size([128]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer2.1.bn1.bias - torch.Size([128]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer2.1.conv2.weight - torch.Size([128, 128, 3, 3]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer2.1.bn2.weight - torch.Size([128]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer2.1.bn2.bias - torch.Size([128]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer2.1.conv3.weight - torch.Size([512, 128, 1, 1]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer2.1.bn3.weight - torch.Size([512]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer2.1.bn3.bias - torch.Size([512]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer2.2.conv1.weight - torch.Size([128, 512, 1, 1]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer2.2.bn1.weight - torch.Size([128]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer2.2.bn1.bias - torch.Size([128]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer2.2.conv2.weight - torch.Size([128, 128, 3, 3]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer2.2.bn2.weight - torch.Size([128]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer2.2.bn2.bias - torch.Size([128]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer2.2.conv3.weight - torch.Size([512, 128, 1, 1]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer2.2.bn3.weight - torch.Size([512]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer2.2.bn3.bias - torch.Size([512]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer2.3.conv1.weight - torch.Size([128, 512, 1, 1]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer2.3.bn1.weight - torch.Size([128]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer2.3.bn1.bias - torch.Size([128]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer2.3.conv2.weight - torch.Size([128, 128, 3, 3]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer2.3.bn2.weight - torch.Size([128]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer2.3.bn2.bias - torch.Size([128]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer2.3.conv3.weight - torch.Size([512, 128, 1, 1]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer2.3.bn3.weight - torch.Size([512]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer2.3.bn3.bias - torch.Size([512]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer3.0.conv1.weight - torch.Size([256, 512, 1, 1]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer3.0.bn1.weight - torch.Size([256]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer3.0.bn1.bias - torch.Size([256]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer3.0.conv2.weight - torch.Size([256, 256, 3, 3]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer3.0.bn2.weight - torch.Size([256]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer3.0.bn2.bias - torch.Size([256]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer3.0.conv3.weight - torch.Size([1024, 256, 1, 1]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer3.0.bn3.weight - torch.Size([1024]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer3.0.bn3.bias - torch.Size([1024]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer3.0.downsample.0.weight - torch.Size([1024, 512, 1, 1]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer3.0.downsample.1.weight - torch.Size([1024]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer3.0.downsample.1.bias - torch.Size([1024]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer3.1.conv1.weight - torch.Size([256, 1024, 1, 1]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer3.1.bn1.weight - torch.Size([256]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer3.1.bn1.bias - torch.Size([256]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer3.1.conv2.weight - torch.Size([256, 256, 3, 3]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer3.1.bn2.weight - torch.Size([256]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer3.1.bn2.bias - torch.Size([256]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer3.1.conv3.weight - torch.Size([1024, 256, 1, 1]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer3.1.bn3.weight - torch.Size([1024]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer3.1.bn3.bias - torch.Size([1024]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer3.2.conv1.weight - torch.Size([256, 1024, 1, 1]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer3.2.bn1.weight - torch.Size([256]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer3.2.bn1.bias - torch.Size([256]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer3.2.conv2.weight - torch.Size([256, 256, 3, 3]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer3.2.bn2.weight - torch.Size([256]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer3.2.bn2.bias - torch.Size([256]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer3.2.conv3.weight - torch.Size([1024, 256, 1, 1]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer3.2.bn3.weight - torch.Size([1024]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer3.2.bn3.bias - torch.Size([1024]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer3.3.conv1.weight - torch.Size([256, 1024, 1, 1]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer3.3.bn1.weight - torch.Size([256]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer3.3.bn1.bias - torch.Size([256]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer3.3.conv2.weight - torch.Size([256, 256, 3, 3]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer3.3.bn2.weight - torch.Size([256]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer3.3.bn2.bias - torch.Size([256]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer3.3.conv3.weight - torch.Size([1024, 256, 1, 1]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer3.3.bn3.weight - torch.Size([1024]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer3.3.bn3.bias - torch.Size([1024]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer3.4.conv1.weight - torch.Size([256, 1024, 1, 1]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer3.4.bn1.weight - torch.Size([256]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer3.4.bn1.bias - torch.Size([256]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer3.4.conv2.weight - torch.Size([256, 256, 3, 3]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer3.4.bn2.weight - torch.Size([256]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer3.4.bn2.bias - torch.Size([256]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer3.4.conv3.weight - torch.Size([1024, 256, 1, 1]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer3.4.bn3.weight - torch.Size([1024]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer3.4.bn3.bias - torch.Size([1024]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer3.5.conv1.weight - torch.Size([256, 1024, 1, 1]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer3.5.bn1.weight - torch.Size([256]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer3.5.bn1.bias - torch.Size([256]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer3.5.conv2.weight - torch.Size([256, 256, 3, 3]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer3.5.bn2.weight - torch.Size([256]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer3.5.bn2.bias - torch.Size([256]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer3.5.conv3.weight - torch.Size([1024, 256, 1, 1]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer3.5.bn3.weight - torch.Size([1024]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer3.5.bn3.bias - torch.Size([1024]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer4.0.conv1.weight - torch.Size([512, 1024, 1, 1]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer4.0.bn1.weight - torch.Size([512]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer4.0.bn1.bias - torch.Size([512]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer4.0.conv2.weight - torch.Size([512, 512, 3, 3]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer4.0.bn2.weight - torch.Size([512]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer4.0.bn2.bias - torch.Size([512]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer4.0.conv3.weight - torch.Size([2048, 512, 1, 1]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer4.0.bn3.weight - torch.Size([2048]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer4.0.bn3.bias - torch.Size([2048]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer4.0.downsample.0.weight - torch.Size([2048, 1024, 1, 1]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer4.0.downsample.1.weight - torch.Size([2048]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer4.0.downsample.1.bias - torch.Size([2048]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer4.1.conv1.weight - torch.Size([512, 2048, 1, 1]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer4.1.bn1.weight - torch.Size([512]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer4.1.bn1.bias - torch.Size([512]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer4.1.conv2.weight - torch.Size([512, 512, 3, 3]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer4.1.bn2.weight - torch.Size([512]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer4.1.bn2.bias - torch.Size([512]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer4.1.conv3.weight - torch.Size([2048, 512, 1, 1]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer4.1.bn3.weight - torch.Size([2048]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer4.1.bn3.bias - torch.Size([2048]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer4.2.conv1.weight - torch.Size([512, 2048, 1, 1]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer4.2.bn1.weight - torch.Size([512]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer4.2.bn1.bias - torch.Size([512]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer4.2.conv2.weight - torch.Size([512, 512, 3, 3]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer4.2.bn2.weight - torch.Size([512]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer4.2.bn2.bias - torch.Size([512]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer4.2.conv3.weight - torch.Size([2048, 512, 1, 1]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer4.2.bn3.weight - torch.Size([2048]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+backbone.layer4.2.bn3.bias - torch.Size([2048]): 
+PretrainedInit: load from open-mmlab://resnet50_v1c 
+
+decode_head.conv_seg.weight - torch.Size([124, 512, 1, 1]): 
+NormalInit: mean=0, std=0.01, bias=0 
+
+decode_head.conv_seg.bias - torch.Size([124]): 
+NormalInit: mean=0, std=0.01, bias=0 
+
+decode_head.image_pool.1.conv.weight - torch.Size([512, 2048, 1, 1]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+decode_head.image_pool.1.bn.weight - torch.Size([512]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+decode_head.image_pool.1.bn.bias - torch.Size([512]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+decode_head.aspp_modules.0.conv.weight - torch.Size([512, 2048, 1, 1]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+decode_head.aspp_modules.0.bn.weight - torch.Size([512]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+decode_head.aspp_modules.0.bn.bias - torch.Size([512]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+decode_head.aspp_modules.1.depthwise_conv.conv.weight - torch.Size([2048, 1, 3, 3]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+decode_head.aspp_modules.1.depthwise_conv.bn.weight - torch.Size([2048]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+decode_head.aspp_modules.1.depthwise_conv.bn.bias - torch.Size([2048]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+decode_head.aspp_modules.1.pointwise_conv.conv.weight - torch.Size([512, 2048, 1, 1]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+decode_head.aspp_modules.1.pointwise_conv.bn.weight - torch.Size([512]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+decode_head.aspp_modules.1.pointwise_conv.bn.bias - torch.Size([512]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+decode_head.aspp_modules.2.depthwise_conv.conv.weight - torch.Size([2048, 1, 3, 3]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+decode_head.aspp_modules.2.depthwise_conv.bn.weight - torch.Size([2048]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+decode_head.aspp_modules.2.depthwise_conv.bn.bias - torch.Size([2048]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+decode_head.aspp_modules.2.pointwise_conv.conv.weight - torch.Size([512, 2048, 1, 1]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+decode_head.aspp_modules.2.pointwise_conv.bn.weight - torch.Size([512]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+decode_head.aspp_modules.2.pointwise_conv.bn.bias - torch.Size([512]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+decode_head.aspp_modules.3.depthwise_conv.conv.weight - torch.Size([2048, 1, 3, 3]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+decode_head.aspp_modules.3.depthwise_conv.bn.weight - torch.Size([2048]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+decode_head.aspp_modules.3.depthwise_conv.bn.bias - torch.Size([2048]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+decode_head.aspp_modules.3.pointwise_conv.conv.weight - torch.Size([512, 2048, 1, 1]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+decode_head.aspp_modules.3.pointwise_conv.bn.weight - torch.Size([512]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+decode_head.aspp_modules.3.pointwise_conv.bn.bias - torch.Size([512]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+decode_head.bottleneck.conv.weight - torch.Size([512, 2560, 3, 3]): 
+Initialized by user-defined `init_weights` in ConvModule  
+
+decode_head.bottleneck.bn.weight - torch.Size([512]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+decode_head.bottleneck.bn.bias - torch.Size([512]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+decode_head.c1_bottleneck.conv.weight - torch.Size([48, 256, 1, 1]): 
+Initialized by user-defined `init_weights` in ConvModule  
+
+decode_head.c1_bottleneck.bn.weight - torch.Size([48]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+decode_head.c1_bottleneck.bn.bias - torch.Size([48]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+decode_head.sep_bottleneck.0.depthwise_conv.conv.weight - torch.Size([560, 1, 3, 3]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+decode_head.sep_bottleneck.0.depthwise_conv.bn.weight - torch.Size([560]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+decode_head.sep_bottleneck.0.depthwise_conv.bn.bias - torch.Size([560]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+decode_head.sep_bottleneck.0.pointwise_conv.conv.weight - torch.Size([512, 560, 1, 1]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+decode_head.sep_bottleneck.0.pointwise_conv.bn.weight - torch.Size([512]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+decode_head.sep_bottleneck.0.pointwise_conv.bn.bias - torch.Size([512]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+decode_head.sep_bottleneck.1.depthwise_conv.conv.weight - torch.Size([512, 1, 3, 3]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+decode_head.sep_bottleneck.1.depthwise_conv.bn.weight - torch.Size([512]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+decode_head.sep_bottleneck.1.depthwise_conv.bn.bias - torch.Size([512]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+decode_head.sep_bottleneck.1.pointwise_conv.conv.weight - torch.Size([512, 512, 1, 1]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+decode_head.sep_bottleneck.1.pointwise_conv.bn.weight - torch.Size([512]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+decode_head.sep_bottleneck.1.pointwise_conv.bn.bias - torch.Size([512]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+auxiliary_head.conv_seg.weight - torch.Size([124, 256, 1, 1]): 
+NormalInit: mean=0, std=0.01, bias=0 
+
+auxiliary_head.conv_seg.bias - torch.Size([124]): 
+NormalInit: mean=0, std=0.01, bias=0 
+
+auxiliary_head.convs.0.conv.weight - torch.Size([256, 1024, 3, 3]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+auxiliary_head.convs.0.bn.weight - torch.Size([256]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+
+auxiliary_head.convs.0.bn.bias - torch.Size([256]): 
+The value is the same before and after calling `init_weights` of EncoderDecoder  
+2026/09/23 21:10:25 - mmengine - INFO - Auto resumed from the latest checkpoint /home/colin/GUVP_pairwise_ranking/output/deeplabv3plus_r50_mapillary_v2_80k/iter_80000.pth.
+2026/09/23 21:10:25 - mmengine - INFO - Load checkpoint from /home/colin/GUVP_pairwise_ranking/output/deeplabv3plus_r50_mapillary_v2_80k/iter_80000.pth
+2026/09/23 21:10:25 - mmengine - INFO - resumed epoch: 0, iter: 80000
+2026/09/23 21:10:25 - mmengine - WARNING - "FileClient" will be deprecated in future. Please use io functions in https://mmengine.readthedocs.io/en/latest/api/fileio.html#file-io
+2026/09/23 21:10:25 - mmengine - WARNING - "HardDiskBackend" is the alias of "LocalBackend" and the former will be deprecated in future.
+2026/09/23 21:10:25 - mmengine - INFO - Checkpoints will be saved to /home/colin/GUVP_pairwise_ranking/output/deeplabv3plus_r50_mapillary_v2_80k.
+2026/09/23 21:10:25 - mmengine - WARNING - Advance dataloader 80000 steps to skip data that has already been trained
+2026/09/23 21:34:46 - mmengine - INFO - Iter(train) [80050/96000]  lr: 1.0000e-04  eta: 5 days, 9:25:29  time: 0.1825  data_time: 0.0017  memory: 3712  loss: 0.5617  decode.loss_ce: 0.3643  decode.acc_seg: 91.0456  aux.loss_ce: 0.1974  aux.acc_seg: 89.5826
+2026/09/23 21:34:55 - mmengine - INFO - Iter(train) [80100/96000]  lr: 1.0000e-04  eta: 2 days, 16:54:47  time: 0.1824  data_time: 0.0016  memory: 3081  loss: 0.4865  decode.loss_ce: 0.3116  decode.acc_seg: 95.2300  aux.loss_ce: 0.1749  aux.acc_seg: 94.6416
+2026/09/23 21:35:04 - mmengine - INFO - Iter(train) [80150/96000]  lr: 1.0000e-04  eta: 1 day, 19:24:24  time: 0.1819  data_time: 0.0017  memory: 3081  loss: 0.5784  decode.loss_ce: 0.3672  decode.acc_seg: 94.7582  aux.loss_ce: 0.2113  aux.acc_seg: 93.7868
+2026/09/23 21:35:13 - mmengine - INFO - Iter(train) [80200/96000]  lr: 1.0000e-04  eta: 1 day, 8:39:08  time: 0.1819  data_time: 0.0017  memory: 3081  loss: 0.7366  decode.loss_ce: 0.4863  decode.acc_seg: 91.3963  aux.loss_ce: 0.2504  aux.acc_seg: 86.9633
+2026/09/23 21:35:22 - mmengine - INFO - Iter(train) [80250/96000]  lr: 1.0000e-04  eta: 1 day, 2:11:56  time: 0.1836  data_time: 0.0017  memory: 3081  loss: 0.4437  decode.loss_ce: 0.2838  decode.acc_seg: 88.3570  aux.loss_ce: 0.1600  aux.acc_seg: 87.0546
+2026/09/23 21:35:31 - mmengine - INFO - Iter(train) [80300/96000]  lr: 1.0000e-04  eta: 21:53:44  time: 0.1822  data_time: 0.0017  memory: 3081  loss: 0.5234  decode.loss_ce: 0.3484  decode.acc_seg: 91.8594  aux.loss_ce: 0.1750  aux.acc_seg: 87.8477
+2026/09/23 21:35:41 - mmengine - INFO - Iter(train) [80350/96000]  lr: 1.0000e-04  eta: 18:49:16  time: 0.1826  data_time: 0.0016  memory: 3081  loss: 0.6532  decode.loss_ce: 0.4339  decode.acc_seg: 94.2490  aux.loss_ce: 0.2192  aux.acc_seg: 89.3965
+2026/09/23 21:35:50 - mmengine - INFO - Iter(train) [80400/96000]  lr: 1.0000e-04  eta: 16:30:52  time: 0.1821  data_time: 0.0017  memory: 3081  loss: 0.7595  decode.loss_ce: 0.4960  decode.acc_seg: 90.6658  aux.loss_ce: 0.2635  aux.acc_seg: 88.4663
+2026/09/23 21:35:59 - mmengine - INFO - Iter(train) [80450/96000]  lr: 1.0000e-04  eta: 14:43:12  time: 0.1817  data_time: 0.0017  memory: 3081  loss: 0.4815  decode.loss_ce: 0.3111  decode.acc_seg: 92.0588  aux.loss_ce: 0.1704  aux.acc_seg: 89.2208
+2026/09/23 21:36:08 - mmengine - INFO - Iter(train) [80500/96000]  lr: 1.0000e-04  eta: 13:17:02  time: 0.1820  data_time: 0.0017  memory: 3081  loss: 0.6732  decode.loss_ce: 0.4336  decode.acc_seg: 89.1197  aux.loss_ce: 0.2396  aux.acc_seg: 86.0052
+2026/09/23 21:36:17 - mmengine - INFO - Iter(train) [80550/96000]  lr: 1.0000e-04  eta: 12:06:30  time: 0.1822  data_time: 0.0016  memory: 3081  loss: 0.6303  decode.loss_ce: 0.4005  decode.acc_seg: 92.6414  aux.loss_ce: 0.2298  aux.acc_seg: 90.7026
+2026/09/23 21:36:26 - mmengine - INFO - Iter(train) [80600/96000]  lr: 1.0000e-04  eta: 11:07:42  time: 0.1820  data_time: 0.0017  memory: 3081  loss: 0.5894  decode.loss_ce: 0.3910  decode.acc_seg: 83.3630  aux.loss_ce: 0.1984  aux.acc_seg: 82.3273
+2026/09/23 21:36:35 - mmengine - INFO - Iter(train) [80650/96000]  lr: 1.0000e-04  eta: 10:17:56  time: 0.1825  data_time: 0.0021  memory: 3081  loss: 0.5779  decode.loss_ce: 0.3668  decode.acc_seg: 91.7269  aux.loss_ce: 0.2111  aux.acc_seg: 90.0745
+2026/09/23 21:36:44 - mmengine - INFO - Iter(train) [80700/96000]  lr: 1.0000e-04  eta: 9:35:15  time: 0.1823  data_time: 0.0016  memory: 3081  loss: 0.4720  decode.loss_ce: 0.2874  decode.acc_seg: 84.5087  aux.loss_ce: 0.1846  aux.acc_seg: 80.9998
+2026/09/23 21:36:54 - mmengine - INFO - Iter(train) [80750/96000]  lr: 1.0000e-04  eta: 8:58:14  time: 0.1817  data_time: 0.0017  memory: 3081  loss: 0.4021  decode.loss_ce: 0.2622  decode.acc_seg: 93.4727  aux.loss_ce: 0.1399  aux.acc_seg: 92.6195
+2026/09/23 21:37:03 - mmengine - INFO - Iter(train) [80800/96000]  lr: 1.0000e-04  eta: 8:25:49  time: 0.1824  data_time: 0.0017  memory: 3081  loss: 0.5648  decode.loss_ce: 0.3678  decode.acc_seg: 82.3381  aux.loss_ce: 0.1969  aux.acc_seg: 79.8948
+2026/09/23 21:37:12 - mmengine - INFO - Iter(train) [80850/96000]  lr: 1.0000e-04  eta: 7:57:12  time: 0.1823  data_time: 0.0017  memory: 3081  loss: 0.3981  decode.loss_ce: 0.2604  decode.acc_seg: 94.7129  aux.loss_ce: 0.1377  aux.acc_seg: 94.0525
+2026/09/23 21:37:21 - mmengine - INFO - Iter(train) [80900/96000]  lr: 1.0000e-04  eta: 7:31:45  time: 0.1824  data_time: 0.0016  memory: 3081  loss: 0.6257  decode.loss_ce: 0.4132  decode.acc_seg: 88.3769  aux.loss_ce: 0.2125  aux.acc_seg: 85.4997
+2026/09/23 21:37:30 - mmengine - INFO - Iter(train) [80950/96000]  lr: 1.0000e-04  eta: 7:08:58  time: 0.1820  data_time: 0.0017  memory: 3081  loss: 0.4659  decode.loss_ce: 0.2917  decode.acc_seg: 89.6857  aux.loss_ce: 0.1742  aux.acc_seg: 88.4529
+2026/09/23 21:37:39 - mmengine - INFO - Exp name: deeplabv3plus_r50-d8_1xb2-96k_mapillary-v2-512x512_20260923_211023
+2026/09/23 21:37:39 - mmengine - INFO - Iter(train) [81000/96000]  lr: 1.0000e-04  eta: 6:48:26  time: 0.1820  data_time: 0.0018  memory: 3081  loss: 0.4697  decode.loss_ce: 0.3068  decode.acc_seg: 91.8779  aux.loss_ce: 0.1629  aux.acc_seg: 90.0162
+2026/09/23 21:37:48 - mmengine - INFO - Iter(train) [81050/96000]  lr: 1.0000e-04  eta: 6:29:51  time: 0.1823  data_time: 0.0017  memory: 3081  loss: 0.7702  decode.loss_ce: 0.4914  decode.acc_seg: 70.8950  aux.loss_ce: 0.2788  aux.acc_seg: 73.6940
+2026/09/23 21:37:57 - mmengine - INFO - Iter(train) [81100/96000]  lr: 1.0000e-04  eta: 6:12:57  time: 0.1823  data_time: 0.0018  memory: 3081  loss: 0.4471  decode.loss_ce: 0.2882  decode.acc_seg: 92.9188  aux.loss_ce: 0.1589  aux.acc_seg: 91.7542
+2026/09/23 21:38:06 - mmengine - INFO - Iter(train) [81150/96000]  lr: 1.0000e-04  eta: 5:57:30  time: 0.1825  data_time: 0.0017  memory: 3081  loss: 0.4815  decode.loss_ce: 0.3015  decode.acc_seg: 78.7111  aux.loss_ce: 0.1799  aux.acc_seg: 71.7159
+2026/09/23 21:38:16 - mmengine - INFO - Iter(train) [81200/96000]  lr: 1.0000e-04  eta: 5:43:19  time: 0.1820  data_time: 0.0017  memory: 3081  loss: 0.3693  decode.loss_ce: 0.2237  decode.acc_seg: 94.4875  aux.loss_ce: 0.1456  aux.acc_seg: 92.4201
+2026/09/23 21:38:25 - mmengine - INFO - Iter(train) [81250/96000]  lr: 1.0000e-04  eta: 5:30:16  time: 0.1826  data_time: 0.0016  memory: 3081  loss: 0.5403  decode.loss_ce: 0.3386  decode.acc_seg: 90.3347  aux.loss_ce: 0.2017  aux.acc_seg: 87.3112
+2026/09/23 21:38:34 - mmengine - INFO - Iter(train) [81300/96000]  lr: 1.0000e-04  eta: 5:18:12  time: 0.1826  data_time: 0.0017  memory: 3081  loss: 0.5182  decode.loss_ce: 0.3371  decode.acc_seg: 87.4377  aux.loss_ce: 0.1811  aux.acc_seg: 85.8224
+2026/09/23 21:38:43 - mmengine - INFO - Iter(train) [81350/96000]  lr: 1.0000e-04  eta: 5:07:01  time: 0.1820  data_time: 0.0017  memory: 3081  loss: 0.4912  decode.loss_ce: 0.3126  decode.acc_seg: 88.4531  aux.loss_ce: 0.1786  aux.acc_seg: 87.4519
+2026/09/23 21:38:52 - mmengine - INFO - Iter(train) [81400/96000]  lr: 1.0000e-04  eta: 4:56:38  time: 0.1817  data_time: 0.0017  memory: 3081  loss: 0.4789  decode.loss_ce: 0.3051  decode.acc_seg: 90.3016  aux.loss_ce: 0.1738  aux.acc_seg: 88.5505
+2026/09/23 21:39:01 - mmengine - INFO - Iter(train) [81450/96000]  lr: 1.0000e-04  eta: 4:46:57  time: 0.1817  data_time: 0.0017  memory: 3081  loss: 0.4498  decode.loss_ce: 0.2916  decode.acc_seg: 88.8958  aux.loss_ce: 0.1582  aux.acc_seg: 84.4305
+2026/09/23 21:39:10 - mmengine - INFO - Iter(train) [81500/96000]  lr: 1.0000e-04  eta: 4:37:53  time: 0.1818  data_time: 0.0017  memory: 3083  loss: 0.5159  decode.loss_ce: 0.3282  decode.acc_seg: 91.1551  aux.loss_ce: 0.1877  aux.acc_seg: 80.5132
+2026/09/23 21:39:19 - mmengine - INFO - Iter(train) [81550/96000]  lr: 1.0000e-04  eta: 4:29:25  time: 0.1820  data_time: 0.0017  memory: 3081  loss: 0.5044  decode.loss_ce: 0.3181  decode.acc_seg: 91.1886  aux.loss_ce: 0.1863  aux.acc_seg: 89.6164
+2026/09/23 21:39:28 - mmengine - INFO - Iter(train) [81600/96000]  lr: 1.0000e-04  eta: 4:21:28  time: 0.1825  data_time: 0.0017  memory: 3081  loss: 0.5131  decode.loss_ce: 0.3303  decode.acc_seg: 91.4490  aux.loss_ce: 0.1828  aux.acc_seg: 88.0308
+2026/09/23 21:39:38 - mmengine - INFO - Iter(train) [81650/96000]  lr: 1.0000e-04  eta: 4:13:59  time: 0.1827  data_time: 0.0017  memory: 3081  loss: 0.7959  decode.loss_ce: 0.5141  decode.acc_seg: 90.5740  aux.loss_ce: 0.2818  aux.acc_seg: 90.2521
+2026/09/23 21:39:47 - mmengine - INFO - Iter(train) [81700/96000]  lr: 1.0000e-04  eta: 4:06:56  time: 0.1826  data_time: 0.0017  memory: 3081  loss: 0.5380  decode.loss_ce: 0.3397  decode.acc_seg: 91.2856  aux.loss_ce: 0.1983  aux.acc_seg: 89.5858
+2026/09/23 21:39:56 - mmengine - INFO - Iter(train) [81750/96000]  lr: 1.0000e-04  eta: 4:00:17  time: 0.1827  data_time: 0.0018  memory: 3081  loss: 0.4993  decode.loss_ce: 0.3306  decode.acc_seg: 93.0634  aux.loss_ce: 0.1687  aux.acc_seg: 90.7378
+2026/09/23 21:40:05 - mmengine - INFO - Iter(train) [81800/96000]  lr: 1.0000e-04  eta: 3:53:59  time: 0.1827  data_time: 0.0018  memory: 3081  loss: 0.5590  decode.loss_ce: 0.3541  decode.acc_seg: 80.7535  aux.loss_ce: 0.2049  aux.acc_seg: 77.7643
+2026/09/23 21:40:14 - mmengine - INFO - Iter(train) [81850/96000]  lr: 1.0000e-04  eta: 3:48:01  time: 0.1820  data_time: 0.0016  memory: 3081  loss: 0.4582  decode.loss_ce: 0.2947  decode.acc_seg: 89.8361  aux.loss_ce: 0.1636  aux.acc_seg: 85.6974
+2026/09/23 21:40:23 - mmengine - INFO - Iter(train) [81900/96000]  lr: 1.0000e-04  eta: 3:42:22  time: 0.1839  data_time: 0.0016  memory: 3081  loss: 0.4423  decode.loss_ce: 0.2720  decode.acc_seg: 94.5204  aux.loss_ce: 0.1703  aux.acc_seg: 93.4914
+2026/09/23 21:40:32 - mmengine - INFO - Iter(train) [81950/96000]  lr: 1.0000e-04  eta: 3:36:59  time: 0.1825  data_time: 0.0018  memory: 3081  loss: 0.4427  decode.loss_ce: 0.2846  decode.acc_seg: 94.6471  aux.loss_ce: 0.1581  aux.acc_seg: 94.3192
+2026/09/23 21:40:41 - mmengine - INFO - Exp name: deeplabv3plus_r50-d8_1xb2-96k_mapillary-v2-512x512_20260923_211023
+2026/09/23 21:40:41 - mmengine - INFO - Iter(train) [82000/96000]  lr: 1.0000e-04  eta: 3:31:52  time: 0.1824  data_time: 0.0017  memory: 3081  loss: 0.4476  decode.loss_ce: 0.2858  decode.acc_seg: 94.3027  aux.loss_ce: 0.1618  aux.acc_seg: 92.9211
+2026/09/23 21:40:51 - mmengine - INFO - Iter(train) [82050/96000]  lr: 1.0000e-04  eta: 3:27:00  time: 0.1825  data_time: 0.0017  memory: 3081  loss: 0.6087  decode.loss_ce: 0.3885  decode.acc_seg: 92.7730  aux.loss_ce: 0.2201  aux.acc_seg: 91.2976
+2026/09/23 21:41:00 - mmengine - INFO - Iter(train) [82100/96000]  lr: 1.0000e-04  eta: 3:22:21  time: 0.1829  data_time: 0.0016  memory: 3081  loss: 0.6709  decode.loss_ce: 0.4148  decode.acc_seg: 89.7520  aux.loss_ce: 0.2561  aux.acc_seg: 75.4715
+2026/09/23 21:41:09 - mmengine - INFO - Iter(train) [82150/96000]  lr: 1.0000e-04  eta: 3:17:55  time: 0.1821  data_time: 0.0017  memory: 3081  loss: 0.5490  decode.loss_ce: 0.3524  decode.acc_seg: 80.0184  aux.loss_ce: 0.1966  aux.acc_seg: 73.2073
+2026/09/23 21:41:18 - mmengine - INFO - Iter(train) [82200/96000]  lr: 1.0000e-04  eta: 3:13:40  time: 0.1819  data_time: 0.0017  memory: 3081  loss: 0.5454  decode.loss_ce: 0.3445  decode.acc_seg: 87.4367  aux.loss_ce: 0.2009  aux.acc_seg: 83.4202
+2026/09/23 21:41:27 - mmengine - INFO - Iter(train) [82250/96000]  lr: 1.0000e-04  eta: 3:09:37  time: 0.1836  data_time: 0.0025  memory: 3081  loss: 0.6417  decode.loss_ce: 0.4188  decode.acc_seg: 85.5932  aux.loss_ce: 0.2229  aux.acc_seg: 85.0901
+2026/09/23 21:41:36 - mmengine - INFO - Iter(train) [82300/96000]  lr: 1.0000e-04  eta: 3:05:43  time: 0.1828  data_time: 0.0024  memory: 3082  loss: 0.6612  decode.loss_ce: 0.4241  decode.acc_seg: 95.3075  aux.loss_ce: 0.2371  aux.acc_seg: 92.3485
+2026/09/23 21:41:45 - mmengine - INFO - Iter(train) [82350/96000]  lr: 1.0000e-04  eta: 3:02:00  time: 0.1820  data_time: 0.0017  memory: 3081  loss: 0.5274  decode.loss_ce: 0.3458  decode.acc_seg: 90.0611  aux.loss_ce: 0.1816  aux.acc_seg: 87.9982
+2026/09/23 21:41:55 - mmengine - INFO - Iter(train) [82400/96000]  lr: 1.0000e-04  eta: 2:58:25  time: 0.1823  data_time: 0.0018  memory: 3081  loss: 0.4227  decode.loss_ce: 0.2753  decode.acc_seg: 83.0136  aux.loss_ce: 0.1474  aux.acc_seg: 85.9268
+2026/09/23 21:42:04 - mmengine - INFO - Iter(train) [82450/96000]  lr: 1.0000e-04  eta: 2:54:58  time: 0.1830  data_time: 0.0017  memory: 3081  loss: 0.5034  decode.loss_ce: 0.3324  decode.acc_seg: 90.8876  aux.loss_ce: 0.1710  aux.acc_seg: 89.7635
+2026/09/23 21:42:13 - mmengine - INFO - Iter(train) [82500/96000]  lr: 1.0000e-04  eta: 2:51:39  time: 0.1828  data_time: 0.0017  memory: 3081  loss: 0.6685  decode.loss_ce: 0.4222  decode.acc_seg: 90.4813  aux.loss_ce: 0.2463  aux.acc_seg: 84.5786
+2026/09/23 21:42:22 - mmengine - INFO - Iter(train) [82550/96000]  lr: 1.0000e-04  eta: 2:48:28  time: 0.1824  data_time: 0.0017  memory: 3081  loss: 0.5076  decode.loss_ce: 0.3048  decode.acc_seg: 91.8123  aux.loss_ce: 0.2027  aux.acc_seg: 86.0183
+2026/09/23 21:42:31 - mmengine - INFO - Iter(train) [82600/96000]  lr: 1.0000e-04  eta: 2:45:24  time: 0.1823  data_time: 0.0017  memory: 3081  loss: 0.5323  decode.loss_ce: 0.3484  decode.acc_seg: 82.3198  aux.loss_ce: 0.1839  aux.acc_seg: 77.4585
+2026/09/23 21:42:40 - mmengine - INFO - Iter(train) [82650/96000]  lr: 1.0000e-04  eta: 2:42:26  time: 0.1824  data_time: 0.0018  memory: 3081  loss: 0.4899  decode.loss_ce: 0.3103  decode.acc_seg: 91.6958  aux.loss_ce: 0.1795  aux.acc_seg: 90.5499
+2026/09/23 21:42:49 - mmengine - INFO - Iter(train) [82700/96000]  lr: 1.0000e-04  eta: 2:39:35  time: 0.1826  data_time: 0.0018  memory: 3081  loss: 0.5171  decode.loss_ce: 0.3069  decode.acc_seg: 90.2491  aux.loss_ce: 0.2102  aux.acc_seg: 86.7321
+2026/09/23 21:42:58 - mmengine - INFO - Iter(train) [82750/96000]  lr: 1.0000e-04  eta: 2:36:49  time: 0.1818  data_time: 0.0017  memory: 3082  loss: 0.4761  decode.loss_ce: 0.3026  decode.acc_seg: 95.3491  aux.loss_ce: 0.1735  aux.acc_seg: 94.4353
+2026/09/23 21:43:08 - mmengine - INFO - Iter(train) [82800/96000]  lr: 1.0000e-04  eta: 2:34:09  time: 0.1828  data_time: 0.0017  memory: 3081  loss: 0.5319  decode.loss_ce: 0.3432  decode.acc_seg: 87.8481  aux.loss_ce: 0.1886  aux.acc_seg: 86.8673
+2026/09/23 21:43:17 - mmengine - INFO - Iter(train) [82850/96000]  lr: 1.0000e-04  eta: 2:31:35  time: 0.1824  data_time: 0.0016  memory: 3081  loss: 0.5159  decode.loss_ce: 0.3254  decode.acc_seg: 91.2962  aux.loss_ce: 0.1905  aux.acc_seg: 86.2139
+2026/09/23 21:43:26 - mmengine - INFO - Iter(train) [82900/96000]  lr: 1.0000e-04  eta: 2:29:05  time: 0.1825  data_time: 0.0017  memory: 3081  loss: 0.4708  decode.loss_ce: 0.3075  decode.acc_seg: 87.8811  aux.loss_ce: 0.1632  aux.acc_seg: 86.7812
+2026/09/23 21:43:35 - mmengine - INFO - Iter(train) [82950/96000]  lr: 1.0000e-04  eta: 2:26:40  time: 0.1818  data_time: 0.0017  memory: 3081  loss: 0.5036  decode.loss_ce: 0.3296  decode.acc_seg: 94.3779  aux.loss_ce: 0.1740  aux.acc_seg: 93.6005
+2026/09/23 21:43:44 - mmengine - INFO - Exp name: deeplabv3plus_r50-d8_1xb2-96k_mapillary-v2-512x512_20260923_211023
+2026/09/23 21:43:44 - mmengine - INFO - Iter(train) [83000/96000]  lr: 1.0000e-04  eta: 2:24:20  time: 0.1828  data_time: 0.0018  memory: 3081  loss: 0.6993  decode.loss_ce: 0.4314  decode.acc_seg: 89.9369  aux.loss_ce: 0.2679  aux.acc_seg: 88.9352
+2026/09/23 21:43:53 - mmengine - INFO - Iter(train) [83050/96000]  lr: 1.0000e-04  eta: 2:22:04  time: 0.1831  data_time: 0.0017  memory: 3081  loss: 0.4476  decode.loss_ce: 0.2940  decode.acc_seg: 95.6387  aux.loss_ce: 0.1536  aux.acc_seg: 94.5133
+2026/09/23 21:44:02 - mmengine - INFO - Iter(train) [83100/96000]  lr: 1.0000e-04  eta: 2:19:52  time: 0.1826  data_time: 0.0017  memory: 3081  loss: 0.5605  decode.loss_ce: 0.3299  decode.acc_seg: 81.0976  aux.loss_ce: 0.2306  aux.acc_seg: 73.9778
+2026/09/23 21:44:11 - mmengine - INFO - Iter(train) [83150/96000]  lr: 1.0000e-04  eta: 2:17:44  time: 0.1820  data_time: 0.0017  memory: 3081  loss: 0.7482  decode.loss_ce: 0.4886  decode.acc_seg: 78.9049  aux.loss_ce: 0.2596  aux.acc_seg: 78.0396
+2026/09/23 21:44:20 - mmengine - INFO - Iter(train) [83200/96000]  lr: 1.0000e-04  eta: 2:15:40  time: 0.1823  data_time: 0.0017  memory: 3081  loss: 0.4462  decode.loss_ce: 0.2826  decode.acc_seg: 93.1170  aux.loss_ce: 0.1636  aux.acc_seg: 90.8006
+2026/09/23 21:44:30 - mmengine - INFO - Iter(train) [83250/96000]  lr: 1.0000e-04  eta: 2:13:39  time: 0.1819  data_time: 0.0018  memory: 3081  loss: 0.5229  decode.loss_ce: 0.3395  decode.acc_seg: 86.5694  aux.loss_ce: 0.1834  aux.acc_seg: 85.0070
+2026/09/23 21:44:39 - mmengine - INFO - Iter(train) [83300/96000]  lr: 1.0000e-04  eta: 2:11:41  time: 0.1828  data_time: 0.0017  memory: 3081  loss: 0.5876  decode.loss_ce: 0.3565  decode.acc_seg: 84.0286  aux.loss_ce: 0.2311  aux.acc_seg: 82.3571
+2026/09/23 21:44:48 - mmengine - INFO - Iter(train) [83350/96000]  lr: 1.0000e-04  eta: 2:09:47  time: 0.1824  data_time: 0.0017  memory: 3081  loss: 0.7495  decode.loss_ce: 0.4791  decode.acc_seg: 72.3093  aux.loss_ce: 0.2703  aux.acc_seg: 61.7757
+2026/09/23 21:44:57 - mmengine - INFO - Iter(train) [83400/96000]  lr: 1.0000e-04  eta: 2:07:56  time: 0.1824  data_time: 0.0017  memory: 3081  loss: 0.4360  decode.loss_ce: 0.2768  decode.acc_seg: 89.1120  aux.loss_ce: 0.1592  aux.acc_seg: 88.2240
+2026/09/23 21:45:06 - mmengine - INFO - Iter(train) [83450/96000]  lr: 1.0000e-04  eta: 2:06:08  time: 0.1820  data_time: 0.0017  memory: 3081  loss: 0.4440  decode.loss_ce: 0.2838  decode.acc_seg: 88.8081  aux.loss_ce: 0.1602  aux.acc_seg: 83.7180
+2026/09/23 21:45:15 - mmengine - INFO - Iter(train) [83500/96000]  lr: 1.0000e-04  eta: 2:04:23  time: 0.1820  data_time: 0.0018  memory: 3083  loss: 0.4755  decode.loss_ce: 0.3042  decode.acc_seg: 87.4153  aux.loss_ce: 0.1714  aux.acc_seg: 83.3996
+2026/09/23 21:45:24 - mmengine - INFO - Iter(train) [83550/96000]  lr: 1.0000e-04  eta: 2:02:40  time: 0.1820  data_time: 0.0018  memory: 3081  loss: 0.5514  decode.loss_ce: 0.3349  decode.acc_seg: 93.0872  aux.loss_ce: 0.2166  aux.acc_seg: 81.1729
+2026/09/23 21:45:33 - mmengine - INFO - Iter(train) [83600/96000]  lr: 1.0000e-04  eta: 2:01:00  time: 0.1825  data_time: 0.0018  memory: 3081  loss: 0.6016  decode.loss_ce: 0.3735  decode.acc_seg: 93.3348  aux.loss_ce: 0.2282  aux.acc_seg: 92.6128
+2026/09/23 21:45:43 - mmengine - INFO - Iter(train) [83650/96000]  lr: 1.0000e-04  eta: 1:59:23  time: 0.1827  data_time: 0.0017  memory: 3081  loss: 0.6560  decode.loss_ce: 0.4182  decode.acc_seg: 71.1330  aux.loss_ce: 0.2378  aux.acc_seg: 68.0605
+2026/09/23 21:45:52 - mmengine - INFO - Iter(train) [83700/96000]  lr: 1.0000e-04  eta: 1:57:48  time: 0.1821  data_time: 0.0017  memory: 3081  loss: 0.5025  decode.loss_ce: 0.3193  decode.acc_seg: 93.2209  aux.loss_ce: 0.1831  aux.acc_seg: 80.0032
+2026/09/23 21:46:01 - mmengine - INFO - Iter(train) [83750/96000]  lr: 1.0000e-04  eta: 1:56:15  time: 0.1820  data_time: 0.0017  memory: 3081  loss: 0.5182  decode.loss_ce: 0.3383  decode.acc_seg: 92.4242  aux.loss_ce: 0.1799  aux.acc_seg: 87.5628
+2026/09/23 21:46:10 - mmengine - INFO - Iter(train) [83800/96000]  lr: 1.0000e-04  eta: 1:54:44  time: 0.1827  data_time: 0.0017  memory: 3081  loss: 0.6466  decode.loss_ce: 0.4180  decode.acc_seg: 90.0814  aux.loss_ce: 0.2286  aux.acc_seg: 87.3110
+2026/09/23 21:46:19 - mmengine - INFO - Iter(train) [83850/96000]  lr: 1.0000e-04  eta: 1:53:16  time: 0.1819  data_time: 0.0017  memory: 3081  loss: 0.5232  decode.loss_ce: 0.3385  decode.acc_seg: 89.5786  aux.loss_ce: 0.1847  aux.acc_seg: 86.8410
+2026/09/23 21:46:28 - mmengine - INFO - Iter(train) [83900/96000]  lr: 1.0000e-04  eta: 1:51:49  time: 0.1821  data_time: 0.0017  memory: 3081  loss: 0.6176  decode.loss_ce: 0.3826  decode.acc_seg: 90.6693  aux.loss_ce: 0.2351  aux.acc_seg: 88.6916
+2026/09/23 21:46:37 - mmengine - INFO - Iter(train) [83950/96000]  lr: 1.0000e-04  eta: 1:50:25  time: 0.1818  data_time: 0.0018  memory: 3081  loss: 0.5523  decode.loss_ce: 0.3626  decode.acc_seg: 93.7714  aux.loss_ce: 0.1897  aux.acc_seg: 93.0784
+2026/09/23 21:46:46 - mmengine - INFO - Exp name: deeplabv3plus_r50-d8_1xb2-96k_mapillary-v2-512x512_20260923_211023
+2026/09/23 21:46:46 - mmengine - INFO - Iter(train) [84000/96000]  lr: 1.0000e-04  eta: 1:49:02  time: 0.1815  data_time: 0.0017  memory: 3081  loss: 0.4612  decode.loss_ce: 0.2876  decode.acc_seg: 88.8896  aux.loss_ce: 0.1737  aux.acc_seg: 86.9463
+2026/09/23 21:46:46 - mmengine - INFO - Saving checkpoint at 84000 iterations
+2026/09/23 21:47:32 - mmengine - INFO - Iter(val) [  50/2000]    eta: 0:29:10  time: 0.0502  data_time: 0.0009  memory: 6834  
+2026/09/23 21:47:53 - mmengine - INFO - Iter(val) [ 100/2000]    eta: 0:20:59  time: 0.0500  data_time: 0.0008  memory: 6834  
+2026/09/23 21:48:14 - mmengine - INFO - Iter(val) [ 150/2000]    eta: 0:18:02  time: 0.0500  data_time: 0.0009  memory: 6043  
+2026/09/23 21:48:17 - mmengine - INFO - Iter(val) [ 200/2000]    eta: 0:13:33  time: 0.0497  data_time: 0.0008  memory: 841  
+2026/09/23 21:48:34 - mmengine - INFO - Iter(val) [ 250/2000]    eta: 0:12:32  time: 1.4978  data_time: 0.0008  memory: 6834  
+2026/09/23 21:48:37 - mmengine - INFO - Iter(val) [ 300/2000]    eta: 0:10:23  time: 0.0507  data_time: 0.0009  memory: 842  
+2026/09/23 21:48:39 - mmengine - INFO - Iter(val) [ 350/2000]    eta: 0:08:50  time: 0.0497  data_time: 0.0008  memory: 842  
+2026/09/23 21:48:51 - mmengine - INFO - Iter(val) [ 400/2000]    eta: 0:08:19  time: 0.0516  data_time: 0.0009  memory: 6053  
+2026/09/23 21:48:54 - mmengine - INFO - Iter(val) [ 450/2000]    eta: 0:07:18  time: 0.0515  data_time: 0.0009  memory: 841  
+2026/09/23 21:48:57 - mmengine - INFO - Iter(val) [ 500/2000]    eta: 0:06:30  time: 0.0518  data_time: 0.0008  memory: 841  
+2026/09/23 21:49:22 - mmengine - INFO - Iter(val) [ 550/2000]    eta: 0:06:49  time: 0.0548  data_time: 0.0009  memory: 6832  
+2026/09/23 21:49:27 - mmengine - INFO - Iter(val) [ 600/2000]    eta: 0:06:13  time: 0.1463  data_time: 0.0009  memory: 1929  
+2026/09/23 21:49:30 - mmengine - INFO - Iter(val) [ 650/2000]    eta: 0:05:39  time: 0.0498  data_time: 0.0009  memory: 1539  
+2026/09/23 21:49:33 - mmengine - INFO - Iter(val) [ 700/2000]    eta: 0:05:08  time: 0.0515  data_time: 0.0009  memory: 843  
+2026/09/23 21:49:35 - mmengine - INFO - Iter(val) [ 750/2000]    eta: 0:04:41  time: 0.0517  data_time: 0.0008  memory: 843  
+2026/09/23 21:49:43 - mmengine - INFO - Iter(val) [ 800/2000]    eta: 0:04:23  time: 0.0523  data_time: 0.0008  memory: 2460  
+2026/09/23 21:49:45 - mmengine - INFO - Iter(val) [ 850/2000]    eta: 0:04:01  time: 0.0515  data_time: 0.0008  memory: 841  
+2026/09/23 21:49:48 - mmengine - INFO - Iter(val) [ 900/2000]    eta: 0:03:41  time: 0.0502  data_time: 0.0009  memory: 841  
+2026/09/23 21:49:51 - mmengine - INFO - Iter(val) [ 950/2000]    eta: 0:03:23  time: 0.0554  data_time: 0.0008  memory: 844  
+2026/09/23 21:50:03 - mmengine - INFO - Iter(val) [1000/2000]    eta: 0:03:16  time: 0.0500  data_time: 0.0009  memory: 6034  
+2026/09/23 21:50:05 - mmengine - INFO - Iter(val) [1050/2000]    eta: 0:02:59  time: 0.0517  data_time: 0.0009  memory: 841  
+2026/09/23 21:50:08 - mmengine - INFO - Iter(val) [1100/2000]    eta: 0:02:44  time: 0.0530  data_time: 0.0008  memory: 841  
+2026/09/23 21:50:11 - mmengine - INFO - Iter(val) [1150/2000]    eta: 0:02:30  time: 0.0517  data_time: 0.0008  memory: 841  
+2026/09/23 21:50:13 - mmengine - INFO - Iter(val) [1200/2000]    eta: 0:02:17  time: 0.0551  data_time: 0.0008  memory: 841  
+2026/09/23 21:50:26 - mmengine - INFO - Iter(val) [1250/2000]    eta: 0:02:11  time: 0.0533  data_time: 0.0008  memory: 6028  
+2026/09/23 21:50:28 - mmengine - INFO - Iter(val) [1300/2000]    eta: 0:01:59  time: 0.0515  data_time: 0.0008  memory: 842  
+2026/09/23 21:50:31 - mmengine - INFO - Iter(val) [1350/2000]    eta: 0:01:47  time: 0.0515  data_time: 0.0008  memory: 842  
+2026/09/23 21:50:34 - mmengine - INFO - Iter(val) [1400/2000]    eta: 0:01:37  time: 0.0521  data_time: 0.0008  memory: 843  
+2026/09/23 21:50:37 - mmengine - INFO - Iter(val) [1450/2000]    eta: 0:01:27  time: 0.0516  data_time: 0.0009  memory: 844  
+2026/09/23 21:50:40 - mmengine - INFO - Iter(val) [1500/2000]    eta: 0:01:17  time: 0.0535  data_time: 0.0009  memory: 844  
+2026/09/23 21:50:42 - mmengine - INFO - Iter(val) [1550/2000]    eta: 0:01:08  time: 0.0500  data_time: 0.0009  memory: 844  
+2026/09/23 21:50:45 - mmengine - INFO - Iter(val) [1600/2000]    eta: 0:00:59  time: 0.0535  data_time: 0.0009  memory: 844  
+2026/09/23 21:50:47 - mmengine - INFO - Iter(val) [1650/2000]    eta: 0:00:51  time: 0.0532  data_time: 0.0009  memory: 844  
+2026/09/23 21:50:50 - mmengine - INFO - Iter(val) [1700/2000]    eta: 0:00:42  time: 0.0536  data_time: 0.0008  memory: 844  
+2026/09/23 21:50:53 - mmengine - INFO - Iter(val) [1750/2000]    eta: 0:00:35  time: 0.0557  data_time: 0.0009  memory: 844  
+2026/09/23 21:50:55 - mmengine - INFO - Iter(val) [1800/2000]    eta: 0:00:27  time: 0.0548  data_time: 0.0009  memory: 844  
+2026/09/23 21:50:58 - mmengine - INFO - Iter(val) [1850/2000]    eta: 0:00:20  time: 0.0519  data_time: 0.0008  memory: 844  
+2026/09/23 21:51:01 - mmengine - INFO - Iter(val) [1900/2000]    eta: 0:00:13  time: 0.0517  data_time: 0.0009  memory: 844  
+2026/09/23 21:51:03 - mmengine - INFO - Iter(val) [1950/2000]    eta: 0:00:06  time: 0.0507  data_time: 0.0008  memory: 844  
+2026/09/23 21:51:06 - mmengine - INFO - Iter(val) [2000/2000]    eta: 0:00:00  time: 0.0496  data_time: 0.0007  memory: 844  
+2026/09/23 21:51:06 - mmengine - INFO - per class results:
+2026/09/23 21:51:06 - mmengine - INFO - 
++------------------------------------------------+-------+-------+-------+
+|                     Class                      |  IoU  |  Acc  |  Dice |
++------------------------------------------------+-------+-------+-------+
+|                      Bird                      |  0.0  |  0.0  |  0.0  |
+|                 Ground Animal                  |  0.0  |  0.0  |  0.0  |
+|               Ambiguous Barrier                |  0.0  |  0.0  |  0.0  |
+|                 Concrete Block                 | 57.35 | 77.01 |  72.9 |
+|                      Curb                      | 47.09 | 59.18 | 64.02 |
+|                     Fence                      | 48.25 | 66.45 | 65.09 |
+|                   Guard Rail                   | 54.26 | 78.63 | 70.35 |
+|                    Barrier                     |  0.0  |  0.0  |  0.0  |
+|                  Road Median                   |  0.73 |  0.8  |  1.46 |
+|                   Road Side                    |  7.89 |  8.4  | 14.62 |
+|                 Lane Separator                 |  0.1  |  0.1  |  0.2  |
+|               Temporary Barrier                | 19.51 | 25.11 | 32.66 |
+|                      Wall                      | 44.51 | 61.45 | 61.61 |
+|                   Bike Lane                    | 33.54 | 68.59 | 50.23 |
+|               Crosswalk - Plain                | 19.21 | 25.13 | 32.23 |
+|                    Curb Cut                    |  1.99 |  2.02 |  3.91 |
+|                    Driveway                    |  5.03 |  5.23 |  9.58 |
+|                    Parking                     | 13.98 |  18.9 | 24.53 |
+|                 Parking Aisle                  |  0.0  |  0.0  |  0.0  |
+|                Pedestrian Area                 | 35.19 | 59.06 | 52.06 |
+|                   Rail Track                   | 41.26 | 58.15 | 58.42 |
+|                      Road                      | 83.05 | 89.94 | 90.74 |
+|                 Road Shoulder                  | 14.95 | 19.25 | 26.01 |
+|                  Service Lane                  | 41.49 | 67.82 | 58.64 |
+|                    Sidewalk                    | 55.89 | 79.49 |  71.7 |
+|                 Traffic Island                 | 29.13 | 39.25 | 45.12 |
+|                     Bridge                     | 56.99 | 81.08 |  72.6 |
+|                    Building                    | 81.81 | 92.28 |  90.0 |
+|                     Garage                     |  0.0  |  0.0  |  0.0  |
+|                     Tunnel                     | 56.93 | 97.81 | 72.55 |
+|                     Person                     | 56.48 | 70.89 | 72.19 |
+|                  Person Group                  |  0.0  |  0.0  |  0.0  |
+|                   Bicyclist                    | 17.81 | 21.33 | 30.24 |
+|                  Motorcyclist                  | 11.56 | 13.65 | 20.73 |
+|                  Other Rider                   |  0.0  |  0.0  |  0.0  |
+|           Lane Marking - Dashed Line           | 32.24 | 40.35 | 48.76 |
+|          Lane Marking - Straight Line          | 51.52 | 63.17 |  68.0 |
+|           Lane Marking - Zigzag Line           |  0.0  |  0.0  |  0.0  |
+|            Lane Marking - Ambiguous            |  0.0  |  0.0  |  0.0  |
+|          Lane Marking - Arrow (Left)           |  0.0  |  0.0  |  0.0  |
+|          Lane Marking - Arrow (Other)          |  0.0  |  0.0  |  0.0  |
+|          Lane Marking - Arrow (Right)          |  0.0  |  0.0  |  0.0  |
+| Lane Marking - Arrow (Split Left or Straight)  |  0.0  |  0.0  |  0.0  |
+| Lane Marking - Arrow (Split Right or Straight) |  0.0  |  0.0  |  0.0  |
+|        Lane Marking - Arrow (Straight)         |  0.0  |  0.0  |  0.0  |
+|            Lane Marking - Crosswalk            | 66.67 | 79.38 |  80.0 |
+|         Lane Marking - Give Way (Row)          |  0.0  |  0.0  |  0.0  |
+|        Lane Marking - Give Way (Single)        |  0.0  |  0.0  |  0.0  |
+|        Lane Marking - Hatched (Chevron)        |  0.2  |  0.2  |  0.39 |
+|       Lane Marking - Hatched (Diagonal)        | 36.36 | 49.66 | 53.33 |
+|              Lane Marking - Other              | 22.18 | 35.03 | 36.31 |
+|            Lane Marking - Stop Line            | 31.98 | 38.05 | 48.46 |
+|        Lane Marking - Symbol (Bicycle)         |  1.93 |  1.93 |  3.79 |
+|         Lane Marking - Symbol (Other)          |  0.0  |  0.0  |  0.0  |
+|              Lane Marking - Text               | 29.27 |  45.9 | 45.28 |
+|       Lane Marking (only) - Dashed Line        |  0.0  |  0.0  |  0.0  |
+|        Lane Marking (only) - Crosswalk         |  0.0  |  0.0  |  0.0  |
+|          Lane Marking (only) - Other           |  0.0  |  0.0  |  0.0  |
+|           Lane Marking (only) - Test           |  0.0  |  0.0  |  0.0  |
+|                    Mountain                    | 46.17 | 58.92 | 63.17 |
+|                      Sand                      |  0.0  |  0.0  |  0.0  |
+|                      Sky                       | 96.61 |  97.9 | 98.27 |
+|                      Snow                      | 50.71 | 87.98 | 67.29 |
+|                    Terrain                     | 57.03 | 68.24 | 72.63 |
+|                   Vegetation                   | 86.22 | 93.76 |  92.6 |
+|                     Water                      | 49.87 | 85.01 | 66.56 |
+|                     Banner                     |  0.2  |  0.2  |  0.4  |
+|                     Bench                      |  0.0  |  0.0  |  0.0  |
+|                   Bike Rack                    |  0.0  |  0.0  |  0.0  |
+|                  Catch Basin                   |  0.05 |  0.05 |  0.1  |
+|                  CCTV Camera                   |  0.0  |  0.0  |  0.0  |
+|                  Fire Hydrant                  |  0.0  |  0.0  |  0.0  |
+|                  Junction Box                  |  8.71 |  9.36 | 16.02 |
+|                    Mailbox                     |  0.0  |  0.0  |  0.0  |
+|                    Manhole                     | 32.21 | 42.05 | 48.73 |
+|                 Parking Meter                  |  0.0  |  0.0  |  0.0  |
+|                  Phone Booth                   |  0.0  |  0.0  |  0.0  |
+|                    Pothole                     |  0.0  |  0.0  |  0.0  |
+|            Signage - Advertisement             | 36.81 | 52.07 | 53.81 |
+|              Signage - Ambiguous               |  0.0  |  0.0  |  0.0  |
+|                 Signage - Back                 |  0.0  |  0.0  |  0.0  |
+|             Signage - Information              |  0.0  |  0.0  |  0.0  |
+|                Signage - Other                 |  0.0  |  0.0  |  0.0  |
+|                Signage - Store                 | 27.48 | 35.81 | 43.12 |
+|                  Street Light                  | 30.44 |  37.3 | 46.67 |
+|                      Pole                      | 31.75 | 44.41 | 48.19 |
+|                   Pole Group                   |  0.0  |  0.0  |  0.0  |
+|               Traffic Sign Frame               | 42.31 | 68.94 | 59.46 |
+|                  Utility Pole                  | 36.48 | 48.96 | 53.46 |
+|                  Traffic Cone                  |  0.0  |  0.0  |  0.0  |
+|        Traffic Light - General (Single)        |  0.0  |  0.0  |  0.0  |
+|          Traffic Light - Pedestrians           |  0.0  |  0.0  |  0.0  |
+|       Traffic Light - General (Upright)        | 48.81 | 63.48 |  65.6 |
+|      Traffic Light - General (Horizontal)      |  1.72 |  1.72 |  3.39 |
+|            Traffic Light - Cyclists            |  0.0  |  0.0  |  0.0  |
+|             Traffic Light - Other              |  0.0  |  0.0  |  0.0  |
+|            Traffic Sign - Ambiguous            |  0.0  |  0.0  |  0.0  |
+|              Traffic Sign (Back)               | 21.62 | 29.51 | 35.56 |
+|        Traffic Sign - Direction (Back)         |  1.26 |  1.29 |  2.48 |
+|        Traffic Sign - Direction (Front)        | 58.44 | 67.78 | 73.77 |
+|              Traffic Sign (Front)              | 47.79 | 60.04 | 64.67 |
+|             Traffic Sign - Parking             |  0.0  |  0.0  |  0.0  |
+|        Traffic Sign - Temporary (Back)         |  0.0  |  0.0  |  0.0  |
+|        Traffic Sign - Temporary (Front)        |  0.0  |  0.0  |  0.0  |
+|                   Trash Can                    | 30.15 | 50.73 | 46.33 |
+|                    Bicycle                     | 36.01 | 55.51 | 52.95 |
+|                      Boat                      |  0.0  |  0.0  |  0.0  |
+|                      Bus                       | 51.67 | 86.32 | 68.14 |
+|                      Car                       | 85.42 | 92.87 | 92.14 |
+|                    Caravan                     |  0.0  |  0.0  |  0.0  |
+|                   Motorcycle                   | 30.51 | 75.22 | 46.75 |
+|                    On Rails                    |  0.0  |  0.0  |  0.0  |
+|                 Other Vehicle                  |  0.18 |  0.18 |  0.35 |
+|                    Trailer                     |  0.0  |  0.0  |  0.0  |
+|                     Truck                      | 59.35 | 77.07 | 74.49 |
+|                 Vehicle Group                  | 11.84 | 14.88 | 21.18 |
+|                  Wheeled Slow                  |  0.0  |  0.0  |  0.0  |
+|                  Water Valve                   |  0.0  |  0.0  |  0.0  |
+|                   Car Mount                    | 70.13 | 81.34 | 82.44 |
+|                    Dynamic                     | 18.48 |  27.4 |  31.2 |
+|                  Ego Vehicle                   |  89.4 | 92.58 |  94.4 |
+|                     Ground                     | 25.45 | 49.66 | 40.58 |
+|                     Static                     | 12.52 | 17.32 | 22.25 |
+|                   Unlabeled                    |  0.0  |  0.0  |  0.0  |
++------------------------------------------------+-------+-------+-------+
+2026/09/23 21:51:06 - mmengine - INFO - Iter(val) [2000/2000]    aAcc: 87.1500  mIoU: 20.5000  mAcc: 27.5500  mDice: 27.4000  data_time: 0.0009  time: 0.1295
+2026/09/23 21:51:16 - mmengine - INFO - Iter(train) [84050/96000]  lr: 1.0000e-04  eta: 1:47:43  time: 0.1960  data_time: 0.0018  memory: 3083  loss: 0.5455  decode.loss_ce: 0.3323  decode.acc_seg: 91.1946  aux.loss_ce: 0.2131  aux.acc_seg: 87.8166
+2026/09/23 21:51:25 - mmengine - INFO - Iter(train) [84100/96000]  lr: 1.0000e-04  eta: 1:46:26  time: 0.1959  data_time: 0.0017  memory: 3083  loss: 0.4411  decode.loss_ce: 0.2891  decode.acc_seg: 95.5835  aux.loss_ce: 0.1520  aux.acc_seg: 90.3791
+2026/09/23 21:51:35 - mmengine - INFO - Iter(train) [84150/96000]  lr: 1.0000e-04  eta: 1:45:10  time: 0.1956  data_time: 0.0018  memory: 3083  loss: 0.6639  decode.loss_ce: 0.4114  decode.acc_seg: 89.0548  aux.loss_ce: 0.2526  aux.acc_seg: 88.5445
+2026/09/23 21:51:45 - mmengine - INFO - Iter(train) [84200/96000]  lr: 1.0000e-04  eta: 1:43:56  time: 0.1950  data_time: 0.0017  memory: 3083  loss: 0.6437  decode.loss_ce: 0.4088  decode.acc_seg: 86.4215  aux.loss_ce: 0.2349  aux.acc_seg: 81.5904
+2026/09/23 21:51:55 - mmengine - INFO - Iter(train) [84250/96000]  lr: 1.0000e-04  eta: 1:42:44  time: 0.1937  data_time: 0.0017  memory: 3083  loss: 0.5099  decode.loss_ce: 0.3280  decode.acc_seg: 91.0211  aux.loss_ce: 0.1819  aux.acc_seg: 89.5187
+2026/09/23 21:52:04 - mmengine - INFO - Iter(train) [84300/96000]  lr: 1.0000e-04  eta: 1:41:33  time: 0.1945  data_time: 0.0017  memory: 3083  loss: 0.5809  decode.loss_ce: 0.3678  decode.acc_seg: 92.0227  aux.loss_ce: 0.2131  aux.acc_seg: 89.3601
+2026/09/23 21:52:14 - mmengine - INFO - Iter(train) [84350/96000]  lr: 1.0000e-04  eta: 1:40:23  time: 0.1944  data_time: 0.0016  memory: 3083  loss: 0.3899  decode.loss_ce: 0.2475  decode.acc_seg: 93.9507  aux.loss_ce: 0.1424  aux.acc_seg: 91.8964
+2026/09/23 21:52:24 - mmengine - INFO - Iter(train) [84400/96000]  lr: 1.0000e-04  eta: 1:39:14  time: 0.1947  data_time: 0.0017  memory: 3083  loss: 0.5853  decode.loss_ce: 0.3742  decode.acc_seg: 88.4141  aux.loss_ce: 0.2111  aux.acc_seg: 85.1241
+2026/09/23 21:52:33 - mmengine - INFO - Iter(train) [84450/96000]  lr: 1.0000e-04  eta: 1:38:07  time: 0.1948  data_time: 0.0017  memory: 3083  loss: 0.5628  decode.loss_ce: 0.3401  decode.acc_seg: 92.4105  aux.loss_ce: 0.2227  aux.acc_seg: 89.4725
+2026/09/23 21:52:43 - mmengine - INFO - Iter(train) [84500/96000]  lr: 1.0000e-04  eta: 1:37:02  time: 0.1952  data_time: 0.0017  memory: 3083  loss: 0.4078  decode.loss_ce: 0.2608  decode.acc_seg: 95.9747  aux.loss_ce: 0.1470  aux.acc_seg: 94.7653
+2026/09/23 21:52:54 - mmengine - INFO - Iter(train) [84550/96000]  lr: 1.0000e-04  eta: 1:35:59  time: 0.2083  data_time: 0.0020  memory: 3083  loss: 0.4842  decode.loss_ce: 0.2965  decode.acc_seg: 89.4493  aux.loss_ce: 0.1877  aux.acc_seg: 78.3669
+2026/09/23 21:53:04 - mmengine - INFO - Iter(train) [84600/96000]  lr: 1.0000e-04  eta: 1:34:58  time: 0.2074  data_time: 0.0017  memory: 3083  loss: 0.5390  decode.loss_ce: 0.3362  decode.acc_seg: 93.8579  aux.loss_ce: 0.2027  aux.acc_seg: 92.9810
+2026/09/23 21:53:15 - mmengine - INFO - Iter(train) [84650/96000]  lr: 1.0000e-04  eta: 1:33:57  time: 0.2118  data_time: 0.0018  memory: 3083  loss: 0.4560  decode.loss_ce: 0.2922  decode.acc_seg: 88.1568  aux.loss_ce: 0.1638  aux.acc_seg: 84.7342
+2026/09/23 21:53:25 - mmengine - INFO - Iter(train) [84700/96000]  lr: 1.0000e-04  eta: 1:32:57  time: 0.2053  data_time: 0.0019  memory: 3083  loss: 0.5130  decode.loss_ce: 0.3426  decode.acc_seg: 92.4628  aux.loss_ce: 0.1703  aux.acc_seg: 90.8422
+2026/09/23 21:53:35 - mmengine - INFO - Iter(train) [84750/96000]  lr: 1.0000e-04  eta: 1:31:59  time: 0.2081  data_time: 0.0018  memory: 3083  loss: 0.5209  decode.loss_ce: 0.3231  decode.acc_seg: 83.3059  aux.loss_ce: 0.1978  aux.acc_seg: 77.6352
+2026/09/23 21:53:46 - mmengine - INFO - Iter(train) [84800/96000]  lr: 1.0000e-04  eta: 1:31:01  time: 0.2081  data_time: 0.0019  memory: 3083  loss: 0.5467  decode.loss_ce: 0.3448  decode.acc_seg: 88.8833  aux.loss_ce: 0.2019  aux.acc_seg: 83.8443
+2026/09/23 21:53:56 - mmengine - INFO - Iter(train) [84850/96000]  lr: 1.0000e-04  eta: 1:30:05  time: 0.2064  data_time: 0.0019  memory: 3083  loss: 0.5324  decode.loss_ce: 0.3412  decode.acc_seg: 87.7239  aux.loss_ce: 0.1913  aux.acc_seg: 81.4589
+2026/09/23 21:54:07 - mmengine - INFO - Iter(train) [84900/96000]  lr: 1.0000e-04  eta: 1:29:09  time: 0.2096  data_time: 0.0018  memory: 3083  loss: 0.5524  decode.loss_ce: 0.3435  decode.acc_seg: 80.8804  aux.loss_ce: 0.2089  aux.acc_seg: 69.2965
+2026/09/23 21:54:17 - mmengine - INFO - Iter(train) [84950/96000]  lr: 1.0000e-04  eta: 1:28:14  time: 0.2121  data_time: 0.0018  memory: 3083  loss: 0.6137  decode.loss_ce: 0.4044  decode.acc_seg: 85.3810  aux.loss_ce: 0.2093  aux.acc_seg: 82.7438
+2026/09/23 21:54:28 - mmengine - INFO - Exp name: deeplabv3plus_r50-d8_1xb2-96k_mapillary-v2-512x512_20260923_211023
+2026/09/23 21:54:28 - mmengine - INFO - Iter(train) [85000/96000]  lr: 1.0000e-04  eta: 1:27:21  time: 0.2206  data_time: 0.0018  memory: 3083  loss: 0.4588  decode.loss_ce: 0.2956  decode.acc_seg: 93.0935  aux.loss_ce: 0.1632  aux.acc_seg: 90.6147
+2026/09/23 21:54:38 - mmengine - INFO - Iter(train) [85050/96000]  lr: 1.0000e-04  eta: 1:26:29  time: 0.2109  data_time: 0.0018  memory: 3083  loss: 0.5668  decode.loss_ce: 0.3687  decode.acc_seg: 72.5508  aux.loss_ce: 0.1981  aux.acc_seg: 69.5576
+2026/09/23 21:54:49 - mmengine - INFO - Iter(train) [85100/96000]  lr: 1.0000e-04  eta: 1:25:37  time: 0.2107  data_time: 0.0019  memory: 3083  loss: 0.4071  decode.loss_ce: 0.2445  decode.acc_seg: 91.9739  aux.loss_ce: 0.1626  aux.acc_seg: 91.0784
+2026/09/23 21:54:59 - mmengine - INFO - Iter(train) [85150/96000]  lr: 1.0000e-04  eta: 1:24:46  time: 0.2107  data_time: 0.0020  memory: 3083  loss: 0.5164  decode.loss_ce: 0.3347  decode.acc_seg: 93.1513  aux.loss_ce: 0.1817  aux.acc_seg: 92.5990
+2026/09/23 21:55:10 - mmengine - INFO - Iter(train) [85200/96000]  lr: 1.0000e-04  eta: 1:23:56  time: 0.2107  data_time: 0.0019  memory: 3083  loss: 0.5502  decode.loss_ce: 0.3623  decode.acc_seg: 84.5050  aux.loss_ce: 0.1879  aux.acc_seg: 83.0546
+2026/09/23 21:55:21 - mmengine - INFO - Iter(train) [85250/96000]  lr: 1.0000e-04  eta: 1:23:06  time: 0.2111  data_time: 0.0019  memory: 3083  loss: 0.6116  decode.loss_ce: 0.3736  decode.acc_seg: 86.4515  aux.loss_ce: 0.2381  aux.acc_seg: 78.6231
+2026/09/23 21:55:31 - mmengine - INFO - Iter(train) [85300/96000]  lr: 1.0000e-04  eta: 1:22:18  time: 0.2107  data_time: 0.0019  memory: 3083  loss: 0.4298  decode.loss_ce: 0.2834  decode.acc_seg: 89.8851  aux.loss_ce: 0.1464  aux.acc_seg: 88.3539
+2026/09/23 21:55:42 - mmengine - INFO - Iter(train) [85350/96000]  lr: 1.0000e-04  eta: 1:21:30  time: 0.2105  data_time: 0.0018  memory: 3083  loss: 0.5980  decode.loss_ce: 0.3738  decode.acc_seg: 88.2403  aux.loss_ce: 0.2241  aux.acc_seg: 85.0156
+2026/09/23 21:55:52 - mmengine - INFO - Iter(train) [85400/96000]  lr: 1.0000e-04  eta: 1:20:42  time: 0.2108  data_time: 0.0018  memory: 3083  loss: 0.8020  decode.loss_ce: 0.4982  decode.acc_seg: 85.9995  aux.loss_ce: 0.3038  aux.acc_seg: 85.1444
+2026/09/23 21:56:03 - mmengine - INFO - Iter(train) [85450/96000]  lr: 1.0000e-04  eta: 1:19:56  time: 0.2107  data_time: 0.0019  memory: 3083  loss: 0.5463  decode.loss_ce: 0.3573  decode.acc_seg: 93.5747  aux.loss_ce: 0.1889  aux.acc_seg: 93.5071
+2026/09/23 21:56:13 - mmengine - INFO - Iter(train) [85500/96000]  lr: 1.0000e-04  eta: 1:19:10  time: 0.2108  data_time: 0.0019  memory: 3083  loss: 0.4999  decode.loss_ce: 0.3276  decode.acc_seg: 85.4585  aux.loss_ce: 0.1723  aux.acc_seg: 75.3800
+2026/09/23 21:56:24 - mmengine - INFO - Iter(train) [85550/96000]  lr: 1.0000e-04  eta: 1:18:24  time: 0.2110  data_time: 0.0019  memory: 3083  loss: 0.5860  decode.loss_ce: 0.3648  decode.acc_seg: 81.3562  aux.loss_ce: 0.2212  aux.acc_seg: 80.9454
+2026/09/23 21:56:34 - mmengine - INFO - Iter(train) [85600/96000]  lr: 1.0000e-04  eta: 1:17:40  time: 0.2142  data_time: 0.0019  memory: 3083  loss: 0.6083  decode.loss_ce: 0.3590  decode.acc_seg: 90.4051  aux.loss_ce: 0.2493  aux.acc_seg: 86.8744
+2026/09/23 21:56:45 - mmengine - INFO - Iter(train) [85650/96000]  lr: 1.0000e-04  eta: 1:16:56  time: 0.2111  data_time: 0.0019  memory: 3083  loss: 0.5465  decode.loss_ce: 0.3470  decode.acc_seg: 91.2101  aux.loss_ce: 0.1995  aux.acc_seg: 89.2445
+2026/09/23 21:56:56 - mmengine - INFO - Iter(train) [85700/96000]  lr: 1.0000e-04  eta: 1:16:12  time: 0.2141  data_time: 0.0020  memory: 3083  loss: 0.6246  decode.loss_ce: 0.4096  decode.acc_seg: 93.9762  aux.loss_ce: 0.2150  aux.acc_seg: 94.8498
+2026/09/23 21:57:06 - mmengine - INFO - Iter(train) [85750/96000]  lr: 1.0000e-04  eta: 1:15:29  time: 0.2123  data_time: 0.0018  memory: 3083  loss: 0.6086  decode.loss_ce: 0.3968  decode.acc_seg: 73.6627  aux.loss_ce: 0.2118  aux.acc_seg: 83.6739
+2026/09/23 21:57:17 - mmengine - INFO - Iter(train) [85800/96000]  lr: 1.0000e-04  eta: 1:14:47  time: 0.2123  data_time: 0.0019  memory: 3083  loss: 0.7107  decode.loss_ce: 0.4390  decode.acc_seg: 91.2411  aux.loss_ce: 0.2717  aux.acc_seg: 89.4337
+2026/09/23 21:57:27 - mmengine - INFO - Iter(train) [85850/96000]  lr: 1.0000e-04  eta: 1:14:05  time: 0.2124  data_time: 0.0018  memory: 3083  loss: 0.4456  decode.loss_ce: 0.2800  decode.acc_seg: 90.3816  aux.loss_ce: 0.1656  aux.acc_seg: 87.7214
+2026/09/23 21:57:38 - mmengine - INFO - Iter(train) [85900/96000]  lr: 1.0000e-04  eta: 1:13:24  time: 0.2125  data_time: 0.0019  memory: 3083  loss: 0.6148  decode.loss_ce: 0.3992  decode.acc_seg: 86.9550  aux.loss_ce: 0.2156  aux.acc_seg: 84.1537
+2026/09/23 21:57:49 - mmengine - INFO - Iter(train) [85950/96000]  lr: 1.0000e-04  eta: 1:12:43  time: 0.2124  data_time: 0.0018  memory: 3083  loss: 0.5463  decode.loss_ce: 0.3473  decode.acc_seg: 89.2826  aux.loss_ce: 0.1989  aux.acc_seg: 88.5614
+2026/09/23 21:57:59 - mmengine - INFO - Exp name: deeplabv3plus_r50-d8_1xb2-96k_mapillary-v2-512x512_20260923_211023
+2026/09/23 21:57:59 - mmengine - INFO - Iter(train) [86000/96000]  lr: 1.0000e-04  eta: 1:12:03  time: 0.2114  data_time: 0.0018  memory: 3083  loss: 0.4321  decode.loss_ce: 0.2705  decode.acc_seg: 92.5167  aux.loss_ce: 0.1617  aux.acc_seg: 89.8777
+2026/09/23 21:58:10 - mmengine - INFO - Iter(train) [86050/96000]  lr: 1.0000e-04  eta: 1:11:23  time: 0.2115  data_time: 0.0018  memory: 3083  loss: 0.5486  decode.loss_ce: 0.3475  decode.acc_seg: 85.7706  aux.loss_ce: 0.2011  aux.acc_seg: 82.4299
+2026/09/23 21:58:20 - mmengine - INFO - Iter(train) [86100/96000]  lr: 1.0000e-04  eta: 1:10:44  time: 0.2096  data_time: 0.0019  memory: 3083  loss: 0.4428  decode.loss_ce: 0.2873  decode.acc_seg: 84.6643  aux.loss_ce: 0.1555  aux.acc_seg: 81.7247
+2026/09/23 21:58:31 - mmengine - INFO - Iter(train) [86150/96000]  lr: 1.0000e-04  eta: 1:10:05  time: 0.2093  data_time: 0.0018  memory: 3083  loss: 0.5306  decode.loss_ce: 0.3422  decode.acc_seg: 89.2818  aux.loss_ce: 0.1884  aux.acc_seg: 86.8832
+2026/09/23 21:58:41 - mmengine - INFO - Iter(train) [86200/96000]  lr: 1.0000e-04  eta: 1:09:26  time: 0.2093  data_time: 0.0018  memory: 3083  loss: 0.5830  decode.loss_ce: 0.3850  decode.acc_seg: 79.0957  aux.loss_ce: 0.1979  aux.acc_seg: 77.2810
+2026/09/23 21:58:52 - mmengine - INFO - Iter(train) [86250/96000]  lr: 1.0000e-04  eta: 1:08:48  time: 0.2094  data_time: 0.0019  memory: 3083  loss: 0.5216  decode.loss_ce: 0.3282  decode.acc_seg: 92.2277  aux.loss_ce: 0.1934  aux.acc_seg: 89.6315
+2026/09/23 21:59:02 - mmengine - INFO - Iter(train) [86300/96000]  lr: 1.0000e-04  eta: 1:08:11  time: 0.2098  data_time: 0.0019  memory: 3083  loss: 0.6240  decode.loss_ce: 0.3897  decode.acc_seg: 85.4730  aux.loss_ce: 0.2343  aux.acc_seg: 81.9916
+2026/09/23 21:59:13 - mmengine - INFO - Iter(train) [86350/96000]  lr: 1.0000e-04  eta: 1:07:34  time: 0.2092  data_time: 0.0018  memory: 3083  loss: 0.4349  decode.loss_ce: 0.2907  decode.acc_seg: 90.3492  aux.loss_ce: 0.1442  aux.acc_seg: 88.5916
+2026/09/23 21:59:23 - mmengine - INFO - Iter(train) [86400/96000]  lr: 1.0000e-04  eta: 1:06:57  time: 0.2094  data_time: 0.0018  memory: 3083  loss: 0.5525  decode.loss_ce: 0.3332  decode.acc_seg: 91.6977  aux.loss_ce: 0.2193  aux.acc_seg: 90.6592
+2026/09/23 21:59:34 - mmengine - INFO - Iter(train) [86450/96000]  lr: 1.0000e-04  eta: 1:06:20  time: 0.2093  data_time: 0.0017  memory: 3083  loss: 0.4768  decode.loss_ce: 0.3144  decode.acc_seg: 90.2153  aux.loss_ce: 0.1623  aux.acc_seg: 89.3590
+2026/09/23 21:59:44 - mmengine - INFO - Iter(train) [86500/96000]  lr: 1.0000e-04  eta: 1:05:44  time: 0.2094  data_time: 0.0018  memory: 3083  loss: 0.5910  decode.loss_ce: 0.3876  decode.acc_seg: 92.1790  aux.loss_ce: 0.2035  aux.acc_seg: 91.0176
+2026/09/23 21:59:55 - mmengine - INFO - Iter(train) [86550/96000]  lr: 1.0000e-04  eta: 1:05:09  time: 0.2095  data_time: 0.0019  memory: 3083  loss: 0.5331  decode.loss_ce: 0.3451  decode.acc_seg: 91.1449  aux.loss_ce: 0.1880  aux.acc_seg: 90.4079
+2026/09/23 22:00:05 - mmengine - INFO - Iter(train) [86600/96000]  lr: 1.0000e-04  eta: 1:04:33  time: 0.2095  data_time: 0.0018  memory: 3083  loss: 0.6003  decode.loss_ce: 0.3896  decode.acc_seg: 93.9162  aux.loss_ce: 0.2107  aux.acc_seg: 92.7962
+2026/09/23 22:00:16 - mmengine - INFO - Iter(train) [86650/96000]  lr: 1.0000e-04  eta: 1:03:59  time: 0.2095  data_time: 0.0018  memory: 3083  loss: 0.5900  decode.loss_ce: 0.3761  decode.acc_seg: 94.0681  aux.loss_ce: 0.2140  aux.acc_seg: 92.8032
+2026/09/23 22:00:26 - mmengine - INFO - Iter(train) [86700/96000]  lr: 1.0000e-04  eta: 1:03:24  time: 0.2099  data_time: 0.0017  memory: 3083  loss: 0.5920  decode.loss_ce: 0.3773  decode.acc_seg: 92.3304  aux.loss_ce: 0.2147  aux.acc_seg: 90.1771
+2026/09/23 22:00:37 - mmengine - INFO - Iter(train) [86750/96000]  lr: 1.0000e-04  eta: 1:02:50  time: 0.2097  data_time: 0.0019  memory: 3083  loss: 0.5833  decode.loss_ce: 0.3742  decode.acc_seg: 94.1565  aux.loss_ce: 0.2091  aux.acc_seg: 92.2274
+2026/09/23 22:00:47 - mmengine - INFO - Iter(train) [86800/96000]  lr: 1.0000e-04  eta: 1:02:16  time: 0.2096  data_time: 0.0018  memory: 3083  loss: 0.5368  decode.loss_ce: 0.3468  decode.acc_seg: 90.6639  aux.loss_ce: 0.1900  aux.acc_seg: 90.1433
+2026/09/23 22:00:58 - mmengine - INFO - Iter(train) [86850/96000]  lr: 1.0000e-04  eta: 1:01:43  time: 0.2097  data_time: 0.0018  memory: 3083  loss: 0.4358  decode.loss_ce: 0.2793  decode.acc_seg: 91.6602  aux.loss_ce: 0.1565  aux.acc_seg: 90.0405
+2026/09/23 22:01:08 - mmengine - INFO - Iter(train) [86900/96000]  lr: 1.0000e-04  eta: 1:01:10  time: 0.2091  data_time: 0.0018  memory: 3083  loss: 0.4808  decode.loss_ce: 0.3140  decode.acc_seg: 88.9794  aux.loss_ce: 0.1667  aux.acc_seg: 88.9887
+2026/09/23 22:01:18 - mmengine - INFO - Iter(train) [86950/96000]  lr: 1.0000e-04  eta: 1:00:37  time: 0.2097  data_time: 0.0018  memory: 3083  loss: 0.5431  decode.loss_ce: 0.3304  decode.acc_seg: 88.4289  aux.loss_ce: 0.2127  aux.acc_seg: 80.9860
+2026/09/23 22:01:29 - mmengine - INFO - Exp name: deeplabv3plus_r50-d8_1xb2-96k_mapillary-v2-512x512_20260923_211023
+2026/09/23 22:01:29 - mmengine - INFO - Iter(train) [87000/96000]  lr: 1.0000e-04  eta: 1:00:04  time: 0.2092  data_time: 0.0018  memory: 3083  loss: 0.5093  decode.loss_ce: 0.3330  decode.acc_seg: 94.1245  aux.loss_ce: 0.1763  aux.acc_seg: 93.2820
+2026/09/23 22:01:39 - mmengine - INFO - Iter(train) [87050/96000]  lr: 1.0000e-04  eta: 0:59:32  time: 0.2093  data_time: 0.0018  memory: 3083  loss: 0.4527  decode.loss_ce: 0.2943  decode.acc_seg: 90.1284  aux.loss_ce: 0.1584  aux.acc_seg: 88.7726
+2026/09/23 22:01:50 - mmengine - INFO - Iter(train) [87100/96000]  lr: 1.0000e-04  eta: 0:59:00  time: 0.2094  data_time: 0.0017  memory: 3083  loss: 0.6315  decode.loss_ce: 0.4236  decode.acc_seg: 65.2351  aux.loss_ce: 0.2079  aux.acc_seg: 64.3089
+2026/09/23 22:02:00 - mmengine - INFO - Iter(train) [87150/96000]  lr: 1.0000e-04  eta: 0:58:29  time: 0.2096  data_time: 0.0018  memory: 3083  loss: 0.5308  decode.loss_ce: 0.3158  decode.acc_seg: 91.4977  aux.loss_ce: 0.2150  aux.acc_seg: 90.6658
+2026/09/23 22:02:11 - mmengine - INFO - Iter(train) [87200/96000]  lr: 1.0000e-04  eta: 0:57:58  time: 0.2096  data_time: 0.0018  memory: 3083  loss: 0.6285  decode.loss_ce: 0.4059  decode.acc_seg: 90.7147  aux.loss_ce: 0.2226  aux.acc_seg: 89.0661
+2026/09/23 22:02:21 - mmengine - INFO - Iter(train) [87250/96000]  lr: 1.0000e-04  eta: 0:57:27  time: 0.2093  data_time: 0.0018  memory: 3083  loss: 0.7381  decode.loss_ce: 0.4967  decode.acc_seg: 89.5647  aux.loss_ce: 0.2414  aux.acc_seg: 88.1189
+2026/09/23 22:02:32 - mmengine - INFO - Iter(train) [87300/96000]  lr: 1.0000e-04  eta: 0:56:56  time: 0.2094  data_time: 0.0018  memory: 3083  loss: 0.4563  decode.loss_ce: 0.2989  decode.acc_seg: 86.8517  aux.loss_ce: 0.1575  aux.acc_seg: 85.6430
+2026/09/23 22:02:42 - mmengine - INFO - Iter(train) [87350/96000]  lr: 1.0000e-04  eta: 0:56:26  time: 0.2091  data_time: 0.0018  memory: 3083  loss: 0.5153  decode.loss_ce: 0.3345  decode.acc_seg: 94.4889  aux.loss_ce: 0.1808  aux.acc_seg: 92.6472
+2026/09/23 22:02:53 - mmengine - INFO - Iter(train) [87400/96000]  lr: 1.0000e-04  eta: 0:55:55  time: 0.2099  data_time: 0.0018  memory: 3083  loss: 0.6361  decode.loss_ce: 0.4052  decode.acc_seg: 92.2536  aux.loss_ce: 0.2309  aux.acc_seg: 90.8912
+2026/09/23 22:03:03 - mmengine - INFO - Iter(train) [87450/96000]  lr: 1.0000e-04  eta: 0:55:25  time: 0.2088  data_time: 0.0018  memory: 3083  loss: 0.6111  decode.loss_ce: 0.3756  decode.acc_seg: 87.1412  aux.loss_ce: 0.2355  aux.acc_seg: 85.5045
+2026/09/23 22:03:14 - mmengine - INFO - Iter(train) [87500/96000]  lr: 1.0000e-04  eta: 0:54:56  time: 0.2093  data_time: 0.0018  memory: 3083  loss: 0.5031  decode.loss_ce: 0.3248  decode.acc_seg: 88.8476  aux.loss_ce: 0.1783  aux.acc_seg: 85.1441
+2026/09/23 22:03:24 - mmengine - INFO - Iter(train) [87550/96000]  lr: 1.0000e-04  eta: 0:54:26  time: 0.2095  data_time: 0.0018  memory: 3083  loss: 0.5016  decode.loss_ce: 0.3188  decode.acc_seg: 94.1485  aux.loss_ce: 0.1828  aux.acc_seg: 89.3937
+2026/09/23 22:03:35 - mmengine - INFO - Iter(train) [87600/96000]  lr: 1.0000e-04  eta: 0:53:57  time: 0.2093  data_time: 0.0018  memory: 3083  loss: 0.5797  decode.loss_ce: 0.3782  decode.acc_seg: 81.4892  aux.loss_ce: 0.2015  aux.acc_seg: 80.6274
+2026/09/23 22:03:45 - mmengine - INFO - Iter(train) [87650/96000]  lr: 1.0000e-04  eta: 0:53:29  time: 0.2101  data_time: 0.0018  memory: 3083  loss: 0.7012  decode.loss_ce: 0.4639  decode.acc_seg: 89.9807  aux.loss_ce: 0.2373  aux.acc_seg: 86.4980
+2026/09/23 22:03:56 - mmengine - INFO - Iter(train) [87700/96000]  lr: 1.0000e-04  eta: 0:53:00  time: 0.2093  data_time: 0.0018  memory: 3083  loss: 0.5670  decode.loss_ce: 0.3703  decode.acc_seg: 92.9923  aux.loss_ce: 0.1967  aux.acc_seg: 93.9495
+2026/09/23 22:04:06 - mmengine - INFO - Iter(train) [87750/96000]  lr: 1.0000e-04  eta: 0:52:31  time: 0.2097  data_time: 0.0018  memory: 3083  loss: 0.5555  decode.loss_ce: 0.3719  decode.acc_seg: 89.7345  aux.loss_ce: 0.1836  aux.acc_seg: 87.9476
+2026/09/23 22:04:17 - mmengine - INFO - Iter(train) [87800/96000]  lr: 1.0000e-04  eta: 0:52:03  time: 0.2097  data_time: 0.0018  memory: 3083  loss: 0.5992  decode.loss_ce: 0.3824  decode.acc_seg: 92.3255  aux.loss_ce: 0.2168  aux.acc_seg: 86.8434
+2026/09/23 22:04:27 - mmengine - INFO - Iter(train) [87850/96000]  lr: 1.0000e-04  eta: 0:51:35  time: 0.2088  data_time: 0.0018  memory: 3083  loss: 0.5185  decode.loss_ce: 0.3362  decode.acc_seg: 93.2586  aux.loss_ce: 0.1823  aux.acc_seg: 89.7109
+2026/09/23 22:04:38 - mmengine - INFO - Iter(train) [87900/96000]  lr: 1.0000e-04  eta: 0:51:08  time: 0.2096  data_time: 0.0018  memory: 3083  loss: 0.5677  decode.loss_ce: 0.3746  decode.acc_seg: 93.5360  aux.loss_ce: 0.1931  aux.acc_seg: 92.6789
+2026/09/23 22:04:48 - mmengine - INFO - Iter(train) [87950/96000]  lr: 1.0000e-04  eta: 0:50:40  time: 0.2092  data_time: 0.0018  memory: 3083  loss: 0.5055  decode.loss_ce: 0.3098  decode.acc_seg: 91.2422  aux.loss_ce: 0.1957  aux.acc_seg: 90.2353
+2026/09/23 22:04:58 - mmengine - INFO - Exp name: deeplabv3plus_r50-d8_1xb2-96k_mapillary-v2-512x512_20260923_211023
+2026/09/23 22:04:58 - mmengine - INFO - Iter(train) [88000/96000]  lr: 1.0000e-04  eta: 0:50:13  time: 0.2093  data_time: 0.0018  memory: 3083  loss: 0.5058  decode.loss_ce: 0.3226  decode.acc_seg: 92.3969  aux.loss_ce: 0.1832  aux.acc_seg: 90.4385
+2026/09/23 22:04:58 - mmengine - INFO - Saving checkpoint at 88000 iterations
+2026/09/23 22:05:03 - mmengine - INFO - Iter(val) [  50/2000]    eta: 0:01:48  time: 0.0543  data_time: 0.0010  memory: 845  
+2026/09/23 22:05:06 - mmengine - INFO - Iter(val) [ 100/2000]    eta: 0:01:47  time: 0.0540  data_time: 0.0010  memory: 845  
+2026/09/23 22:05:09 - mmengine - INFO - Iter(val) [ 150/2000]    eta: 0:01:44  time: 0.0545  data_time: 0.0011  memory: 875  
+2026/09/23 22:05:11 - mmengine - INFO - Iter(val) [ 200/2000]    eta: 0:01:41  time: 0.0537  data_time: 0.0009  memory: 845  
+2026/09/23 22:05:14 - mmengine - INFO - Iter(val) [ 250/2000]    eta: 0:01:38  time: 0.0573  data_time: 0.0009  memory: 845  
+2026/09/23 22:05:17 - mmengine - INFO - Iter(val) [ 300/2000]    eta: 0:01:36  time: 0.0544  data_time: 0.0008  memory: 845  
+2026/09/23 22:05:20 - mmengine - INFO - Iter(val) [ 350/2000]    eta: 0:01:33  time: 0.0541  data_time: 0.0009  memory: 845  
+2026/09/23 22:05:23 - mmengine - INFO - Iter(val) [ 400/2000]    eta: 0:01:30  time: 0.0562  data_time: 0.0010  memory: 899  
+2026/09/23 22:05:26 - mmengine - INFO - Iter(val) [ 450/2000]    eta: 0:01:27  time: 0.0558  data_time: 0.0010  memory: 845  
+2026/09/23 22:05:28 - mmengine - INFO - Iter(val) [ 500/2000]    eta: 0:01:24  time: 0.0555  data_time: 0.0010  memory: 845  
+2026/09/23 22:05:31 - mmengine - INFO - Iter(val) [ 550/2000]    eta: 0:01:22  time: 0.0591  data_time: 0.0010  memory: 875  
+2026/09/23 22:05:34 - mmengine - INFO - Iter(val) [ 600/2000]    eta: 0:01:19  time: 0.0579  data_time: 0.0009  memory: 875  
+2026/09/23 22:05:37 - mmengine - INFO - Iter(val) [ 650/2000]    eta: 0:01:16  time: 0.0540  data_time: 0.0009  memory: 845  
+2026/09/23 22:05:40 - mmengine - INFO - Iter(val) [ 700/2000]    eta: 0:01:13  time: 0.0558  data_time: 0.0009  memory: 845  
+2026/09/23 22:05:42 - mmengine - INFO - Iter(val) [ 750/2000]    eta: 0:01:10  time: 0.0562  data_time: 0.0010  memory: 845  
+2026/09/23 22:05:45 - mmengine - INFO - Iter(val) [ 800/2000]    eta: 0:01:07  time: 0.0563  data_time: 0.0009  memory: 900  
+2026/09/23 22:05:48 - mmengine - INFO - Iter(val) [ 850/2000]    eta: 0:01:05  time: 0.0555  data_time: 0.0009  memory: 845  
+2026/09/23 22:05:51 - mmengine - INFO - Iter(val) [ 900/2000]    eta: 0:01:02  time: 0.0555  data_time: 0.0009  memory: 845  
+2026/09/23 22:05:54 - mmengine - INFO - Iter(val) [ 950/2000]    eta: 0:00:59  time: 0.0619  data_time: 0.0010  memory: 845  
+2026/09/23 22:05:57 - mmengine - INFO - Iter(val) [1000/2000]    eta: 0:00:56  time: 0.0545  data_time: 0.0009  memory: 875  
+2026/09/23 22:06:00 - mmengine - INFO - Iter(val) [1050/2000]    eta: 0:00:53  time: 0.0567  data_time: 0.0009  memory: 845  
+2026/09/23 22:06:03 - mmengine - INFO - Iter(val) [1100/2000]    eta: 0:00:51  time: 0.0618  data_time: 0.0009  memory: 845  
+2026/09/23 22:06:06 - mmengine - INFO - Iter(val) [1150/2000]    eta: 0:00:48  time: 0.0567  data_time: 0.0010  memory: 845  
+2026/09/23 22:06:09 - mmengine - INFO - Iter(val) [1200/2000]    eta: 0:00:45  time: 0.0605  data_time: 0.0009  memory: 845  
+2026/09/23 22:06:12 - mmengine - INFO - Iter(val) [1250/2000]    eta: 0:00:42  time: 0.0582  data_time: 0.0009  memory: 846  
+2026/09/23 22:06:14 - mmengine - INFO - Iter(val) [1300/2000]    eta: 0:00:40  time: 0.0564  data_time: 0.0010  memory: 845  
+2026/09/23 22:06:17 - mmengine - INFO - Iter(val) [1350/2000]    eta: 0:00:37  time: 0.0562  data_time: 0.0010  memory: 845  
+2026/09/23 22:06:20 - mmengine - INFO - Iter(val) [1400/2000]    eta: 0:00:34  time: 0.0563  data_time: 0.0009  memory: 845  
+2026/09/23 22:06:23 - mmengine - INFO - Iter(val) [1450/2000]    eta: 0:00:31  time: 0.0557  data_time: 0.0009  memory: 845  
+2026/09/23 22:06:26 - mmengine - INFO - Iter(val) [1500/2000]    eta: 0:00:28  time: 0.0575  data_time: 0.0009  memory: 845  
+2026/09/23 22:06:29 - mmengine - INFO - Iter(val) [1550/2000]    eta: 0:00:25  time: 0.0546  data_time: 0.0009  memory: 845  
+2026/09/23 22:06:31 - mmengine - INFO - Iter(val) [1600/2000]    eta: 0:00:22  time: 0.0577  data_time: 0.0009  memory: 845  
+2026/09/23 22:06:34 - mmengine - INFO - Iter(val) [1650/2000]    eta: 0:00:19  time: 0.0572  data_time: 0.0009  memory: 845  
+2026/09/23 22:06:37 - mmengine - INFO - Iter(val) [1700/2000]    eta: 0:00:17  time: 0.0579  data_time: 0.0010  memory: 845  
+2026/09/23 22:06:40 - mmengine - INFO - Iter(val) [1750/2000]    eta: 0:00:14  time: 0.0590  data_time: 0.0009  memory: 845  
+2026/09/23 22:06:43 - mmengine - INFO - Iter(val) [1800/2000]    eta: 0:00:11  time: 0.0594  data_time: 0.0010  memory: 845  
+2026/09/23 22:06:45 - mmengine - INFO - Iter(val) [1850/2000]    eta: 0:00:08  time: 0.0562  data_time: 0.0009  memory: 845  
+2026/09/23 22:06:48 - mmengine - INFO - Iter(val) [1900/2000]    eta: 0:00:05  time: 0.0558  data_time: 0.0008  memory: 845  
+2026/09/23 22:06:51 - mmengine - INFO - Iter(val) [1950/2000]    eta: 0:00:02  time: 0.0548  data_time: 0.0009  memory: 845  
+2026/09/23 22:06:54 - mmengine - INFO - Iter(val) [2000/2000]    eta: 0:00:00  time: 0.0540  data_time: 0.0008  memory: 845  
+2026/09/23 22:06:54 - mmengine - INFO - per class results:
+2026/09/23 22:06:54 - mmengine - INFO - 
++------------------------------------------------+-------+-------+-------+
+|                     Class                      |  IoU  |  Acc  |  Dice |
++------------------------------------------------+-------+-------+-------+
+|                      Bird                      |  0.0  |  0.0  |  0.0  |
+|                 Ground Animal                  |  0.0  |  0.0  |  0.0  |
+|               Ambiguous Barrier                |  0.0  |  0.0  |  0.0  |
+|                 Concrete Block                 | 59.54 | 74.84 | 74.64 |
+|                      Curb                      |  46.3 | 57.21 | 63.29 |
+|                     Fence                      | 48.65 |  64.1 | 65.45 |
+|                   Guard Rail                   | 52.87 |  78.1 | 69.17 |
+|                    Barrier                     |  0.0  |  0.0  |  0.0  |
+|                  Road Median                   |  0.02 |  0.02 |  0.04 |
+|                   Road Side                    |  6.43 |  6.73 | 12.08 |
+|                 Lane Separator                 |  0.17 |  0.17 |  0.34 |
+|               Temporary Barrier                | 18.54 |  22.6 | 31.28 |
+|                      Wall                      | 43.92 | 59.28 | 61.03 |
+|                   Bike Lane                    | 20.85 | 81.35 | 34.51 |
+|               Crosswalk - Plain                | 19.43 | 29.01 | 32.54 |
+|                    Curb Cut                    |  2.3  |  2.34 |  4.5  |
+|                    Driveway                    |  4.32 |  4.43 |  8.28 |
+|                    Parking                     | 11.13 | 13.49 | 20.02 |
+|                 Parking Aisle                  |  0.0  |  0.0  |  0.0  |
+|                Pedestrian Area                 | 33.61 |  56.6 | 50.31 |
+|                   Rail Track                   | 43.13 | 63.45 | 60.26 |
+|                      Road                      | 81.69 | 88.17 | 89.92 |
+|                 Road Shoulder                  | 15.22 | 19.14 | 26.42 |
+|                  Service Lane                  |  41.2 | 57.48 | 58.35 |
+|                    Sidewalk                    | 55.74 | 80.44 | 71.58 |
+|                 Traffic Island                 |  25.8 |  31.9 | 41.02 |
+|                     Bridge                     | 54.56 | 82.83 |  70.6 |
+|                    Building                    | 81.58 | 91.67 | 89.86 |
+|                     Garage                     |  0.0  |  0.0  |  0.0  |
+|                     Tunnel                     | 75.76 | 97.53 | 86.21 |
+|                     Person                     | 57.51 | 71.74 | 73.02 |
+|                  Person Group                  |  0.0  |  0.0  |  0.0  |
+|                   Bicyclist                    | 21.25 | 25.52 | 35.05 |
+|                  Motorcyclist                  | 11.93 |  13.6 | 21.31 |
+|                  Other Rider                   |  0.0  |  0.0  |  0.0  |
+|           Lane Marking - Dashed Line           | 30.61 | 37.31 | 46.87 |
+|          Lane Marking - Straight Line          | 50.05 | 59.28 | 66.71 |
+|           Lane Marking - Zigzag Line           |  0.0  |  0.0  |  0.0  |
+|            Lane Marking - Ambiguous            |  0.0  |  0.0  |  0.0  |
+|          Lane Marking - Arrow (Left)           |  0.0  |  0.0  |  0.0  |
+|          Lane Marking - Arrow (Other)          |  0.0  |  0.0  |  0.0  |
+|          Lane Marking - Arrow (Right)          |  0.0  |  0.0  |  0.0  |
+| Lane Marking - Arrow (Split Left or Straight)  |  0.0  |  0.0  |  0.0  |
+| Lane Marking - Arrow (Split Right or Straight) |  0.0  |  0.0  |  0.0  |
+|        Lane Marking - Arrow (Straight)         |  0.0  |  0.0  |  0.0  |
+|            Lane Marking - Crosswalk            | 66.15 | 76.77 | 79.63 |
+|         Lane Marking - Give Way (Row)          |  0.0  |  0.0  |  0.0  |
+|        Lane Marking - Give Way (Single)        |  0.0  |  0.0  |  0.0  |
+|        Lane Marking - Hatched (Chevron)        |  0.02 |  0.02 |  0.05 |
+|       Lane Marking - Hatched (Diagonal)        | 29.65 | 38.42 | 45.73 |
+|              Lane Marking - Other              | 23.98 | 33.51 | 38.69 |
+|            Lane Marking - Stop Line            | 32.09 | 37.43 | 48.59 |
+|        Lane Marking - Symbol (Bicycle)         |  0.0  |  0.0  |  0.0  |
+|         Lane Marking - Symbol (Other)          |  0.0  |  0.0  |  0.0  |
+|              Lane Marking - Text               | 25.32 | 48.37 |  40.4 |
+|       Lane Marking (only) - Dashed Line        |  0.0  |  0.0  |  0.0  |
+|        Lane Marking (only) - Crosswalk         |  0.0  |  0.0  |  0.0  |
+|          Lane Marking (only) - Other           |  0.0  |  0.0  |  0.0  |
+|           Lane Marking (only) - Test           |  0.0  |  0.0  |  0.0  |
+|                    Mountain                    | 44.94 | 58.75 | 62.01 |
+|                      Sand                      |  0.0  |  0.0  |  0.0  |
+|                      Sky                       | 96.54 | 97.95 | 98.24 |
+|                      Snow                      | 53.54 | 90.21 | 69.74 |
+|                    Terrain                     |  58.2 | 72.39 | 73.57 |
+|                   Vegetation                   | 86.22 | 94.05 |  92.6 |
+|                     Water                      | 64.46 | 80.47 | 78.39 |
+|                     Banner                     |  0.19 |  0.19 |  0.38 |
+|                     Bench                      |  0.0  |  0.0  |  0.0  |
+|                   Bike Rack                    |  0.0  |  0.0  |  0.0  |
+|                  Catch Basin                   |  0.0  |  0.0  |  0.0  |
+|                  CCTV Camera                   |  0.0  |  0.0  |  0.0  |
+|                  Fire Hydrant                  |  0.0  |  0.0  |  0.0  |
+|                  Junction Box                  | 12.07 | 13.72 | 21.54 |
+|                    Mailbox                     |  0.0  |  0.0  |  0.0  |
+|                    Manhole                     | 33.64 | 46.21 | 50.35 |
+|                 Parking Meter                  |  0.0  |  0.0  |  0.0  |
+|                  Phone Booth                   |  0.0  |  0.0  |  0.0  |
+|                    Pothole                     |  0.0  |  0.0  |  0.0  |
+|            Signage - Advertisement             | 35.89 | 50.91 | 52.83 |
+|              Signage - Ambiguous               |  0.0  |  0.0  |  0.0  |
+|                 Signage - Back                 |  0.0  |  0.0  |  0.0  |
+|             Signage - Information              |  0.0  |  0.0  |  0.0  |
+|                Signage - Other                 |  0.0  |  0.0  |  0.0  |
+|                Signage - Store                 | 29.55 | 40.41 | 45.62 |
+|                  Street Light                  |  29.7 | 35.42 |  45.8 |
+|                      Pole                      | 32.14 | 43.76 | 48.64 |
+|                   Pole Group                   |  0.0  |  0.0  |  0.0  |
+|               Traffic Sign Frame               | 45.54 | 66.91 | 62.58 |
+|                  Utility Pole                  |  36.1 | 48.59 | 53.05 |
+|                  Traffic Cone                  |  0.0  |  0.0  |  0.0  |
+|        Traffic Light - General (Single)        |  0.0  |  0.0  |  0.0  |
+|          Traffic Light - Pedestrians           |  0.0  |  0.0  |  0.0  |
+|       Traffic Light - General (Upright)        | 48.45 | 60.62 | 65.27 |
+|      Traffic Light - General (Horizontal)      |  1.25 |  1.25 |  2.48 |
+|            Traffic Light - Cyclists            |  0.0  |  0.0  |  0.0  |
+|             Traffic Light - Other              |  0.0  |  0.0  |  0.0  |
+|            Traffic Sign - Ambiguous            |  0.0  |  0.0  |  0.0  |
+|              Traffic Sign (Back)               | 21.74 | 29.66 | 35.72 |
+|        Traffic Sign - Direction (Back)         |  3.88 |  4.0  |  7.47 |
+|        Traffic Sign - Direction (Front)        | 60.92 | 73.14 | 75.71 |
+|              Traffic Sign (Front)              | 48.65 | 60.07 | 65.45 |
+|             Traffic Sign - Parking             |  0.0  |  0.0  |  0.0  |
+|        Traffic Sign - Temporary (Back)         |  0.0  |  0.0  |  0.0  |
+|        Traffic Sign - Temporary (Front)        |  0.0  |  0.0  |  0.0  |
+|                   Trash Can                    | 31.09 | 50.37 | 47.43 |
+|                    Bicycle                     | 38.82 | 66.09 | 55.93 |
+|                      Boat                      |  0.0  |  0.0  |  0.0  |
+|                      Bus                       | 42.36 | 86.97 | 59.51 |
+|                      Car                       | 85.05 | 93.01 | 91.92 |
+|                    Caravan                     |  0.0  |  0.0  |  0.0  |
+|                   Motorcycle                   | 31.41 | 73.78 |  47.8 |
+|                    On Rails                    |  0.0  |  0.0  |  0.0  |
+|                 Other Vehicle                  |  0.53 |  0.53 |  1.05 |
+|                    Trailer                     |  0.0  |  0.0  |  0.0  |
+|                     Truck                      | 55.96 | 75.61 | 71.76 |
+|                 Vehicle Group                  | 11.36 |  14.1 |  20.4 |
+|                  Wheeled Slow                  |  0.0  |  0.0  |  0.0  |
+|                  Water Valve                   |  0.0  |  0.0  |  0.0  |
+|                   Car Mount                    | 69.62 | 82.16 | 82.09 |
+|                    Dynamic                     | 16.77 |  23.0 | 28.72 |
+|                  Ego Vehicle                   | 88.67 | 92.78 | 93.99 |
+|                     Ground                     | 24.71 | 41.81 | 39.63 |
+|                     Static                     | 11.91 | 16.51 | 21.28 |
+|                   Unlabeled                    |  0.0  |  0.0  |  0.0  |
++------------------------------------------------+-------+-------+-------+
+2026/09/23 22:06:54 - mmengine - INFO - Iter(val) [2000/2000]    aAcc: 86.7100  mIoU: 20.5100  mAcc: 27.3400  mDice: 27.3100  data_time: 0.0010  time: 0.0569
+2026/09/23 22:07:05 - mmengine - INFO - Iter(train) [88050/96000]  lr: 1.0000e-04  eta: 0:49:46  time: 0.2102  data_time: 0.0019  memory: 3083  loss: 0.5366  decode.loss_ce: 0.3247  decode.acc_seg: 88.3017  aux.loss_ce: 0.2118  aux.acc_seg: 83.9537
+2026/09/23 22:07:15 - mmengine - INFO - Iter(train) [88100/96000]  lr: 1.0000e-04  eta: 0:49:19  time: 0.2105  data_time: 0.0018  memory: 3083  loss: 0.5443  decode.loss_ce: 0.3531  decode.acc_seg: 86.7682  aux.loss_ce: 0.1912  aux.acc_seg: 85.1849
+2026/09/23 22:07:26 - mmengine - INFO - Iter(train) [88150/96000]  lr: 1.0000e-04  eta: 0:48:52  time: 0.2108  data_time: 0.0018  memory: 3083  loss: 0.5676  decode.loss_ce: 0.3728  decode.acc_seg: 88.3886  aux.loss_ce: 0.1949  aux.acc_seg: 86.2890
+2026/09/23 22:07:36 - mmengine - INFO - Iter(train) [88200/96000]  lr: 1.0000e-04  eta: 0:48:26  time: 0.2110  data_time: 0.0018  memory: 3083  loss: 0.4499  decode.loss_ce: 0.2862  decode.acc_seg: 90.9596  aux.loss_ce: 0.1637  aux.acc_seg: 89.1328
+2026/09/23 22:07:47 - mmengine - INFO - Iter(train) [88250/96000]  lr: 1.0000e-04  eta: 0:48:00  time: 0.2107  data_time: 0.0018  memory: 3083  loss: 0.6969  decode.loss_ce: 0.4461  decode.acc_seg: 89.9733  aux.loss_ce: 0.2508  aux.acc_seg: 88.3818
+2026/09/23 22:07:57 - mmengine - INFO - Iter(train) [88300/96000]  lr: 1.0000e-04  eta: 0:47:34  time: 0.2106  data_time: 0.0020  memory: 3083  loss: 0.5348  decode.loss_ce: 0.3516  decode.acc_seg: 95.4568  aux.loss_ce: 0.1831  aux.acc_seg: 94.5585
+2026/09/23 22:08:08 - mmengine - INFO - Iter(train) [88350/96000]  lr: 1.0000e-04  eta: 0:47:08  time: 0.2107  data_time: 0.0018  memory: 3083  loss: 0.5636  decode.loss_ce: 0.3658  decode.acc_seg: 92.7925  aux.loss_ce: 0.1978  aux.acc_seg: 91.0090
+2026/09/23 22:08:18 - mmengine - INFO - Iter(train) [88400/96000]  lr: 1.0000e-04  eta: 0:46:42  time: 0.2109  data_time: 0.0018  memory: 3083  loss: 0.5518  decode.loss_ce: 0.3515  decode.acc_seg: 87.2144  aux.loss_ce: 0.2003  aux.acc_seg: 80.2017
+2026/09/23 22:08:29 - mmengine - INFO - Iter(train) [88450/96000]  lr: 1.0000e-04  eta: 0:46:17  time: 0.2102  data_time: 0.0019  memory: 3083  loss: 0.5521  decode.loss_ce: 0.3593  decode.acc_seg: 77.8341  aux.loss_ce: 0.1928  aux.acc_seg: 74.7950
+2026/09/23 22:08:39 - mmengine - INFO - Iter(train) [88500/96000]  lr: 1.0000e-04  eta: 0:45:51  time: 0.2097  data_time: 0.0018  memory: 3083  loss: 0.6067  decode.loss_ce: 0.3920  decode.acc_seg: 90.3938  aux.loss_ce: 0.2147  aux.acc_seg: 89.6589
+2026/09/23 22:08:50 - mmengine - INFO - Iter(train) [88550/96000]  lr: 1.0000e-04  eta: 0:45:26  time: 0.2094  data_time: 0.0019  memory: 3083  loss: 0.6493  decode.loss_ce: 0.4211  decode.acc_seg: 91.1478  aux.loss_ce: 0.2282  aux.acc_seg: 89.8077
+2026/09/23 22:09:00 - mmengine - INFO - Iter(train) [88600/96000]  lr: 1.0000e-04  eta: 0:45:01  time: 0.2094  data_time: 0.0018  memory: 3083  loss: 0.5979  decode.loss_ce: 0.3784  decode.acc_seg: 91.2561  aux.loss_ce: 0.2196  aux.acc_seg: 89.5350
+2026/09/23 22:09:11 - mmengine - INFO - Iter(train) [88650/96000]  lr: 1.0000e-04  eta: 0:44:36  time: 0.2093  data_time: 0.0018  memory: 3083  loss: 0.6412  decode.loss_ce: 0.4266  decode.acc_seg: 93.6380  aux.loss_ce: 0.2146  aux.acc_seg: 92.9793
+2026/09/23 22:09:21 - mmengine - INFO - Iter(train) [88700/96000]  lr: 1.0000e-04  eta: 0:44:11  time: 0.2093  data_time: 0.0019  memory: 3083  loss: 0.6542  decode.loss_ce: 0.4341  decode.acc_seg: 90.6902  aux.loss_ce: 0.2201  aux.acc_seg: 88.6699
+2026/09/23 22:09:32 - mmengine - INFO - Iter(train) [88750/96000]  lr: 1.0000e-04  eta: 0:43:47  time: 0.2089  data_time: 0.0018  memory: 3083  loss: 0.4884  decode.loss_ce: 0.3166  decode.acc_seg: 91.1360  aux.loss_ce: 0.1718  aux.acc_seg: 89.2910
+2026/09/23 22:09:42 - mmengine - INFO - Iter(train) [88800/96000]  lr: 1.0000e-04  eta: 0:43:22  time: 0.2090  data_time: 0.0018  memory: 3083  loss: 0.5804  decode.loss_ce: 0.3717  decode.acc_seg: 93.3592  aux.loss_ce: 0.2086  aux.acc_seg: 91.4165
+2026/09/23 22:09:53 - mmengine - INFO - Iter(train) [88850/96000]  lr: 1.0000e-04  eta: 0:42:58  time: 0.2094  data_time: 0.0020  memory: 3083  loss: 0.6407  decode.loss_ce: 0.4088  decode.acc_seg: 76.1478  aux.loss_ce: 0.2319  aux.acc_seg: 81.9312
+2026/09/23 22:10:03 - mmengine - INFO - Iter(train) [88900/96000]  lr: 1.0000e-04  eta: 0:42:34  time: 0.2085  data_time: 0.0018  memory: 3083  loss: 0.7422  decode.loss_ce: 0.5002  decode.acc_seg: 87.8798  aux.loss_ce: 0.2420  aux.acc_seg: 85.0883
+2026/09/23 22:10:14 - mmengine - INFO - Iter(train) [88950/96000]  lr: 1.0000e-04  eta: 0:42:10  time: 0.2108  data_time: 0.0019  memory: 3083  loss: 0.5055  decode.loss_ce: 0.3229  decode.acc_seg: 73.6207  aux.loss_ce: 0.1826  aux.acc_seg: 72.2982
+2026/09/23 22:10:24 - mmengine - INFO - Exp name: deeplabv3plus_r50-d8_1xb2-96k_mapillary-v2-512x512_20260923_211023
+2026/09/23 22:10:24 - mmengine - INFO - Iter(train) [89000/96000]  lr: 1.0000e-04  eta: 0:41:46  time: 0.2108  data_time: 0.0019  memory: 3083  loss: 0.6028  decode.loss_ce: 0.4043  decode.acc_seg: 78.5208  aux.loss_ce: 0.1985  aux.acc_seg: 76.5146
+2026/09/23 22:10:35 - mmengine - INFO - Iter(train) [89050/96000]  lr: 1.0000e-04  eta: 0:41:23  time: 0.2107  data_time: 0.0018  memory: 3083  loss: 0.6312  decode.loss_ce: 0.4003  decode.acc_seg: 91.5252  aux.loss_ce: 0.2309  aux.acc_seg: 87.8680
+2026/09/23 22:10:45 - mmengine - INFO - Iter(train) [89100/96000]  lr: 1.0000e-04  eta: 0:40:59  time: 0.2105  data_time: 0.0018  memory: 3083  loss: 0.5580  decode.loss_ce: 0.3482  decode.acc_seg: 91.7223  aux.loss_ce: 0.2098  aux.acc_seg: 81.4739
+2026/09/23 22:10:56 - mmengine - INFO - Iter(train) [89150/96000]  lr: 1.0000e-04  eta: 0:40:36  time: 0.2098  data_time: 0.0018  memory: 3083  loss: 0.6098  decode.loss_ce: 0.3933  decode.acc_seg: 66.5583  aux.loss_ce: 0.2165  aux.acc_seg: 61.4050
+2026/09/23 22:11:06 - mmengine - INFO - Iter(train) [89200/96000]  lr: 1.0000e-04  eta: 0:40:13  time: 0.2107  data_time: 0.0018  memory: 3083  loss: 0.5193  decode.loss_ce: 0.3108  decode.acc_seg: 93.8930  aux.loss_ce: 0.2085  aux.acc_seg: 93.1680
+2026/09/23 22:11:17 - mmengine - INFO - Iter(train) [89250/96000]  lr: 1.0000e-04  eta: 0:39:50  time: 0.2103  data_time: 0.0019  memory: 3083  loss: 0.7383  decode.loss_ce: 0.4687  decode.acc_seg: 61.3354  aux.loss_ce: 0.2695  aux.acc_seg: 56.7993
+2026/09/23 22:11:27 - mmengine - INFO - Iter(train) [89300/96000]  lr: 1.0000e-04  eta: 0:39:27  time: 0.2106  data_time: 0.0018  memory: 3083  loss: 0.5089  decode.loss_ce: 0.3372  decode.acc_seg: 93.3093  aux.loss_ce: 0.1717  aux.acc_seg: 91.8118
+2026/09/23 22:11:38 - mmengine - INFO - Iter(train) [89350/96000]  lr: 1.0000e-04  eta: 0:39:04  time: 0.2104  data_time: 0.0018  memory: 3083  loss: 0.4450  decode.loss_ce: 0.2901  decode.acc_seg: 91.3056  aux.loss_ce: 0.1548  aux.acc_seg: 89.6756
+2026/09/23 22:11:48 - mmengine - INFO - Iter(train) [89400/96000]  lr: 1.0000e-04  eta: 0:38:42  time: 0.2102  data_time: 0.0018  memory: 3083  loss: 0.6310  decode.loss_ce: 0.4227  decode.acc_seg: 93.4841  aux.loss_ce: 0.2084  aux.acc_seg: 93.0429
+2026/09/23 22:11:59 - mmengine - INFO - Iter(train) [89450/96000]  lr: 1.0000e-04  eta: 0:38:19  time: 0.2104  data_time: 0.0018  memory: 3083  loss: 0.5541  decode.loss_ce: 0.3699  decode.acc_seg: 88.0473  aux.loss_ce: 0.1842  aux.acc_seg: 83.7013
+2026/09/23 22:12:09 - mmengine - INFO - Iter(train) [89500/96000]  lr: 1.0000e-04  eta: 0:37:57  time: 0.2095  data_time: 0.0018  memory: 3083  loss: 0.6113  decode.loss_ce: 0.4089  decode.acc_seg: 95.3295  aux.loss_ce: 0.2024  aux.acc_seg: 92.6628
+2026/09/23 22:12:20 - mmengine - INFO - Iter(train) [89550/96000]  lr: 1.0000e-04  eta: 0:37:35  time: 0.2107  data_time: 0.0019  memory: 3083  loss: 0.5767  decode.loss_ce: 0.3649  decode.acc_seg: 74.5098  aux.loss_ce: 0.2118  aux.acc_seg: 65.2235
+2026/09/23 22:12:30 - mmengine - INFO - Iter(train) [89600/96000]  lr: 1.0000e-04  eta: 0:37:12  time: 0.2100  data_time: 0.0019  memory: 3083  loss: 0.5261  decode.loss_ce: 0.3432  decode.acc_seg: 89.0242  aux.loss_ce: 0.1830  aux.acc_seg: 86.3701
+2026/09/23 22:12:41 - mmengine - INFO - Iter(train) [89650/96000]  lr: 1.0000e-04  eta: 0:36:50  time: 0.2103  data_time: 0.0019  memory: 3083  loss: 0.4393  decode.loss_ce: 0.2730  decode.acc_seg: 94.8232  aux.loss_ce: 0.1663  aux.acc_seg: 93.9351
+2026/09/23 22:12:51 - mmengine - INFO - Iter(train) [89700/96000]  lr: 1.0000e-04  eta: 0:36:29  time: 0.2109  data_time: 0.0018  memory: 3083  loss: 0.4948  decode.loss_ce: 0.3195  decode.acc_seg: 92.3168  aux.loss_ce: 0.1752  aux.acc_seg: 91.0946
+2026/09/23 22:13:02 - mmengine - INFO - Iter(train) [89750/96000]  lr: 1.0000e-04  eta: 0:36:07  time: 0.2099  data_time: 0.0018  memory: 3083  loss: 0.5216  decode.loss_ce: 0.3431  decode.acc_seg: 96.1228  aux.loss_ce: 0.1785  aux.acc_seg: 95.2443
+2026/09/23 22:13:12 - mmengine - INFO - Iter(train) [89800/96000]  lr: 1.0000e-04  eta: 0:35:45  time: 0.2107  data_time: 0.0018  memory: 3083  loss: 0.4924  decode.loss_ce: 0.3191  decode.acc_seg: 95.1460  aux.loss_ce: 0.1733  aux.acc_seg: 93.0336
+2026/09/23 22:13:23 - mmengine - INFO - Iter(train) [89850/96000]  lr: 1.0000e-04  eta: 0:35:24  time: 0.2108  data_time: 0.0018  memory: 3083  loss: 0.5032  decode.loss_ce: 0.3211  decode.acc_seg: 91.5581  aux.loss_ce: 0.1821  aux.acc_seg: 89.7654
+2026/09/23 22:13:34 - mmengine - INFO - Iter(train) [89900/96000]  lr: 1.0000e-04  eta: 0:35:02  time: 0.2107  data_time: 0.0020  memory: 3083  loss: 0.3431  decode.loss_ce: 0.2212  decode.acc_seg: 92.3071  aux.loss_ce: 0.1219  aux.acc_seg: 90.7410
+2026/09/23 22:13:44 - mmengine - INFO - Iter(train) [89950/96000]  lr: 1.0000e-04  eta: 0:34:41  time: 0.2106  data_time: 0.0019  memory: 3083  loss: 0.5217  decode.loss_ce: 0.3337  decode.acc_seg: 84.0508  aux.loss_ce: 0.1880  aux.acc_seg: 79.2465
+2026/09/23 22:13:55 - mmengine - INFO - Exp name: deeplabv3plus_r50-d8_1xb2-96k_mapillary-v2-512x512_20260923_211023
+2026/09/23 22:13:55 - mmengine - INFO - Iter(train) [90000/96000]  lr: 1.0000e-04  eta: 0:34:20  time: 0.2110  data_time: 0.0019  memory: 3083  loss: 0.5356  decode.loss_ce: 0.3329  decode.acc_seg: 87.2652  aux.loss_ce: 0.2027  aux.acc_seg: 85.2636
+2026/09/23 22:14:05 - mmengine - INFO - Iter(train) [90050/96000]  lr: 1.0000e-04  eta: 0:33:59  time: 0.2111  data_time: 0.0019  memory: 3083  loss: 0.6465  decode.loss_ce: 0.4140  decode.acc_seg: 93.0786  aux.loss_ce: 0.2325  aux.acc_seg: 92.4726
+2026/09/23 22:14:16 - mmengine - INFO - Iter(train) [90100/96000]  lr: 1.0000e-04  eta: 0:33:38  time: 0.2107  data_time: 0.0019  memory: 3083  loss: 0.6389  decode.loss_ce: 0.3976  decode.acc_seg: 88.8296  aux.loss_ce: 0.2413  aux.acc_seg: 87.1532
+2026/09/23 22:14:26 - mmengine - INFO - Iter(train) [90150/96000]  lr: 1.0000e-04  eta: 0:33:17  time: 0.2105  data_time: 0.0019  memory: 3083  loss: 0.5427  decode.loss_ce: 0.3415  decode.acc_seg: 81.7318  aux.loss_ce: 0.2011  aux.acc_seg: 83.1191
+2026/09/23 22:14:37 - mmengine - INFO - Iter(train) [90200/96000]  lr: 1.0000e-04  eta: 0:32:56  time: 0.2110  data_time: 0.0019  memory: 3083  loss: 0.5767  decode.loss_ce: 0.3480  decode.acc_seg: 91.3180  aux.loss_ce: 0.2287  aux.acc_seg: 86.3330
+2026/09/23 22:14:47 - mmengine - INFO - Iter(train) [90250/96000]  lr: 1.0000e-04  eta: 0:32:35  time: 0.2110  data_time: 0.0019  memory: 3083  loss: 0.4328  decode.loss_ce: 0.2808  decode.acc_seg: 86.4034  aux.loss_ce: 0.1519  aux.acc_seg: 86.1365
+2026/09/23 22:14:58 - mmengine - INFO - Iter(train) [90300/96000]  lr: 1.0000e-04  eta: 0:32:15  time: 0.2115  data_time: 0.0018  memory: 3083  loss: 0.6677  decode.loss_ce: 0.4121  decode.acc_seg: 95.1362  aux.loss_ce: 0.2555  aux.acc_seg: 92.7548
+2026/09/23 22:15:08 - mmengine - INFO - Iter(train) [90350/96000]  lr: 1.0000e-04  eta: 0:31:54  time: 0.2109  data_time: 0.0019  memory: 3083  loss: 0.4395  decode.loss_ce: 0.2798  decode.acc_seg: 94.0363  aux.loss_ce: 0.1597  aux.acc_seg: 93.2907
+2026/09/23 22:15:19 - mmengine - INFO - Iter(train) [90400/96000]  lr: 1.0000e-04  eta: 0:31:34  time: 0.2105  data_time: 0.0018  memory: 3083  loss: 0.5056  decode.loss_ce: 0.3126  decode.acc_seg: 87.5540  aux.loss_ce: 0.1929  aux.acc_seg: 73.3877
+2026/09/23 22:15:29 - mmengine - INFO - Iter(train) [90450/96000]  lr: 1.0000e-04  eta: 0:31:13  time: 0.2098  data_time: 0.0018  memory: 3083  loss: 0.5425  decode.loss_ce: 0.3471  decode.acc_seg: 88.3012  aux.loss_ce: 0.1954  aux.acc_seg: 86.5871
+2026/09/23 22:15:40 - mmengine - INFO - Iter(train) [90500/96000]  lr: 1.0000e-04  eta: 0:30:53  time: 0.2110  data_time: 0.0019  memory: 3083  loss: 0.5558  decode.loss_ce: 0.3398  decode.acc_seg: 96.3552  aux.loss_ce: 0.2160  aux.acc_seg: 66.7250
+2026/09/23 22:15:50 - mmengine - INFO - Iter(train) [90550/96000]  lr: 1.0000e-04  eta: 0:30:33  time: 0.2096  data_time: 0.0018  memory: 3083  loss: 0.4533  decode.loss_ce: 0.2744  decode.acc_seg: 89.6622  aux.loss_ce: 0.1790  aux.acc_seg: 78.8719
+2026/09/23 22:16:01 - mmengine - INFO - Iter(train) [90600/96000]  lr: 1.0000e-04  eta: 0:30:13  time: 0.2099  data_time: 0.0020  memory: 3083  loss: 0.6026  decode.loss_ce: 0.3680  decode.acc_seg: 88.5138  aux.loss_ce: 0.2346  aux.acc_seg: 86.0005
+2026/09/23 22:16:12 - mmengine - INFO - Iter(train) [90650/96000]  lr: 1.0000e-04  eta: 0:29:53  time: 0.2104  data_time: 0.0019  memory: 3083  loss: 0.6152  decode.loss_ce: 0.4060  decode.acc_seg: 93.3072  aux.loss_ce: 0.2092  aux.acc_seg: 91.8751
+2026/09/23 22:16:22 - mmengine - INFO - Iter(train) [90700/96000]  lr: 1.0000e-04  eta: 0:29:33  time: 0.2110  data_time: 0.0019  memory: 3083  loss: 0.4584  decode.loss_ce: 0.2859  decode.acc_seg: 93.9835  aux.loss_ce: 0.1725  aux.acc_seg: 88.2918
+2026/09/23 22:16:33 - mmengine - INFO - Iter(train) [90750/96000]  lr: 1.0000e-04  eta: 0:29:14  time: 0.2111  data_time: 0.0019  memory: 3083  loss: 0.4721  decode.loss_ce: 0.3071  decode.acc_seg: 92.5797  aux.loss_ce: 0.1650  aux.acc_seg: 90.9994
+2026/09/23 22:16:43 - mmengine - INFO - Iter(train) [90800/96000]  lr: 1.0000e-04  eta: 0:28:54  time: 0.2106  data_time: 0.0020  memory: 3083  loss: 0.6680  decode.loss_ce: 0.4116  decode.acc_seg: 94.6418  aux.loss_ce: 0.2564  aux.acc_seg: 93.9709
+2026/09/23 22:16:54 - mmengine - INFO - Iter(train) [90850/96000]  lr: 1.0000e-04  eta: 0:28:34  time: 0.2109  data_time: 0.0020  memory: 3083  loss: 0.6094  decode.loss_ce: 0.3762  decode.acc_seg: 90.9466  aux.loss_ce: 0.2332  aux.acc_seg: 89.5115
+2026/09/23 22:17:04 - mmengine - INFO - Iter(train) [90900/96000]  lr: 1.0000e-04  eta: 0:28:15  time: 0.2109  data_time: 0.0020  memory: 3083  loss: 0.4370  decode.loss_ce: 0.2902  decode.acc_seg: 92.3064  aux.loss_ce: 0.1468  aux.acc_seg: 91.8588
+2026/09/23 22:17:15 - mmengine - INFO - Iter(train) [90950/96000]  lr: 1.0000e-04  eta: 0:27:55  time: 0.2104  data_time: 0.0018  memory: 3083  loss: 0.5153  decode.loss_ce: 0.3406  decode.acc_seg: 89.5359  aux.loss_ce: 0.1747  aux.acc_seg: 88.2915
+2026/09/23 22:17:25 - mmengine - INFO - Exp name: deeplabv3plus_r50-d8_1xb2-96k_mapillary-v2-512x512_20260923_211023
+2026/09/23 22:17:25 - mmengine - INFO - Iter(train) [91000/96000]  lr: 1.0000e-04  eta: 0:27:36  time: 0.2106  data_time: 0.0020  memory: 3083  loss: 0.4389  decode.loss_ce: 0.2833  decode.acc_seg: 94.0039  aux.loss_ce: 0.1557  aux.acc_seg: 92.2221
+2026/09/23 22:17:36 - mmengine - INFO - Iter(train) [91050/96000]  lr: 1.0000e-04  eta: 0:27:17  time: 0.2108  data_time: 0.0020  memory: 3083  loss: 0.7204  decode.loss_ce: 0.4579  decode.acc_seg: 93.6169  aux.loss_ce: 0.2625  aux.acc_seg: 87.1130
+2026/09/23 22:17:46 - mmengine - INFO - Iter(train) [91100/96000]  lr: 1.0000e-04  eta: 0:26:58  time: 0.2110  data_time: 0.0018  memory: 3083  loss: 0.6191  decode.loss_ce: 0.3995  decode.acc_seg: 94.2090  aux.loss_ce: 0.2196  aux.acc_seg: 92.7882
+2026/09/23 22:17:57 - mmengine - INFO - Iter(train) [91150/96000]  lr: 1.0000e-04  eta: 0:26:38  time: 0.2115  data_time: 0.0018  memory: 3083  loss: 0.5300  decode.loss_ce: 0.3413  decode.acc_seg: 92.1970  aux.loss_ce: 0.1887  aux.acc_seg: 87.1138
+2026/09/23 22:18:07 - mmengine - INFO - Iter(train) [91200/96000]  lr: 1.0000e-04  eta: 0:26:19  time: 0.2113  data_time: 0.0019  memory: 3083  loss: 0.5752  decode.loss_ce: 0.3776  decode.acc_seg: 92.7851  aux.loss_ce: 0.1976  aux.acc_seg: 90.7670
+2026/09/23 22:18:18 - mmengine - INFO - Iter(train) [91250/96000]  lr: 1.0000e-04  eta: 0:26:00  time: 0.2109  data_time: 0.0018  memory: 3083  loss: 0.4938  decode.loss_ce: 0.3184  decode.acc_seg: 87.0275  aux.loss_ce: 0.1754  aux.acc_seg: 83.0353
+2026/09/23 22:18:29 - mmengine - INFO - Iter(train) [91300/96000]  lr: 1.0000e-04  eta: 0:25:42  time: 0.2111  data_time: 0.0019  memory: 3083  loss: 0.5415  decode.loss_ce: 0.3525  decode.acc_seg: 85.8097  aux.loss_ce: 0.1890  aux.acc_seg: 85.7970
+2026/09/23 22:18:39 - mmengine - INFO - Iter(train) [91350/96000]  lr: 1.0000e-04  eta: 0:25:23  time: 0.2108  data_time: 0.0018  memory: 3083  loss: 0.4172  decode.loss_ce: 0.2610  decode.acc_seg: 87.9183  aux.loss_ce: 0.1562  aux.acc_seg: 85.7132
+2026/09/23 22:18:50 - mmengine - INFO - Iter(train) [91400/96000]  lr: 1.0000e-04  eta: 0:25:04  time: 0.2110  data_time: 0.0019  memory: 3083  loss: 0.6768  decode.loss_ce: 0.4226  decode.acc_seg: 93.9389  aux.loss_ce: 0.2542  aux.acc_seg: 92.3186
+2026/09/23 22:19:00 - mmengine - INFO - Iter(train) [91450/96000]  lr: 1.0000e-04  eta: 0:24:45  time: 0.2111  data_time: 0.0019  memory: 3083  loss: 0.8223  decode.loss_ce: 0.5373  decode.acc_seg: 80.4535  aux.loss_ce: 0.2850  aux.acc_seg: 70.2242
+2026/09/23 22:19:11 - mmengine - INFO - Iter(train) [91500/96000]  lr: 1.0000e-04  eta: 0:24:27  time: 0.2111  data_time: 0.0019  memory: 3083  loss: 0.6724  decode.loss_ce: 0.4329  decode.acc_seg: 82.9460  aux.loss_ce: 0.2395  aux.acc_seg: 67.6090
+2026/09/23 22:19:21 - mmengine - INFO - Iter(train) [91550/96000]  lr: 1.0000e-04  eta: 0:24:08  time: 0.2097  data_time: 0.0020  memory: 3083  loss: 0.5224  decode.loss_ce: 0.3407  decode.acc_seg: 91.7219  aux.loss_ce: 0.1817  aux.acc_seg: 88.3322
+2026/09/23 22:19:32 - mmengine - INFO - Iter(train) [91600/96000]  lr: 1.0000e-04  eta: 0:23:50  time: 0.2098  data_time: 0.0019  memory: 3083  loss: 0.4400  decode.loss_ce: 0.2850  decode.acc_seg: 95.3475  aux.loss_ce: 0.1550  aux.acc_seg: 94.7574
+2026/09/23 22:19:42 - mmengine - INFO - Iter(train) [91650/96000]  lr: 1.0000e-04  eta: 0:23:31  time: 0.2106  data_time: 0.0019  memory: 3083  loss: 0.7353  decode.loss_ce: 0.4780  decode.acc_seg: 91.1670  aux.loss_ce: 0.2573  aux.acc_seg: 91.8370
+2026/09/23 22:19:53 - mmengine - INFO - Iter(train) [91700/96000]  lr: 1.0000e-04  eta: 0:23:13  time: 0.2100  data_time: 0.0018  memory: 3083  loss: 0.4313  decode.loss_ce: 0.2708  decode.acc_seg: 88.6654  aux.loss_ce: 0.1605  aux.acc_seg: 69.2804
+2026/09/23 22:20:03 - mmengine - INFO - Iter(train) [91750/96000]  lr: 1.0000e-04  eta: 0:22:55  time: 0.2108  data_time: 0.0018  memory: 3083  loss: 0.4727  decode.loss_ce: 0.3028  decode.acc_seg: 92.4551  aux.loss_ce: 0.1699  aux.acc_seg: 89.7425
+2026/09/23 22:20:14 - mmengine - INFO - Iter(train) [91800/96000]  lr: 1.0000e-04  eta: 0:22:37  time: 0.2105  data_time: 0.0018  memory: 3083  loss: 0.5196  decode.loss_ce: 0.3369  decode.acc_seg: 91.0654  aux.loss_ce: 0.1827  aux.acc_seg: 90.8878
+2026/09/23 22:20:24 - mmengine - INFO - Iter(train) [91850/96000]  lr: 1.0000e-04  eta: 0:22:19  time: 0.2113  data_time: 0.0019  memory: 3083  loss: 0.4482  decode.loss_ce: 0.2770  decode.acc_seg: 95.2537  aux.loss_ce: 0.1712  aux.acc_seg: 94.1107
+2026/09/23 22:20:35 - mmengine - INFO - Iter(train) [91900/96000]  lr: 1.0000e-04  eta: 0:22:00  time: 0.2111  data_time: 0.0019  memory: 3083  loss: 0.6039  decode.loss_ce: 0.3761  decode.acc_seg: 83.6905  aux.loss_ce: 0.2278  aux.acc_seg: 75.3328
+2026/09/23 22:20:46 - mmengine - INFO - Iter(train) [91950/96000]  lr: 1.0000e-04  eta: 0:21:42  time: 0.2109  data_time: 0.0019  memory: 3083  loss: 0.5157  decode.loss_ce: 0.3360  decode.acc_seg: 90.8247  aux.loss_ce: 0.1798  aux.acc_seg: 88.6026
+2026/09/23 22:20:56 - mmengine - INFO - Exp name: deeplabv3plus_r50-d8_1xb2-96k_mapillary-v2-512x512_20260923_211023
+2026/09/23 22:20:56 - mmengine - INFO - Iter(train) [92000/96000]  lr: 1.0000e-04  eta: 0:21:25  time: 0.2113  data_time: 0.0019  memory: 3083  loss: 0.4963  decode.loss_ce: 0.3110  decode.acc_seg: 90.1765  aux.loss_ce: 0.1853  aux.acc_seg: 82.9375
+2026/09/23 22:20:56 - mmengine - INFO - Saving checkpoint at 92000 iterations
+2026/09/23 22:20:59 - mmengine - INFO - Iter(val) [  50/2000]    eta: 0:01:49  time: 0.0544  data_time: 0.0010  memory: 845  
+2026/09/23 22:21:02 - mmengine - INFO - Iter(val) [ 100/2000]    eta: 0:01:48  time: 0.0544  data_time: 0.0010  memory: 845  
+2026/09/23 22:21:05 - mmengine - INFO - Iter(val) [ 150/2000]    eta: 0:01:45  time: 0.0547  data_time: 0.0010  memory: 875  
+2026/09/23 22:21:08 - mmengine - INFO - Iter(val) [ 200/2000]    eta: 0:01:42  time: 0.0546  data_time: 0.0009  memory: 845  
+2026/09/23 22:21:11 - mmengine - INFO - Iter(val) [ 250/2000]    eta: 0:01:39  time: 0.0582  data_time: 0.0009  memory: 845  
+2026/09/23 22:21:14 - mmengine - INFO - Iter(val) [ 300/2000]    eta: 0:01:36  time: 0.0552  data_time: 0.0009  memory: 845  
+2026/09/23 22:21:16 - mmengine - INFO - Iter(val) [ 350/2000]    eta: 0:01:33  time: 0.0543  data_time: 0.0009  memory: 845  
+2026/09/23 22:21:19 - mmengine - INFO - Iter(val) [ 400/2000]    eta: 0:01:31  time: 0.0559  data_time: 0.0010  memory: 899  
+2026/09/23 22:21:22 - mmengine - INFO - Iter(val) [ 450/2000]    eta: 0:01:28  time: 0.0561  data_time: 0.0010  memory: 845  
+2026/09/23 22:21:25 - mmengine - INFO - Iter(val) [ 500/2000]    eta: 0:01:25  time: 0.0562  data_time: 0.0010  memory: 845  
+2026/09/23 22:21:28 - mmengine - INFO - Iter(val) [ 550/2000]    eta: 0:01:22  time: 0.0597  data_time: 0.0009  memory: 875  
+2026/09/23 22:21:31 - mmengine - INFO - Iter(val) [ 600/2000]    eta: 0:01:19  time: 0.0587  data_time: 0.0010  memory: 875  
+2026/09/23 22:21:34 - mmengine - INFO - Iter(val) [ 650/2000]    eta: 0:01:17  time: 0.0547  data_time: 0.0010  memory: 845  
+2026/09/23 22:21:36 - mmengine - INFO - Iter(val) [ 700/2000]    eta: 0:01:14  time: 0.0563  data_time: 0.0010  memory: 845  
+2026/09/23 22:21:39 - mmengine - INFO - Iter(val) [ 750/2000]    eta: 0:01:11  time: 0.0560  data_time: 0.0010  memory: 845  
+2026/09/23 22:21:42 - mmengine - INFO - Iter(val) [ 800/2000]    eta: 0:01:08  time: 0.0566  data_time: 0.0010  memory: 900  
+2026/09/23 22:21:45 - mmengine - INFO - Iter(val) [ 850/2000]    eta: 0:01:05  time: 0.0557  data_time: 0.0009  memory: 845  
+2026/09/23 22:21:48 - mmengine - INFO - Iter(val) [ 900/2000]    eta: 0:01:02  time: 0.0542  data_time: 0.0010  memory: 845  
+2026/09/23 22:21:51 - mmengine - INFO - Iter(val) [ 950/2000]    eta: 0:00:59  time: 0.0601  data_time: 0.0009  memory: 845  
+2026/09/23 22:21:53 - mmengine - INFO - Iter(val) [1000/2000]    eta: 0:00:57  time: 0.0546  data_time: 0.0009  memory: 875  
+2026/09/23 22:21:56 - mmengine - INFO - Iter(val) [1050/2000]    eta: 0:00:54  time: 0.0559  data_time: 0.0009  memory: 845  
+2026/09/23 22:21:59 - mmengine - INFO - Iter(val) [1100/2000]    eta: 0:00:51  time: 0.0578  data_time: 0.0009  memory: 845  
+2026/09/23 22:22:02 - mmengine - INFO - Iter(val) [1150/2000]    eta: 0:00:48  time: 0.0560  data_time: 0.0009  memory: 845  
+2026/09/23 22:22:05 - mmengine - INFO - Iter(val) [1200/2000]    eta: 0:00:45  time: 0.0594  data_time: 0.0010  memory: 845  
+2026/09/23 22:22:08 - mmengine - INFO - Iter(val) [1250/2000]    eta: 0:00:42  time: 0.0578  data_time: 0.0009  memory: 846  
+2026/09/23 22:22:11 - mmengine - INFO - Iter(val) [1300/2000]    eta: 0:00:40  time: 0.0560  data_time: 0.0010  memory: 845  
+2026/09/23 22:22:14 - mmengine - INFO - Iter(val) [1350/2000]    eta: 0:00:37  time: 0.0561  data_time: 0.0009  memory: 845  
+2026/09/23 22:22:16 - mmengine - INFO - Iter(val) [1400/2000]    eta: 0:00:34  time: 0.0566  data_time: 0.0009  memory: 845  
+2026/09/23 22:22:19 - mmengine - INFO - Iter(val) [1450/2000]    eta: 0:00:31  time: 0.0560  data_time: 0.0010  memory: 845  
+2026/09/23 22:22:22 - mmengine - INFO - Iter(val) [1500/2000]    eta: 0:00:28  time: 0.0577  data_time: 0.0009  memory: 845  
+2026/09/23 22:22:25 - mmengine - INFO - Iter(val) [1550/2000]    eta: 0:00:25  time: 0.0543  data_time: 0.0009  memory: 845  
+2026/09/23 22:22:28 - mmengine - INFO - Iter(val) [1600/2000]    eta: 0:00:22  time: 0.0579  data_time: 0.0009  memory: 845  
+2026/09/23 22:22:31 - mmengine - INFO - Iter(val) [1650/2000]    eta: 0:00:19  time: 0.0577  data_time: 0.0009  memory: 845  
+2026/09/23 22:22:33 - mmengine - INFO - Iter(val) [1700/2000]    eta: 0:00:17  time: 0.0584  data_time: 0.0009  memory: 845  
+2026/09/23 22:22:36 - mmengine - INFO - Iter(val) [1750/2000]    eta: 0:00:14  time: 0.0595  data_time: 0.0009  memory: 845  
+2026/09/23 22:22:39 - mmengine - INFO - Iter(val) [1800/2000]    eta: 0:00:11  time: 0.0596  data_time: 0.0009  memory: 845  
+2026/09/23 22:22:42 - mmengine - INFO - Iter(val) [1850/2000]    eta: 0:00:08  time: 0.0560  data_time: 0.0010  memory: 845  
+2026/09/23 22:22:45 - mmengine - INFO - Iter(val) [1900/2000]    eta: 0:00:05  time: 0.0561  data_time: 0.0009  memory: 845  
+2026/09/23 22:22:48 - mmengine - INFO - Iter(val) [1950/2000]    eta: 0:00:02  time: 0.0553  data_time: 0.0009  memory: 845  
+2026/09/23 22:22:51 - mmengine - INFO - Iter(val) [2000/2000]    eta: 0:00:00  time: 0.0543  data_time: 0.0009  memory: 845  
+2026/09/23 22:22:51 - mmengine - INFO - per class results:
+2026/09/23 22:22:51 - mmengine - INFO - 
++------------------------------------------------+-------+-------+-------+
+|                     Class                      |  IoU  |  Acc  |  Dice |
++------------------------------------------------+-------+-------+-------+
+|                      Bird                      |  0.0  |  0.0  |  0.0  |
+|                 Ground Animal                  |  0.0  |  0.0  |  0.0  |
+|               Ambiguous Barrier                |  0.0  |  0.0  |  0.0  |
+|                 Concrete Block                 | 56.54 | 75.43 | 72.24 |
+|                      Curb                      | 47.82 | 60.17 |  64.7 |
+|                     Fence                      | 48.69 | 64.43 | 65.49 |
+|                   Guard Rail                   | 55.56 | 77.78 | 71.43 |
+|                    Barrier                     |  0.0  |  0.0  |  0.0  |
+|                  Road Median                   |  0.49 |  0.51 |  0.97 |
+|                   Road Side                    |  6.45 |  6.87 | 12.11 |
+|                 Lane Separator                 |  0.18 |  0.18 |  0.36 |
+|               Temporary Barrier                | 18.08 | 21.04 | 30.63 |
+|                      Wall                      | 45.19 | 61.64 | 62.25 |
+|                   Bike Lane                    | 33.84 | 66.89 | 50.56 |
+|               Crosswalk - Plain                | 22.66 | 31.98 | 36.95 |
+|                    Curb Cut                    |  3.11 |  3.19 |  6.03 |
+|                    Driveway                    |  8.17 |  8.68 |  15.1 |
+|                    Parking                     |  14.2 | 18.44 | 24.87 |
+|                 Parking Aisle                  |  0.0  |  0.0  |  0.0  |
+|                Pedestrian Area                 | 37.61 | 58.26 | 54.66 |
+|                   Rail Track                   | 43.31 | 64.43 | 60.45 |
+|                      Road                      | 83.97 | 91.81 | 91.29 |
+|                 Road Shoulder                  | 14.45 | 18.32 | 25.25 |
+|                  Service Lane                  | 42.97 | 62.61 | 60.11 |
+|                    Sidewalk                    | 57.25 |  77.1 | 72.81 |
+|                 Traffic Island                 |  26.8 | 34.77 | 42.27 |
+|                     Bridge                     | 57.33 | 86.38 | 72.88 |
+|                    Building                    | 82.21 | 92.13 | 90.24 |
+|                     Garage                     |  0.0  |  0.0  |  0.0  |
+|                     Tunnel                     | 69.27 | 97.46 | 81.84 |
+|                     Person                     | 57.68 | 73.76 | 73.16 |
+|                  Person Group                  |  0.0  |  0.0  |  0.0  |
+|                   Bicyclist                    | 20.74 | 24.97 | 34.35 |
+|                  Motorcyclist                  | 10.63 | 11.97 | 19.22 |
+|                  Other Rider                   |  0.0  |  0.0  |  0.0  |
+|           Lane Marking - Dashed Line           | 30.68 | 37.17 | 46.96 |
+|          Lane Marking - Straight Line          | 51.83 | 62.79 | 68.27 |
+|           Lane Marking - Zigzag Line           |  0.0  |  0.0  |  0.0  |
+|            Lane Marking - Ambiguous            |  0.0  |  0.0  |  0.0  |
+|          Lane Marking - Arrow (Left)           |  0.0  |  0.0  |  0.0  |
+|          Lane Marking - Arrow (Other)          |  0.0  |  0.0  |  0.0  |
+|          Lane Marking - Arrow (Right)          |  0.0  |  0.0  |  0.0  |
+| Lane Marking - Arrow (Split Left or Straight)  |  0.0  |  0.0  |  0.0  |
+| Lane Marking - Arrow (Split Right or Straight) |  0.0  |  0.0  |  0.0  |
+|        Lane Marking - Arrow (Straight)         |  0.0  |  0.0  |  0.0  |
+|            Lane Marking - Crosswalk            | 66.53 | 79.17 |  79.9 |
+|         Lane Marking - Give Way (Row)          |  0.0  |  0.0  |  0.0  |
+|        Lane Marking - Give Way (Single)        |  0.0  |  0.0  |  0.0  |
+|        Lane Marking - Hatched (Chevron)        |  0.01 |  0.01 |  0.02 |
+|       Lane Marking - Hatched (Diagonal)        | 37.38 |  52.6 | 54.41 |
+|              Lane Marking - Other              | 21.81 |  33.5 | 35.81 |
+|            Lane Marking - Stop Line            | 33.01 | 39.97 | 49.64 |
+|        Lane Marking - Symbol (Bicycle)         |  0.96 |  0.97 |  1.91 |
+|         Lane Marking - Symbol (Other)          |  0.0  |  0.0  |  0.0  |
+|              Lane Marking - Text               | 29.67 | 48.93 | 45.76 |
+|       Lane Marking (only) - Dashed Line        |  0.0  |  0.0  |  0.0  |
+|        Lane Marking (only) - Crosswalk         |  0.0  |  0.0  |  0.0  |
+|          Lane Marking (only) - Other           |  0.0  |  0.0  |  0.0  |
+|           Lane Marking (only) - Test           |  0.0  |  0.0  |  0.0  |
+|                    Mountain                    | 46.17 | 59.66 | 63.17 |
+|                      Sand                      |  0.0  |  0.0  |  0.0  |
+|                      Sky                       | 96.67 | 98.02 |  98.3 |
+|                      Snow                      | 50.34 | 92.34 | 66.96 |
+|                    Terrain                     | 58.19 |  73.6 | 73.57 |
+|                   Vegetation                   | 86.25 | 93.76 | 92.62 |
+|                     Water                      | 66.92 | 81.92 | 80.18 |
+|                     Banner                     |  0.25 |  0.25 |  0.51 |
+|                     Bench                      |  0.0  |  0.0  |  0.0  |
+|                   Bike Rack                    |  0.0  |  0.0  |  0.0  |
+|                  Catch Basin                   |  0.01 |  0.01 |  0.02 |
+|                  CCTV Camera                   |  0.0  |  0.0  |  0.0  |
+|                  Fire Hydrant                  |  0.0  |  0.0  |  0.0  |
+|                  Junction Box                  |  11.9 | 13.16 | 21.27 |
+|                    Mailbox                     |  0.0  |  0.0  |  0.0  |
+|                    Manhole                     | 33.81 | 44.02 | 50.53 |
+|                 Parking Meter                  |  0.0  |  0.0  |  0.0  |
+|                  Phone Booth                   |  0.0  |  0.0  |  0.0  |
+|                    Pothole                     |  0.0  |  0.0  |  0.0  |
+|            Signage - Advertisement             | 36.95 | 50.19 | 53.96 |
+|              Signage - Ambiguous               |  0.0  |  0.0  |  0.0  |
+|                 Signage - Back                 |  0.0  |  0.0  |  0.0  |
+|             Signage - Information              |  0.0  |  0.0  |  0.0  |
+|                Signage - Other                 |  0.0  |  0.0  |  0.0  |
+|                Signage - Store                 | 27.11 | 33.86 | 42.65 |
+|                  Street Light                  | 29.28 | 34.36 | 45.29 |
+|                      Pole                      | 33.64 | 46.49 | 50.35 |
+|                   Pole Group                   |  0.0  |  0.0  |  0.0  |
+|               Traffic Sign Frame               | 45.09 | 68.66 | 62.16 |
+|                  Utility Pole                  | 36.44 | 46.54 | 53.42 |
+|                  Traffic Cone                  |  0.0  |  0.0  |  0.0  |
+|        Traffic Light - General (Single)        |  0.0  |  0.0  |  0.0  |
+|          Traffic Light - Pedestrians           |  0.0  |  0.0  |  0.0  |
+|       Traffic Light - General (Upright)        | 48.91 |  61.7 | 65.69 |
+|      Traffic Light - General (Horizontal)      |  2.47 |  2.47 |  4.82 |
+|            Traffic Light - Cyclists            |  0.0  |  0.0  |  0.0  |
+|             Traffic Light - Other              |  0.0  |  0.0  |  0.0  |
+|            Traffic Sign - Ambiguous            |  0.0  |  0.0  |  0.0  |
+|              Traffic Sign (Back)               | 22.03 | 30.67 | 36.11 |
+|        Traffic Sign - Direction (Back)         |  3.68 |  3.84 |  7.1  |
+|        Traffic Sign - Direction (Front)        | 60.87 | 71.66 | 75.67 |
+|              Traffic Sign (Front)              | 49.19 | 60.95 | 65.94 |
+|             Traffic Sign - Parking             |  0.0  |  0.0  |  0.0  |
+|        Traffic Sign - Temporary (Back)         |  0.0  |  0.0  |  0.0  |
+|        Traffic Sign - Temporary (Front)        |  0.0  |  0.0  |  0.0  |
+|                   Trash Can                    | 28.29 | 45.33 |  44.1 |
+|                    Bicycle                     |  39.8 | 62.01 | 56.94 |
+|                      Boat                      |  0.0  |  0.0  |  0.0  |
+|                      Bus                       | 43.51 | 88.09 | 60.64 |
+|                      Car                       | 85.37 | 92.24 | 92.11 |
+|                    Caravan                     |  0.0  |  0.0  |  0.0  |
+|                   Motorcycle                   | 31.38 | 71.54 | 47.77 |
+|                    On Rails                    |  0.0  |  0.0  |  0.0  |
+|                 Other Vehicle                  |  0.43 |  0.43 |  0.85 |
+|                    Trailer                     |  0.0  |  0.0  |  0.0  |
+|                     Truck                      | 56.86 | 77.12 |  72.5 |
+|                 Vehicle Group                  | 11.07 | 13.04 | 19.94 |
+|                  Wheeled Slow                  |  0.0  |  0.0  |  0.0  |
+|                  Water Valve                   |  0.0  |  0.0  |  0.0  |
+|                   Car Mount                    | 67.91 | 83.86 | 80.89 |
+|                    Dynamic                     |  16.6 | 22.71 | 28.47 |
+|                  Ego Vehicle                   | 88.28 |  91.4 | 93.78 |
+|                     Ground                     | 25.02 | 45.01 | 40.02 |
+|                     Static                     | 13.49 | 20.24 | 23.78 |
+|                   Unlabeled                    |  0.0  |  0.0  |  0.0  |
++------------------------------------------------+-------+-------+-------+
+2026/09/23 22:22:51 - mmengine - INFO - Iter(val) [2000/2000]    aAcc: 87.4700  mIoU: 20.9000  mAcc: 27.6400  mDice: 27.8000  data_time: 0.0010  time: 0.0570
+2026/09/23 22:22:51 - mmengine - INFO - The previous best checkpoint /home/colin/GUVP_pairwise_ranking/output/deeplabv3plus_r50_mapillary_v2_80k/best_mIoU_iter_80000.pth is removed
+2026/09/23 22:22:51 - mmengine - INFO - The best checkpoint with 20.9000 mIoU at 92000 iter is saved to best_mIoU_iter_92000.pth.
+2026/09/23 22:23:02 - mmengine - INFO - Iter(train) [92050/96000]  lr: 1.0000e-04  eta: 0:21:07  time: 0.2108  data_time: 0.0019  memory: 3083  loss: 0.4834  decode.loss_ce: 0.3131  decode.acc_seg: 79.2592  aux.loss_ce: 0.1703  aux.acc_seg: 71.3972
+2026/09/23 22:23:13 - mmengine - INFO - Iter(train) [92100/96000]  lr: 1.0000e-04  eta: 0:20:49  time: 0.2113  data_time: 0.0018  memory: 3083  loss: 0.6175  decode.loss_ce: 0.3920  decode.acc_seg: 88.6910  aux.loss_ce: 0.2255  aux.acc_seg: 87.6134
+2026/09/23 22:23:23 - mmengine - INFO - Iter(train) [92150/96000]  lr: 1.0000e-04  eta: 0:20:31  time: 0.2098  data_time: 0.0019  memory: 3083  loss: 0.5897  decode.loss_ce: 0.3843  decode.acc_seg: 92.1585  aux.loss_ce: 0.2054  aux.acc_seg: 90.1611
+2026/09/23 22:23:34 - mmengine - INFO - Iter(train) [92200/96000]  lr: 1.0000e-04  eta: 0:20:14  time: 0.2093  data_time: 0.0019  memory: 3083  loss: 0.6434  decode.loss_ce: 0.4164  decode.acc_seg: 94.2501  aux.loss_ce: 0.2270  aux.acc_seg: 92.5259
+2026/09/23 22:23:44 - mmengine - INFO - Iter(train) [92250/96000]  lr: 1.0000e-04  eta: 0:19:56  time: 0.2109  data_time: 0.0019  memory: 3083  loss: 0.6581  decode.loss_ce: 0.4289  decode.acc_seg: 94.4124  aux.loss_ce: 0.2292  aux.acc_seg: 92.9346
+2026/09/23 22:23:55 - mmengine - INFO - Iter(train) [92300/96000]  lr: 1.0000e-04  eta: 0:19:38  time: 0.2097  data_time: 0.0019  memory: 3083  loss: 0.5243  decode.loss_ce: 0.3378  decode.acc_seg: 88.1207  aux.loss_ce: 0.1864  aux.acc_seg: 87.7577
+2026/09/23 22:24:05 - mmengine - INFO - Iter(train) [92350/96000]  lr: 1.0000e-04  eta: 0:19:21  time: 0.2102  data_time: 0.0019  memory: 3083  loss: 0.4383  decode.loss_ce: 0.2803  decode.acc_seg: 95.8794  aux.loss_ce: 0.1580  aux.acc_seg: 94.3840
+2026/09/23 22:24:16 - mmengine - INFO - Iter(train) [92400/96000]  lr: 1.0000e-04  eta: 0:19:03  time: 0.2107  data_time: 0.0020  memory: 3083  loss: 0.4788  decode.loss_ce: 0.3123  decode.acc_seg: 93.4828  aux.loss_ce: 0.1665  aux.acc_seg: 91.6159
+2026/09/23 22:24:26 - mmengine - INFO - Iter(train) [92450/96000]  lr: 1.0000e-04  eta: 0:18:46  time: 0.2110  data_time: 0.0020  memory: 3083  loss: 0.4186  decode.loss_ce: 0.2653  decode.acc_seg: 95.1071  aux.loss_ce: 0.1533  aux.acc_seg: 94.2284
+2026/09/23 22:24:37 - mmengine - INFO - Iter(train) [92500/96000]  lr: 1.0000e-04  eta: 0:18:29  time: 0.2112  data_time: 0.0019  memory: 3083  loss: 0.6300  decode.loss_ce: 0.4009  decode.acc_seg: 73.8317  aux.loss_ce: 0.2291  aux.acc_seg: 68.1974
+2026/09/23 22:24:48 - mmengine - INFO - Iter(train) [92550/96000]  lr: 1.0000e-04  eta: 0:18:11  time: 0.2112  data_time: 0.0018  memory: 3083  loss: 0.5432  decode.loss_ce: 0.3406  decode.acc_seg: 94.3900  aux.loss_ce: 0.2026  aux.acc_seg: 94.4961
+2026/09/23 22:24:58 - mmengine - INFO - Iter(train) [92600/96000]  lr: 1.0000e-04  eta: 0:17:54  time: 0.2100  data_time: 0.0018  memory: 3083  loss: 0.5504  decode.loss_ce: 0.3589  decode.acc_seg: 92.8823  aux.loss_ce: 0.1915  aux.acc_seg: 93.1406
+2026/09/23 22:25:09 - mmengine - INFO - Iter(train) [92650/96000]  lr: 1.0000e-04  eta: 0:17:37  time: 0.2111  data_time: 0.0018  memory: 3083  loss: 0.5169  decode.loss_ce: 0.3262  decode.acc_seg: 91.5869  aux.loss_ce: 0.1907  aux.acc_seg: 71.3671
+2026/09/23 22:25:19 - mmengine - INFO - Iter(train) [92700/96000]  lr: 1.0000e-04  eta: 0:17:20  time: 0.2101  data_time: 0.0019  memory: 3083  loss: 0.3588  decode.loss_ce: 0.2338  decode.acc_seg: 92.9505  aux.loss_ce: 0.1250  aux.acc_seg: 90.3762
+2026/09/23 22:25:30 - mmengine - INFO - Iter(train) [92750/96000]  lr: 1.0000e-04  eta: 0:17:03  time: 0.2104  data_time: 0.0019  memory: 3083  loss: 0.6654  decode.loss_ce: 0.4271  decode.acc_seg: 84.8670  aux.loss_ce: 0.2383  aux.acc_seg: 79.8642
+2026/09/23 22:25:40 - mmengine - INFO - Iter(train) [92800/96000]  lr: 1.0000e-04  eta: 0:16:46  time: 0.2106  data_time: 0.0019  memory: 3083  loss: 0.6701  decode.loss_ce: 0.4386  decode.acc_seg: 91.4331  aux.loss_ce: 0.2315  aux.acc_seg: 89.8399
+2026/09/23 22:25:51 - mmengine - INFO - Iter(train) [92850/96000]  lr: 1.0000e-04  eta: 0:16:29  time: 0.2106  data_time: 0.0019  memory: 3083  loss: 0.6857  decode.loss_ce: 0.4510  decode.acc_seg: 87.6680  aux.loss_ce: 0.2348  aux.acc_seg: 86.6665
+2026/09/23 22:26:01 - mmengine - INFO - Iter(train) [92900/96000]  lr: 1.0000e-04  eta: 0:16:12  time: 0.2110  data_time: 0.0018  memory: 3083  loss: 0.5214  decode.loss_ce: 0.3117  decode.acc_seg: 85.4452  aux.loss_ce: 0.2097  aux.acc_seg: 78.6009
+2026/09/23 22:26:12 - mmengine - INFO - Iter(train) [92950/96000]  lr: 1.0000e-04  eta: 0:15:55  time: 0.2109  data_time: 0.0019  memory: 3083  loss: 0.5376  decode.loss_ce: 0.3126  decode.acc_seg: 90.5842  aux.loss_ce: 0.2250  aux.acc_seg: 88.9521
+2026/09/23 22:26:22 - mmengine - INFO - Exp name: deeplabv3plus_r50-d8_1xb2-96k_mapillary-v2-512x512_20260923_211023
+2026/09/23 22:26:22 - mmengine - INFO - Iter(train) [93000/96000]  lr: 1.0000e-04  eta: 0:15:38  time: 0.2172  data_time: 0.0019  memory: 3083  loss: 0.4530  decode.loss_ce: 0.2975  decode.acc_seg: 95.7964  aux.loss_ce: 0.1555  aux.acc_seg: 95.0140
+2026/09/23 22:26:33 - mmengine - INFO - Iter(train) [93050/96000]  lr: 1.0000e-04  eta: 0:15:21  time: 0.2101  data_time: 0.0020  memory: 3083  loss: 0.5056  decode.loss_ce: 0.3172  decode.acc_seg: 93.2302  aux.loss_ce: 0.1884  aux.acc_seg: 91.9210
+2026/09/23 22:26:43 - mmengine - INFO - Iter(train) [93100/96000]  lr: 1.0000e-04  eta: 0:15:04  time: 0.2105  data_time: 0.0021  memory: 3083  loss: 0.4685  decode.loss_ce: 0.2973  decode.acc_seg: 94.8708  aux.loss_ce: 0.1712  aux.acc_seg: 93.5438
+2026/09/23 22:26:54 - mmengine - INFO - Iter(train) [93150/96000]  lr: 1.0000e-04  eta: 0:14:48  time: 0.2103  data_time: 0.0019  memory: 3083  loss: 0.6632  decode.loss_ce: 0.4212  decode.acc_seg: 92.8023  aux.loss_ce: 0.2420  aux.acc_seg: 89.5872
+2026/09/23 22:27:04 - mmengine - INFO - Iter(train) [93200/96000]  lr: 1.0000e-04  eta: 0:14:31  time: 0.2095  data_time: 0.0019  memory: 3083  loss: 0.3931  decode.loss_ce: 0.2528  decode.acc_seg: 93.9817  aux.loss_ce: 0.1403  aux.acc_seg: 92.8709
+2026/09/23 22:27:15 - mmengine - INFO - Iter(train) [93250/96000]  lr: 1.0000e-04  eta: 0:14:14  time: 0.2092  data_time: 0.0019  memory: 3083  loss: 0.4751  decode.loss_ce: 0.3110  decode.acc_seg: 88.6953  aux.loss_ce: 0.1642  aux.acc_seg: 87.6320
+2026/09/23 22:27:25 - mmengine - INFO - Iter(train) [93300/96000]  lr: 1.0000e-04  eta: 0:13:58  time: 0.2102  data_time: 0.0019  memory: 3083  loss: 0.6527  decode.loss_ce: 0.4147  decode.acc_seg: 89.2621  aux.loss_ce: 0.2380  aux.acc_seg: 78.7412
+2026/09/23 22:27:36 - mmengine - INFO - Iter(train) [93350/96000]  lr: 1.0000e-04  eta: 0:13:41  time: 0.2106  data_time: 0.0019  memory: 3083  loss: 0.6072  decode.loss_ce: 0.3810  decode.acc_seg: 91.1291  aux.loss_ce: 0.2262  aux.acc_seg: 89.2946
+2026/09/23 22:27:46 - mmengine - INFO - Iter(train) [93400/96000]  lr: 1.0000e-04  eta: 0:13:25  time: 0.2108  data_time: 0.0018  memory: 3083  loss: 0.4042  decode.loss_ce: 0.2575  decode.acc_seg: 91.7686  aux.loss_ce: 0.1467  aux.acc_seg: 90.5567
+2026/09/23 22:27:57 - mmengine - INFO - Iter(train) [93450/96000]  lr: 1.0000e-04  eta: 0:13:08  time: 0.2107  data_time: 0.0018  memory: 3083  loss: 0.4641  decode.loss_ce: 0.3046  decode.acc_seg: 92.1760  aux.loss_ce: 0.1595  aux.acc_seg: 91.2494
+2026/09/23 22:28:07 - mmengine - INFO - Iter(train) [93500/96000]  lr: 1.0000e-04  eta: 0:12:52  time: 0.2111  data_time: 0.0019  memory: 3083  loss: 0.4367  decode.loss_ce: 0.2794  decode.acc_seg: 90.1037  aux.loss_ce: 0.1573  aux.acc_seg: 72.8649
+2026/09/23 22:28:18 - mmengine - INFO - Iter(train) [93550/96000]  lr: 1.0000e-04  eta: 0:12:36  time: 0.2110  data_time: 0.0019  memory: 3083  loss: 0.4090  decode.loss_ce: 0.2637  decode.acc_seg: 93.0555  aux.loss_ce: 0.1452  aux.acc_seg: 92.1835
+2026/09/23 22:28:28 - mmengine - INFO - Iter(train) [93600/96000]  lr: 1.0000e-04  eta: 0:12:19  time: 0.2109  data_time: 0.0018  memory: 3083  loss: 0.4792  decode.loss_ce: 0.3094  decode.acc_seg: 88.9111  aux.loss_ce: 0.1698  aux.acc_seg: 87.0203
+2026/09/23 22:28:39 - mmengine - INFO - Iter(train) [93650/96000]  lr: 1.0000e-04  eta: 0:12:03  time: 0.2103  data_time: 0.0019  memory: 3083  loss: 0.5244  decode.loss_ce: 0.3425  decode.acc_seg: 93.8239  aux.loss_ce: 0.1819  aux.acc_seg: 92.1793
+2026/09/23 22:28:50 - mmengine - INFO - Iter(train) [93700/96000]  lr: 1.0000e-04  eta: 0:11:47  time: 0.2111  data_time: 0.0019  memory: 3083  loss: 0.6805  decode.loss_ce: 0.4549  decode.acc_seg: 84.1593  aux.loss_ce: 0.2256  aux.acc_seg: 85.7002
+2026/09/23 22:29:00 - mmengine - INFO - Iter(train) [93750/96000]  lr: 1.0000e-04  eta: 0:11:31  time: 0.2104  data_time: 0.0018  memory: 3083  loss: 0.5128  decode.loss_ce: 0.3287  decode.acc_seg: 91.4210  aux.loss_ce: 0.1840  aux.acc_seg: 89.6397
+2026/09/23 22:29:11 - mmengine - INFO - Iter(train) [93800/96000]  lr: 1.0000e-04  eta: 0:11:15  time: 0.2108  data_time: 0.0019  memory: 3083  loss: 0.4153  decode.loss_ce: 0.2628  decode.acc_seg: 92.4555  aux.loss_ce: 0.1525  aux.acc_seg: 90.7064
+2026/09/23 22:29:21 - mmengine - INFO - Iter(train) [93850/96000]  lr: 1.0000e-04  eta: 0:10:59  time: 0.2097  data_time: 0.0019  memory: 3083  loss: 0.5870  decode.loss_ce: 0.3754  decode.acc_seg: 93.2118  aux.loss_ce: 0.2117  aux.acc_seg: 92.3409
+2026/09/23 22:29:32 - mmengine - INFO - Iter(train) [93900/96000]  lr: 1.0000e-04  eta: 0:10:43  time: 0.2108  data_time: 0.0018  memory: 3083  loss: 0.4820  decode.loss_ce: 0.3210  decode.acc_seg: 88.1166  aux.loss_ce: 0.1610  aux.acc_seg: 85.4939
+2026/09/23 22:29:42 - mmengine - INFO - Iter(train) [93950/96000]  lr: 1.0000e-04  eta: 0:10:26  time: 0.2105  data_time: 0.0019  memory: 3083  loss: 0.4536  decode.loss_ce: 0.2984  decode.acc_seg: 81.5273  aux.loss_ce: 0.1552  aux.acc_seg: 79.3933
+2026/09/23 22:29:53 - mmengine - INFO - Exp name: deeplabv3plus_r50-d8_1xb2-96k_mapillary-v2-512x512_20260923_211023
+2026/09/23 22:29:53 - mmengine - INFO - Iter(train) [94000/96000]  lr: 1.0000e-04  eta: 0:10:11  time: 0.2102  data_time: 0.0018  memory: 3083  loss: 0.4565  decode.loss_ce: 0.2974  decode.acc_seg: 93.9059  aux.loss_ce: 0.1591  aux.acc_seg: 92.0052
+2026/09/23 22:30:03 - mmengine - INFO - Iter(train) [94050/96000]  lr: 1.0000e-04  eta: 0:09:55  time: 0.2105  data_time: 0.0019  memory: 3083  loss: 0.4971  decode.loss_ce: 0.3143  decode.acc_seg: 89.8325  aux.loss_ce: 0.1828  aux.acc_seg: 84.0443
+2026/09/23 22:30:14 - mmengine - INFO - Iter(train) [94100/96000]  lr: 1.0000e-04  eta: 0:09:39  time: 0.2104  data_time: 0.0018  memory: 3083  loss: 0.6403  decode.loss_ce: 0.4180  decode.acc_seg: 60.4822  aux.loss_ce: 0.2223  aux.acc_seg: 53.8848
+2026/09/23 22:30:24 - mmengine - INFO - Iter(train) [94150/96000]  lr: 1.0000e-04  eta: 0:09:23  time: 0.2108  data_time: 0.0019  memory: 3083  loss: 0.6847  decode.loss_ce: 0.4210  decode.acc_seg: 93.7981  aux.loss_ce: 0.2638  aux.acc_seg: 92.6303
+2026/09/23 22:30:35 - mmengine - INFO - Iter(train) [94200/96000]  lr: 1.0000e-04  eta: 0:09:07  time: 0.2102  data_time: 0.0019  memory: 3083  loss: 0.4462  decode.loss_ce: 0.2880  decode.acc_seg: 94.8042  aux.loss_ce: 0.1582  aux.acc_seg: 91.6480
+2026/09/23 22:30:45 - mmengine - INFO - Iter(train) [94250/96000]  lr: 1.0000e-04  eta: 0:08:51  time: 0.2105  data_time: 0.0019  memory: 3083  loss: 0.6728  decode.loss_ce: 0.4383  decode.acc_seg: 92.2012  aux.loss_ce: 0.2345  aux.acc_seg: 91.0105
+2026/09/23 22:30:56 - mmengine - INFO - Iter(train) [94300/96000]  lr: 1.0000e-04  eta: 0:08:35  time: 0.2104  data_time: 0.0019  memory: 3083  loss: 0.4895  decode.loss_ce: 0.3113  decode.acc_seg: 82.0702  aux.loss_ce: 0.1782  aux.acc_seg: 81.0810
+2026/09/23 22:31:06 - mmengine - INFO - Iter(train) [94350/96000]  lr: 1.0000e-04  eta: 0:08:20  time: 0.2103  data_time: 0.0018  memory: 3083  loss: 0.5762  decode.loss_ce: 0.3677  decode.acc_seg: 93.4078  aux.loss_ce: 0.2085  aux.acc_seg: 91.3859
+2026/09/23 22:31:17 - mmengine - INFO - Iter(train) [94400/96000]  lr: 1.0000e-04  eta: 0:08:04  time: 0.2090  data_time: 0.0018  memory: 3083  loss: 0.5370  decode.loss_ce: 0.3547  decode.acc_seg: 82.9068  aux.loss_ce: 0.1823  aux.acc_seg: 79.8966
+2026/09/23 22:31:27 - mmengine - INFO - Iter(train) [94450/96000]  lr: 1.0000e-04  eta: 0:07:48  time: 0.2097  data_time: 0.0018  memory: 3083  loss: 0.4863  decode.loss_ce: 0.3126  decode.acc_seg: 80.8092  aux.loss_ce: 0.1737  aux.acc_seg: 78.9915
+2026/09/23 22:31:38 - mmengine - INFO - Iter(train) [94500/96000]  lr: 1.0000e-04  eta: 0:07:33  time: 0.2095  data_time: 0.0019  memory: 3083  loss: 0.5032  decode.loss_ce: 0.3226  decode.acc_seg: 91.0765  aux.loss_ce: 0.1806  aux.acc_seg: 89.0726
+2026/09/23 22:31:48 - mmengine - INFO - Iter(train) [94550/96000]  lr: 1.0000e-04  eta: 0:07:17  time: 0.2108  data_time: 0.0018  memory: 3083  loss: 0.5326  decode.loss_ce: 0.3389  decode.acc_seg: 85.2064  aux.loss_ce: 0.1937  aux.acc_seg: 82.8569
+2026/09/23 22:31:59 - mmengine - INFO - Iter(train) [94600/96000]  lr: 1.0000e-04  eta: 0:07:02  time: 0.2112  data_time: 0.0018  memory: 3083  loss: 0.4652  decode.loss_ce: 0.2924  decode.acc_seg: 94.6224  aux.loss_ce: 0.1728  aux.acc_seg: 94.3743
+2026/09/23 22:32:09 - mmengine - INFO - Iter(train) [94650/96000]  lr: 1.0000e-04  eta: 0:06:46  time: 0.2108  data_time: 0.0018  memory: 3083  loss: 0.4206  decode.loss_ce: 0.2719  decode.acc_seg: 96.5811  aux.loss_ce: 0.1487  aux.acc_seg: 95.4600
+2026/09/23 22:32:20 - mmengine - INFO - Iter(train) [94700/96000]  lr: 1.0000e-04  eta: 0:06:31  time: 0.2107  data_time: 0.0019  memory: 3083  loss: 0.5153  decode.loss_ce: 0.3233  decode.acc_seg: 93.7293  aux.loss_ce: 0.1920  aux.acc_seg: 93.5179
+2026/09/23 22:32:31 - mmengine - INFO - Iter(train) [94750/96000]  lr: 1.0000e-04  eta: 0:06:15  time: 0.2111  data_time: 0.0019  memory: 3083  loss: 0.4858  decode.loss_ce: 0.3168  decode.acc_seg: 90.8318  aux.loss_ce: 0.1690  aux.acc_seg: 88.5766
+2026/09/23 22:32:41 - mmengine - INFO - Iter(train) [94800/96000]  lr: 1.0000e-04  eta: 0:06:00  time: 0.2096  data_time: 0.0019  memory: 3083  loss: 0.5915  decode.loss_ce: 0.3726  decode.acc_seg: 92.9544  aux.loss_ce: 0.2189  aux.acc_seg: 89.0289
+2026/09/23 22:32:52 - mmengine - INFO - Iter(train) [94850/96000]  lr: 1.0000e-04  eta: 0:05:45  time: 0.2107  data_time: 0.0018  memory: 3083  loss: 0.5305  decode.loss_ce: 0.3421  decode.acc_seg: 89.0471  aux.loss_ce: 0.1883  aux.acc_seg: 66.5320
+2026/09/23 22:33:02 - mmengine - INFO - Iter(train) [94900/96000]  lr: 1.0000e-04  eta: 0:05:29  time: 0.2107  data_time: 0.0018  memory: 3083  loss: 0.5613  decode.loss_ce: 0.3533  decode.acc_seg: 92.5536  aux.loss_ce: 0.2079  aux.acc_seg: 89.3936
+2026/09/23 22:33:13 - mmengine - INFO - Iter(train) [94950/96000]  lr: 1.0000e-04  eta: 0:05:14  time: 0.2110  data_time: 0.0019  memory: 3083  loss: 0.5749  decode.loss_ce: 0.3814  decode.acc_seg: 87.0292  aux.loss_ce: 0.1935  aux.acc_seg: 84.9658
+2026/09/23 22:33:23 - mmengine - INFO - Exp name: deeplabv3plus_r50-d8_1xb2-96k_mapillary-v2-512x512_20260923_211023
+2026/09/23 22:33:23 - mmengine - INFO - Iter(train) [95000/96000]  lr: 1.0000e-04  eta: 0:04:59  time: 0.2110  data_time: 0.0019  memory: 3083  loss: 0.5120  decode.loss_ce: 0.3254  decode.acc_seg: 93.3890  aux.loss_ce: 0.1866  aux.acc_seg: 91.1199
+2026/09/23 22:33:34 - mmengine - INFO - Iter(train) [95050/96000]  lr: 1.0000e-04  eta: 0:04:43  time: 0.2103  data_time: 0.0019  memory: 3083  loss: 0.5090  decode.loss_ce: 0.3197  decode.acc_seg: 85.5537  aux.loss_ce: 0.1893  aux.acc_seg: 85.5604
+2026/09/23 22:33:44 - mmengine - INFO - Iter(train) [95100/96000]  lr: 1.0000e-04  eta: 0:04:28  time: 0.2098  data_time: 0.0019  memory: 3083  loss: 0.4539  decode.loss_ce: 0.2814  decode.acc_seg: 88.5189  aux.loss_ce: 0.1726  aux.acc_seg: 86.0610
+2026/09/23 22:33:55 - mmengine - INFO - Iter(train) [95150/96000]  lr: 1.0000e-04  eta: 0:04:13  time: 0.2116  data_time: 0.0019  memory: 3083  loss: 0.4556  decode.loss_ce: 0.2908  decode.acc_seg: 89.6202  aux.loss_ce: 0.1648  aux.acc_seg: 88.6272
+2026/09/23 22:34:05 - mmengine - INFO - Iter(train) [95200/96000]  lr: 1.0000e-04  eta: 0:03:58  time: 0.2111  data_time: 0.0018  memory: 3083  loss: 0.5286  decode.loss_ce: 0.3340  decode.acc_seg: 95.5502  aux.loss_ce: 0.1946  aux.acc_seg: 94.1902
+2026/09/23 22:34:16 - mmengine - INFO - Iter(train) [95250/96000]  lr: 1.0000e-04  eta: 0:03:43  time: 0.2110  data_time: 0.0018  memory: 3083  loss: 0.7001  decode.loss_ce: 0.4551  decode.acc_seg: 91.8705  aux.loss_ce: 0.2450  aux.acc_seg: 90.2147
+2026/09/23 22:34:26 - mmengine - INFO - Iter(train) [95300/96000]  lr: 1.0000e-04  eta: 0:03:28  time: 0.2111  data_time: 0.0019  memory: 3083  loss: 0.3912  decode.loss_ce: 0.2479  decode.acc_seg: 90.5991  aux.loss_ce: 0.1434  aux.acc_seg: 86.6415
+2026/09/23 22:34:37 - mmengine - INFO - Iter(train) [95350/96000]  lr: 1.0000e-04  eta: 0:03:13  time: 0.2105  data_time: 0.0018  memory: 3083  loss: 0.5895  decode.loss_ce: 0.3802  decode.acc_seg: 96.7100  aux.loss_ce: 0.2094  aux.acc_seg: 95.5324
+2026/09/23 22:34:47 - mmengine - INFO - Iter(train) [95400/96000]  lr: 1.0000e-04  eta: 0:02:58  time: 0.2103  data_time: 0.0018  memory: 3083  loss: 0.4477  decode.loss_ce: 0.2934  decode.acc_seg: 93.1317  aux.loss_ce: 0.1543  aux.acc_seg: 90.2452
+2026/09/23 22:34:58 - mmengine - INFO - Iter(train) [95450/96000]  lr: 1.0000e-04  eta: 0:02:43  time: 0.2110  data_time: 0.0019  memory: 3083  loss: 0.5255  decode.loss_ce: 0.3325  decode.acc_seg: 94.1111  aux.loss_ce: 0.1930  aux.acc_seg: 87.6410
+2026/09/23 22:35:09 - mmengine - INFO - Iter(train) [95500/96000]  lr: 1.0000e-04  eta: 0:02:28  time: 0.2122  data_time: 0.0019  memory: 3083  loss: 0.4068  decode.loss_ce: 0.2629  decode.acc_seg: 94.4565  aux.loss_ce: 0.1438  aux.acc_seg: 92.4176
+2026/09/23 22:35:19 - mmengine - INFO - Iter(train) [95550/96000]  lr: 1.0000e-04  eta: 0:02:13  time: 0.2111  data_time: 0.0018  memory: 3083  loss: 0.5763  decode.loss_ce: 0.3698  decode.acc_seg: 90.9604  aux.loss_ce: 0.2064  aux.acc_seg: 88.3197
+2026/09/23 22:35:30 - mmengine - INFO - Iter(train) [95600/96000]  lr: 1.0000e-04  eta: 0:01:58  time: 0.2109  data_time: 0.0018  memory: 3083  loss: 0.4681  decode.loss_ce: 0.3014  decode.acc_seg: 82.7291  aux.loss_ce: 0.1666  aux.acc_seg: 77.2383
+2026/09/23 22:35:40 - mmengine - INFO - Iter(train) [95650/96000]  lr: 1.0000e-04  eta: 0:01:43  time: 0.2105  data_time: 0.0018  memory: 3083  loss: 0.3675  decode.loss_ce: 0.2374  decode.acc_seg: 90.1752  aux.loss_ce: 0.1301  aux.acc_seg: 88.3926
+2026/09/23 22:35:51 - mmengine - INFO - Iter(train) [95700/96000]  lr: 1.0000e-04  eta: 0:01:28  time: 0.2110  data_time: 0.0019  memory: 3083  loss: 0.5840  decode.loss_ce: 0.3720  decode.acc_seg: 76.5371  aux.loss_ce: 0.2121  aux.acc_seg: 69.0179
+2026/09/23 22:36:01 - mmengine - INFO - Iter(train) [95750/96000]  lr: 1.0000e-04  eta: 0:01:13  time: 0.2105  data_time: 0.0020  memory: 3083  loss: 0.4689  decode.loss_ce: 0.2924  decode.acc_seg: 92.0107  aux.loss_ce: 0.1765  aux.acc_seg: 90.2283
+2026/09/23 22:36:12 - mmengine - INFO - Iter(train) [95800/96000]  lr: 1.0000e-04  eta: 0:00:58  time: 0.2101  data_time: 0.0018  memory: 3083  loss: 0.4169  decode.loss_ce: 0.2664  decode.acc_seg: 94.1856  aux.loss_ce: 0.1505  aux.acc_seg: 92.4571
+2026/09/23 22:36:22 - mmengine - INFO - Iter(train) [95850/96000]  lr: 1.0000e-04  eta: 0:00:44  time: 0.2114  data_time: 0.0019  memory: 3083  loss: 0.7251  decode.loss_ce: 0.4696  decode.acc_seg: 85.9230  aux.loss_ce: 0.2555  aux.acc_seg: 82.7333
+2026/09/23 22:36:33 - mmengine - INFO - Iter(train) [95900/96000]  lr: 1.0000e-04  eta: 0:00:29  time: 0.2102  data_time: 0.0019  memory: 3083  loss: 0.5745  decode.loss_ce: 0.3524  decode.acc_seg: 88.7150  aux.loss_ce: 0.2220  aux.acc_seg: 86.0271
+2026/09/23 22:36:44 - mmengine - INFO - Iter(train) [95950/96000]  lr: 1.0000e-04  eta: 0:00:14  time: 0.2133  data_time: 0.0019  memory: 3083  loss: 0.5392  decode.loss_ce: 0.3399  decode.acc_seg: 88.9517  aux.loss_ce: 0.1993  aux.acc_seg: 85.4013
+2026/09/23 22:36:54 - mmengine - INFO - Exp name: deeplabv3plus_r50-d8_1xb2-96k_mapillary-v2-512x512_20260923_211023
+2026/09/23 22:36:54 - mmengine - INFO - Iter(train) [96000/96000]  lr: 1.0000e-04  eta: 0:00:00  time: 0.2097  data_time: 0.0018  memory: 3083  loss: 0.6292  decode.loss_ce: 0.3931  decode.acc_seg: 87.7193  aux.loss_ce: 0.2360  aux.acc_seg: 87.7316
+2026/09/23 22:36:54 - mmengine - INFO - Saving checkpoint at 96000 iterations
+2026/09/23 22:36:57 - mmengine - INFO - Iter(val) [  50/2000]    eta: 0:01:48  time: 0.0540  data_time: 0.0009  memory: 845  
+2026/09/23 22:37:00 - mmengine - INFO - Iter(val) [ 100/2000]    eta: 0:01:47  time: 0.0540  data_time: 0.0010  memory: 845  
+2026/09/23 22:37:03 - mmengine - INFO - Iter(val) [ 150/2000]    eta: 0:01:44  time: 0.0549  data_time: 0.0011  memory: 875  
+2026/09/23 22:37:06 - mmengine - INFO - Iter(val) [ 200/2000]    eta: 0:01:41  time: 0.0543  data_time: 0.0009  memory: 845  
+2026/09/23 22:37:09 - mmengine - INFO - Iter(val) [ 250/2000]    eta: 0:01:39  time: 0.0581  data_time: 0.0011  memory: 845  
+2026/09/23 22:37:11 - mmengine - INFO - Iter(val) [ 300/2000]    eta: 0:01:36  time: 0.0554  data_time: 0.0010  memory: 845  
+2026/09/23 22:37:14 - mmengine - INFO - Iter(val) [ 350/2000]    eta: 0:01:33  time: 0.0542  data_time: 0.0010  memory: 845  
+2026/09/23 22:37:17 - mmengine - INFO - Iter(val) [ 400/2000]    eta: 0:01:30  time: 0.0562  data_time: 0.0010  memory: 899  
+2026/09/23 22:37:20 - mmengine - INFO - Iter(val) [ 450/2000]    eta: 0:01:28  time: 0.0563  data_time: 0.0010  memory: 845  
+2026/09/23 22:37:23 - mmengine - INFO - Iter(val) [ 500/2000]    eta: 0:01:25  time: 0.0565  data_time: 0.0010  memory: 845  
+2026/09/23 22:37:26 - mmengine - INFO - Iter(val) [ 550/2000]    eta: 0:01:22  time: 0.0597  data_time: 0.0010  memory: 875  
+2026/09/23 22:37:29 - mmengine - INFO - Iter(val) [ 600/2000]    eta: 0:01:19  time: 0.0587  data_time: 0.0010  memory: 875  
+2026/09/23 22:37:31 - mmengine - INFO - Iter(val) [ 650/2000]    eta: 0:01:16  time: 0.0543  data_time: 0.0009  memory: 845  
+2026/09/23 22:37:34 - mmengine - INFO - Iter(val) [ 700/2000]    eta: 0:01:14  time: 0.0561  data_time: 0.0009  memory: 845  
+2026/09/23 22:37:37 - mmengine - INFO - Iter(val) [ 750/2000]    eta: 0:01:11  time: 0.0560  data_time: 0.0010  memory: 845  
+2026/09/23 22:37:40 - mmengine - INFO - Iter(val) [ 800/2000]    eta: 0:01:08  time: 0.0564  data_time: 0.0009  memory: 900  
+2026/09/23 22:37:43 - mmengine - INFO - Iter(val) [ 850/2000]    eta: 0:01:05  time: 0.0560  data_time: 0.0010  memory: 845  
+2026/09/23 22:37:46 - mmengine - INFO - Iter(val) [ 900/2000]    eta: 0:01:02  time: 0.0546  data_time: 0.0009  memory: 845  
+2026/09/23 22:37:49 - mmengine - INFO - Iter(val) [ 950/2000]    eta: 0:00:59  time: 0.0604  data_time: 0.0009  memory: 845  
+2026/09/23 22:37:51 - mmengine - INFO - Iter(val) [1000/2000]    eta: 0:00:56  time: 0.0544  data_time: 0.0010  memory: 875  
+2026/09/23 22:37:54 - mmengine - INFO - Iter(val) [1050/2000]    eta: 0:00:54  time: 0.0561  data_time: 0.0009  memory: 845  
+2026/09/23 22:37:57 - mmengine - INFO - Iter(val) [1100/2000]    eta: 0:00:51  time: 0.0578  data_time: 0.0009  memory: 845  
+2026/09/23 22:38:00 - mmengine - INFO - Iter(val) [1150/2000]    eta: 0:00:48  time: 0.0558  data_time: 0.0009  memory: 845  
+2026/09/23 22:38:03 - mmengine - INFO - Iter(val) [1200/2000]    eta: 0:00:45  time: 0.0595  data_time: 0.0010  memory: 845  
+2026/09/23 22:38:06 - mmengine - INFO - Iter(val) [1250/2000]    eta: 0:00:42  time: 0.0581  data_time: 0.0009  memory: 846  
+2026/09/23 22:38:09 - mmengine - INFO - Iter(val) [1300/2000]    eta: 0:00:40  time: 0.0561  data_time: 0.0009  memory: 845  
+2026/09/23 22:38:12 - mmengine - INFO - Iter(val) [1350/2000]    eta: 0:00:37  time: 0.0562  data_time: 0.0009  memory: 845  
+2026/09/23 22:38:14 - mmengine - INFO - Iter(val) [1400/2000]    eta: 0:00:34  time: 0.0569  data_time: 0.0009  memory: 845  
+2026/09/23 22:38:17 - mmengine - INFO - Iter(val) [1450/2000]    eta: 0:00:31  time: 0.0562  data_time: 0.0010  memory: 845  
+2026/09/23 22:38:20 - mmengine - INFO - Iter(val) [1500/2000]    eta: 0:00:28  time: 0.0577  data_time: 0.0009  memory: 845  
+2026/09/23 22:38:23 - mmengine - INFO - Iter(val) [1550/2000]    eta: 0:00:25  time: 0.0543  data_time: 0.0009  memory: 845  
+2026/09/23 22:38:26 - mmengine - INFO - Iter(val) [1600/2000]    eta: 0:00:22  time: 0.0578  data_time: 0.0009  memory: 845  
+2026/09/23 22:38:29 - mmengine - INFO - Iter(val) [1650/2000]    eta: 0:00:19  time: 0.0582  data_time: 0.0010  memory: 845  
+2026/09/23 22:38:31 - mmengine - INFO - Iter(val) [1700/2000]    eta: 0:00:17  time: 0.0584  data_time: 0.0010  memory: 845  
+2026/09/23 22:38:34 - mmengine - INFO - Iter(val) [1750/2000]    eta: 0:00:14  time: 0.0604  data_time: 0.0009  memory: 845  
+2026/09/23 22:38:37 - mmengine - INFO - Iter(val) [1800/2000]    eta: 0:00:11  time: 0.0594  data_time: 0.0009  memory: 845  
+2026/09/23 22:38:40 - mmengine - INFO - Iter(val) [1850/2000]    eta: 0:00:08  time: 0.0559  data_time: 0.0009  memory: 845  
+2026/09/23 22:38:43 - mmengine - INFO - Iter(val) [1900/2000]    eta: 0:00:05  time: 0.0558  data_time: 0.0009  memory: 845  
+2026/09/23 22:38:46 - mmengine - INFO - Iter(val) [1950/2000]    eta: 0:00:02  time: 0.0549  data_time: 0.0010  memory: 845  
+2026/09/23 22:38:49 - mmengine - INFO - Iter(val) [2000/2000]    eta: 0:00:00  time: 0.0540  data_time: 0.0008  memory: 845  
+2026/09/23 22:38:49 - mmengine - INFO - per class results:
+2026/09/23 22:38:49 - mmengine - INFO - 
++------------------------------------------------+-------+-------+-------+
+|                     Class                      |  IoU  |  Acc  |  Dice |
++------------------------------------------------+-------+-------+-------+
+|                      Bird                      |  0.0  |  0.0  |  0.0  |
+|                 Ground Animal                  |  0.0  |  0.0  |  0.0  |
+|               Ambiguous Barrier                |  0.0  |  0.0  |  0.0  |
+|                 Concrete Block                 | 58.31 | 75.17 | 73.67 |
+|                      Curb                      | 47.32 |  58.5 | 64.24 |
+|                     Fence                      | 49.85 | 67.55 | 66.54 |
+|                   Guard Rail                   |  56.4 | 75.69 | 72.12 |
+|                    Barrier                     |  0.0  |  0.0  |  0.0  |
+|                  Road Median                   |  1.43 |  1.6  |  2.82 |
+|                   Road Side                    |  4.76 |  5.52 |  9.09 |
+|                 Lane Separator                 |  0.14 |  0.14 |  0.29 |
+|               Temporary Barrier                | 19.68 | 24.95 | 32.88 |
+|                      Wall                      | 44.87 | 62.56 | 61.95 |
+|                   Bike Lane                    | 31.88 | 66.89 | 48.35 |
+|               Crosswalk - Plain                | 23.82 | 39.99 | 38.48 |
+|                    Curb Cut                    |  2.45 |  2.49 |  4.79 |
+|                    Driveway                    |  4.59 |  4.79 |  8.78 |
+|                    Parking                     | 12.28 | 15.33 | 21.87 |
+|                 Parking Aisle                  |  0.0  |  0.0  |  0.0  |
+|                Pedestrian Area                 | 35.76 | 58.49 | 52.68 |
+|                   Rail Track                   | 42.92 | 68.24 | 60.07 |
+|                      Road                      | 83.71 | 91.46 | 91.13 |
+|                 Road Shoulder                  | 16.35 | 21.72 | 28.11 |
+|                  Service Lane                  | 42.91 | 62.42 | 60.05 |
+|                    Sidewalk                    | 57.14 | 76.75 | 72.72 |
+|                 Traffic Island                 | 28.05 | 36.73 | 43.81 |
+|                     Bridge                     | 57.22 | 78.23 | 72.79 |
+|                    Building                    | 82.25 | 92.15 | 90.26 |
+|                     Garage                     |  0.0  |  0.0  |  0.0  |
+|                     Tunnel                     |  69.2 | 97.77 |  81.8 |
+|                     Person                     | 57.49 | 76.31 | 73.01 |
+|                  Person Group                  |  0.0  |  0.0  |  0.0  |
+|                   Bicyclist                    | 24.29 | 29.98 | 39.09 |
+|                  Motorcyclist                  | 13.61 | 16.38 | 23.96 |
+|                  Other Rider                   |  0.0  |  0.0  |  0.0  |
+|           Lane Marking - Dashed Line           | 31.69 | 38.44 | 48.12 |
+|          Lane Marking - Straight Line          | 51.38 | 61.16 | 67.88 |
+|           Lane Marking - Zigzag Line           |  0.0  |  0.0  |  0.0  |
+|            Lane Marking - Ambiguous            |  0.0  |  0.0  |  0.0  |
+|          Lane Marking - Arrow (Left)           |  0.0  |  0.0  |  0.0  |
+|          Lane Marking - Arrow (Other)          |  0.0  |  0.0  |  0.0  |
+|          Lane Marking - Arrow (Right)          |  0.0  |  0.0  |  0.0  |
+| Lane Marking - Arrow (Split Left or Straight)  |  0.0  |  0.0  |  0.0  |
+| Lane Marking - Arrow (Split Right or Straight) |  0.0  |  0.0  |  0.0  |
+|        Lane Marking - Arrow (Straight)         |  0.0  |  0.0  |  0.0  |
+|            Lane Marking - Crosswalk            | 66.46 | 81.64 | 79.85 |
+|         Lane Marking - Give Way (Row)          |  0.0  |  0.0  |  0.0  |
+|        Lane Marking - Give Way (Single)        |  0.0  |  0.0  |  0.0  |
+|        Lane Marking - Hatched (Chevron)        |  0.0  |  0.0  |  0.0  |
+|       Lane Marking - Hatched (Diagonal)        | 40.64 | 56.43 | 57.79 |
+|              Lane Marking - Other              | 22.83 |  31.9 | 37.17 |
+|            Lane Marking - Stop Line            | 33.28 | 40.08 | 49.94 |
+|        Lane Marking - Symbol (Bicycle)         |  0.36 |  0.36 |  0.73 |
+|         Lane Marking - Symbol (Other)          |  0.0  |  0.0  |  0.0  |
+|              Lane Marking - Text               | 30.01 | 50.65 | 46.16 |
+|       Lane Marking (only) - Dashed Line        |  0.0  |  0.0  |  0.0  |
+|        Lane Marking (only) - Crosswalk         |  0.0  |  0.0  |  0.0  |
+|          Lane Marking (only) - Other           |  0.0  |  0.0  |  0.0  |
+|           Lane Marking (only) - Test           |  0.0  |  0.0  |  0.0  |
+|                    Mountain                    | 43.07 | 62.67 | 60.21 |
+|                      Sand                      |  0.0  |  0.0  |  0.0  |
+|                      Sky                       | 96.79 | 98.18 | 98.37 |
+|                      Snow                      | 52.36 | 86.83 | 68.73 |
+|                    Terrain                     | 57.91 |  70.1 | 73.35 |
+|                   Vegetation                   |  86.1 | 93.85 | 92.53 |
+|                     Water                      | 56.57 | 83.87 | 72.26 |
+|                     Banner                     |  0.72 |  0.72 |  1.43 |
+|                     Bench                      |  0.0  |  0.0  |  0.0  |
+|                   Bike Rack                    |  0.0  |  0.0  |  0.0  |
+|                  Catch Basin                   |  0.04 |  0.04 |  0.08 |
+|                  CCTV Camera                   |  0.0  |  0.0  |  0.0  |
+|                  Fire Hydrant                  |  0.0  |  0.0  |  0.0  |
+|                  Junction Box                  | 12.85 | 14.49 | 22.78 |
+|                    Mailbox                     |  0.0  |  0.0  |  0.0  |
+|                    Manhole                     | 34.85 | 48.02 | 51.69 |
+|                 Parking Meter                  |  0.0  |  0.0  |  0.0  |
+|                  Phone Booth                   |  0.0  |  0.0  |  0.0  |
+|                    Pothole                     |  0.0  |  0.0  |  0.0  |
+|            Signage - Advertisement             | 37.44 | 53.06 | 54.48 |
+|              Signage - Ambiguous               |  0.0  |  0.0  |  0.0  |
+|                 Signage - Back                 |  0.0  |  0.0  |  0.0  |
+|             Signage - Information              |  0.0  |  0.0  |  0.0  |
+|                Signage - Other                 |  0.0  |  0.0  |  0.0  |
+|                Signage - Store                 | 26.59 | 33.59 | 42.01 |
+|                  Street Light                  | 30.37 | 36.25 | 46.59 |
+|                      Pole                      | 33.37 | 49.09 | 50.04 |
+|                   Pole Group                   |  0.0  |  0.0  |  0.0  |
+|               Traffic Sign Frame               | 46.96 | 67.82 | 63.91 |
+|                  Utility Pole                  | 35.99 | 46.22 | 52.93 |
+|                  Traffic Cone                  |  0.0  |  0.0  |  0.0  |
+|        Traffic Light - General (Single)        |  0.0  |  0.0  |  0.0  |
+|          Traffic Light - Pedestrians           |  0.0  |  0.0  |  0.0  |
+|       Traffic Light - General (Upright)        | 49.35 | 65.39 | 66.08 |
+|      Traffic Light - General (Horizontal)      |  3.57 |  3.57 |  6.89 |
+|            Traffic Light - Cyclists            |  0.0  |  0.0  |  0.0  |
+|             Traffic Light - Other              |  0.0  |  0.0  |  0.0  |
+|            Traffic Sign - Ambiguous            |  0.0  |  0.0  |  0.0  |
+|              Traffic Sign (Back)               | 22.81 |  32.5 | 37.15 |
+|        Traffic Sign - Direction (Back)         |  6.56 |  6.96 | 12.31 |
+|        Traffic Sign - Direction (Front)        | 61.89 | 73.45 | 76.46 |
+|              Traffic Sign (Front)              | 48.88 | 60.91 | 65.66 |
+|             Traffic Sign - Parking             |  0.0  |  0.0  |  0.0  |
+|        Traffic Sign - Temporary (Back)         |  0.0  |  0.0  |  0.0  |
+|        Traffic Sign - Temporary (Front)        |  0.0  |  0.0  |  0.0  |
+|                   Trash Can                    | 31.81 | 51.91 | 48.27 |
+|                    Bicycle                     |  40.2 | 61.68 | 57.35 |
+|                      Boat                      |  0.0  |  0.0  |  0.0  |
+|                      Bus                       |  40.2 | 87.27 | 57.35 |
+|                      Car                       | 85.29 | 93.03 | 92.06 |
+|                    Caravan                     |  0.0  |  0.0  |  0.0  |
+|                   Motorcycle                   | 33.82 | 74.62 | 50.55 |
+|                    On Rails                    |  0.0  |  0.0  |  0.0  |
+|                 Other Vehicle                  |  0.34 |  0.34 |  0.67 |
+|                    Trailer                     |  0.0  |  0.0  |  0.0  |
+|                     Truck                      | 57.25 | 74.73 | 72.81 |
+|                 Vehicle Group                  | 12.25 |  15.2 | 21.82 |
+|                  Wheeled Slow                  |  0.0  |  0.0  |  0.0  |
+|                  Water Valve                   |  0.0  |  0.0  |  0.0  |
+|                   Car Mount                    | 68.09 | 84.67 | 81.02 |
+|                    Dynamic                     | 19.23 | 26.33 | 32.26 |
+|                  Ego Vehicle                   | 86.29 | 89.29 | 92.64 |
+|                     Ground                     | 26.44 | 44.27 | 41.82 |
+|                     Static                     | 11.52 | 14.66 | 20.66 |
+|                   Unlabeled                    |  0.0  |  0.0  |  0.0  |
++------------------------------------------------+-------+-------+-------+
+2026/09/23 22:38:49 - mmengine - INFO - Iter(val) [2000/2000]    aAcc: 87.4200  mIoU: 20.9900  mAcc: 28.0200  mDice: 27.9700  data_time: 0.0010  time: 0.0570
+2026/09/23 22:38:49 - mmengine - INFO - The previous best checkpoint /home/colin/GUVP_pairwise_ranking/output/deeplabv3plus_r50_mapillary_v2_80k/best_mIoU_iter_92000.pth is removed
+2026/09/23 22:38:49 - mmengine - INFO - The best checkpoint with 20.9900 mIoU at 96000 iter is saved to best_mIoU_iter_96000.pth.
