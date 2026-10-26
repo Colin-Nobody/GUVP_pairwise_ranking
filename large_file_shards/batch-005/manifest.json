@@ -1,0 +1,48 @@
+{
+  "batch": "batch-005",
+  "source": "white-project-archive",
+  "archive_path": "large_file_shards/batch-005/archive.tar.zst",
+  "original_files": 5,
+  "original_bytes": 664005752,
+  "archive_bytes": 515839453,
+  "archive_sha256": "edab72292b314b44d484b9b546d492dc64e94f906f8d930000b159877bbae9f4",
+  "part_bytes_limit": 80000000,
+  "parts": [
+    {
+      "name": "batch-005.part-0000",
+      "size_bytes": 80000000,
+      "sha256": "b4dfff54822864583f9b8199acead1088076f5af2508df1b5b912cf9709c7ab9"
+    },
+    {
+      "name": "batch-005.part-0001",
+      "size_bytes": 80000000,
+      "sha256": "77ef8ab9a0b609d1da5b2422f9930fe53763df2bfd007fabbf42de241bdf8c4a"
+    },
+    {
+      "name": "batch-005.part-0002",
+      "size_bytes": 80000000,
+      "sha256": "4530c14edbb170666bbfbac5bd079f1dea0f319aa1ebf98a21a39866b536c245"
+    },
+    {
+      "name": "batch-005.part-0003",
+      "size_bytes": 80000000,
+      "sha256": "96745bba4355d9742de8b91907a914c090e0fc3ae840ba8a7d65dfbbe263bf80"
+    },
+    {
+      "name": "batch-005.part-0004",
+      "size_bytes": 80000000,
+      "sha256": "889ca376d9b7f38c2783eebeb87ea493ff5c0078594051fe39a25b66859cd59f"
+    },
+    {
+      "name": "batch-005.part-0005",
+      "size_bytes": 80000000,
+      "sha256": "38bb33f9cc2c2f9ee35cc7a9f1320d9af44c5ac6a766cc1d279619d77939be4a"
+    },
+    {
+      "name": "batch-005.part-0006",
+      "size_bytes": 35839453,
+      "sha256": "55ac3f7b33e5beef903d56d1df92d89bf490bff5241cc5dea22e8391ef4066f7"
+    }
+  ],
+  "restore": "Concatenate parts in lexical order, verify archive_sha256, then run zstd -d and tar -xf."
+}
