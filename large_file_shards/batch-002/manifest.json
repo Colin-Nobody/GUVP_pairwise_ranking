@@ -1,0 +1,63 @@
+{
+  "batch": "batch-002",
+  "source": "active-local",
+  "archive_path": "large_file_shards/batch-002/archive.tar.zst",
+  "original_files": 587,
+  "original_bytes": 921297704,
+  "archive_bytes": 751318919,
+  "archive_sha256": "9dd2f2e5a48482995331c27ca0c605822e792d45e8db17c784af778ead55d93c",
+  "part_bytes_limit": 80000000,
+  "parts": [
+    {
+      "name": "batch-002.part-0000",
+      "size_bytes": 80000000,
+      "sha256": "e5b8b9224691d6ff87dcc064909d3191c109cf5d21e69b2ed5388aa5db1d7486"
+    },
+    {
+      "name": "batch-002.part-0001",
+      "size_bytes": 80000000,
+      "sha256": "7a440f79c5edfbe89cf7daef9b9977b04244888a27fc31f0993af9519e15746d"
+    },
+    {
+      "name": "batch-002.part-0002",
+      "size_bytes": 80000000,
+      "sha256": "3d3e0bed38f45b69210b0f9b9302a3589f81b4f780ffae809c9474eb34831fbc"
+    },
+    {
+      "name": "batch-002.part-0003",
+      "size_bytes": 80000000,
+      "sha256": "a088548b84d088f2d8a6c464ae7ebfea0608bd3c4fb132e7f541979efb327abe"
+    },
+    {
+      "name": "batch-002.part-0004",
+      "size_bytes": 80000000,
+      "sha256": "aef8ccf578a9cfb18a9ed0e27de1b1109baf64be765951aa885121155b224f37"
+    },
+    {
+      "name": "batch-002.part-0005",
+      "size_bytes": 80000000,
+      "sha256": "74d62b7830c6ac58a227c6e19955802ba468f7aeb8b7537ed7e09828e85b36be"
+    },
+    {
+      "name": "batch-002.part-0006",
+      "size_bytes": 80000000,
+      "sha256": "a558b8b3544e3dc6aef06bf35ce0efc23a751ecb25c29b64283e593df9b7bb0f"
+    },
+    {
+      "name": "batch-002.part-0007",
+      "size_bytes": 80000000,
+      "sha256": "f4f875bf1aaea7cb7aeeddeeecdac4602e9bb1ce7f7d26dc384f656b9756d4e3"
+    },
+    {
+      "name": "batch-002.part-0008",
+      "size_bytes": 80000000,
+      "sha256": "25b171ec18bb8f083635d121a1b5a0a2a1517d5ecf6bd4f23d391888d09af308"
+    },
+    {
+      "name": "batch-002.part-0009",
+      "size_bytes": 31318919,
+      "sha256": "b0b7438c9a08936c11f9e3ae502190260839624c1d39af027918ad893bc0bf75"
+    }
+  ],
+  "restore": "Concatenate parts in lexical order, verify archive_sha256, then run zstd -d and tar -xf."
+}
