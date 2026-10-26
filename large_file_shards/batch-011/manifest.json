@@ -1,0 +1,38 @@
+{
+  "batch": "batch-011",
+  "source": "white-project-archive",
+  "archive_path": "large_file_shards/batch-011/archive.tar.zst",
+  "original_files": 1,
+  "original_bytes": 492340675,
+  "archive_bytes": 357087533,
+  "archive_sha256": "647ca9233c188c5a83aefaea6c5d281244a88e4b714b843ce5c70cfd07d45160",
+  "part_bytes_limit": 80000000,
+  "parts": [
+    {
+      "name": "batch-011.part-0000",
+      "size_bytes": 80000000,
+      "sha256": "689dc8fde1c86d55aea24966a20ca4774a9d953ebf7cfd97c8864fe1f1f52210"
+    },
+    {
+      "name": "batch-011.part-0001",
+      "size_bytes": 80000000,
+      "sha256": "e7797c67e37e9169a738cbe87c13fc48dc564d13b93081e3339c237ea65630f7"
+    },
+    {
+      "name": "batch-011.part-0002",
+      "size_bytes": 80000000,
+      "sha256": "4c178f8ed147c5e6a52cfcafa611bdbea6d1b70b9d531d58a6aca89c24036626"
+    },
+    {
+      "name": "batch-011.part-0003",
+      "size_bytes": 80000000,
+      "sha256": "fed736aab4c2fdf8d0f8f742f26b469b982942eb8fe70c926e858df5ca2d3e04"
+    },
+    {
+      "name": "batch-011.part-0004",
+      "size_bytes": 37087533,
+      "sha256": "6ca5370cf21789b01d7608ad07ec861860c64fb6becbaa504896c6bbe8a691ca"
+    }
+  ],
+  "restore": "Concatenate parts in lexical order, verify archive_sha256, then run zstd -d and tar -xf."
+}
