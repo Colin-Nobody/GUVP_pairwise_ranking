@@ -1,0 +1,79 @@
+{
+  "model": "DINOv3 ViT-B/16 LVD-1689M; final two blocks fine-tuned; patch-mean MLP head",
+  "source_checkpoint": "/home/colin/GUVP_pairwise_ranking/models/checkpoints/dinov3_vitb.safetensors",
+  "source_checkpoint_sha256": "9a21ac3df0c63839d62612dda6f454d816c25611cc7a52966ed5a5a94921dc8b",
+  "initialization": "original pretrained checkpoint; no previous V6 or V9 fine-tuned weights",
+  "label_version": "V9 optimized prompt / joint 1,200-image Qwen-TrueSkill labels",
+  "training_images": 900,
+  "training_cities": [
+    "Amsterdam",
+    "Barcelona",
+    "Belgrade",
+    "Berlin",
+    "Brussels",
+    "Budapest",
+    "Copenhagen",
+    "Edinburgh",
+    "Helsinki",
+    "Krakow",
+    "Munich",
+    "Oslo",
+    "Paris",
+    "Rome",
+    "Stockholm",
+    "Tallinn",
+    "Warsaw",
+    "Zurich"
+  ],
+  "test_images_excluded": 300,
+  "test_city_groups_excluded": 6,
+  "test_manifest_or_labels_loaded": false,
+  "fixed_edge": 512,
+  "backbone_learning_rate": 1e-05,
+  "head_learning_rate": 0.0001,
+  "weight_decay": 0.01,
+  "dropout": 0.5,
+  "epochs": 16,
+  "effective_batch_size": 16,
+  "seeds": [
+    42,
+    137,
+    2026
+  ],
+  "selection_and_early_stopping": "none; fixed config and fixed epoch count, test partition untouched",
+  "label": "V9 optimized prompt Qwen/TrueSkill visual_pollution_score_0_10",
+  "feature_cache_edge": 512,
+  "pooling": "mean of final normalized image patch tokens excluding CLS and four register tokens",
+  "preprocessing": "EXIF transpose, RGB, aspect-preserving resize to 512 long edge; dimensions rounded to nearest multiple of 16; Pillow bicubic; ImageNet mean/std",
+  "prediction_rule": "arithmetic mean of seed 42, 137, 2026 predictions",
+  "device": "cuda",
+  "torch_version": "2.11.0+cu128",
+  "transformers_version": "5.15.1",
+  "artifacts": [
+    {
+      "seed": 42,
+      "weights": "seed_42.safetensors",
+      "sha256": "663ddbfd1f8a3da351a2a3d7cf1de1d8dce28c00e4f7e5475839dfabc09f8285",
+      "bytes": 57107476,
+      "target_mean": 5.028364572222221,
+      "target_std": 1.953825783915049
+    },
+    {
+      "seed": 137,
+      "weights": "seed_137.safetensors",
+      "sha256": "01a228dcf4d68cd42e7b0098007a8de6287939163206b9495d552fe61f43becb",
+      "bytes": 57107476,
+      "target_mean": 5.028364572222221,
+      "target_std": 1.953825783915049
+    },
+    {
+      "seed": 2026,
+      "weights": "seed_2026.safetensors",
+      "sha256": "d918aa6ed1b5cfcbf8ea956751b249a3e71cf1a7b0d57f0da3ace3d273e32099",
+      "bytes": 57107476,
+      "target_mean": 5.028364572222221,
+      "target_std": 1.953825783915049
+    }
+  ],
+  "label_graph_caveat": "All V9 targets were jointly estimated on the 1,200-image comparison graph; model fitting excluded all 300 test records and six test cities."
+}

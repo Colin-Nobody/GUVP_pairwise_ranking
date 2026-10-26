@@ -1,0 +1,21 @@
+{
+  "n_images": 200,
+  "cities": {
+    "Bern": 50,
+    "Chisinau": 50,
+    "Hildesheim": 50,
+    "Stuttgart": 50
+  },
+  "source_counts": {
+    "KartaView": 200
+  },
+  "qwen_target": "Qwen2.5-VL-7B-Instruct, vp-faireval-mec-bpc-score-v6, TrueSkill then min-max to 0-10 on this 200-image cohort",
+  "vit_model": "Three-seed DINOv3 ViT-B/16 last-two-block fine-tuned ensemble, trained only on original 1,000 images",
+  "normalization": "Separately min-max scale Qwen and ViT cohort predictions to [0,10]; positive affine scaling does not change Pearson or Spearman correlation.",
+  "interpretation": "Association of independent Qwen V6 labels with external-city ViT predictions; separate cohort scaling evaluates association/ranking, not absolute score calibration.",
+  "dependence_caveat": "These Qwen scores are derived from a shared pairwise comparison graph, and images are nested in only four cities; report correlations descriptively and do not interpret ordinary image-independent p-values as city-generalization evidence.",
+  "outputs": [
+    "external_qwen_vit_scores.csv",
+    "external_correlations.csv"
+  ]
+}

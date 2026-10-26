@@ -1,0 +1,22 @@
+{
+  "model": "DINOv3 ViT-B/16 LVD-1689M; final two blocks fine-tuned; patch-mean MLP head",
+  "source_checkpoint_sha256": "9a21ac3df0c63839d62612dda6f454d816c25611cc7a52966ed5a5a94921dc8b",
+  "label_version": "V9 optimized prompt / joint 1,200-image Qwen-TrueSkill labels",
+  "training_images": 1000,
+  "excluded_holdout_images": 200,
+  "internal_evaluation": "3 repeats x 5 city-held-out folds over the 1,000 development images; fixed config, no V9 holdout tuning",
+  "fixed_edge": 512,
+  "backbone_learning_rate": 1e-05,
+  "head_learning_rate": 0.0001,
+  "weight_decay": 0.01,
+  "dropout": 0.5,
+  "epochs": 16,
+  "effective_batch_size": 16,
+  "seeds": [
+    42,
+    137,
+    2026
+  ],
+  "split_source": "output/vit_vp_1000_v1/splits/unseen_city_outer.csv; city groups restricted to original_1000",
+  "holdout_features_or_targets_loaded_during_training": false
+}

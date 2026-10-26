@@ -1,0 +1,55 @@
+{
+  "model": "DINOv3 ViT-B/16 LVD-1689M; final two transformer blocks fine-tuned; patch-mean MLP head",
+  "label": "visual_pollution_score_0_10; fixed Qwen/TrueSkill-derived v6 labels",
+  "training_images": 1000,
+  "source_checkpoint": "/home/colin/GUVP_pairwise_ranking/models/checkpoints/dinov3_vitb.safetensors",
+  "source_checkpoint_sha256": "9a21ac3df0c63839d62612dda6f454d816c25611cc7a52966ed5a5a94921dc8b",
+  "feature_cache_edge": 512,
+  "preprocessing": "EXIF transpose, RGB, aspect-preserving resize to 512 long edge; dimensions rounded to nearest multiple of 16; Pillow bicubic; ImageNet mean/std",
+  "pooling": "mean of final normalized image patch tokens excluding CLS and four register tokens",
+  "optimizer": "AdamW",
+  "backbone_learning_rate": 1e-05,
+  "head_learning_rate": 0.0001,
+  "weight_decay": 0.01,
+  "dropout": 0.5,
+  "micro_batch_size": 4,
+  "gradient_accumulation_target": 16,
+  "epochs": 16,
+  "epoch_selection_rule": "median of the 15 outer-fold refit_epochs; hyperparameters/epochs aggregated from inner-CV selections; no full-data early stopping",
+  "seed_ensemble": [
+    42,
+    137,
+    2026
+  ],
+  "prediction_rule": "arithmetic mean of the three seed-model predictions",
+  "device": "cuda",
+  "torch_version": "2.11.0+cu128",
+  "transformers_version": "5.15.1",
+  "artifacts": [
+    {
+      "seed": 42,
+      "weights": "seed_42.safetensors",
+      "sha256": "3c1644a2c3c298347f2a64151780f3431e5f55ba2c56eb5dcadec5b5763206f4",
+      "bytes": 57107476,
+      "target_mean": 5.008327714,
+      "target_std": 2.296895628927861
+    },
+    {
+      "seed": 137,
+      "weights": "seed_137.safetensors",
+      "sha256": "5121ee2254d25f3ae6f8703dc310de20e386e3094b5642e1baf2dbd9ebb19743",
+      "bytes": 57107476,
+      "target_mean": 5.008327714,
+      "target_std": 2.296895628927861
+    },
+    {
+      "seed": 2026,
+      "weights": "seed_2026.safetensors",
+      "sha256": "4d2ff23b0efe2bd0467548025c4bcbf43ed79d3ab1ca7dc986d28872efd6cd56",
+      "bytes": 57107476,
+      "target_mean": 5.008327714,
+      "target_std": 2.296895628927861
+    }
+  ],
+  "generalization_metrics": "Use nested out-of-fold evaluation in output/vit_vp_1000_v1/finetune_last2; this all-data fit is for deployment only."
+}

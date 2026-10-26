@@ -20,7 +20,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--manifest", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--model", required=True)
-    parser.add_argument("--cpu-offload", action="store_true")
+    parser.add_argument("--cpu-offload", action="store_true",
+                        help="Deprecated and rejected: project inference requires GPU-only execution")
     parser.add_argument("--max-pixels", type=int, default=401408)
     parser.add_argument("--resume", action="store_true")
     parser.add_argument("--overwrite", action="store_true")
@@ -71,6 +72,10 @@ def infer(model, processor, row: dict[str, str], max_pixels: int, label_layout: 
 
 def main() -> None:
     args = parse_args()
+    if not torch.cuda.is_available():
+        raise RuntimeError("GPU-only inference is required, but CUDA is unavailable")
+    if args.cpu_offload:
+        raise ValueError("--cpu-offload is disabled by the project GPU-only policy")
     if args.resume and args.overwrite:
         raise ValueError("--resume and --overwrite cannot be combined")
     with args.manifest.open(newline="", encoding="utf-8") as handle:
@@ -104,18 +109,10 @@ def main() -> None:
         bnb_4bit_quant_type="nf4",
         bnb_4bit_compute_dtype=torch.bfloat16,
         bnb_4bit_use_double_quant=True,
-        llm_int8_enable_fp32_cpu_offload=args.cpu_offload,
+        llm_int8_enable_fp32_cpu_offload=False,
     )
-    device_map: str | dict[str, int | str] = "auto"
-    if args.cpu_offload:
-        device_map = {
-            "model.visual": 0,
-            "model.language_model.embed_tokens": "cpu",
-            "model.language_model.layers": 0,
-            "model.language_model.norm": 0,
-            "model.language_model.rotary_emb": 0,
-            "lm_head": "cpu",
-        }
+    device_index = torch.cuda.current_device()
+    device_map = device_index
     model = AutoModelForImageTextToText.from_pretrained(
         args.model,
         quantization_config=config,
@@ -124,6 +121,13 @@ def main() -> None:
         attn_implementation="sdpa",
         local_files_only=True,
     )
+    placement = getattr(model, "hf_device_map", None)
+    is_gpu = lambda device: isinstance(device, int) or (
+        isinstance(device, str) and (device == "cuda" or device.startswith("cuda:"))
+    )
+    if not placement or any(not is_gpu(device) for device in placement.values()):
+        raise RuntimeError(f"GPU-only model placement check failed: {placement}")
+    print(f"GPU-only device placement verified across {len(placement)} model modules", flush=True)
     processor = AutoProcessor.from_pretrained(args.model, max_pixels=args.max_pixels, local_files_only=True)
 
     output_fields = manifest_fields + ["choice", "chosen_image", "model", "label_layout", "max_pixels", "timestamp_utc", "raw_response", "status"]

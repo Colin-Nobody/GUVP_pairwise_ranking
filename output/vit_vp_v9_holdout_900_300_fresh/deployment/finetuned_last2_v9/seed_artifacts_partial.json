@@ -1,0 +1,26 @@
+[
+  {
+    "seed": 42,
+    "weights": "seed_42.safetensors",
+    "sha256": "663ddbfd1f8a3da351a2a3d7cf1de1d8dce28c00e4f7e5475839dfabc09f8285",
+    "bytes": 57107476,
+    "target_mean": 5.028364572222221,
+    "target_std": 1.953825783915049
+  },
+  {
+    "seed": 137,
+    "weights": "seed_137.safetensors",
+    "sha256": "01a228dcf4d68cd42e7b0098007a8de6287939163206b9495d552fe61f43becb",
+    "bytes": 57107476,
+    "target_mean": 5.028364572222221,
+    "target_std": 1.953825783915049
+  },
+  {
+    "seed": 2026,
+    "weights": "seed_2026.safetensors",
+    "sha256": "d918aa6ed1b5cfcbf8ea956751b249a3e71cf1a7b0d57f0da3ace3d273e32099",
+    "bytes": 57107476,
+    "target_mean": 5.028364572222221,
+    "target_std": 1.953825783915049
+  }
+]

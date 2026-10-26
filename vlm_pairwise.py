@@ -34,7 +34,7 @@ LABEL_LAYOUT = "label_before"
 PROMPT_PATH = Path(__file__).resolve().parent / "prompts" / "vp_pairwise_faireval_mec_bpc_v6.txt"
 PROMPT = PROMPT_PATH.read_text(encoding="utf-8").strip()
 PROMPT_SHA256 = hashlib.sha256(PROMPT.encode("utf-8")).hexdigest()
-QUANTIZATION = "bitsandbytes-nf4-double-bfloat16"
+QUANTIZATION = "bitsandbytes-nf4-double-bf16-if-supported-else-fp16"
 DECODE_MODE = "sampled_evidence_first_scores"
 
 AUDIT_FIELDS = [
@@ -80,7 +80,9 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--progress-file", type=Path, help="Optional append-only progress log")
     parser.add_argument("--max-pixels", type=int, default=512 * 28 * 28)
     parser.add_argument("--cpu-offload", action="store_true",
-                        help="Offload selected language modules for an 8GB GPU")
+                        help="Deprecated and rejected: project inference requires GPU-only execution")
+    parser.add_argument("--gpu-only", action="store_true", default=True,
+                        help="Compatibility flag; GPU-only execution is enforced for every run")
     parser.add_argument("--mec-samples", type=int, default=3,
                         help="Evidence-first samples per position (paper default: 3)")
     parser.add_argument("--mec-batch-size", type=int, default=1,
@@ -163,13 +165,21 @@ def get_pairs(args: argparse.Namespace, files: dict[str, Path]) -> list[tuple[st
 
 
 def _score_match(response: str, label: str) -> re.Match[str] | None:
-    pattern = rf"(?im)^\s*(?:the\s+)?score\s+of\s+image\s+{label}\s*:\s*([-+]?[0-9]+(?:\.[0-9]+)?)\s*$"
+    # Qwen sometimes wraps the otherwise correct score line in Markdown, e.g.
+    # ``**Score of Image A:** 4``. Treat that as formatting, not a bad score.
+    pattern = (
+        rf"(?im)^\s*\*{{0,2}}\s*(?:the\s+)?score\s+of\s+image\s+{label}"
+        rf"\s*:\s*\*{{0,2}}\s*([-+]?[0-9]+(?:\.[0-9]+)?)\s*\*{{0,2}}\s*$"
+    )
     return re.search(pattern, response)
 
 
 def parse_evaluation(response: str) -> tuple[float, float] | None:
     """Parse an evidence-first response, rejecting missing evidence and out-of-range scores."""
-    evidence = re.search(r"(?im)^\s*evaluation evidence\s*:\s*(\S.*)$", response)
+    evidence = re.search(
+        r"(?im)^\s*\*{0,2}\s*evaluation evidence\s*:\s*\*{0,2}\s*(\S.*)$",
+        response,
+    )
     match_a = _score_match(response, "A")
     match_b = _score_match(response, "B")
     if not evidence or not match_a or not match_b:
@@ -565,26 +575,46 @@ def rebuild_votes(audit_rows: list[dict[str, str]], output: Path) -> int:
 
 
 def load_model(args: argparse.Namespace):
-    config = BitsAndBytesConfig(
-        load_in_4bit=True, bnb_4bit_quant_type="nf4", bnb_4bit_compute_dtype=torch.bfloat16,
-        bnb_4bit_use_double_quant=True, llm_int8_enable_fp32_cpu_offload=args.cpu_offload,
-    )
-    device_map: str | dict[str, int | str] = "auto"
+    if not torch.cuda.is_available():
+        raise RuntimeError("GPU-only inference is required, but CUDA is unavailable")
     if args.cpu_offload:
-        device_map = {
-            "model.visual": 0, "model.language_model.embed_tokens": "cpu",
-            "model.language_model.layers": 0, "model.language_model.norm": 0,
-            "model.language_model.rotary_emb": 0, "lm_head": "cpu",
-        }
+        raise ValueError("CPU offload is disabled by the project GPU-only policy")
+    if torch.cuda.get_device_capability()[0] >= 8:
+        compute_dtype = torch.bfloat16
+    else:
+        compute_dtype = torch.float16
+    dtype_name = "bfloat16" if compute_dtype == torch.bfloat16 else "float16"
+    device_index = torch.cuda.current_device()
+    gpu_name = torch.cuda.get_device_name(device_index)
+    capability = torch.cuda.get_device_capability(device_index)
+    print(
+        f"GPU-only: {gpu_name} (compute capability {capability[0]}.{capability[1]}); "
+        f"model compute dtype: {dtype_name}",
+        flush=True,
+    )
+    config = BitsAndBytesConfig(
+        load_in_4bit=True, bnb_4bit_quant_type="nf4", bnb_4bit_compute_dtype=compute_dtype,
+        bnb_4bit_use_double_quant=True, llm_int8_enable_fp32_cpu_offload=False,
+    )
+    device_map = device_index
     model = AutoModelForImageTextToText.from_pretrained(
-        args.model, quantization_config=config, dtype=torch.bfloat16, device_map=device_map,
+        args.model, quantization_config=config, dtype=compute_dtype, device_map=device_map,
         attn_implementation="sdpa",
     )
+    device_map = getattr(model, "hf_device_map", None)
+    gpu_devices = lambda device: isinstance(device, int) or (
+        isinstance(device, str) and (device == "cuda" or device.startswith("cuda:"))
+    )
+    if not device_map or any(not gpu_devices(device) for device in device_map.values()):
+        raise RuntimeError(f"GPU-only model placement check failed: {device_map}")
+    print(f"GPU-only device placement verified across {len(device_map)} model modules", flush=True)
     processor = AutoProcessor.from_pretrained(args.model, max_pixels=args.max_pixels)
     return model, processor
 
 
 def validate_args(args: argparse.Namespace) -> None:
+    if args.cpu_offload:
+        raise ValueError("--cpu-offload is disabled by the project GPU-only policy")
     if args.resume and args.overwrite:
         raise ValueError("--resume and --overwrite cannot be used together")
     if args.mec_samples < 1:

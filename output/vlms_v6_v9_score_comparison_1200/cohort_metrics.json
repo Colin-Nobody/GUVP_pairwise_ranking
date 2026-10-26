@@ -1,0 +1,131 @@
+{
+  "coverage": {
+    "v6_main": 1000,
+    "v6_external": 200,
+    "v9": 1200,
+    "matched": 1200
+  },
+  "v6_note": "Main 1000 and external 200 V6 images were rated in separate comparison graphs and have separate min-max scales.",
+  "v9_note": "V9 uses one joint 1200-image graph and its own 0-10 min-max scale.",
+  "cohort_metrics": {
+    "main_1000": {
+      "n": 1000,
+      "v6_distribution": {
+        "n": 1000,
+        "min": 0.0,
+        "q25": 3.35383575,
+        "median": 4.9690235000000005,
+        "mean": 5.008327714,
+        "sd": 2.298044938796594,
+        "q75": 6.7243525,
+        "max": 10.0
+      },
+      "v9_global_0_10_distribution": {
+        "n": 1000,
+        "min": 0.0,
+        "q25": 3.6869312499999998,
+        "median": 5.0052535,
+        "mean": 4.995560742,
+        "sd": 1.9596609946050751,
+        "q75": 6.157667249999999,
+        "max": 10.0
+      },
+      "v9_rescaled_within_cohort_distribution": {
+        "n": 1000,
+        "min": 0.0,
+        "q25": 3.6869312499999998,
+        "median": 5.0052535,
+        "mean": 4.995560742,
+        "sd": 1.959660994605075,
+        "q75": 6.157667249999999,
+        "max": 10.0
+      },
+      "pearson_within_cohort": 0.6961582985027643,
+      "spearman_within_cohort": 0.6878632958632959,
+      "mae_after_within_cohort_minmax": 1.338156906,
+      "rmse_after_within_cohort_minmax": 1.687735264134472,
+      "mean_signed_difference_v9_minus_v6_after_minmax": -0.012766972000000019,
+      "mean_absolute_percentile_rank_gap": 0.17385785785785784,
+      "top_decile_overlap": 51,
+      "top_decile_size": 100,
+      "top_decile_jaccard": 0.3422818791946309
+    },
+    "external_200": {
+      "n": 200,
+      "v6_distribution": {
+        "n": 200,
+        "min": 0.0,
+        "q25": 3.31824825,
+        "median": 4.890089,
+        "mean": 4.93857291,
+        "sd": 2.2493662647827133,
+        "q75": 6.5483105,
+        "max": 10.0
+      },
+      "v9_global_0_10_distribution": {
+        "n": 200,
+        "min": 0.258585,
+        "q25": 3.70387725,
+        "median": 4.50093,
+        "mean": 4.56479926,
+        "sd": 1.629376164608814,
+        "q75": 5.49837275,
+        "max": 9.329655
+      },
+      "v9_rescaled_within_cohort_distribution": {
+        "n": 200,
+        "min": 0.0,
+        "q25": 3.798110090650827,
+        "median": 4.676785649322516,
+        "mean": 4.747195490719396,
+        "sd": 1.796233701877302,
+        "q75": 5.776372302275254,
+        "max": 10.0
+      },
+      "pearson_within_cohort": 0.6155479370873741,
+      "spearman_within_cohort": 0.5799699992499813,
+      "mae_after_within_cohort_minmax": 1.4120439843952148,
+      "rmse_after_within_cohort_minmax": 1.8253944917628862,
+      "mean_signed_difference_v9_minus_v6_after_minmax": -0.1913774192806035,
+      "mean_absolute_percentile_rank_gap": 0.201356783919598,
+      "top_decile_overlap": 10,
+      "top_decile_size": 20,
+      "top_decile_jaccard": 0.3333333333333333
+    }
+  },
+  "pooled_within_cohort_percentile_agreement": {
+    "n": 1200,
+    "pearson": 0.669760877179164,
+    "spearman": 0.6697676242814588,
+    "mean_absolute_percentile_rank_gap": 0.1784410122014812,
+    "macro_mean_cohort_spearman": 0.6339166475566386
+  },
+  "city_summary": {
+    "city_count": 24,
+    "median_spearman": 0.6317406962785115,
+    "mean_spearman": 0.6279751900760304,
+    "min": {
+      "city": "Tallinn",
+      "country": "Estonia",
+      "v6_cohort": "main_1000",
+      "n": 50,
+      "spearman": 0.3538535414165666,
+      "pearson": 0.3915581941706602,
+      "mean_absolute_percentile_rank_gap": 0.26285714285714284
+    },
+    "max": {
+      "city": "Krakow",
+      "country": "Poland",
+      "v6_cohort": "main_1000",
+      "n": 50,
+      "spearman": 0.7954381752701081,
+      "pearson": 0.7998231687610367,
+      "mean_absolute_percentile_rank_gap": 0.1526530612244898
+    }
+  },
+  "limits": [
+    "V6 main and external scores are from separate comparison graphs; pooled raw V6 values are not a calibrated cross-cohort scale.",
+    "The scores are VLM-derived labels, not human ratings.",
+    "Pairwise-derived scores share graph information; no independent-image significance tests are reported."
+  ]
+}

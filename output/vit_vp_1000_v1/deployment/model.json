@@ -1,0 +1,21 @@
+{
+  "model": "DINOv3 ViT-B/16 LVD-1689M frozen encoder + Ridge regression head",
+  "target": "visual_pollution_score_0_10",
+  "target_direction": "larger means more visual pollution",
+  "feature_max_edge": 384,
+  "feature_view": "patch_mean",
+  "feature_dimension": 768,
+  "ridge_alpha": 1000.0,
+  "intercept": 5.008327484130859,
+  "final_fit_images": 1000,
+  "final_fit_cities": 20,
+  "selection": "5-fold GroupKFold by city on all images; choose the lowest mean validation MAE",
+  "selection_cv_mae": 1.2234604547056886,
+  "selection_cv_mae_sd_across_folds": 0.11635326602116391,
+  "fit_note": "This final all-data model is for inference; its in-sample metrics are not a generalization estimate. Use nested out-of-fold results.",
+  "feature_checkpoint": "/home/colin/GUVP_pairwise_ranking/models/checkpoints/dinov3_vitb.safetensors",
+  "feature_checkpoint_sha256": "9a21ac3df0c63839d62612dda6f454d816c25611cc7a52966ed5a5a94921dc8b",
+  "prediction_units": "frozen dataset VP 0-10 scale; raw regression output is not clipped",
+  "source_manifest_sha256": "585e5de847e0459c77bbe285fe0ab927cef51724eeb2be61e1ba6bdb3a4ecbde",
+  "source_scores_sha256": "416a3c307a52ef5f3f4dec12c0c8ee4cda3581391839ea75a03890fa4029725c"
+}

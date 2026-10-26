@@ -1,0 +1,111 @@
+{
+  "protocol": "city-disjoint 900-image fine-tuning; one locked 300-image six-city test",
+  "overall": {
+    "n": 300,
+    "mae": 1.0683659551380131,
+    "rmse": 1.35327726764053,
+    "r2": 0.4032051405286844,
+    "spearman": 0.6141681574239714,
+    "pearson": 0.6464217326107915,
+    "mean_prediction_minus_target": 0.15405539108189753
+  },
+  "test_group_count": 2,
+  "group_macro_mae": 1.0744339109602394,
+  "group_macro_spearman": 0.6225040761032528,
+  "test_city_count": 6,
+  "city_macro_mae": 1.0683659551380131,
+  "city_macro_spearman": 0.5620808323329332,
+  "group_metrics": [
+    {
+      "split_group": "external_4city",
+      "n": 200,
+      "mae": 1.0562300434935599,
+      "rmse": 1.3311275676603136,
+      "r2": 0.3292301138750705,
+      "spearman": 0.5513147828695718,
+      "pearson": 0.592931154520288,
+      "mean_prediction_minus_target": 0.16862671314331704
+    },
+    {
+      "split_group": "heldout_original_city",
+      "n": 100,
+      "mae": 1.092637778426919,
+      "rmse": 1.3965231421524422,
+      "r2": 0.5012774042856669,
+      "spearman": 0.6936933693369337,
+      "pearson": 0.7129035494388554,
+      "mean_prediction_minus_target": 0.12491274695905857
+    }
+  ],
+  "city_metrics": [
+    {
+      "city": "Bern",
+      "country": "Switzerland",
+      "n": 50,
+      "mae": 0.9925764866033494,
+      "rmse": 1.2289534823799189,
+      "r2": 0.43213709998272376,
+      "spearman": 0.5922208883553421,
+      "pearson": 0.6678874379934799,
+      "mean_prediction_minus_target": 0.14838877962596717
+    },
+    {
+      "city": "Chisinau",
+      "country": "Moldova",
+      "n": 50,
+      "mae": 1.053840074778094,
+      "rmse": 1.2992105788515336,
+      "r2": -0.07104546449859295,
+      "spearman": 0.4297238895558223,
+      "pearson": 0.4381805954994137,
+      "mean_prediction_minus_target": 0.5906681565924774
+    },
+    {
+      "city": "Hildesheim",
+      "country": "Germany",
+      "n": 50,
+      "mae": 1.0911727719183273,
+      "rmse": 1.39457419416473,
+      "r2": 0.38099717532548083,
+      "spearman": 0.5500600240096039,
+      "pearson": 0.6210978225841897,
+      "mean_prediction_minus_target": -0.12054102289311755
+    },
+    {
+      "city": "Madrid",
+      "country": "Spain",
+      "n": 50,
+      "mae": 0.9233685701704547,
+      "rmse": 1.1750030870944725,
+      "r2": 0.5858146588766202,
+      "spearman": 0.7835294117647059,
+      "pearson": 0.7769490699520479,
+      "mean_prediction_minus_target": 0.20425298381720033
+    },
+    {
+      "city": "Prague",
+      "country": "Czechia",
+      "n": 50,
+      "mae": 1.261906986683384,
+      "rmse": 1.5874260670825338,
+      "r2": 0.2860210582370265,
+      "spearman": 0.49570228091236496,
+      "pearson": 0.5763575635133807,
+      "mean_prediction_minus_target": 0.04557251010091688
+    },
+    {
+      "city": "Stuttgart",
+      "country": "Germany",
+      "n": 50,
+      "mae": 1.0873308406744693,
+      "rmse": 1.394449867315917,
+      "r2": 0.2767785895792867,
+      "spearman": 0.5212484993997599,
+      "pearson": 0.5316315871750947,
+      "mean_prediction_minus_target": 0.05599093924794097
+    }
+  ],
+  "test_used_for_training_selection_or_early_stopping": false,
+  "label_graph_caveat": "ViT training and model selection exclude all 300 test images and all six test cities. Existing V9 labels remain jointly graph-derived, including cross-partition comparisons.",
+  "ordinary_image_level_p_values_reported": false
+}

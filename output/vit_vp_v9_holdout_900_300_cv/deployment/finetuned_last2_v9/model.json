@@ -1,0 +1,65 @@
+{
+  "model": "DINOv3 ViT-B/16 LVD-1689M; final two blocks fine-tuned; patch-mean MLP head",
+  "source_checkpoint_sha256": "9a21ac3df0c63839d62612dda6f454d816c25611cc7a52966ed5a5a94921dc8b",
+  "initialization": "original pretrained checkpoint for every fold and seed; no prior V6/V9 fine-tuned weights",
+  "label_version": "V9 optimized prompt / joint 1,200-image Qwen-TrueSkill labels",
+  "training_images": 900,
+  "outer_evaluation": "3 repeats x 5 city-held-out folds within the 900 development images; 3-seed ensemble per fold",
+  "final_fit": "three seeds fitted on all 900 development images after OOF evaluation",
+  "external_test_images": 300,
+  "external_test_manifest_or_labels_loaded_during_fit": false,
+  "fixed_edge": 512,
+  "backbone_learning_rate": 1e-05,
+  "head_learning_rate": 0.0001,
+  "weight_decay": 0.01,
+  "dropout": 0.5,
+  "epochs": 16,
+  "effective_batch_size": 16,
+  "seeds": [
+    42,
+    137,
+    2026
+  ],
+  "selection_and_early_stopping": "none; fixed configuration and fixed epochs; the 300-image test is untouched",
+  "city_fold_seed_by_repeat": {
+    "1": 42,
+    "2": 137,
+    "3": 2026
+  },
+  "label": "V9 optimized prompt Qwen/TrueSkill visual_pollution_score_0_10",
+  "source_checkpoint": "/home/colin/GUVP_pairwise_ranking/models/checkpoints/dinov3_vitb.safetensors",
+  "feature_cache_edge": 512,
+  "pooling": "mean of final normalized image patch tokens excluding CLS and four register tokens",
+  "preprocessing": "EXIF transpose, RGB, aspect-preserving resize to 512 long edge; dimensions rounded to nearest multiple of 16; Pillow bicubic; ImageNet mean/std",
+  "prediction_rule": "arithmetic mean of seed 42, 137, 2026 predictions",
+  "device": "cuda",
+  "torch_version": "2.11.0+cu128",
+  "transformers_version": "5.15.1",
+  "artifacts": [
+    {
+      "seed": 42,
+      "weights": "seed_42.safetensors",
+      "sha256": "d25a09b409c06097861e785cc2dd9891036c6f9f015f2503607d708849cf0fd2",
+      "bytes": 57107476,
+      "target_mean": 5.028364572222221,
+      "target_std": 1.953825783915049
+    },
+    {
+      "seed": 137,
+      "weights": "seed_137.safetensors",
+      "sha256": "056d833d5bedbb9c0d97905d005eed4ddfd330c2ba8e8444a01be527f1745536",
+      "bytes": 57107476,
+      "target_mean": 5.028364572222221,
+      "target_std": 1.953825783915049
+    },
+    {
+      "seed": 2026,
+      "weights": "seed_2026.safetensors",
+      "sha256": "a4c63148deacbffd7bb5fe945093eb48754e39d9c8a56b054674bc4b406ad8ff",
+      "bytes": 57107476,
+      "target_mean": 5.028364572222221,
+      "target_std": 1.953825783915049
+    }
+  ],
+  "label_graph_caveat": "V9 labels were jointly estimated on the 1,200-image graph, although all 300 final-test images and six cities were excluded from ViT fitting and selection."
+}

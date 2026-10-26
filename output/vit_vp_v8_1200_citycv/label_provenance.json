@@ -1,0 +1,9 @@
+{
+  "prompt_version": "vp-definition-score-v8",
+  "model": "Qwen2.5-VL-7B-Instruct",
+  "aggregation": "pairwise calibrated votes aggregated by TrueSkill and min-max scaled to [0,10]",
+  "scores_path": "/home/colin/GUVP_pairwise_ranking/output/vlm_v8_1200_gpuonly/perception_scores.csv",
+  "scores_sha256": "8d95bd864d1acd229eae346278cef9c9a0c4a0f712097f649a489a0d74ebf43f",
+  "pair_audit_path": "/home/colin/GUVP_pairwise_ranking/output/vlm_v8_1200_gpuonly/pair_audit.csv",
+  "pair_audit_sha256": "6da7a6dcb562adc0e41c96a11f530a8d298de3eb45e72798dfeca1a4f514e1c1"
+}

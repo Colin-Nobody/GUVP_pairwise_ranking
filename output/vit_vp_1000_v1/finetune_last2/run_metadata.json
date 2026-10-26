@@ -1,0 +1,32 @@
+{
+  "model": "DINOv3 ViT-B/16 with last 2 blocks fine-tuned + patch-mean MLP",
+  "repeats": 3,
+  "seeds": [
+    42,
+    137,
+    2026
+  ],
+  "outer_folds": 5,
+  "inner_folds": 4,
+  "candidate_edges": [
+    384,
+    512
+  ],
+  "backbone_learning_rates": [
+    1e-06,
+    3e-06,
+    1e-05
+  ],
+  "head_learning_rate_multiplier": 10,
+  "weight_decay": 0.01,
+  "max_epochs": 60,
+  "patience": 20,
+  "warmup_epochs": 5,
+  "effective_batch_size": 16,
+  "micro_batch_size_by_identical_image_geometry": 4,
+  "feature_precision": "bfloat16 autocast; cached frozen prefix stored in float16",
+  "outer_refit_epoch_rule": "median inner best epoch for selected config; outer test labels are not used",
+  "device": "cuda",
+  "peak_cuda_allocated_bytes": 2844343808,
+  "label_scope": "Fixed global Qwen/TrueSkill labels; same unseen-city partitions as frozen Ridge"
+}

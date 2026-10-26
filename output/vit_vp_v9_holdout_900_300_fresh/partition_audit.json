@@ -1,0 +1,73 @@
+{
+  "created_date": "2026-10-20",
+  "protocol": "city-disjoint 900 train / 300 test; fixed epoch count, no test tuning or early stopping",
+  "training_images": 900,
+  "test_images": 300,
+  "training_cities": [
+    "Amsterdam",
+    "Barcelona",
+    "Belgrade",
+    "Berlin",
+    "Brussels",
+    "Budapest",
+    "Copenhagen",
+    "Edinburgh",
+    "Helsinki",
+    "Krakow",
+    "Munich",
+    "Oslo",
+    "Paris",
+    "Rome",
+    "Stockholm",
+    "Tallinn",
+    "Warsaw",
+    "Zurich"
+  ],
+  "heldout_original_cities_seed_20261020": [
+    "Madrid",
+    "Prague"
+  ],
+  "external_test_cities": [
+    "Bern",
+    "Chisinau",
+    "Hildesheim",
+    "Stuttgart"
+  ],
+  "test_cities": [
+    "Bern",
+    "Chisinau",
+    "Hildesheim",
+    "Madrid",
+    "Prague",
+    "Stuttgart"
+  ],
+  "training_ids_match_pretrained_prefix_cache": true,
+  "image_ids_disjoint": true,
+  "city_groups_disjoint": true,
+  "test_subgroups": {
+    "heldout_original_city": 100,
+    "external_4city": 200
+  },
+  "test_city_counts": {
+    "Madrid": 50,
+    "Prague": 50,
+    "Chisinau": 50,
+    "Stuttgart": 50,
+    "Bern": 50,
+    "Hildesheim": 50
+  },
+  "cross_partition_v9_comparisons": {
+    "all_audit_edges": 2848,
+    "calibrated_edges": 2395
+  },
+  "test_internal_valid_edge_components": 27,
+  "test_images_without_internal_valid_edge": 12,
+  "v9_label_note": "All 1,200 targets were jointly estimated on the V9 pairwise comparison graph and globally min-max scaled to 0-10.",
+  "interpretation_note": "ViT training and model selection exclude all 300 test images and all six test cities. Existing V9 labels remain jointly graph-derived, including cross-partition comparisons.",
+  "input_sha256": {
+    "manifest_1200": "cf3230492eeebdc3fa3794e44e08ccd8f436d99b87738535361466d792289ba3",
+    "v9_perception_scores": "a2cc07d9739cf36d0fbdae3a21de09a8c17355c962ae727d5d1343e6be8b983c",
+    "v9_pair_audit": "9d3952ef730a8e5bdfd219e039398a768729d5009b5706893f7de6e22cbf7d43",
+    "pretrained_dinov3_checkpoint": "9a21ac3df0c63839d62612dda6f454d816c25611cc7a52966ed5a5a94921dc8b"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "device": "cuda",
+  "seeds": [
+    42,
+    137,
+    2026
+  ],
+  "repeats": 3,
+  "candidate_count_per_outer_fold": 48,
+  "candidate_views": [
+    "384_cls",
+    "384_patch_mean",
+    "384_cls_patch",
+    "512_cls",
+    "512_patch_mean",
+    "512_cls_patch"
+  ],
+  "learning_rates": [
+    0.0001,
+    0.001
+  ],
+  "weight_decays": [
+    0.001,
+    0.01
+  ],
+  "dropouts": [
+    0.2,
+    0.5
+  ],
+  "max_epochs": 200,
+  "patience": 20,
+  "inner_selection_metric": "mean validation MAE",
+  "fit_batching": "full batch",
+  "outer_seed_ensemble": [
+    42,
+    137,
+    2026
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "target": "visual_pollution_score_0_10",
+  "outer_protocol": "5-fold city-grouped CV, each held-out city predicted once per repeat",
+  "inner_protocol": "4-fold city-grouped CV on outer-train cities; tune all candidates by mean inner MAE",
+  "repeats": 3,
+  "seeds": [
+    42,
+    137,
+    2026
+  ],
+  "primary_metric": "MAE",
+  "ridge_candidates_per_outer_fold": 60,
+  "elastic_net_candidates_per_outer_fold": 60,
+  "feature_matrix_dimensions": {
+    "384_cls": 768,
+    "384_patch_mean": 768,
+    "384_cls_patch": 1536,
+    "512_cls": 768,
+    "512_patch_mean": 768,
+    "512_cls_patch": 1536
+  },
+  "segmentation_feature_count": 124,
+  "prediction_rows": 9000,
+  "paired_oof_predictions_averaged_over_repeats_for_cluster_bootstrap": 3000,
+  "cluster_bootstrap_replicates": 2000,
+  "label_scope_warning": "Fixed global TrueSkill teacher labels are statistically dependent through the shared comparison graph; see the experiment plan."
+}

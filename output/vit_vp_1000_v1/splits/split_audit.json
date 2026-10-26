@@ -1,0 +1,152 @@
+{
+  "seeds": [
+    42,
+    137,
+    2026
+  ],
+  "outer_fold_count": 5,
+  "inner_fold_count": 4,
+  "protocols": {
+    "unseen_city_repeat_1": {
+      "seed": 42,
+      "outer_folds": [
+        {
+          "train_images": 800,
+          "test_images": 200
+        },
+        {
+          "train_images": 800,
+          "test_images": 200
+        },
+        {
+          "train_images": 800,
+          "test_images": 200
+        },
+        {
+          "train_images": 800,
+          "test_images": 200
+        },
+        {
+          "train_images": 800,
+          "test_images": 200
+        }
+      ],
+      "heldout_city_counts": {
+        "Amsterdam": 1,
+        "Barcelona": 1,
+        "Belgrade": 1,
+        "Berlin": 1,
+        "Brussels": 1,
+        "Budapest": 1,
+        "Copenhagen": 1,
+        "Edinburgh": 1,
+        "Helsinki": 1,
+        "Krakow": 1,
+        "Madrid": 1,
+        "Munich": 1,
+        "Oslo": 1,
+        "Paris": 1,
+        "Prague": 1,
+        "Rome": 1,
+        "Stockholm": 1,
+        "Tallinn": 1,
+        "Warsaw": 1,
+        "Zurich": 1
+      }
+    },
+    "unseen_city_repeat_2": {
+      "seed": 137,
+      "outer_folds": [
+        {
+          "train_images": 800,
+          "test_images": 200
+        },
+        {
+          "train_images": 800,
+          "test_images": 200
+        },
+        {
+          "train_images": 800,
+          "test_images": 200
+        },
+        {
+          "train_images": 800,
+          "test_images": 200
+        },
+        {
+          "train_images": 800,
+          "test_images": 200
+        }
+      ],
+      "heldout_city_counts": {
+        "Amsterdam": 1,
+        "Barcelona": 1,
+        "Belgrade": 1,
+        "Berlin": 1,
+        "Brussels": 1,
+        "Budapest": 1,
+        "Copenhagen": 1,
+        "Edinburgh": 1,
+        "Helsinki": 1,
+        "Krakow": 1,
+        "Madrid": 1,
+        "Munich": 1,
+        "Oslo": 1,
+        "Paris": 1,
+        "Prague": 1,
+        "Rome": 1,
+        "Stockholm": 1,
+        "Tallinn": 1,
+        "Warsaw": 1,
+        "Zurich": 1
+      }
+    },
+    "unseen_city_repeat_3": {
+      "seed": 2026,
+      "outer_folds": [
+        {
+          "train_images": 800,
+          "test_images": 200
+        },
+        {
+          "train_images": 800,
+          "test_images": 200
+        },
+        {
+          "train_images": 800,
+          "test_images": 200
+        },
+        {
+          "train_images": 800,
+          "test_images": 200
+        },
+        {
+          "train_images": 800,
+          "test_images": 200
+        }
+      ],
+      "heldout_city_counts": {
+        "Amsterdam": 1,
+        "Barcelona": 1,
+        "Belgrade": 1,
+        "Berlin": 1,
+        "Brussels": 1,
+        "Budapest": 1,
+        "Copenhagen": 1,
+        "Edinburgh": 1,
+        "Helsinki": 1,
+        "Krakow": 1,
+        "Madrid": 1,
+        "Munich": 1,
+        "Oslo": 1,
+        "Paris": 1,
+        "Prague": 1,
+        "Rome": 1,
+        "Stockholm": 1,
+        "Tallinn": 1,
+        "Warsaw": 1,
+        "Zurich": 1
+      }
+    }
+  }
+}

@@ -1,0 +1,2 @@
+repeat,seed,outer_fold,inner_fold,edge,backbone_lr,validation_mae,best_epoch,elapsed_seconds
+1,42,0,0,384,1e-06,1.45578165316817,59,146.449

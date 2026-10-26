@@ -1,0 +1,18 @@
+{
+  "n_images": 200,
+  "n_cities": 4,
+  "pairs": 1300,
+  "comparisons_per_image": 13,
+  "within_city_pairs": 600,
+  "cross_city_pairs": 700,
+  "graph_connected": true,
+  "city_image_counts": {
+    "Bern": 50,
+    "Chisinau": 50,
+    "Hildesheim": 50,
+    "Stuttgart": 50
+  },
+  "seed": 20261020,
+  "pair_manifest": "/home/colin/GUVP_pairwise_ranking/data/external_vp_4city_200/pairs_200_13_per_image.csv",
+  "design": "6-regular within-city graph plus seven cross-city perfect matchings per image; shuffled pair order"
+}

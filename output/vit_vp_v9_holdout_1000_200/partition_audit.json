@@ -1,0 +1,30 @@
+{
+  "created_date": "2026-10-20",
+  "training_images": 1000,
+  "holdout_images": 200,
+  "training_cities": 20,
+  "holdout_cities": {
+    "Chisinau": 50,
+    "Stuttgart": 50,
+    "Bern": 50,
+    "Hildesheim": 50
+  },
+  "ids_disjoint": true,
+  "training_image_ids_match_existing_pretrained_prefix_cache": true,
+  "label": "V9 optimized prompt Qwen/TrueSkill visual_pollution_score_0_10",
+  "label_direction": "higher_is_more_visual_pollution",
+  "label_scale_note": "All 1,200 targets were min-max normalized from one joint V9 comparison graph.",
+  "cross_partition_v9_comparisons": {
+    "all_audit_edges": 2144,
+    "calibrated_edges": 1790
+  },
+  "holdout_internal_valid_votes": 192,
+  "strict_label_isolation_note": "The holdout images and labels are excluded from ViT fitting, model selection, and early stopping. However, the precomputed V9 TrueSkill targets were jointly estimated from a graph containing cross-partition comparisons; these fixed labels cannot be made independent without new ratings.",
+  "input_sha256": {
+    "manifest_1200": "cf3230492eeebdc3fa3794e44e08ccd8f436d99b87738535361466d792289ba3",
+    "v9_perception_scores": "a2cc07d9739cf36d0fbdae3a21de09a8c17355c962ae727d5d1343e6be8b983c",
+    "v9_calibrated_votes": "9d633164ba99dd1b86cb8285e9b265ccb2df93f7d465c0aca3bfba50691e78ae",
+    "v9_pair_audit": "9d3952ef730a8e5bdfd219e039398a768729d5009b5706893f7de6e22cbf7d43",
+    "pretrained_dinov3_checkpoint": "9a21ac3df0c63839d62612dda6f454d816c25611cc7a52966ed5a5a94921dc8b"
+  }
+}

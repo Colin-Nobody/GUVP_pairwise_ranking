@@ -1,0 +1,23 @@
+{
+  "repeats": 3,
+  "edges": [
+    384,
+    512
+  ],
+  "backbone_lrs": [
+    1e-06,
+    3e-06,
+    1e-05
+  ],
+  "max_epochs": 60,
+  "patience": 20,
+  "dropout": 0.5,
+  "weight_decay": 0.01,
+  "micro_batch_size": 4,
+  "effective_batch_size": 16,
+  "seeds": [
+    42,
+    137,
+    2026
+  ]
+}

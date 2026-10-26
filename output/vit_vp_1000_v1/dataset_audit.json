@@ -1,0 +1,72 @@
+{
+  "audit_date": "2026-10-19",
+  "expected_images": 1000,
+  "manifest_images": 1000,
+  "unique_image_ids": 1000,
+  "scores": 1000,
+  "score_range": [
+    0.0,
+    10.0
+  ],
+  "invalid_or_unreadable_images": 0,
+  "exact_duplicate_group_count": 0,
+  "exact_duplicate_extra_image_count": 0,
+  "near_duplicate_candidate_count_dhash_hamming_le_4": 4,
+  "near_duplicate_confirmed_pair_count": 3,
+  "near_duplicate_false_positive_count": 1,
+  "near_duplicate_pending_review_count": 0,
+  "cities": {
+    "Amsterdam": 50,
+    "Barcelona": 50,
+    "Belgrade": 50,
+    "Berlin": 50,
+    "Brussels": 50,
+    "Budapest": 50,
+    "Copenhagen": 50,
+    "Edinburgh": 50,
+    "Helsinki": 50,
+    "Krakow": 50,
+    "Madrid": 50,
+    "Munich": 50,
+    "Oslo": 50,
+    "Paris": 50,
+    "Prague": 50,
+    "Rome": 50,
+    "Stockholm": 50,
+    "Tallinn": 50,
+    "Warsaw": 50,
+    "Zurich": 50
+  },
+  "sources": {
+    "KartaView": 88,
+    "Mapillary": 912
+  },
+  "panorama_flags": {
+    "False": 920,
+    "True": 80
+  },
+  "score_target": "visual_pollution_score_0_10; larger means more visual pollution",
+  "label_audit_model_prompt": [
+    [
+      "Qwen/Qwen2.5-VL-7B-Instruct",
+      "vp-faireval-mec-bpc-score-v6"
+    ]
+  ],
+  "pair_audit_status": {
+    "calibrated": 5146,
+    "calibrated_tie": 270,
+    "invalid_ab": 490,
+    "invalid_ba": 528,
+    "invalid_both": 66
+  },
+  "valid_non_tie_vote_count": 5146,
+  "vote_endpoint_degree_min": 6,
+  "vote_endpoint_degree_max": 13,
+  "input_sha256": {
+    "manifest": "585e5de847e0459c77bbe285fe0ab927cef51724eeb2be61e1ba6bdb3a4ecbde",
+    "scores": "416a3c307a52ef5f3f4dec12c0c8ee4cda3581391839ea75a03890fa4029725c",
+    "pair_audit": "998ad8d59f014d94167d8f32eeb0a9cefcf630de46f27b00224161aeef6cf52f",
+    "votes": "e72f6b7ef9da5cba862bdc4f23b6b7b17d1c55845c51accf89f9495fe53db705"
+  },
+  "image_file_count": 1000
+}

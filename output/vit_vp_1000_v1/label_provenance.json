@@ -1,0 +1,25 @@
+{
+  "target_column": "visual_pollution_score_0_10",
+  "target_direction": "larger values mean more visual pollution",
+  "teacher_model": [
+    "Qwen/Qwen2.5-VL-7B-Instruct"
+  ],
+  "prompt_versions": [
+    "vp-faireval-mec-bpc-score-v6"
+  ],
+  "prompt_sha256": [
+    "b34d3f8b72f684ae228edc6ef817b27d07927d8a73b3a5bd172cfc8b2f33fa8e"
+  ],
+  "comparison_edge_count": 6500,
+  "valid_non_tie_edges": 5146,
+  "ties": 270,
+  "invalid_edges": 1084,
+  "derivation": "10 * (1 - minmax(TrueSkill mu)); TrueSkill winner means cleaner, so this target is reversed",
+  "scale_scope": "relative to the frozen 1000-image ranking; keep fixed for inference",
+  "input_sha256": {
+    "manifest": "585e5de847e0459c77bbe285fe0ab927cef51724eeb2be61e1ba6bdb3a4ecbde",
+    "scores": "416a3c307a52ef5f3f4dec12c0c8ee4cda3581391839ea75a03890fa4029725c",
+    "pair_audit": "998ad8d59f014d94167d8f32eeb0a9cefcf630de46f27b00224161aeef6cf52f",
+    "votes": "e72f6b7ef9da5cba862bdc4f23b6b7b17d1c55845c51accf89f9495fe53db705"
+  }
+}

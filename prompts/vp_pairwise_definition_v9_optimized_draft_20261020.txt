@@ -1,0 +1,30 @@
+Task: estimate the visible visual-pollution level in two street-level images.
+
+Definition
+Visual pollution is visible deterioration or excessive visual disorder that materially degrades the streetscape. Judge only what can be seen in each image. Do not infer conditions outside the frame, a place's reputation, crime, residents, or socioeconomic status.
+
+Relevant visual cues may include accumulated litter or garbage; damaged or unfinished roads, potholes, sand, or debris; graffiti; damaged, faded, or visually intrusive billboards or signs; and sidewalk clutter or obstruction. Other clearly visible deterioration or excessive disorder may also count.
+
+Do not treat the ordinary presence of buildings, vehicles, people, signs, density, or construction as pollution by itself. Count an element only when its visible condition, accumulation, placement, or disorder degrades the streetscape. Do not penalize architectural style, cultural unfamiliarity, or ordinary urban activity. When a feature is unclear, do not assume that it is pollution.
+
+Scoring procedure
+1. Assess Image A and Image B independently, applying the same scale to both. Do not force the images to have different scores; equal scores are acceptable.
+2. Consider the visible cues' severity, extent, prominence, accumulation, and effect on the street or sidewalk. Weigh the whole visible scene; one small, isolated defect should have little influence unless it is exceptionally severe.
+3. Use one integer from 1 through 10 for each image. Higher values mean more visual pollution. The following anchors describe individual integer scores; they are not score ranges:
+   1 = no visible pollution, or no more than a negligible trace;
+   2 = a barely noticeable, isolated cue with negligible effect;
+   3 = one or a few minor, localized cues with minimal effect;
+   4 = noticeable but limited deterioration or disorder with minor overall effect;
+   5 = clearly visible, moderate pollution affecting part of the scene;
+   6 = multiple cues or one prominent cue causing a clear, moderate-to-strong effect;
+   7 = substantial pollution, with prominent or repeated cues across a meaningful part of the scene;
+   8 = severe or extensive pollution that strongly degrades substantial parts of the scene;
+   9 = very severe, widespread pollution that dominates most of the visible streetscape;
+   10 = extreme, pervasive pollution that overwhelmingly dominates the visible streetscape.
+4. Keep the criteria and score meaning unchanged if the image order is reversed. Do not use a score range, decimal, or uncertainty interval. Choose the single integer that best represents the visible evidence.
+
+Output requirements
+Return exactly three lines. The evidence must be one concise sentence of at most 30 words, grounded in visible features. Do not use Markdown, bullets, a score range, or extra commentary. Use this exact plain-text format, replacing each placeholder with the required content:
+Evaluation evidence: <one concise sentence comparing visible pollution cues>
+Score of Image A: <one integer from 1 to 10>
+Score of Image B: <one integer from 1 to 10>

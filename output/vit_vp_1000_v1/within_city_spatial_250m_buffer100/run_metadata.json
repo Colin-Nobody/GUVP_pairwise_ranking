@@ -1,0 +1,16 @@
+{
+  "protocol": "buffer100",
+  "grid_size_m": 250,
+  "buffer_m": 100,
+  "repeats": 3,
+  "seeds": [
+    42,
+    137,
+    2026
+  ],
+  "outer_folds": 5,
+  "inner_folds": 4,
+  "ridge_candidates_per_outer_fold": 60,
+  "elastic_net_candidates_per_outer_fold": 60,
+  "label_scope_warning": "Fixed global TrueSkill scores share edges across examples; this spatial evaluation does not isolate comparison edges."
+}

@@ -1,0 +1,39 @@
+{
+  "model": "DINOv3 ViT-B/16 LVD-1689M",
+  "frozen_blocks": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "cached_state": "hidden states after block 10 plus RoPE cos/sin for final two trainable blocks",
+  "precision": "stored float16; generated with bfloat16 autocast on CUDA",
+  "image_count": 1200,
+  "edges": {
+    "384": {
+      "path": "/home/colin/GUVP_pairwise_ranking/output/vit_vp_v8_1200_citycv/prefix_after_block10/edge384",
+      "images": 1200,
+      "bytes": 855171072,
+      "token_range": [
+        245,
+        581
+      ]
+    },
+    "512": {
+      "path": "/home/colin/GUVP_pairwise_ranking/output/vit_vp_v8_1200_citycv/prefix_after_block10/edge512",
+      "images": 1200,
+      "bytes": 1501696000,
+      "token_range": [
+        453,
+        1029
+      ]
+    }
+  },
+  "elapsed_seconds": 111.394
+}

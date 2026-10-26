@@ -1,0 +1,12 @@
+{
+  "failed_images_replaced": 4,
+  "replacement_rule": "Next grid-round-robin candidate in the same city, with a unique sequence and not present in the training set.",
+  "counts_per_city": {
+    "Bern": 50,
+    "Chisinau": 50,
+    "Hildesheim": 50,
+    "Stuttgart": 50
+  },
+  "replacement_file": "/home/colin/GUVP_pairwise_ranking/data/external_vp_4city_200/download_replacements.csv",
+  "updated_manifest": "/home/colin/GUVP_pairwise_ranking/data/external_vp_4city_200/images_manifest.csv"
+}

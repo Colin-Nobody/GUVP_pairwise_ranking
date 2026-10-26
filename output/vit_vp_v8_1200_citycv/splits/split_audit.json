@@ -1,0 +1,226 @@
+{
+  "seeds": [
+    42,
+    137,
+    2026
+  ],
+  "outer_folds": 5,
+  "inner_folds": 4,
+  "repeats": [
+    {
+      "repeat": 1,
+      "seed": 42,
+      "folds": [
+        {
+          "outer_fold": 0,
+          "train_cities": 19,
+          "test_cities": 5,
+          "train_images": 950,
+          "test_images": 250,
+          "inner_train_cities_per_fold": [
+            14,
+            14,
+            14,
+            15
+          ]
+        },
+        {
+          "outer_fold": 1,
+          "train_cities": 19,
+          "test_cities": 5,
+          "train_images": 950,
+          "test_images": 250,
+          "inner_train_cities_per_fold": [
+            14,
+            14,
+            14,
+            15
+          ]
+        },
+        {
+          "outer_fold": 2,
+          "train_cities": 19,
+          "test_cities": 5,
+          "train_images": 950,
+          "test_images": 250,
+          "inner_train_cities_per_fold": [
+            14,
+            14,
+            14,
+            15
+          ]
+        },
+        {
+          "outer_fold": 3,
+          "train_cities": 19,
+          "test_cities": 5,
+          "train_images": 950,
+          "test_images": 250,
+          "inner_train_cities_per_fold": [
+            14,
+            14,
+            14,
+            15
+          ]
+        },
+        {
+          "outer_fold": 4,
+          "train_cities": 20,
+          "test_cities": 4,
+          "train_images": 1000,
+          "test_images": 200,
+          "inner_train_cities_per_fold": [
+            15,
+            15,
+            15,
+            15
+          ]
+        }
+      ]
+    },
+    {
+      "repeat": 2,
+      "seed": 137,
+      "folds": [
+        {
+          "outer_fold": 0,
+          "train_cities": 19,
+          "test_cities": 5,
+          "train_images": 950,
+          "test_images": 250,
+          "inner_train_cities_per_fold": [
+            14,
+            14,
+            14,
+            15
+          ]
+        },
+        {
+          "outer_fold": 1,
+          "train_cities": 19,
+          "test_cities": 5,
+          "train_images": 950,
+          "test_images": 250,
+          "inner_train_cities_per_fold": [
+            14,
+            14,
+            14,
+            15
+          ]
+        },
+        {
+          "outer_fold": 2,
+          "train_cities": 19,
+          "test_cities": 5,
+          "train_images": 950,
+          "test_images": 250,
+          "inner_train_cities_per_fold": [
+            14,
+            14,
+            14,
+            15
+          ]
+        },
+        {
+          "outer_fold": 3,
+          "train_cities": 19,
+          "test_cities": 5,
+          "train_images": 950,
+          "test_images": 250,
+          "inner_train_cities_per_fold": [
+            14,
+            14,
+            14,
+            15
+          ]
+        },
+        {
+          "outer_fold": 4,
+          "train_cities": 20,
+          "test_cities": 4,
+          "train_images": 1000,
+          "test_images": 200,
+          "inner_train_cities_per_fold": [
+            15,
+            15,
+            15,
+            15
+          ]
+        }
+      ]
+    },
+    {
+      "repeat": 3,
+      "seed": 2026,
+      "folds": [
+        {
+          "outer_fold": 0,
+          "train_cities": 19,
+          "test_cities": 5,
+          "train_images": 950,
+          "test_images": 250,
+          "inner_train_cities_per_fold": [
+            14,
+            14,
+            14,
+            15
+          ]
+        },
+        {
+          "outer_fold": 1,
+          "train_cities": 19,
+          "test_cities": 5,
+          "train_images": 950,
+          "test_images": 250,
+          "inner_train_cities_per_fold": [
+            14,
+            14,
+            14,
+            15
+          ]
+        },
+        {
+          "outer_fold": 2,
+          "train_cities": 19,
+          "test_cities": 5,
+          "train_images": 950,
+          "test_images": 250,
+          "inner_train_cities_per_fold": [
+            14,
+            14,
+            14,
+            15
+          ]
+        },
+        {
+          "outer_fold": 3,
+          "train_cities": 19,
+          "test_cities": 5,
+          "train_images": 950,
+          "test_images": 250,
+          "inner_train_cities_per_fold": [
+            14,
+            14,
+            14,
+            15
+          ]
+        },
+        {
+          "outer_fold": 4,
+          "train_cities": 20,
+          "test_cities": 4,
+          "train_images": 1000,
+          "test_images": 200,
+          "inner_train_cities_per_fold": [
+            15,
+            15,
+            15,
+            15
+          ]
+        }
+      ]
+    }
+  ],
+  "outer_city_partition_sha256": "b17acedc470c130be5d56896df01757c82c35286a7388eae3fd344b83ffe0c54",
+  "inner_city_partition_sha256": "043bb9c40cbe6bf7c5c7ea31248ef41c53de6ad10110ad53f6e9b747cb9b06b6"
+}

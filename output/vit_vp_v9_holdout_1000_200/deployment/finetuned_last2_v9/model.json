@@ -1,0 +1,59 @@
+{
+  "model": "DINOv3 ViT-B/16 LVD-1689M; final two blocks fine-tuned; patch-mean MLP head",
+  "source_checkpoint_sha256": "9a21ac3df0c63839d62612dda6f454d816c25611cc7a52966ed5a5a94921dc8b",
+  "label_version": "V9 optimized prompt / joint 1,200-image Qwen-TrueSkill labels",
+  "training_images": 1000,
+  "excluded_holdout_images": 200,
+  "internal_evaluation": "3 repeats x 5 city-held-out folds over the 1,000 development images; fixed config, no V9 holdout tuning",
+  "fixed_edge": 512,
+  "backbone_learning_rate": 1e-05,
+  "head_learning_rate": 0.0001,
+  "weight_decay": 0.01,
+  "dropout": 0.5,
+  "epochs": 16,
+  "effective_batch_size": 16,
+  "seeds": [
+    42,
+    137,
+    2026
+  ],
+  "split_source": "output/vit_vp_1000_v1/splits/unseen_city_outer.csv; city groups restricted to original_1000",
+  "holdout_features_or_targets_loaded_during_training": false,
+  "label": "V9 optimized prompt Qwen/TrueSkill visual_pollution_score_0_10",
+  "source_checkpoint": "/home/colin/GUVP_pairwise_ranking/models/checkpoints/dinov3_vitb.safetensors",
+  "feature_cache_edge": 512,
+  "pooling": "mean of final normalized image patch tokens excluding CLS and four register tokens",
+  "preprocessing": "EXIF transpose, RGB, aspect-preserving resize to 512 long edge; dimensions rounded to nearest multiple of 16; Pillow bicubic; ImageNet mean/std",
+  "prediction_rule": "arithmetic mean of seed 42, 137, 2026 predictions",
+  "device": "cuda",
+  "torch_version": "2.11.0+cu128",
+  "transformers_version": "5.15.1",
+  "artifacts": [
+    {
+      "seed": 42,
+      "weights": "seed_42.safetensors",
+      "sha256": "a7d1199d92f80e213a60b9cf8a31f3c89beeda195d6bc673a526a9f935264627",
+      "bytes": 57107476,
+      "target_mean": 4.995560741999999,
+      "target_std": 1.9586809190275927
+    },
+    {
+      "seed": 137,
+      "weights": "seed_137.safetensors",
+      "sha256": "54bd3687f6d01a606a2fb93ebc2472ae7e4c13b820995aca00ba34b1383eb9c8",
+      "bytes": 57107476,
+      "target_mean": 4.995560741999999,
+      "target_std": 1.9586809190275927
+    },
+    {
+      "seed": 2026,
+      "weights": "seed_2026.safetensors",
+      "sha256": "65c54e9732a83191596338ea040fa13744d377bac6f3be0d0a974b6b38489349",
+      "bytes": 57107476,
+      "target_mean": 4.995560741999999,
+      "target_std": 1.9586809190275927
+    }
+  ],
+  "holdout_evaluation": "performed by evaluate_v9_200_holdout.py after this model package is finalized",
+  "label_graph_caveat": "V9 train and holdout targets were jointly estimated; model fit excluded all holdout records, but target construction contains cross-partition comparison edges."
+}

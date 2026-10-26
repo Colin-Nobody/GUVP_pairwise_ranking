@@ -1,0 +1,16 @@
+{
+  "protocol": "outer unseen-city, 5-fold, 3 repeats; inner unseen-city, 4-fold",
+  "valid_decisive_edges": 5146,
+  "ties_and_invalid_edges_excluded": true,
+  "training_target": "TrueSkill mu recomputed from edges with both endpoints in current training subset; VP direction reversed and min-maxed within that training graph",
+  "heldout_metric": "fraction of held-out decisive edges where predicted VP(winner cleaner) < predicted VP(loser)",
+  "hyperparameter_selection": "maximum edge-weighted inner-validation pairwise accuracy",
+  "label_scope_warning": "No fixed full-graph score enters this protocol. Uncertainty in the source VLM comparison judgments remains.",
+  "repeat_seeds": [
+    42,
+    137,
+    2026
+  ],
+  "ridge_candidate_count": 60,
+  "elastic_net_candidate_count": 60
+}

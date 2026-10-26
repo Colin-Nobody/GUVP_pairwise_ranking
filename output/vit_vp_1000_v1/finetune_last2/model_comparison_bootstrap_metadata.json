@@ -1,0 +1,20 @@
+{
+  "comparisons": [
+    "last-two-block DINOv3 fine-tuning minus frozen DINOv3 Ridge",
+    "last-two-block DINOv3 fine-tuning minus semantic pooled Elastic Net"
+  ],
+  "paired_keys": [
+    "repeat",
+    "image_id"
+  ],
+  "validation": "3 repeats x 5 outer city folds; 1000 images and 20 cities per repeat; 50 images/city",
+  "bootstrap_unit": "city, sampled with replacement; all images in each sampled city kept together",
+  "bootstrap_replicates": 2000,
+  "bootstrap_seed": 20261019,
+  "primary_summary": "OOF predictions averaged per image across repeats, with repeat-specific results also reported",
+  "interpretation": "Approximate uncertainty over 20 city clusters; repeated splits are not independent observations",
+  "label_scope": "Fixed global Qwen/TrueSkill VP targets; not independent human ratings",
+  "paired_rows": 3000,
+  "repeat_averaged_images": 1000,
+  "cities": 20
+}

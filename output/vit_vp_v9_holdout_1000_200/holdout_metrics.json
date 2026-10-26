@@ -1,0 +1,77 @@
+{
+  "evaluation": "sealed 200-image holdout after fixed model selection and final fit on the original 1,000 images",
+  "overall": {
+    "n": 200,
+    "mae": 1.0530686606318043,
+    "rmse": 1.3260911345551751,
+    "r2": 0.33429634001985886,
+    "spearman": 0.548212705317633,
+    "pearson": 0.5918636428873296,
+    "mean_prediction_minus_target": 0.10431810699803253,
+    "prediction_below_0_count": 0,
+    "prediction_above_10_count": 0,
+    "clipped_0_10_mae_diagnostic": 1.0530686606318043,
+    "clipped_0_10_rmse_diagnostic": 1.3260911345551751
+  },
+  "city_count": 4,
+  "city_macro_mae": 1.0530686606318043,
+  "city_macro_spearman": 0.5329411764705883,
+  "city_metrics": [
+    {
+      "city": "Bern",
+      "country": "Switzerland",
+      "n": 50,
+      "mae": 0.9924872544487299,
+      "rmse": 1.2359770897537552,
+      "r2": 0.4256277514709643,
+      "spearman": 0.5845378151260504,
+      "pearson": 0.6597160315306712,
+      "mean_prediction_minus_target": 0.07841961018306329,
+      "prediction_below_0_count": 0,
+      "prediction_above_10_count": 0
+    },
+    {
+      "city": "Chisinau",
+      "country": "Moldova",
+      "n": 50,
+      "mae": 1.0258066047818304,
+      "rmse": 1.2737570185609806,
+      "r2": -0.029489662862892896,
+      "spearman": 0.4532533013205282,
+      "pearson": 0.4550374939777698,
+      "mean_prediction_minus_target": 0.5598128776338658,
+      "prediction_below_0_count": 0,
+      "prediction_above_10_count": 0
+    },
+    {
+      "city": "Hildesheim",
+      "country": "Germany",
+      "n": 50,
+      "mae": 1.093444060497355,
+      "rmse": 1.3966050823546248,
+      "r2": 0.3791929817677012,
+      "spearman": 0.5709963985594237,
+      "pearson": 0.6289744588346877,
+      "mean_prediction_minus_target": -0.22205881152344042,
+      "prediction_below_0_count": 0,
+      "prediction_above_10_count": 0
+    },
+    {
+      "city": "Stuttgart",
+      "country": "Germany",
+      "n": 50,
+      "mae": 1.1005367227993021,
+      "rmse": 1.3904922595235965,
+      "r2": 0.2808779338347126,
+      "spearman": 0.5229771908763504,
+      "pearson": 0.5327703329757956,
+      "mean_prediction_minus_target": 0.0010987516986414026,
+      "prediction_below_0_count": 0,
+      "prediction_above_10_count": 0
+    }
+  ],
+  "target_label_version": "V9 optimized prompt / joint 1,200-image Qwen-TrueSkill labels",
+  "label_graph_caveat": "The holdout images and labels are excluded from ViT fitting, model selection, and early stopping. However, the precomputed V9 TrueSkill targets were jointly estimated from a graph containing cross-partition comparisons; these fixed labels cannot be made independent without new ratings.",
+  "holdout_used_for_training_selection_or_early_stopping": false,
+  "ordinary_image_level_p_values_reported": false
+}

@@ -1,0 +1,46 @@
+{
+  "purpose": "External city evaluation; do not add these images to training or hyperparameter selection.",
+  "cities": [
+    "Chisinau",
+    "Stuttgart",
+    "Bern",
+    "Hildesheim"
+  ],
+  "images_per_city": 50,
+  "total_images": 200,
+  "source": "KartaView only; source differs from the predominantly Mapillary training sample.",
+  "sampling": "seeded random sample after one-image-per-sequence deduplication, ordered by grid-cell round-robin",
+  "seed": 20261019,
+  "grid_size_degrees": 0.005,
+  "filters": {
+    "source": "KartaView",
+    "platform": [
+      "driving surface",
+      "walking surface",
+      "cycling surface"
+    ],
+    "quality": "good",
+    "lighting_condition": "day",
+    "glare": false,
+    "reflection": false,
+    "lat_lon_required": true,
+    "sequence_id_required": true,
+    "one_image_per_sequence_per_city": true
+  },
+  "excluded_training_city_count": 20,
+  "eligible_unique_sequences_by_city": {
+    "Chisinau": 248,
+    "Stuttgart": 63,
+    "Bern": 140,
+    "Hildesheim": 54
+  },
+  "sampled_images_by_city": {
+    "Bern": 50,
+    "Chisinau": 50,
+    "Hildesheim": 50,
+    "Stuttgart": 50
+  },
+  "source_metadata_file": "/media/colin/白/GUVP_storage/downloads_archive/guvp_external_4city/source_metadata/data/parquet/streetscapes.parquet",
+  "train_manifest": "/home/colin/GUVP_pairwise_ranking/data/expansion_750/images_manifest_1000.csv",
+  "manifest": "/home/colin/GUVP_pairwise_ranking/data/external_vp_4city_200/images_manifest.csv"
+}

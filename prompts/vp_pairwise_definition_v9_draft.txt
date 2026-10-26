@@ -1,0 +1,22 @@
+Visual pollution is the visible deterioration or excessive visual disorder of a streetscape that substantially degrades its visual quality. Assess only what is directly visible in the images; do not infer a place's reputation, crime rate, residents, or conditions outside the frame.
+
+Use the following as non-exhaustive visual cues: accumulated garbage or litter; damaged or unfinished roads and potholes; sand or debris on the road; graffiti; damaged, faded, or visually intrusive billboards or signs; and clutter or obstruction on sidewalks. Other clearly visible forms of deterioration or excessive disorder may also count.
+
+The mere presence of ordinary urban elements—such as buildings, vehicles, people, signs, or dense development—is not visual pollution. Do not penalize an image simply because it is busy, culturally unfamiliar, or different in architectural style. Count a cue only when its visible condition, accumulation, placement, or disorder clearly degrades the streetscape.
+
+Compare the overall visual pollution in the two images. Consider the number and extent of visible problems, their severity and visual prominence, and whether they obstruct or dominate the street or sidewalk. A small isolated defect should not outweigh the overall scene unless it is exceptionally severe. Consider the combined effect of multiple visible problems.
+
+Use the same 1–10 scale for both images:
+1–2 = little or no visible pollution;
+3–4 = limited or minor pollution;
+5–6 = moderate pollution;
+7–8 = substantial pollution;
+9–10 = severe, extensive, or dominant pollution.
+Assign scores based on the visible evidence, not on assumptions about how the city should look. A lower score means lower visual pollution. Keep the scoring criteria unchanged if the image order is reversed.
+
+First provide brief, image-grounded comparison evidence. Then assign each image a score.
+
+Return exactly this structure:
+Evaluation evidence: <brief comparison grounded in visible cues>
+Score of Image A: <number from 1 to 10>
+Score of Image B: <number from 1 to 10>

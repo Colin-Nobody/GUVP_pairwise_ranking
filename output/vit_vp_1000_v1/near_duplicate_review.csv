@@ -1,0 +1,5 @@
+image_id_a,image_id_b,dhash_distance,decision,rationale
+0beb4032-9766-43da-a46c-7ffe61dcec1f,2cf560a4-7631-4d10-a819-f307fa2d76e7,0,confirmed_duplicate,Visual review: same street scene and near-identical frame across sources
+40e1821e-bf85-45b2-aa66-e1d3a28170ef,e27078ff-1faf-4f34-8c85-ad410a6cceae,0,confirmed_duplicate,Visual review: same street scene and near-identical frame across sources
+c2ba8e12-fdeb-4459-897d-43e18e76fe8c,f2facae8-3840-4932-b186-477d79056759,0,confirmed_duplicate,Visual review: same street scene and near-identical frame across sources
+67a42126-b63b-4ffc-a8a0-8498546944b3,678dd26a-09e6-4363-ae72-2271bece7ac0,3,false_positive,"Visual review: different cities, scenes, and capture dates"

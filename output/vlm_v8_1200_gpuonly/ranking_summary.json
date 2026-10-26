@@ -1,0 +1,16 @@
+{
+  "dimension": "visual_pollution",
+  "valid_vote_rows": 7196,
+  "image_count": 1200,
+  "comparisons_per_image": {
+    "minimum": 8,
+    "median": 12.0,
+    "maximum": 13
+  },
+  "q_score_vs_trueskill": {
+    "pearson_r": 0.9834234848636239,
+    "pearson_p_value": 0.0,
+    "spearman_rho": 0.9840387283605642,
+    "spearman_p_value": 0.0
+  }
+}

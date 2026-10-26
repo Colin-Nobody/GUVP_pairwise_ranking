@@ -1,0 +1,48 @@
+{
+  "n_images": 1200,
+  "cohorts": {
+    "external_4city_200": 200,
+    "original_1000": 1000
+  },
+  "cities": {
+    "Amsterdam": 50,
+    "Barcelona": 50,
+    "Belgrade": 50,
+    "Berlin": 50,
+    "Bern": 50,
+    "Brussels": 50,
+    "Budapest": 50,
+    "Chisinau": 50,
+    "Copenhagen": 50,
+    "Edinburgh": 50,
+    "Helsinki": 50,
+    "Hildesheim": 50,
+    "Krakow": 50,
+    "Madrid": 50,
+    "Munich": 50,
+    "Oslo": 50,
+    "Paris": 50,
+    "Prague": 50,
+    "Rome": 50,
+    "Stockholm": 50,
+    "Stuttgart": 50,
+    "Tallinn": 50,
+    "Warsaw": 50,
+    "Zurich": 50
+  },
+  "source_counts": {
+    "KartaView": 288,
+    "Mapillary": 912
+  },
+  "pairs": 7800,
+  "comparisons_per_image": 13,
+  "within_city_pairs": 339,
+  "cross_city_pairs": 7461,
+  "graph_connected": true,
+  "seed": 20261020,
+  "design": "Seeded random relabeling of a 13-regular connected circulant graph: offsets 1..6 and antipodal matching at N/2.",
+  "inputs": [
+    "/home/colin/GUVP_pairwise_ranking/data/expansion_750/images_manifest_1000.csv",
+    "/home/colin/GUVP_pairwise_ranking/data/external_vp_4city_200/images_manifest.csv"
+  ]
+}

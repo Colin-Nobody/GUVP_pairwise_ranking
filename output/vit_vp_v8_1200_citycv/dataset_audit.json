@@ -1,0 +1,56 @@
+{
+  "dataset": "V8 Qwen pairwise / TrueSkill labels for the fixed 1,200-image comparison",
+  "images": 1200,
+  "unique_image_ids": 1200,
+  "unique_content_hashes": 1200,
+  "cities": {
+    "Amsterdam": 50,
+    "Barcelona": 50,
+    "Belgrade": 50,
+    "Berlin": 50,
+    "Bern": 50,
+    "Brussels": 50,
+    "Budapest": 50,
+    "Chisinau": 50,
+    "Copenhagen": 50,
+    "Edinburgh": 50,
+    "Helsinki": 50,
+    "Hildesheim": 50,
+    "Krakow": 50,
+    "Madrid": 50,
+    "Munich": 50,
+    "Oslo": 50,
+    "Paris": 50,
+    "Prague": 50,
+    "Rome": 50,
+    "Stockholm": 50,
+    "Stuttgart": 50,
+    "Tallinn": 50,
+    "Warsaw": 50,
+    "Zurich": 50
+  },
+  "sources": {
+    "KartaView": 288,
+    "Mapillary": 912
+  },
+  "pair_audit_rows": 7800,
+  "pair_audit_status": {
+    "calibrated": 7196,
+    "calibrated_tie": 230,
+    "invalid_ab": 178,
+    "invalid_ba": 187,
+    "invalid_both": 9
+  },
+  "target": "visual_pollution_score_0_10; larger means more visual pollution",
+  "target_range": [
+    0.0,
+    10.0
+  ],
+  "input_sha256": {
+    "image_manifest": "cf3230492eeebdc3fa3794e44e08ccd8f436d99b87738535361466d792289ba3",
+    "v8_perception_scores": "8d95bd864d1acd229eae346278cef9c9a0c4a0f712097f649a489a0d74ebf43f",
+    "v8_pair_audit": "6da7a6dcb562adc0e41c96a11f530a8d298de3eb45e72798dfeca1a4f514e1c1",
+    "original_dinov3_checkpoint": "9a21ac3df0c63839d62612dda6f454d816c25611cc7a52966ed5a5a94921dc8b"
+  },
+  "label_caveat": "V8 labels are VLM/TrueSkill-derived from a shared 1,200-image comparison graph; not human ground truth."
+}

@@ -1,0 +1,22 @@
+{
+  "image_count": 200,
+  "cities": {
+    "Bern": 50,
+    "Chisinau": 50,
+    "Hildesheim": 50,
+    "Stuttgart": 50
+  },
+  "source_counts": {
+    "KartaView": 200
+  },
+  "all_images_decode": true,
+  "unique_sha256_count": 200,
+  "train_images_checked_for_near_duplicates": 1000,
+  "dhash_candidate_threshold": 4,
+  "near_duplicate_candidate_count": 0,
+  "manual_review_required_if_candidates_exist": false,
+  "outputs": [
+    "image_integrity.csv",
+    "near_duplicate_candidates.csv"
+  ]
+}

@@ -34,13 +34,19 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--per-city", type=int, default=50)
     parser.add_argument("--seed", type=int, default=SEED)
     parser.add_argument("--grid-size-degrees", type=float, default=GRID_SIZE_DEGREES)
+    parser.add_argument(
+        "--cities", nargs="+", default=list(CITIES),
+        help="Cities to sample (default: the original five-city pilot)",
+    )
     parser.add_argument("--sources", nargs="+", default=["KartaView"], choices=["KartaView", "Mapillary"])
     return parser.parse_args()
 
 
-def filter_candidates(frame: pd.DataFrame, sources: list[str]) -> pd.DataFrame:
+def filter_candidates(
+    frame: pd.DataFrame, sources: list[str], cities: list[str] = list(CITIES)
+) -> pd.DataFrame:
     return frame.loc[
-        frame["city"].isin(CITIES)
+        frame["city"].isin(cities)
         & frame["source"].isin(sources)
         & frame["platform"].isin(ALLOWED_PLATFORMS)
         & frame["quality"].eq("good")
@@ -80,12 +86,12 @@ def main() -> None:
         raise ValueError(f"Input is missing required columns: {sorted(missing)}")
 
     raw = pq.read_table(args.input, columns=KEEP_COLUMNS).to_pandas()
-    candidates = make_grid(filter_candidates(raw, args.sources), args.grid_size_degrees)
+    candidates = make_grid(filter_candidates(raw, args.sources, args.cities), args.grid_size_degrees)
     # Keep one independently selected frame per capture sequence before sampling.
     candidates = candidates.sample(frac=1, random_state=args.seed).drop_duplicates(["source", "sequence_id"]).copy()
 
-    counts = candidates.groupby("city", sort=False).size().reindex(CITIES, fill_value=0)
-    source_counts = candidates.groupby(["city", "source"], sort=False).size().unstack(fill_value=0).reindex(CITIES, fill_value=0)
+    counts = candidates.groupby("city", sort=False).size().reindex(args.cities, fill_value=0)
+    source_counts = candidates.groupby(["city", "source"], sort=False).size().unstack(fill_value=0).reindex(args.cities, fill_value=0)
     print("Candidates after quality filters and per-source sequence de-duplication:")
     for city, available in counts.items():
         print(f"  {city}: {available}")
@@ -100,7 +106,7 @@ def main() -> None:
 
     chosen = pd.concat(
         [stratified_sample(candidates[candidates.city.eq(city)], args.per_city, args.seed + index)
-         for index, city in enumerate(CITIES)],
+         for index, city in enumerate(args.cities)],
         ignore_index=True,
     )
     chosen["selection_rank_within_city"] = chosen.groupby("city", sort=False).cumcount() + 1
