@@ -1,0 +1,73 @@
+{
+  "batch": "batch-022",
+  "source": "mapillary-vistas",
+  "archive_path": "large_file_shards/batch-022/archive.tar.zst",
+  "original_files": 1021,
+  "original_bytes": 943036127,
+  "archive_bytes": 937194985,
+  "archive_sha256": "63d4321194a67fd17e23468a74f1df4ca0b5449506ccd6c143f789571848732a",
+  "part_bytes_limit": 80000000,
+  "parts": [
+    {
+      "name": "batch-022.part-0000",
+      "size_bytes": 80000000,
+      "sha256": "fe02a6c790ae102ddd23d9f0c9cdf36224a38ce33073878be32eb7dba2a82778"
+    },
+    {
+      "name": "batch-022.part-0001",
+      "size_bytes": 80000000,
+      "sha256": "c3dcb6ed2c8ebe4d98f1c4a9d6f08ba57e74b4e5ffc1888504357624d345fed9"
+    },
+    {
+      "name": "batch-022.part-0002",
+      "size_bytes": 80000000,
+      "sha256": "8ada01628defa89015da8cbbe2d7946fb0c2178801f7e50a7e29f4ca4a81e25f"
+    },
+    {
+      "name": "batch-022.part-0003",
+      "size_bytes": 80000000,
+      "sha256": "53ae3d2769ebc78298539431b72be63640b313b6ac45b68e6ffbe0755b1cc72d"
+    },
+    {
+      "name": "batch-022.part-0004",
+      "size_bytes": 80000000,
+      "sha256": "3adf69de9782a568e36045ba03dd5b28a68009ff0aa5f60c8d45c1b3f221bcff"
+    },
+    {
+      "name": "batch-022.part-0005",
+      "size_bytes": 80000000,
+      "sha256": "481dfb9a71b2613755abd9e5abd134ab66a7b434fa83e90c85401b1f70c38876"
+    },
+    {
+      "name": "batch-022.part-0006",
+      "size_bytes": 80000000,
+      "sha256": "10b21bf4a9d432dc0c8da9cbde0bb04cf38b0c4f7725b6785fcbc9e594f5a5c0"
+    },
+    {
+      "name": "batch-022.part-0007",
+      "size_bytes": 80000000,
+      "sha256": "a0d8f5db9cffe202f9863f6fcab32563ab2728740a669291dfd882c315d2086f"
+    },
+    {
+      "name": "batch-022.part-0008",
+      "size_bytes": 80000000,
+      "sha256": "9b04dbba65e79f63bdcc42cbc197c22bb865c2806f4d1f576162fa9d036d3a2b"
+    },
+    {
+      "name": "batch-022.part-0009",
+      "size_bytes": 80000000,
+      "sha256": "0126b8de7a0eb9b13f65815f8e291aceaca7afc2e5f4723a735090f149897d62"
+    },
+    {
+      "name": "batch-022.part-0010",
+      "size_bytes": 80000000,
+      "sha256": "f15028cc18787b53edd1afe2ab892b5631309a4a1065509430c7c8ec9ef81122"
+    },
+    {
+      "name": "batch-022.part-0011",
+      "size_bytes": 57194985,
+      "sha256": "1a344b90cf3d2e381519b0aa47f7715b927256007858b25a4308beebbbbe5a34"
+    }
+  ],
+  "restore": "Concatenate parts in lexical order, verify archive_sha256, then run zstd -d and tar -xf."
+}
