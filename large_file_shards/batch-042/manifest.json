@@ -1,0 +1,58 @@
+{
+  "batch": "batch-042",
+  "source": "mapillary-vistas",
+  "archive_path": "large_file_shards/batch-042/archive.tar.zst",
+  "original_files": 2585,
+  "original_bytes": 665355423,
+  "archive_bytes": 651871999,
+  "archive_sha256": "dba384b1959c2b2d8dd659f919e610099fc910dadfa7d03db8660a0e47f3c27c",
+  "part_bytes_limit": 80000000,
+  "parts": [
+    {
+      "name": "batch-042.part-0000",
+      "size_bytes": 80000000,
+      "sha256": "d980563480ef0e21b55cd19da57126a21d8331ba6c380127a5e74cdaec9454ee"
+    },
+    {
+      "name": "batch-042.part-0001",
+      "size_bytes": 80000000,
+      "sha256": "89f132ba5205f148275397dac023d4f057ec15e899acecccd49c30a54e455385"
+    },
+    {
+      "name": "batch-042.part-0002",
+      "size_bytes": 80000000,
+      "sha256": "5df1e8c55462fea7d4923acc360a43ee97443373d5ec7df4f19f53c3f73660ef"
+    },
+    {
+      "name": "batch-042.part-0003",
+      "size_bytes": 80000000,
+      "sha256": "d1f3e0b0cab50a812b9b9e5cdecb69ade5f38423b54c830bf5aa279bf5bbacb9"
+    },
+    {
+      "name": "batch-042.part-0004",
+      "size_bytes": 80000000,
+      "sha256": "2cf0c30ca97705bf0f8d59be87df17ff41129035fa99734ec9d1563f45ad83a5"
+    },
+    {
+      "name": "batch-042.part-0005",
+      "size_bytes": 80000000,
+      "sha256": "75ef6136c44cea64ac4c8c4b00ae8bbe15155ae378e7f0cd04f20d71ba2c6558"
+    },
+    {
+      "name": "batch-042.part-0006",
+      "size_bytes": 80000000,
+      "sha256": "353f2ff8ab3bdba14626c9032060d6c3b5c696eddf228d2472382ef9858e6fa5"
+    },
+    {
+      "name": "batch-042.part-0007",
+      "size_bytes": 80000000,
+      "sha256": "a66a0170feffa340821dc942604d032446c7a120a636ef06aaf78b814a9e832e"
+    },
+    {
+      "name": "batch-042.part-0008",
+      "size_bytes": 11871999,
+      "sha256": "5df94da182178fb533c721a7a385ed3ef6936cd5825163a2773efde7ce4ce999"
+    }
+  ],
+  "restore": "Concatenate parts in lexical order, verify archive_sha256, then run zstd -d and tar -xf."
+}
