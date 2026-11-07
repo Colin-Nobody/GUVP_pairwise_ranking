@@ -1,0 +1,9 @@
+{
+  "prompt_version": "vp-definition-score-v8",
+  "model": "Qwen2.5-VL-7B-Instruct",
+  "aggregation": "pairwise calibrated votes aggregated by TrueSkill and min-max scaled to [0,10]",
+  "scores_path": "/share/home/sgxcw3/GUVP_pairwise_ranking/output/vlm_hpc_10k_v8_pairbatch50_5day_mec3/perception_scores.csv",
+  "scores_sha256": "3f7d4b965e2a00ac63f8c1b675489c51c31c04cedef6a8adbea8f82888d82483",
+  "pair_audit_path": "/share/home/sgxcw3/GUVP_pairwise_ranking/output/vlm_hpc_10k_v8_pairbatch50_5day_mec3/pair_audit.csv",
+  "pair_audit_sha256": "e301e20e09dc2b428ef95d15f1d287a23cc3058aeec56c535bd2ee712d87f141"
+}
