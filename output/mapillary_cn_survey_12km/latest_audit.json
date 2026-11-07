@@ -1,0 +1,36 @@
+{
+  "utc": "2026-11-07T14:01:15.855853+00:00",
+  "completed": [
+    {
+      "city": "Beijing",
+      "country": "China",
+      "center_lat": 39.9042,
+      "center_lon": 116.4074,
+      "radius_km": 12.0,
+      "tiles_total": 196,
+      "tiles_failed": 0,
+      "unique_sequences": 702,
+      "occupied_grid_cells": 175,
+      "has_1000_candidates": false,
+      "complete_tile_query": true,
+      "quality_missing": 0
+    },
+    {
+      "city": "Shanghai",
+      "country": "China",
+      "center_lat": 31.2304,
+      "center_lon": 121.4737,
+      "radius_km": 12.0,
+      "tiles_total": 169,
+      "tiles_failed": 0,
+      "unique_sequences": 1104,
+      "occupied_grid_cells": 136,
+      "has_1000_candidates": true,
+      "complete_tile_query": true,
+      "quality_missing": 0
+    }
+  ],
+  "latest_failures": [],
+  "rules": "Mapillary live vector tiles, non-panoramic, within 12 km of supplied center, one image per sequence, quality >=0.25 when available; 0.01-degree spatial grid proxy",
+  "limitations": "Candidates only; individual files have not been downloaded, decoded or content-deduplicated. Areas and centers are approximate; comparisons use metadata snapshot at query time."
+}

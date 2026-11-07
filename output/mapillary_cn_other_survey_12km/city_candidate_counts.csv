@@ -1,0 +1,7 @@
+city,country,center_lat,center_lon,radius_km,tiles_total,tiles_failed,unique_sequences,occupied_grid_cells,has_1000_candidates,complete_tile_query,quality_missing
+Guangzhou,China,23.1291,113.2644,12.0,132,0,187,69,False,True,0
+Shenzhen,China,22.5431,114.0579,12.0,132,0,416,141,False,True,0
+Chengdu,China,30.5728,104.0668,12.0,156,0,118,68,False,True,0
+Wuhan,China,30.5928,114.3055,12.0,156,0,145,60,False,True,0
+Hangzhou,China,30.2741,120.1551,12.0,156,0,86,34,False,True,0
+Nanjing,China,32.0603,118.7969,12.0,169,0,101,46,False,True,0

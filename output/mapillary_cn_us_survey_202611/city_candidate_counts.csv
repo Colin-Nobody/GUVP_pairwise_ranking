@@ -1,0 +1,15 @@
+city,country,center_lat,center_lon,radius_km,tiles_total,tiles_failed,unique_sequences,occupied_grid_cells,has_1000_candidates,complete_tile_query,quality_missing
+Beijing,China,39.9042,116.4074,6.0,56,0,464,68,False,True,0
+Shanghai,China,31.2304,121.4737,6.0,49,0,629,59,False,True,0
+Guangzhou,China,23.1291,113.2644,6.0,42,0,127,32,False,True,0
+Shenzhen,China,22.5431,114.0579,6.0,42,0,88,43,False,True,0
+Chengdu,China,30.5728,104.0668,6.0,49,0,31,23,False,True,0
+Wuhan,China,30.5928,114.3055,6.0,49,0,65,31,False,True,0
+Hangzhou,China,30.2741,120.1551,6.0,49,0,65,24,False,True,0
+Nanjing,China,32.0603,118.7969,6.0,49,0,66,28,False,True,0
+New York,United States,40.7128,-74.006,6.0,64,0,4227,102,True,True,0
+Los Angeles,United States,34.0522,-118.2437,6.0,49,0,4100,104,True,True,0
+Chicago,United States,41.8781,-87.6298,6.0,56,0,1830,74,True,True,0
+San Francisco,United States,37.7749,-122.4194,6.0,49,0,9513,94,True,True,0
+Boston,United States,42.3601,-71.0589,6.0,64,0,4527,97,True,True,0
+Seattle,United States,47.6062,-122.3321,6.0,72,0,8305,90,True,True,0

@@ -1,0 +1,18 @@
+{
+  "date": "2026-11-07",
+  "selection": "random.Random(20261108).sample(city_candidate_csv_rows, 10)",
+  "image_source": "Mapillary Graph API thumb_1024_url",
+  "results": {
+    "Shanghai_12km": {
+      "sampled": 10,
+      "decoded": 10,
+      "unique_sha256": 10
+    },
+    "New_York_6km": {
+      "sampled": 10,
+      "decoded": 10,
+      "unique_sha256": 10
+    }
+  },
+  "limitations": "Small sample only; cannot infer final 1000-image usable yield or eliminate duplicates across full set."
+}

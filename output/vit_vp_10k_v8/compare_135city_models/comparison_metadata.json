@@ -1,0 +1,12 @@
+{
+  "city_count": 135,
+  "images_per_city": 1000,
+  "paired_images": 135000,
+  "city_rank_spearman": 0.9721539362013464,
+  "rank_displacement_median": 5.0,
+  "rank_displacement_max": 28,
+  "rank_direction": "1 = highest predicted visual pollution; positive rank_change_higher means higher in 10k model",
+  "old": "/media/colin/白/GUVP_archive/oecd_europe_50city_10000/image_vp_predictions_expanded_1000.csv",
+  "new": "/home/colin/GUVP_pairwise_ranking/output/vit_vp_10k_v8/score_135city/image_predictions.csv",
+  "limitations": "Identical images but models and independently normalized VLM training labels differ; 10000 new-model training images are included. Descriptive model comparison, not ground truth or change over time."
+}

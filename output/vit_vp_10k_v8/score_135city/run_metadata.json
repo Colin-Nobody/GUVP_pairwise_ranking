@@ -1,0 +1,16 @@
+{
+  "manifest_sha256": "10afe2a577dedfa49b9b897b676a2a59674a0b5e9a9eb07670fe380f0e2ce564",
+  "model_json_sha256": "2152504e224c5daebbf52512a376ffc1e4dd534bc79b4b7c490aef42bb897443",
+  "image_count": 135000,
+  "limit": 0,
+  "model": "10k V8 3-seed ensemble",
+  "weights": {
+    "42": "695ca1c55d3747d1d6aabd382ceb50ccfa15ade7c101baaf8dac0e828466b45e",
+    "137": "2273c35c4b323cc3d73a719febbaa945f11406294ad60d3a02d61bc46d25d498",
+    "2026": "d9ddf04469ea25a045b51eb3fcdc81a02f17f81be18296952b66acc72c1c3a1d"
+  },
+  "checkpoint_sha256": "9a21ac3df0c63839d62612dda6f454d816c25611cc7a52966ed5a5a94921dc8b",
+  "edge": 512,
+  "training_overlap": "10,000 images are part of the 135,000 image cohort; their predictions are in-sample",
+  "labels": "V8 Qwen/TrueSkill relative labels; not human ground truth"
+}
