@@ -1,0 +1,65 @@
+{
+  "model": "DINOv3 ViT-B/16 LVD-1689M; final two transformer blocks fine-tuned; patch-mean MLP head",
+  "label": "V8 Qwen/TrueSkill-derived visual_pollution_score_0_10; model-derived labels, not human ground truth",
+  "training_images": 10000,
+  "source_checkpoint": "/home/colin/GUVP_pairwise_ranking/models/checkpoints/dinov3_vitb.safetensors",
+  "source_checkpoint_sha256": "9a21ac3df0c63839d62612dda6f454d816c25611cc7a52966ed5a5a94921dc8b",
+  "feature_cache_edge": 512,
+  "preprocessing": "EXIF transpose, RGB, aspect-preserving resize to selected long edge; dimensions rounded to nearest multiple of 16; Pillow bicubic; ImageNet mean/std",
+  "pooling": "mean of final normalized image patch tokens excluding CLS and four register tokens",
+  "optimizer": "AdamW",
+  "backbone_learning_rate": 1e-05,
+  "head_learning_rate": 0.0001,
+  "weight_decay": 0.01,
+  "dropout": 0.5,
+  "epochs": 8,
+  "epoch_selection_rule": "modal edge and backbone LR from 15 nested outer-fold selections; median refit epoch",
+  "seed_ensemble": [
+    42,
+    137,
+    2026
+  ],
+  "prediction_rule": "arithmetic mean of the three seed-model predictions",
+  "device": "cuda",
+  "torch_version": "2.11.0+cu128",
+  "transformers_version": "5.15.1",
+  "label_provenance": {
+    "label": "V8 Qwen/TrueSkill visual_pollution_score_0_10; VLM-derived, not human ground truth",
+    "result_commit": "5843efc94274a05c342b54c515543b7fbe518b6e",
+    "source_manifest": "/home/colin/GUVP_pairwise_ranking/data/vlm_hpc_10k/manifest_10000.csv",
+    "source_manifest_sha256": "ba8676b1ad3ee684d3f66840f495809e63cbfadff1310c69823b59cda29320dd",
+    "scores": "/home/colin/GUVP_pairwise_ranking/output/vlm_hpc_10k_v8_pairbatch50_5day_mec3/perception_scores.csv",
+    "scores_sha256": "3f7d4b965e2a00ac63f8c1b675489c51c31c04cedef6a8adbea8f82888d82483",
+    "selected_configs": "/home/colin/GUVP_pairwise_ranking/output/vit_vp_10k_v8/finetune_last2/inner_selected_configs.csv",
+    "selected_configs_sha256": "be4539d6cf44e39d867ba702a3db9e005b9d52d08747d39ba028a1e06fad95aa",
+    "image_archive": "/media/colin/白/GUVP_archive/oecd_europe_50city_10000",
+    "image_sha256_verified": 10000
+  },
+  "artifacts": [
+    {
+      "seed": 42,
+      "weights": "seed_42.safetensors",
+      "sha256": "695ca1c55d3747d1d6aabd382ceb50ccfa15ade7c101baaf8dac0e828466b45e",
+      "bytes": 57107476,
+      "target_mean": 4.935917842099999,
+      "target_std": 2.167615380027106
+    },
+    {
+      "seed": 137,
+      "weights": "seed_137.safetensors",
+      "sha256": "2273c35c4b323cc3d73a719febbaa945f11406294ad60d3a02d61bc46d25d498",
+      "bytes": 57107476,
+      "target_mean": 4.935917842099999,
+      "target_std": 2.167615380027106
+    },
+    {
+      "seed": 2026,
+      "weights": "seed_2026.safetensors",
+      "sha256": "d9ddf04469ea25a045b51eb3fcdc81a02f17f81be18296952b66acc72c1c3a1d",
+      "bytes": 57107476,
+      "target_mean": 4.935917842099999,
+      "target_std": 2.167615380027106
+    }
+  ],
+  "generalization_metrics": "Use nested city-held-out OOF metrics in finetune_last2; this all-data fit is for deployment only."
+}

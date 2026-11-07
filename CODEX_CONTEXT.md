@@ -1,5 +1,12 @@
 # GUVP ViT→VP 会话交接
 
+## 2026-11-07：10k V8 部署完成
+
+- 已从 `hpc-10k-vp-results` 提交 `5843efc94274a05c342b54c515543b7fbe518b6e` 获取 10,000 图 V8 VLM 分数、清单及城市交叉验证结果；“白”盘 10,000 张实际图片的 SHA-256 与 HPC 清单全部匹配。输入清单和标签来源在 `output/vit_vp_10k_v8/{image_manifest.csv,label_provenance.json}`。
+- 原始 DINOv3 权重初始化，训练最后两层和回归头：edge 512、backbone LR 1e-5、8 epochs、seeds 42/137/2026。三个模型及 `model.json`、`fit_config.json` 位于 `output/vit_vp_10k_v8/deployment/finetuned_last2_v8/`；均与元数据 SHA-256 相符。V8 分数是 VLM/TrueSkill 派生标签，并非人工真值。
+- RTX 5060 CUDA 上的单图和三图目录推理通过，同一图结果一致；峰值 CUDA allocated 0.994 GiB。三次未见城市 CV MAE 分别为 0.9523、0.9581、0.9498。训练日志与 smoke 结果在 `output/vit_vp_10k_v8/`；全数据训练拟合不作为泛化评估。
+- 推理使用 `vit_vp/predict_finetuned.py`，必须显式指定 `--model-dir output/vit_vp_10k_v8/deployment/finetuned_last2_v8`，否则使用旧模型。训练前缀缓存约 12.96 GB，跨系统盘和 `/media/colin/白/GUVP_archive/vit_vp_10k_v8_prefix_edge512/`；日常推理不需要它，现予保留。
+
 最后更新：2026-10-25。
 
 ## 现在要记住什么
@@ -165,6 +172,15 @@ V9 1,200 图 VLM、1,000/200 图像级留出、900/300 简化拟合及 fresh rer
 - 正式作业 **355992** 已于 2026-10-21 02:48:15 至 14:33:43 完成，Slurm `COMPLETED`、ExitCode `0:0`、耗时 11:45:28。日志确认 6,500/6,500 对、39,000 个 MEC 方向样本全部完成；5,504 张有效校准票，996 对平局/无效，1,000 张 perception score 均已输出。产物行数：audit 6,501、votes 5,505、scores 1,001（含表头）。`timing.json` 总 wall 42,302 秒、generate 40,925 秒、峰值 CUDA allocated 6.31 GiB。用户随后提出 GPU-only 要求；该任务脚本当时没有 `--gpu-only`，且默认使用 `device_map="auto"`，因此不得推断模型完全在 GPU 上执行。可在 HPC 用 `awk -F, 'NR==1{for(i=1;i<=NF;i++)if($i=="cpu_offload")c=i;next} NR>1{n++;if($(c)=="true")t++} END{printf "rows=%d cpu_offload_true=%d\n",n,t}' output/vlm_expansion_1000_definition_v8/pair_audit.csv` 检查审计列，但这只记录配置 flag，不足以证明每层最终放置；旧运行的确切设备映射未保存，无法事后严格核实。
 
 Q10 操作背景见 [`jobs/Q10_SETUP.md`](jobs/Q10_SETUP.md)，但其中早期“尚未探测/未提交”和临时资源参数描述已过期；以本节当前 HPC 实测和任务状态为准。下一步继续检查 353415 最新状态；任务启动后核验 GPU 可见性、模型加载、batch 3 显存和配对进度。不要把 Slurm 预计启动时间当作实际运行或完成时间。
+
+### HPC 10,000 图 V8 VLM 流程（2026-10-29，跨图片对 batch=10 / 3 天配置已准备，待用户上传）
+
+- 用户要求在 Q10 单 GPU 上基于 135 城×1,000 图数据抽取 20 城×500 图，使用 V8 prompt 完成成对 VLM 评分和 TrueSkill/Q-score；最新明确每对仍保持 6 次判断（AB/BA 各 MEC=3），通过跨图片对 batching 提升吞吐，申请 3 天，不在本地小显存 GPU 做基准。
+- 代码位于 `hpc_vlm_10k/`：数据子集准备、20 城配对图、对照逐对运行与跨图片对 batch=10 的 100 对吞吐/显存 pilot、70 小时估时门槛、V8 运行脚本及 3 天 Slurm 作业模板。配对图为每图 6 条同城边+7 条跨城边，共 65,000 对；每对仍是 AB/BA 各 MEC=3，总生成数维持 390,000。默认名单沿用现有主实验 20 城，但来源清单无 Belgrade，现用 Zagreb 替换。
+- 运行使用 `prompts/vp_pairwise_definition_v8.txt`、Qwen2.5-VL-7B-Instruct、`lower_is_cleaner`、MEC=3；跨 pair batch=10 的速度将由 Q10 pilot 实测，不用先前 MEC=3 单 pair 吞吐直接推断。
+- 新 job 复用 `jobs/submit_q10.sh` 和 `jobs/lib/q10_python.sh`，不覆盖 HPC 私有 `jobs/q10.env`。最新 3 天模板为 `hpc_vlm_10k/submit_3day_1gpu.sbatch`；提交前需在 HPC 私有配置中将 `Q10_TIME=3-00:00:00`，然后执行 `--check`。模板资源为单张 `gpu:l20`、8 CPU、32G RAM。历史作业 376115/376118/376123/376126 的失败原因及修复见前版本记录；用户随后报告作业 376132 完成 batch=1/3 pilot，batch=3 实测速率约 1.992 倍，但全量 65,000 对估时 115.2 小时，46 小时门槛拒绝启动全量。
+- 当前本地代码已适配 MEC=3 与 `pair-batch-size=10`：pilot 用固定 100 对对比逐对和跨图片对批处理，并记录并行 pilot 峰值 CUDA allocated；估时高于 70 小时则停止全量。全量结果写入独立目录 `output/vlm_hpc_10k_v8_pairbatch10_mec3/`。已更新根目录 `vlm_pairwise.py`，需与整个 `hpc_vlm_10k/` 一并上传；代码未上传、未提交，交接入口：`hpc_vlm_10k/README_CN.md`。
+- 2026-10-30：本地尝试 SSH 至 Q10 登录地址 `10.179.1.20` 并查询 Slurm 队列及 10k 输出目录，但连接超时；当前工作区没有该作业的 job ID 或远程日志，因此不能确认用户之后是否已上传并提交。需从学校网络/VPN 重试远程查询后再更新作业状态。
 
 ## GPU-only 项目约束（2026-10-22）
 

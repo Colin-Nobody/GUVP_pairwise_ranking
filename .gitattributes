@@ -1,3 +1,5 @@
 models/checkpoints/*.pth filter=lfs diff=lfs merge=lfs -text
 models/checkpoints/dinov3_vitb.safetensors filter=lfs diff=lfs merge=lfs -text
 output/vit_vp_v8_1200_citycv/deployment/finetuned_last2_v8/*.safetensors filter=lfs diff=lfs merge=lfs -text
+
+output/vit_vp_10k_v8/deployment/finetuned_last2_v8/*.safetensors filter=lfs diff=lfs merge=lfs -text
