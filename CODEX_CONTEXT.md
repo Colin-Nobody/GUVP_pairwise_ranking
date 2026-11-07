@@ -2,6 +2,8 @@
 
 ## 2026-11-07：10k V8 部署完成
 
+- GitHub `local-10k-v8-deployment` 分支已包含 10k 结果、部署配置、脚本和三份 Git LFS 权重；已从远端独立重新下载三对象并逐一核对 SHA-256。原工作区 `main` 和其未提交修改未被切换或覆盖。
+
 - 已从 `hpc-10k-vp-results` 提交 `5843efc94274a05c342b54c515543b7fbe518b6e` 获取 10,000 图 V8 VLM 分数、清单及城市交叉验证结果；“白”盘 10,000 张实际图片的 SHA-256 与 HPC 清单全部匹配。输入清单和标签来源在 `output/vit_vp_10k_v8/{image_manifest.csv,label_provenance.json}`。
 - 原始 DINOv3 权重初始化，训练最后两层和回归头：edge 512、backbone LR 1e-5、8 epochs、seeds 42/137/2026。三个模型及 `model.json`、`fit_config.json` 位于 `output/vit_vp_10k_v8/deployment/finetuned_last2_v8/`；均与元数据 SHA-256 相符。V8 分数是 VLM/TrueSkill 派生标签，并非人工真值。
 - RTX 5060 CUDA 上的单图和三图目录推理通过，同一图结果一致；峰值 CUDA allocated 0.994 GiB。三次未见城市 CV MAE 分别为 0.9523、0.9581、0.9498。训练日志与 smoke 结果在 `output/vit_vp_10k_v8/`；全数据训练拟合不作为泛化评估。
