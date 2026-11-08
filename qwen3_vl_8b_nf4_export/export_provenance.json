@@ -1,0 +1,7 @@
+{
+  "base_model": "Qwen/Qwen3-VL-8B-Instruct",
+  "base_revision": "0c351dd01ed87e9c1b53cbc748cba10e6187ff3b",
+  "quantization": "bitsandbytes NF4 double quantization",
+  "compute_dtype": "torch.bfloat16",
+  "device": "cuda:0"
+}
