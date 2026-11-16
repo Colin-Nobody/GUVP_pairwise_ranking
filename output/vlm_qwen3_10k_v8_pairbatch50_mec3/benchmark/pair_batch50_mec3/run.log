@@ -1,0 +1,21 @@
+Loading weights:   0%|          | 0/750 [00:00<?, ?it/s]Loading weights:  10%|█         | 78/750 [00:00<00:00, 777.63it/s]Loading weights:  21%|██        | 156/750 [00:00<00:00, 706.96it/s]Loading weights:  30%|███       | 228/750 [00:00<00:00, 703.77it/s]Loading weights:  40%|███▉      | 299/750 [00:00<00:00, 700.00it/s]Loading weights:  50%|█████     | 376/750 [00:00<00:00, 716.60it/s]Loading weights:  92%|█████████▏| 691/750 [00:00<00:00, 1517.43it/s]Loading weights: 100%|██████████| 750/750 [00:00<00:00, 1156.67it/s]
+GPU placement verified for 754 parameters and buffers
+Loaded pre-quantized model locally from /share/home/sgxcw3/qwen3-nf4/qwen3_vl_8b_nf4_export; GPU placement None
+/share/home/sgxcw3/miniforge3/envs/guvp-vlm/lib/python3.11/site-packages/transformers/models/qwen2_vl/image_processing_qwen2_vl.py:129: FutureWarning: Passing `min_pixels` and `max_pixels` to a processor call is deprecated and will be removed in v5.23. Pass in `size={'longest_edge': xxx, 'shortest_edge': xxx} to override the target size.`
+  warnings.warn(
+Completed 10/100 unordered pairs (60 MEC directional samples); calibrated votes=10
+Completed 20/100 unordered pairs (120 MEC directional samples); calibrated votes=20
+Completed 30/100 unordered pairs (180 MEC directional samples); calibrated votes=30
+Completed 40/100 unordered pairs (240 MEC directional samples); calibrated votes=40
+Completed 50/100 unordered pairs (300 MEC directional samples); calibrated votes=50
+Completed 60/100 unordered pairs (360 MEC directional samples); calibrated votes=60
+Completed 70/100 unordered pairs (420 MEC directional samples); calibrated votes=70
+Completed 80/100 unordered pairs (480 MEC directional samples); calibrated votes=80
+Completed 90/100 unordered pairs (540 MEC directional samples); calibrated votes=90
+Completed 100/100 unordered pairs (600 MEC directional samples); calibrated votes=100
+Completed 100 unordered pairs and 600 MEC directional samples.
+Calibrated votes: 100; excluded/invalid/tied pairs: 0
+Audit: /share/home/sgxcw3/GUVP_pairwise_ranking/output/vlm_qwen3_10k_v8_pairbatch50_mec3/benchmark/pair_batch50_mec3/pair_audit.csv
+Votes: /share/home/sgxcw3/GUVP_pairwise_ranking/output/vlm_qwen3_10k_v8_pairbatch50_mec3/benchmark/pair_batch50_mec3/vlm_pairwise_votes.csv
+Peak CUDA memory allocated: 20.51 GiB
+Timing: /share/home/sgxcw3/GUVP_pairwise_ranking/output/vlm_qwen3_10k_v8_pairbatch50_mec3/benchmark/pair_batch50_mec3/timing.json

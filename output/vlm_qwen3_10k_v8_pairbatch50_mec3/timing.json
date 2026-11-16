@@ -1,0 +1,15 @@
+{
+  "model": "Qwen/Qwen3-VL-8B-Instruct",
+  "decode_mode": "sampled_evidence_first_scores_pair_batch50_lower_score_is_cleaner",
+  "mec_samples": 3,
+  "mec_batch_size": 1,
+  "pair_batch_size": 50,
+  "score_direction": "lower_is_cleaner",
+  "completed_pairs": 65000,
+  "model_load_seconds": 3.088945396244526,
+  "preprocess_seconds": 5121.84396078065,
+  "generate_seconds": 266231.1414478179,
+  "generation_batches": 7800,
+  "wall_seconds": 271483.398134565,
+  "peak_cuda_allocated_gib": 20.54421329498291
+}

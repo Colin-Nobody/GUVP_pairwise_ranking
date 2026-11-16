@@ -1,0 +1,11 @@
+Starting/resuming 100 pairs; 0 complete; prompt=vp-definition-score-v8; model=Qwen/Qwen3-VL-8B-Instruct; MEC k=3; MEC batch=1; temperature=1.0; BPC=true; score_direction=lower_is_cleaner
+Completed 10/100 unordered pairs (60 MEC directional samples); calibrated votes=10
+Completed 20/100 unordered pairs (120 MEC directional samples); calibrated votes=20
+Completed 30/100 unordered pairs (180 MEC directional samples); calibrated votes=30
+Completed 40/100 unordered pairs (240 MEC directional samples); calibrated votes=40
+Completed 50/100 unordered pairs (300 MEC directional samples); calibrated votes=50
+Completed 60/100 unordered pairs (360 MEC directional samples); calibrated votes=60
+Completed 70/100 unordered pairs (420 MEC directional samples); calibrated votes=70
+Completed 80/100 unordered pairs (480 MEC directional samples); calibrated votes=80
+Completed 90/100 unordered pairs (540 MEC directional samples); calibrated votes=90
+Completed 100/100 unordered pairs (600 MEC directional samples); calibrated votes=100

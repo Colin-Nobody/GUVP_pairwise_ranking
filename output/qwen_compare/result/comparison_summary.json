@@ -1,0 +1,104 @@
+{
+  "comparison": "qwen25_vs_qwen3",
+  "votes": {
+    "qwen25": {
+      "label": "qwen25",
+      "source": "a/vlm_pairwise_votes.csv",
+      "rows": 57260,
+      "valid_winners": 57260,
+      "invalid_winners": 0,
+      "unique_images": 10000,
+      "side_selection": {
+        "a_count": 28770,
+        "b_count": 28490,
+        "a_rate": 0.5024449877750611,
+        "two_sided_binomial_p_value_vs_0_5": 0.2436359297113135
+      },
+      "model_values": [
+        "Qwen/Qwen2.5-VL-7B-Instruct"
+      ],
+      "prompt_versions": [
+        "vp-definition-score-v8"
+      ],
+      "max_pixels_values": [
+        401408
+      ],
+      "timing": {
+        "first_timestamp_utc": "2026-10-31T08:37:53.449800+00:00",
+        "last_timestamp_utc": "2026-11-03T19:05:10.797994+00:00",
+        "elapsed_seconds": 296837.348194,
+        "seconds_per_pair": 5.184116875844846
+      }
+    },
+    "qwen3": {
+      "label": "qwen3",
+      "source": "b/vlm_pairwise_votes.csv",
+      "rows": 64142,
+      "valid_winners": 64142,
+      "invalid_winners": 0,
+      "unique_images": 10000,
+      "side_selection": {
+        "a_count": 32292,
+        "b_count": 31850,
+        "a_rate": 0.5034454803404945,
+        "two_sided_binomial_p_value_vs_0_5": 0.08163459766257128
+      },
+      "model_values": [
+        "Qwen/Qwen3-VL-8B-Instruct"
+      ],
+      "prompt_versions": [
+        "vp-definition-score-v8"
+      ],
+      "max_pixels_values": [
+        401408
+      ],
+      "timing": {
+        "first_timestamp_utc": "2026-11-12T13:18:55.502857+00:00",
+        "last_timestamp_utc": "2026-11-15T16:39:59.687054+00:00",
+        "elapsed_seconds": 271264.184197,
+        "seconds_per_pair": 4.229185453875057
+      }
+    },
+    "matched_unordered_pairs": 56565,
+    "unmatched_pairs_a": 695,
+    "unmatched_pairs_b": 7577,
+    "same_physical_winner_count": 44193,
+    "different_physical_winner_count": 12372,
+    "winner_agreement_rate": 0.7812781755502519
+  },
+  "scores": {
+    "source_a": "a/perception_scores.csv",
+    "source_b": "b/perception_scores.csv",
+    "matched_images": 10000,
+    "visual_pollution_score_0_10_correlations": {
+      "pearson_r": 0.7598522418149652,
+      "pearson_p_value": 0.0,
+      "spearman_rho": 0.7581900691257446,
+      "spearman_p_value": 0.0,
+      "kendall_tau": 0.56316303514634,
+      "kendall_p_value": 0.0
+    },
+    "mean_absolute_vp_score_difference": 1.2162773025,
+    "mean_absolute_rank_difference": 1513.268,
+    "top_bottom_overlap": {
+      "10": {
+        "most_polluted": 1,
+        "least_polluted": 0
+      },
+      "25": {
+        "most_polluted": 4,
+        "least_polluted": 5
+      },
+      "50": {
+        "most_polluted": 10,
+        "least_polluted": 13
+      }
+    }
+  },
+  "city_mean_vp": [],
+  "quality_flags": {
+    "qwen25": [],
+    "qwen3": [],
+    "interpretation": "Q-score/TrueSkill agreement within a run does not validate the VLM judgments. A/B swap auditing is required before treating either run as ground truth."
+  }
+}
