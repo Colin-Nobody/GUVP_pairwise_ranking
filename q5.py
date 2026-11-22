@@ -103,7 +103,9 @@ def main():
         manifest["hpc_checkout_commit"] = git("rev-parse", "HEAD")
         add(f"{DEST}/manifest.json", (json.dumps(manifest, indent=2) + "\n").encode(), env)
         tree = git("write-tree", env=env)
-        commit = git("commit-tree", tree, "-p", base, "-m", "Archive both Qwen V8 5K experiment results and code")
+        commit = git("-c", "user.name=Codex", "-c", "user.email=codex@users.noreply.github.com",
+                     "commit-tree", tree, "-p", base, "-m", "Archive both Qwen V8 5K experiment results and code")
+        print("Created commit " + commit, flush=True)
         subprocess.run(["git", "push", "origin", f"{commit}:refs/heads/{BRANCH}"], check=True)
         print(commit)
         print(json.dumps(manifest, indent=2))
