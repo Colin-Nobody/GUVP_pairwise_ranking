@@ -1,0 +1,27 @@
+{
+  "qwen25": {
+    "pair_audit.csv": 32500,
+    "vlm_pairwise_votes.csv": 28606
+  },
+  "qwen3": {
+    "pair_audit.csv": 32500,
+    "vlm_pairwise_votes.csv": 32045
+  },
+  "code_paths": [
+    "hpc_vlm_10k/estimate_runtime.py",
+    "hpc_vlm_10k/q25.sbatch",
+    "hpc_vlm_10k/q25.sh",
+    "hpc_vlm_10k/q5.sbatch",
+    "hpc_vlm_10k/q5.sh",
+    "hpc_vlm_10k/qwen3_padding_guard.py",
+    "hpc_vlm_10k/vlm_qwen3_local.py",
+    "main.py",
+    "prepare_global_streetscapes_sample.py",
+    "vlm_pairwise.py"
+  ],
+  "jobs": {
+    "qwen25": 391888,
+    "qwen3": 391832
+  },
+  "hpc_checkout_commit": "54ccaa470e767cba7cadb7824fc50d543afb2486"
+}
