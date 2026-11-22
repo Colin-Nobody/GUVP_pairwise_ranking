@@ -47,6 +47,12 @@ def launch_code():
     expected = {"q25.sh", "q25.sbatch", "q5.sh", "q5.sbatch"}
     available = {p.name: p for root in roots for p in root.glob("*") if p.is_file()}
     if not expected <= set(available):
+        for root in (Path("."), *roots):
+            for name in expected - set(available):
+                path = root / name
+                if path.is_file():
+                    available[name] = path
+    if not expected <= set(available):
         raise ValueError("Missing launchers: " + str(expected - set(available)))
     paths = {available[name] for name in expected}
     pending = list(paths)
@@ -84,7 +90,7 @@ def main():
                 payload, count = sanitize_csv(source / name)
                 if name == "pair_audit.csv" and count != 32500:
                     raise ValueError("Unexpected pair count: " + model)
-                add(f"{prefix}/{name}.gz", gzip.compress(payload, mtime=0), env)
+                add(f"{prefix}/{name}.gz", gzip.compress(payload), env)
                 manifest[model][name] = count
         code = launch_code()
         for path in code:
