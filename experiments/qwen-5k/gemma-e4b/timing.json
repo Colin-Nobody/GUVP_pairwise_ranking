@@ -1,0 +1,15 @@
+{
+  "model": "google/gemma-4-E4B-it-qat-q4_0-gguf",
+  "decode_mode": "sampled_evidence_first_scores_pair_batch7_lower_score_is_cleaner",
+  "mec_samples": 3,
+  "mec_batch_size": 1,
+  "pair_batch_size": 7,
+  "score_direction": "lower_is_cleaner",
+  "completed_pairs": 32500,
+  "model_load_seconds": 1.3969838619232178e-06,
+  "preprocess_seconds": 24010.125409584492,
+  "generate_seconds": 367084.8916221503,
+  "generation_batches": 27858,
+  "wall_seconds": 391118.79252582416,
+  "peak_cuda_allocated_gib": 0.0
+}

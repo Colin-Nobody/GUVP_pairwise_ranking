@@ -1,0 +1,17 @@
+{
+  "job": 391681,
+  "pair_batch_size": 7,
+  "unordered_pairs": 32500,
+  "valid_votes": 32125,
+  "excluded_invalid_or_tied": 375,
+  "directional_samples": 195000,
+  "images": 5000,
+  "pairs_match_qwen": true,
+  "ranking_included": true,
+  "code_paths": [
+    "e4b5k.sbatch",
+    "gemma_e4b.py",
+    "main.py",
+    "vlm_pairwise.py"
+  ]
+}
